@@ -1,0 +1,27 @@
+{
+	"name": "stacha/api",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Stacha.dev",
+			"email": "chalupa.petr93@gmail.com"
+		}
+	],
+	"require": {
+		"doctrine/orm": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "src/"
+		}
+	},
+	"minimum-stability": "stable",
+	"config": {
+		"platform": {
+			"php": "7.2.24"
+		}
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^0.12.25"
+	}
+}
