@@ -1,46 +1,65 @@
 # API Service Stacha.dev
 
-## Použití DOCTRINE 0RM
+## Instalace
+
+1. Naklonovat repozitář: `git clone https://github.com/Stacha-dev/back-end.git`
+2. Nainstalovat závislosti: `composer install`
+3. Nadefinovat připojení k DB `/config/common.ini`
+4. Vytvoření schéma DB `vendor/bin/doctrine orm:schema-tool:create`
+
+## Vývoj
+
+1. Před začátkem prací, aktualizovat vývojovou větev `develop` pomocí:
+2. Přepnout na vývojovou větev: `git checkout develop`
+3. Aktualizovat lokální repozitář `git pull`
+4. Vytvořit větev pro vývoj funčknosti `git checkout -b develop_nova_funkcnost` podle konvence pojmenování větví:
+    - Pro novou či experimentální funčknost `develop_`
+    - Pro opravu `bugfix_`
+5. Zaverzovat změny pomocí `git add cesta/k/souboru` a `git commit -m "Popis změny"`
+6. Odeslat změny do vzdáleného repozitáře pomocí `git push origin nazev_vetve`
+7. Vytvoření pull requestu v GitHubu a po schválění změn sloučení s větví develop
+
+## DOCTRINE 0RM
 
 Doctrine ORM je abstraktní databázová vrstva, která umožňuje pracovat s daty jako s objekty. [Seznam anotací](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/annotations-reference.html)
 
 ### Dustupné příkazy
 
--   Vygeneruje DB schéma na základě tříd.
-    `vendor/bin/doctrine orm:schema-tool:create`
--   Aktualizuje DB schéma
-    `vendor/bin/doctrine orm:schema-tool:update`
--   Dropne entity databáze
-    `vendor/bin/doctrine orm:schema-tool:drop`
+-   Vygenerování DB schéma na základě entit `vendor/bin/doctrine orm:schema-tool:create`
+-   Aktualizace DB `vendor/bin/doctrine orm:schema-tool:update`
+-   Dropuje všechny entity databáze `vendor/bin/doctrine orm:schema-tool:drop`
 
-### Dostupné flagy
+#### Dostupné flagy
 
--   `--force`
--   `--dump-sql`
+-   Vynucení `--force`
+-   Příkaz se neprovede, vypíše se pouze náhled `--dump-sql`
 
 ## Composer
 
--   Instalace balíčků
-    `composer require <balíček>`
+Slouží k udržování závislostí projektu a autoloadingu tříd.
 
--   Obnovení autoloadu
-    `composer dump-autoload -o`
+### Dostupné příkazy
+
+-   Instalace závislostí `composer require <balíček>`
+-   Aktualizace závislostí `composer update`
+-   Obnovení autoloadu `composer dump-autoload -o`
 
 ## PHPStan
 
--   Kotrola src
-    `vendor/bin/phpstan analyse src -l 8`
+Slouží k statické analýze kódu.
 
-## Poznámky
+-   Spuštění pomocí příkazu `vendor/bin/phpstan analyse src -l 8`
 
--   URL ve tvaru base/version/controller/action.format?params
--   https://api.stacha.dev/1/article/all.json?order=newest
-
-## Endpointy
+## API
 
 Výpis implmentovancýh koncových bodů API.
 
 ### Články
 
+-   Vyýpis všech článků `https://api.stacha.dev/1/article/all.json`
 -   Vyýpis jednoho článku podle ID `https://api.stacha.dev/1/article/one.json?id=1`
--   Vytvoření jedoho článku s `https://api.stacha.dev/1/article/one.json?title=test&content=Tohle je obsah článku`
+
+## Poznámky
+
+-   URL ve tvaru base/version/controller/action.format?params
+-   https://api.stacha.dev/1/article/all.json?order=newest
