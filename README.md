@@ -48,7 +48,7 @@ Slouží k udržování závislostí projektu a autoloadingu tříd.
 
 Slouží k statické analýze kódu.
 
--   Spuštění pomocí příkazu `vendor/bin/phpstan analyse src -l 8`
+-   Spuštění pomocí příkazu `vendor/bin/phpstan analyse src -l max`
 
 ## API
 
