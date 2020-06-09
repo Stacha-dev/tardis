@@ -1,8 +1,21 @@
 <?php
+declare(strict_types = 1);
 namespace App\View;
 
-class Json {
-	public function display(array $data) {
+use App\View\BaseView;
+use Exception;
+
+final class Json extends BaseView {
+	/**
+	 * Displays data in JSON format
+	 *
+	 * @param array<integer|string|array> $data
+	 * @return void
+	 */
+	public function render(array $data): string {
 		echo json_encode($data);
+		if($error = json_last_error()) {
+			throw new Exception(json_last_error_msg());
+		}
 	}
 }

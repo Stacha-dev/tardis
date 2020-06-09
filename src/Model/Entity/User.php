@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -23,17 +24,33 @@ class User
      */
     protected $name;
 
+	/**
+	 * Return user ID.
+	 *
+	 * @return integer
+	 */
     public function getId()
     {
         return $this->id;
     }
 
+	/**
+	 * Returns user name.
+	 *
+	 * @return string
+	 */
     public function getName()
     {
         return $this->name;
     }
 
-    public function setName($name)
+	/**
+	 * Sets user name.
+	 *
+	 * @param string $name
+	 * @return void
+	 */
+    public function setName(string $name)
     {
         $this->name = $name;
     }

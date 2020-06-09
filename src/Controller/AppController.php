@@ -20,6 +20,7 @@ final class AppController {
 
 	function __construct(EntityManager $entityManager){
 	try {
+		$uri = new Uri($_SERVER["REQUEST_URI"]);
 		@list($uri, $params) = Uri::fromString($_SERVER["REQUEST_URI"]);
 		@list($version, $controller, $action) = $uri;
 		@list($action, $format) = explode(".", $action);

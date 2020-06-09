@@ -1,13 +1,17 @@
 <?php
 declare(strict_types = 1);
 namespace App\Controller;
-use Doctrine\ORM\EntityManager;
+
 use App\View\Json;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
+use Exception;
 
 class BaseController {
 
 	/** @var EntityManager */
 	protected $entityManager;
+	/** @var QueryBuilder */
 	protected $queryBuilder;
 	/** @var Json */
 	protected $view;
@@ -34,7 +38,7 @@ class BaseController {
 		if (class_exists($view)) {
 			$this->view = new $view;
 		} else {
-			throw new InvalidArgumentException("The view '$view' has not been defined.");
+			throw new Exception("The view '$view' has not been defined.");
 		}
 	}
 }

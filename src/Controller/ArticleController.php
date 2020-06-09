@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\BaseController;
 use App\Model\Entity\Article;
+use Exception;
 
 final class ArticleController extends BaseController
 {
@@ -15,7 +16,7 @@ final class ArticleController extends BaseController
 	public function getAll() {
 		$query = $this->entityManager->createQuery('SELECT a FROM App\Model\Entity\Article a');
 		$result = $query->getArrayResult();
-		$this->view->display($result);
+		$this->view->render($result);
 	}
 
 	/**
@@ -32,9 +33,9 @@ final class ArticleController extends BaseController
 		}
 		if(isset($id) && $id) {
 			$result = $this->entityManager->find('App\Model\Entity\Article', $id);
-			$this->view->display(array('title' => $result->getTitle(), 'content' => $result->getContent()));
+			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
 		} else {
-			throw new InvalidArgumentException("The ID has not been defined.");
+			throw new Exception("The ID has not been defined.");
 		}
 	}
 
@@ -44,24 +45,25 @@ final class ArticleController extends BaseController
 	 * @param array<array> $params
 	 * @return void
 	 */
-	public function postOne(array $params=[]) {
-		foreach($params as $param) {
-			if($param['name'] === 'title') {
-				$articleTitle = $param['value'];
+	public function create(array $params=[]) {
+		$raw = file_get_contents('php://input');
+		if(!empty($raw)) {
+			$json = json_decode($raw, true);
+			if (isset($json['title']) && !empty($json['title'])) {
+				$article = new Article();
+				$article->setTitle($json['title']);
+				$article->setContent(isset($json['content']) ? $json['content'] : NULL);
+				$this->entityManager->persist($article);
+				$this->entityManager->flush();
+			} else {
+				throw new Exception('Title is not set!');
 			}
-			if($param['name'] === 'content') {
-				$articleContent = $param['value'];
-			}
-		}
-		if (isset($articleTitle) && $articleTitle) {
-			$article = new Article();
-			$article->setTitle($articleTitle);
-			$article->setContent(isset($articleContent) && $articleContent ? $articleContent : NULL);
-
-			$this->entityManager->persist($article);
-			$this->entityManager->flush();
 		} else {
-			return;
+			throw new Exception('Body is not set!');
 		}
+	}
+
+	public function delete(array $params=[]) {
+
 	}
 }
