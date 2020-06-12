@@ -5,7 +5,7 @@ namespace App\View;
 use App\View\BaseView;
 use Exception;
 
-final class Json extends BaseView {
+class Json extends BaseView {
 	/**
 	 * Displays data in JSON format
 	 *
