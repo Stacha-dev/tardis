@@ -12,7 +12,7 @@ final class Json extends BaseView {
 	 * @param array<integer|string|array> $data
 	 * @return void
 	 */
-	public function render(array $data): string {
+	public function render(array $data): void {
 		echo json_encode($data);
 		if($error = json_last_error()) {
 			throw new Exception(json_last_error_msg());
