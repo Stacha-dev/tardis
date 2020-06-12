@@ -5,7 +5,7 @@ namespace App\Lib;
 use Exception;
 
 class Uri {
-	/** @var string */
+	/** @var array */
 	private $path;
 	/** @var array */
 	private $query;
@@ -40,7 +40,7 @@ class Uri {
 	 */
 	private function setPath(string $path) {
 		$path = trim($path, "/");
-		$this->path = $path;
+		$this->path = explode("/", $path);
 	}
 
 	/**
