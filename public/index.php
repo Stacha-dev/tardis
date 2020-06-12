@@ -1,5 +1,6 @@
 <?php
 require_once "../bootstrap.php";
-use App\Controller\AppController;
 
-$app = new AppController($entityManager);
+use App\Controller\App;
+
+$app = new App($entityManager);
