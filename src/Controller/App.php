@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManager;
 use Exception;
 
 
-final class AppController {
+final class App {
 	/** @var string */
 	private $version;
 	private $controller;
@@ -21,8 +21,7 @@ final class AppController {
 	function __construct(EntityManager $entityManager){
 	try {
 		$uri = new Uri($_SERVER["REQUEST_URI"]);
-		@list($uri, $params) = Uri::fromString($_SERVER["REQUEST_URI"]);
-		@list($version, $controller, $action) = $uri;
+		@list($version, $controller, $action) = $uri->getPath();
 		@list($action, $format) = explode(".", $action);
 
 		if(isset($version)) {
@@ -38,10 +37,7 @@ final class AppController {
 		}
 
 		if(isset($params)) {
-			foreach(explode("&",$params) as $param) {
-				@list($name, $value) = explode("=", $param);
-				array_push($this->params, array('name' => $name, 'value' => $value));
-			}
+			$this->params = $params;
 		}
 
 		$this->controller->setEntityManager($entityManager);
