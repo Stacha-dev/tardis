@@ -1,6 +1,7 @@
 {
-	"name": "stacha/api",
+	"name": "stacha/back-end",
 	"type": "project",
+	"description": "Back-end for our applications.",
 	"authors": [
 		{
 			"name": "Stacha.dev",
@@ -9,6 +10,9 @@
 	],
 	"require": {
 		"doctrine/orm": "*"
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^0.12.25"
 	},
 	"autoload": {
 		"psr-4": {
@@ -19,15 +23,14 @@
 	"config": {
 		"platform": {
 			"php": "7.2.24"
-		}
-	},
-	"require-dev": {
-		"phpstan/phpstan": "^0.12.25"
+		},
+		"sort-packages": true
 	},
 	"scripts": {
 		"orm:create": "doctrine orm:schema-tool:create",
 		"orm:update": "doctrine orm:schema-tool:update",
 		"orm:drop": "doctrine orm:schema-tool:drop",
-		"phpstan": "phpstan analyse src -l max"
+		"phpstan": "phpstan analyse src -l max",
+		"doc": "phpdoc run -t docs"
 	}
 }
