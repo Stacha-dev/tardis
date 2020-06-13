@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace App\Controller;
 
-use App\Lib\Uri;
+use App\Lib\Http\Uri;
 use App\Controller\ArticleController;
 use App\View\Error;
 use Doctrine\ORM\EntityManager;
@@ -12,21 +12,21 @@ use Exception;
 final class App {
 	/** @var string */
 	private $version;
+	/** @var ArticleController */
 	private $controller;
 	/** @var string */
 	private $action;
-	/** @var array */
-	private $params = array();
+	/** @var \App\Lib\Http\Query */
+	private $params;
 
-	function __construct(EntityManager $entityManager){
+	function __construct(\App\Lib\Http\Request $request, EntityManager $entityManager) {
 	try {
-		$uri = new Uri($_SERVER["REQUEST_URI"]);
+		$uri = $request->getUri();
 		@list($version, $controller, $action) = $uri->getPath();
 		@list($action, $format) = explode(".", $action);
+		$params = $uri->getQuery();
 
-		if(isset($version)) {
-			$this->version = $version;
-		}
+		$this->version = isset($version) ? $version : 1;
 
 		if(isset($controller)) {
 			$this->setController($controller);
