@@ -1,8 +1,9 @@
 <?php
 declare(strict_types = 1);
-namespace App\Lib;
+namespace App\Lib\Http;
 
 use Exception;
+use App\Lib\Http\Query;
 
 class Uri {
 	/** @var array */
@@ -13,23 +14,7 @@ class Uri {
 	public function __construct(string $url = NULL) {
 		$url = @parse_url($url);
 		$this->setPath($url['path'] ?? '');
-		$this->setQuery($url['query'] ?? []);
-	}
-	/**
-	 * Creates URI from string.
-	 *
-	 * @param string $url
-	 * @return array<int, array<int, string>|string|false|null>
-	 */
-	static public function fromString(string $url = "/") {
-		$url = trim($url, "/");
-		if(!empty($url)){
-			$path = ltrim(parse_url($url, PHP_URL_PATH), "/");
-			$query = parse_url($url, PHP_URL_QUERY);
-			return array(explode("/", $path, 3), $query);
-		} else {
-			throw new Exception('Invalid URL!');
-		}
+		$this->setQuery($url['query'] ?? '');
 	}
 
 	/**
@@ -55,19 +40,19 @@ class Uri {
 	/**
 	 * Sets query
 	 *
-	 * @param string|array $query
+	 * @param string $query
 	 * @return void
 	 */
-	private function setQuery($query) {
-		$this->query = is_string($query) ? $this->parseQuery($query) : $query;
+	private function setQuery(string $query) {
+		$this->query = new Query($query);
 	}
 
 	/**
 	 * Returns query.
 	 *
-	 * @return array
+	 * @return Query
 	 */
-	public function getQuery(): array {
+	public function getQuery(): Query {
 		return $this->query;
 	}
 
