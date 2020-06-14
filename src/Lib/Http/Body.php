@@ -37,7 +37,7 @@ class Body {
 	 * @param string $key
 	 * @return string
 	 */
-	public function getBodyData(string $key): string {
-		return $this->body[$key];
+	public function getBodyData(string $key): ?string {
+		return array_key_exists($key, $this->body) ? $this->body[$key] : NULL;
 	}
 }
