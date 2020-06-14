@@ -33,8 +33,7 @@ class Article
 	 *
 	 * @return integer
 	 */
-    public function getId()
-    {
+    public function getId(): int {
         return $this->id;
     }
 
@@ -43,8 +42,7 @@ class Article
 	 *
 	 * @return string
 	 */
-    public function getTitle()
-    {
+    public function getTitle(): string {
         return $this->title;
     }
 
@@ -54,7 +52,7 @@ class Article
 	 * @param string $title
 	 * @return void
 	 */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -64,7 +62,7 @@ class Article
 	 *
 	 * @return string
 	 */
-	public function getContent()
+	public function getContent(): string
     {
         return $this->content;
     }
@@ -75,7 +73,7 @@ class Article
 	 * @param string $content
 	 * @return void
 	 */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
