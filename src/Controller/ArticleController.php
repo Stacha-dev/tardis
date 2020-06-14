@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\BaseController;
 use App\Model\Entity\Article;
+use App\Lib\Util\Input;
 use Exception;
 
 final class ArticleController extends BaseController
@@ -46,16 +47,18 @@ final class ArticleController extends BaseController
 	 * @param string $content
 	 * @return \App\Model\Entity\Article
 	 */
-	public function create(string $title = '', string $content = ''): \App\Model\Entity\Article {
+	public function create(string $title = '', string $alias = NULL, string $content = ''): \App\Model\Entity\Article {
 		$body = $this->request->getBody();
 		$title = $body->getBodyData('title') ?? $title;
+		$alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
 		$content = $body->getBodyData('content') ?? $content;
 		$article = new Article();
 		$article->setTitle($title);
+		$article->setAlias($alias);
 		$article->setContent($content);
 		$this->entityManager->persist($article);
 		$this->entityManager->flush();
-		$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "content" => $article->getContent()));
+		$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "alias" => $article->getAlias(), "content" => $article->getContent()));
 
 		return $article;
 	}
@@ -73,6 +76,7 @@ final class ArticleController extends BaseController
 		$body = $this->request->getBody();
 		$id = $params->getQueryParamValue('id') ?? $id;
 		$title = $body->getBodyData('title') ?? $title;
+		$alias = $body->getBodyData('alias') ?? $alias;
 		$content = $body->getBodyData('content') ?? $content;
 
 		$article = $this->entityManager->find('App\Model\Entity\Article', $id);
@@ -81,8 +85,10 @@ final class ArticleController extends BaseController
 				$article->setTitle($title);
 			if (!empty($content))
 				$article->setContent($content);
+			if (!empty($alias))
+				$article->setContent($alias);
 			$this->entityManager->flush();
-			$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "content" => $article->getContent()));
+			$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "alias" => $article->getAlias(), "content" => $article->getContent()));
 			return $article;
 		} else {
 			throw new Exception("Article with ID: " . $id . " not exists!");
