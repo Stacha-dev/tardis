@@ -11,68 +11,96 @@ final class ArticleController extends BaseController
 	/**
 	 * Gets all articles.
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function getAll() {
+	public function getAll(): array {
 		$query = $this->entityManager->createQuery('SELECT a FROM App\Model\Entity\Article a');
 		$result = $query->getArrayResult();
 		$this->view->render($result);
+		return $result;
 	}
 
 	/**
 	* Gets one article by his ID.
 	*
-	* @param App\Lib\Http\Query|array $params
+	* @param int $id
 	* @return void
 	*/
-	public function getOne($params) {
-		if($params instanceof \App\Lib\Http\Query) {
-			$id = $params->getQueryParam('id')['value'];
-		}
+	public function getOne(int $id = 0): \App\Model\Entity\Article {
+		$params = $this->request->getUri()->getQuery();
+		$id = $params->getQueryParamValue('id') ?? $id;
 
 		if(isset($id) && $id) {
 			$result = $this->entityManager->find('App\Model\Entity\Article', $id);
 			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
+			return $result;
 		} else {
 			throw new Exception("The ID has not been defined.");
 		}
 	}
 
 	/**
-	 * Create new article.
+	 * Creates new article.
 	 *
-	 * @param App\Lib\Http\Query|array $params
+	 * @param string $title
+	 * @param string $content
 	 * @return void
 	 */
-	public function create($params=[]) {
-		$raw = file_get_contents('php://input');
-		if(!empty($raw)) {
-			$json = json_decode($raw, true);
-			if (isset($json['title']) && !empty($json['title'])) {
-				$article = new Article();
-				$article->setTitle($json['title']);
-				$article->setContent(isset($json['content']) ? $json['content'] : NULL);
-				$this->entityManager->persist($article);
+	public function create(string $title = '', string $content = ''): \App\Model\Entity\Article {
+		$body = $this->request->getBody();
+		$title = $body->getBodyData('title') ?? $title;
+		$content = $body->getBodyData('content') ?? $content;
+		$article = new Article();
+		$article->setTitle($title);
+		$article->setContent($content);
+		$this->entityManager->persist($article);
+		$this->entityManager->flush();
+		$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "content" => $article->getContent()));
+
+		return $article;
+	}
+
+	/**
+	 * Edit article by ID.
+	 *
+	 * @param array $params
+	 * @return void
+	 */
+	public function edit(int $id = 0, string $title = '', string $content = '') {
+		$params = $this->request->getUri()->getQuery();
+		$body = $this->request->getBody();
+		$id = $params->getQueryParamValue('id') ?? $id;
+		$title = $body->getBodyData('title') ?? $title;
+		$content = $body->getBodyData('content') ?? $content;
+
+		if(isset($id) && $id) {
+			$article = $this->entityManager->find('App\Model\Entity\Article', $id);
+			if(isset($article)) {
+				if (!empty($title))
+					$article->setTitle($title);
+				if (!empty($content))
+					$article->setContent($content);
 				$this->entityManager->flush();
-				$this->view->render(array($article->getTitle(), $article->getContent()));
+				$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "content" => $article->getContent()));
+				return $article;
 			} else {
-				throw new Exception('Title is not set!');
+				throw new Exception("Article with ID: " . $id . " not exists!");
 			}
 		} else {
-			throw new Exception('Body is not set!');
+			throw new Exception("The ID has not been defined.");
 		}
+
 	}
 
 	/**
 	 * Delete article by ID.
 	 *
-	 * @param array $params
+	 * @param int $id
 	 * @return void
 	 */
-	public function delete($params=[]) {
-		if($params instanceof \App\Lib\Http\Query) {
-			$id = $params->getQueryParam('id')['value'];
-		}
+	public function delete(int $id = 0) {
+		$params = $this->request->getUri()->getQuery();
+		$id = $params->getQueryParamValue('id') ?? $id;
 
 		if(isset($id) && $id) {
 			$article = $this->entityManager->find('App\Model\Entity\Article', $id);

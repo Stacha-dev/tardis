@@ -42,9 +42,10 @@ final class App {
 
 		$this->controller->setEntityManager($entityManager);
 		$this->controller->setView($format);
+		$this->controller->setRequest($request);
 
 		$action = $this->action;
-		$this->controller->$action($this->params);
+		$this->controller->$action();
 		} catch(Exception $e){
 			error_log($e->getMessage());
 			Error::render($e->getMessage(), 400);
