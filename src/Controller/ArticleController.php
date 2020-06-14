@@ -11,7 +11,7 @@ final class ArticleController extends BaseController
 	/**
 	 * Gets all articles.
 	 *
-	 * @return array
+	 * @return array<array>
 	 */
 	public function getAll(): array {
 		$query = $this->entityManager->createQuery('SELECT a FROM App\Model\Entity\Article a');
@@ -24,18 +24,18 @@ final class ArticleController extends BaseController
 	* Gets one article by his ID.
 	*
 	* @param int $id
-	* @return void
+	* @return \App\Model\Entity\Article
 	*/
-	public function getOne(int $id = 0): \App\Model\Entity\Article {
+	public function getOne(int $id = -1): \App\Model\Entity\Article {
 		$params = $this->request->getUri()->getQuery();
 		$id = $params->getQueryParamValue('id') ?? $id;
 
-		if(isset($id) && $id) {
-			$result = $this->entityManager->find('App\Model\Entity\Article', $id);
+		$result = $this->entityManager->find('App\Model\Entity\Article', $id);
+		if ($result instanceof Article) {
 			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
 			return $result;
 		} else {
-			throw new Exception("The ID has not been defined.");
+			throw new Exception("Article by ID can not be founded!");
 		}
 	}
 
@@ -44,7 +44,7 @@ final class ArticleController extends BaseController
 	 *
 	 * @param string $title
 	 * @param string $content
-	 * @return void
+	 * @return \App\Model\Entity\Article
 	 */
 	public function create(string $title = '', string $content = ''): \App\Model\Entity\Article {
 		$body = $this->request->getBody();
@@ -63,33 +63,30 @@ final class ArticleController extends BaseController
 	/**
 	 * Edit article by ID.
 	 *
-	 * @param array $params
-	 * @return void
+	 * @param int $id
+	 * @param string $title
+	 * @param string $content
+	 * @return \App\Model\Entity\Article
 	 */
-	public function edit(int $id = 0, string $title = '', string $content = '') {
+	public function edit(int $id = -1, string $title = '', string $content = ''): \App\Model\Entity\Article {
 		$params = $this->request->getUri()->getQuery();
 		$body = $this->request->getBody();
 		$id = $params->getQueryParamValue('id') ?? $id;
 		$title = $body->getBodyData('title') ?? $title;
 		$content = $body->getBodyData('content') ?? $content;
 
-		if(isset($id) && $id) {
-			$article = $this->entityManager->find('App\Model\Entity\Article', $id);
-			if(isset($article)) {
-				if (!empty($title))
-					$article->setTitle($title);
-				if (!empty($content))
-					$article->setContent($content);
-				$this->entityManager->flush();
-				$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "content" => $article->getContent()));
-				return $article;
-			} else {
-				throw new Exception("Article with ID: " . $id . " not exists!");
-			}
+		$article = $this->entityManager->find('App\Model\Entity\Article', $id);
+		if($article instanceof \App\Model\Entity\Article) {
+			if (!empty($title))
+				$article->setTitle($title);
+			if (!empty($content))
+				$article->setContent($content);
+			$this->entityManager->flush();
+			$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "content" => $article->getContent()));
+			return $article;
 		} else {
-			throw new Exception("The ID has not been defined.");
+			throw new Exception("Article with ID: " . $id . " not exists!");
 		}
-
 	}
 
 	/**
@@ -98,21 +95,16 @@ final class ArticleController extends BaseController
 	 * @param int $id
 	 * @return void
 	 */
-	public function delete(int $id = 0) {
+	public function delete(int $id = -1) {
 		$params = $this->request->getUri()->getQuery();
 		$id = $params->getQueryParamValue('id') ?? $id;
 
-		if(isset($id) && $id) {
-			$article = $this->entityManager->find('App\Model\Entity\Article', $id);
-			if(isset($article)) {
-				$this->entityManager->remove($article);
-				$this->entityManager->flush();
-			} else {
-				throw new Exception("Article with ID: " . $id . " not exists!");
-			}
+		$article = $this->entityManager->find('App\Model\Entity\Article', $id);
+		if(isset($article)) {
+			$this->entityManager->remove($article);
+			$this->entityManager->flush();
 		} else {
-			throw new Exception("The ID has not been defined.");
+			throw new Exception("Article with ID: " . $id . " not exists!");
 		}
-
 	}
 }

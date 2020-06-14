@@ -19,24 +19,27 @@ class RequestFactory {
 	 * Returns new instance of Uri class by URI.
 	 *
 	 * @param string $uri
+	 * @static
 	 * @return \App\Lib\Http\Uri
 	 */
-	private function getUri(string $uri): \App\Lib\Http\Uri {
+	private static function getUri(string $uri): \App\Lib\Http\Uri {
 		return new Uri($uri);
 	}
 
 	/**
 	 * Returns new instance of Body class.
 	 *
+	 * @static
 	 * @return \App\Lib\Http\Body
 	 */
-	private function getBody(): \App\Lib\Http\Body {
+	private static function getBody(): \App\Lib\Http\Body {
 		return new Body();
 	}
 
 	/**
 	 * Returns new instance of Request class from server globals.
 	 *
+	 * @static
 	 * @return \App\Lib\Http\Request
 	 */
 	public static function fromGlobals(): \App\Lib\Http\Request {

@@ -5,16 +5,20 @@ namespace App\Lib\Http;
 use Exception;
 use App\Lib\Http\Query;
 
+define("URL_PATH", "path");
+define("URL_QUERY", "query");
+
 class Uri {
-	/** @var array */
+	/** @var array<string> */
 	private $path;
-	/** @var array */
+
+	/** @var \App\Lib\Http\Query */
 	private $query;
 
-	public function __construct(string $url = NULL) {
-		$url = @parse_url($url);
-		$this->setPath($url['path'] ?? '');
-		$this->setQuery($url['query'] ?? '');
+	public function __construct(string $url = '') {
+		$url = parse_url($url);
+		$this->setPath($url[URL_PATH] ?? '');
+		$this->setQuery($url[URL_QUERY] ?? '');
 	}
 
 	/**
@@ -31,7 +35,7 @@ class Uri {
 	/**
 	 * Returns path.
 	 *
-	 * @return array
+	 * @return array<string>
 	 */
 	public function getPath(): array {
 		return $this->path;
@@ -60,9 +64,9 @@ class Uri {
 	 * Parse query to params
 	 *
 	 * @param string $query
-	 * @return array
+	 * @return array<array<string>>
 	 */
-	private function parseQuery(string $query): array{
+	private function parseQuery(string $query): array {
 		$params = array();
 		foreach(explode("&",$query) as $param) {
 			@list($name, $value) = explode("=", $param);
