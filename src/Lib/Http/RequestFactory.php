@@ -31,9 +31,7 @@ class RequestFactory {
 	 * @return \App\Lib\Http\Body
 	 */
 	private function getBody(): \App\Lib\Http\Body {
-		$data = new Body();
-		var_dump($data);
-		return $data;
+		return new Body();
 	}
 
 	/**
