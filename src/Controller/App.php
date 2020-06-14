@@ -52,6 +52,12 @@ final class App {
 		}
 	}
 
+	/**
+	 * Sets controller.
+	 *
+	 * @param string $controller
+	 * @return void
+	 */
 	private function setController(string $controller) {
         $controller = __NAMESPACE__ . "\\" . ucfirst(strtolower($controller)) . "Controller";
         if (!class_exists($controller)) {
@@ -62,7 +68,12 @@ final class App {
         $this->controller = new $controller;
     }
 
-
+	/**
+	 * Sets action of controller.
+	 *
+	 * @param string $action
+	 * @return void
+	 */
 	private function setAction(string $action) {
         $action = str_replace("_", "", ucwords(strtolower($action), "_"));
         if (!method_exists($this->controller, $action)) {
