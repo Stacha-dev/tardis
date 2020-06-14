@@ -16,13 +16,17 @@ class Request {
 	/** @var App\Lib\Http\Uri */
 	private $uri;
 
+	/** @var App\Lib\Http\Body */
+	private $body;
+
 	/** @var string */
 	private $remoteAddress;
 
-	public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, string $remoteAddress) {
+	public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, \App\Lib\Http\Body $body, string $remoteAddress) {
 		$this->isSecured = $isSecured;
 		$this->method = $method;
 		$this->uri = $uri;
+		$this->body = $body;
 		$this->remoteAddress = $remoteAddress;
 	}
 
