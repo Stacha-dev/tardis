@@ -27,7 +27,7 @@ final class ArticleController extends BaseController
 	* @param int $id
 	* @return \App\Model\Entity\Article
 	*/
-	public function getOne(int $id = -1): \App\Model\Entity\Article {
+	public function getOneById(int $id = -1): \App\Model\Entity\Article {
 		$params = $this->request->getUri()->getQuery();
 		$id = $params->getQueryParamValue('id') ?? $id;
 
@@ -37,6 +37,25 @@ final class ArticleController extends BaseController
 			return $result;
 		} else {
 			throw new Exception("Article by ID can not be founded!");
+		}
+	}
+
+	/**
+	* Gets one article by his alias.
+	*
+	* @param string $alias
+	* @return \App\Model\Entity\Article
+	*/
+	public function getOneByAlias(string $alias = ''): \App\Model\Entity\Article {
+		$params = $this->request->getUri()->getQuery();
+		$alias = $params->getQueryParamValue('alias') ?? $alias;
+
+		$result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('alias' => $alias));
+		if ($result instanceof Article) {
+			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
+			return $result;
+		} else {
+			throw new Exception("Article by alias can not be founded!");
 		}
 	}
 
