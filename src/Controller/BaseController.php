@@ -15,6 +15,8 @@ class BaseController {
 	protected $queryBuilder;
 	/** @var Json */
 	protected $view;
+	/** @var \App\Lib\Http\Request */
+	protected $request;
 
 	/**
 	 * Sets entity manager.
