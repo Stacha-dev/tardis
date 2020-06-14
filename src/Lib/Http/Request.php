@@ -13,10 +13,10 @@ class Request {
 	/** @var string */
 	private $method;
 
-	/** @var App\Lib\Http\Uri */
+	/** @var \App\Lib\Http\Uri */
 	private $uri;
 
-	/** @var App\Lib\Http\Body */
+	/** @var \App\Lib\Http\Body */
 	private $body;
 
 	/** @var string */
