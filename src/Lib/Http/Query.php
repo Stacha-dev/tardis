@@ -34,11 +34,11 @@ class Query{
 	/**
 	 * Returns query.
 	 *
-	 * @return array
+	 * @return string|null
 	 */
-	public function getQueryParam(string $param): array {
+	public function getQueryParamValue(string $param): ?string {
 		$key = array_search($param, array_column($this->query, QUERY_PARAM_NAME));
-		return $this->query[$key];
+		return $this->query[$key][QUERY_PARAM_VALUE];
 	}
 
 	/**
