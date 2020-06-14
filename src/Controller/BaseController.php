@@ -33,12 +33,22 @@ class BaseController {
 	 * @param string $view
 	 * @return void
 	 */
-	public function setView(string $view){
+	public function setView(string $view) {
 		$view = "App\View\\" . ucfirst(strtolower($view));
 		if (class_exists($view)) {
 			$this->view = new $view;
 		} else {
 			throw new Exception("The view '$view' has not been defined.");
 		}
+	}
+
+	/**
+	 * Sets request.
+	 *
+	 * @param \App\Lib\Http\Request $request
+	 * @return void
+	 */
+	public function setRequest(\App\Lib\Http\Request $request) {
+		$this->request = $request;
 	}
 }
