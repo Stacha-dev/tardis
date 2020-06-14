@@ -17,11 +17,19 @@ class Article
 	 * @var int
      */
     protected $id;
+
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=512)
 	 * @var string
      */
     protected $title;
+
+	/**
+	 * @ORM\Column(type="string", unique=true, length=191)
+	 * @var string
+	 */
+	protected $alias;
+
 	/**
      * @ORM\Column(type="string", nullable=true)
 	 * @var string
@@ -38,7 +46,7 @@ class Article
     }
 
 	/**
-	 * Returns article title
+	 * Returns article title.
 	 *
 	 * @return string
 	 */
@@ -55,6 +63,26 @@ class Article
     public function setTitle(string $title)
     {
         $this->title = $title;
+    }
+
+	/**
+	 * Returns article alias.
+	 *
+	 * @return string
+	 */
+    public function getAlias(): string {
+        return $this->alias;
+    }
+
+	/**
+	 * Sets article alias.
+	 *
+	 * @param string $alias
+	 * @return void
+	 */
+    public function setAlias(string $alias)
+    {
+        $this->alias = $alias;
     }
 
 	/**
