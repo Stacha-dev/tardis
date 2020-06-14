@@ -5,7 +5,8 @@ namespace App\Lib\Http;
 define("QUERY_PARAM_NAME","name");
 define("QUERY_PARAM_VALUE","value");
 
-class Query{
+class Query {
+	/** @var array<array<string>> */
 	private $query = array();
 
 	public function __construct(string $query='') {
@@ -15,17 +16,17 @@ class Query{
 	/**
 	 * Sets query
 	 *
-	 * @param string|array $query
+	 * @param string $query
 	 * @return void
 	 */
-	private function setQuery($query) {
-		$this->query = is_string($query) ? $this->parseQuery($query) : $query;
+	private function setQuery(string $query) {
+		$this->query = $this->parseQuery($query);
 	}
 
 	/**
 	 * Returns query.
 	 *
-	 * @return array
+	 * @return array<int, array<string, string>>
 	 */
 	public function getQuery(): array {
 		return $this->query;
@@ -45,7 +46,7 @@ class Query{
 	 * Parse query to params
 	 *
 	 * @param string $query
-	 * @return array
+	 * @return array<int, array<string, string>>
 	 */
 	private function parseQuery(string $query): array{
 		$params = array();
