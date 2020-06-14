@@ -31,7 +31,7 @@ class Request {
 	}
 
 	/**
-	 * Gets instance of Uri.
+	 * Returns requests URI.
 	 *
 	 * @return \App\Lib\Http\Uri
 	 */
@@ -39,4 +39,12 @@ class Request {
 		return $this->uri;
 	}
 
+	/**
+	 * Returns requests body.
+	 *
+	 * @return \App\Lib\Http\Body
+	 */
+	public function getBody(): \App\Lib\Http\Body {
+		return $this->body;
+	}
 }
