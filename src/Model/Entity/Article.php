@@ -36,6 +36,13 @@ class Article
      */
     protected $content;
 
+	 /**
+     * @ORM\Column(type="datetime", nullable=false)
+	 * @ORM\Version
+     * @var \DateTime
+     */
+    protected $updated;
+
 	/**
 	 * Returns article ID.
 	 *
@@ -104,5 +111,23 @@ class Article
     public function setContent(string $content)
     {
         $this->content = $content;
+    }
+
+	 /**
+     * Sets user updated date.
+     *
+     * @return void
+     */
+    public function setUpdated() {
+        $this->updated = new \DateTime("now");
+    }
+
+    /**
+     * Returns user updated date.
+     *
+     * @return \DateTime
+     */
+    public function getUpdated(): \DateTime {
+        return $this->updated;
     }
 }

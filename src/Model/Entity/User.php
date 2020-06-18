@@ -49,10 +49,11 @@ class User
     protected $surname;
 
     /**
-     * @ORM\Column(name="`date_created`", type="datetime")
+     * @ORM\Column(type="datetime", nullable=false)
+	 * @ORM\Version
      * @var \DateTime
      */
-    protected $dateCreated;
+    protected $updated;
 
     /**
      * @ORM\COlumn(type="string", length=1024)
@@ -168,22 +169,22 @@ class User
     }
 
     /**
-     * Sets user created date.
+     * Sets user updated date.
      *
-     * @param \DateTime $dateCreated
+     * @param \DateTime $updated
      * @return void
      */
-    public function setDateCreated(\DateTime $dateCreated) {
-        $this->dateCreated = $dateCreated;
+    public function setUpdated(\DateTime $updated) {
+        $this->updated = $updated;
     }
 
     /**
-     * Returns user created date.
+     * Returns user updated date.
      *
      * @return \DateTime
      */
-    public function getDateCreated(): \DateTime {
-        return $this->dateCreated;
+    public function getUpdated(): \DateTime {
+        return $this->updated;
     }
 
     /**
