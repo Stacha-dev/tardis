@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManager;
 use Exception;
 
 
-final class App {
+class App {
 	/** @var string */
 	private $version;
 	/** @var ArticleController */
@@ -26,19 +26,10 @@ final class App {
 		@list($action, $format) = explode(".", $action);
 		$params = $uri->getQuery();
 
-		$this->version = isset($version) ? $version : 1;
-
-		if(isset($controller)) {
-			$this->setController($controller);
-		}
-
-		if(isset($action)) {
-			$this->setAction($action);
-		}
-
-		if(isset($params)) {
-			$this->params = $params;
-		}
+		$this->version = $version;
+		$this->setController($controller);
+		$this->setAction($action);
+		$this->params = $params;
 
 		$this->controller->setEntityManager($entityManager);
 		$this->controller->setView($format);
