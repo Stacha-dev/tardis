@@ -1,2 +1,5 @@
 <?php
-require_once "../bootstrap.php";
+declare(strict_types = 1);
+require __DIR__ . '/../vendor/autoload.php';
+
+App\Bootstrap::boot();
