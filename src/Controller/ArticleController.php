@@ -90,7 +90,7 @@ final class ArticleController extends BaseController
 	 * @param string $content
 	 * @return \App\Model\Entity\Article
 	 */
-	public function edit(int $id = -1, string $title = '', string $content = ''): \App\Model\Entity\Article {
+	public function edit(int $id = -1, string $title = '', string $alias= '', string $content = ''): \App\Model\Entity\Article {
 		$params = $this->request->getUri()->getQuery();
 		$body = $this->request->getBody();
 		$id = $params->getQueryParamValue('id') ?? $id;
