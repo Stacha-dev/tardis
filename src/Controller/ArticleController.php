@@ -71,10 +71,7 @@ final class ArticleController extends BaseController
 		$title = $body->getBodyData('title') ?? $title;
 		$alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
 		$content = $body->getBodyData('content') ?? $content;
-		$article = new Article();
-		$article->setTitle($title);
-		$article->setAlias($alias);
-		$article->setContent($content);
+		$article = new Article($title, $alias, $content);
 		$this->entityManager->persist($article);
 		$this->entityManager->flush();
 		$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "alias" => $article->getAlias(), "content" => $article->getContent()));

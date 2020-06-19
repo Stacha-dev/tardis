@@ -43,6 +43,19 @@ class Article
      */
     protected $updated;
 
+    /**
+     * Creates new instance of Article class.
+     *
+     * @param string $title
+     * @param string $alias
+     * @param string $content
+     */
+    public function __construct(string $title = "", string $alias = "", string $content = ""){
+        $this->setTitle($title);
+        $this->setAlias($alias);
+        $this->setContent($content);
+    }
+
 	/**
 	 * Returns article ID.
 	 *
