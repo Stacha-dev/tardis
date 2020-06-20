@@ -56,10 +56,10 @@ Výpis implmentovancýh koncových bodů API.
 
 ### Články
 
--   Vyýpis všech článků `https://api.stacha.dev/1/article/all.json`
--   Vyýpis jednoho článku podle ID `https://api.stacha.dev/1/article/one.json?id=1`
+-   Vyýpis všech článků `https://api.stacha.dev/1/article/get-all`
+-   Vyýpis jednoho článku podle ID `https://api.stacha.dev/1/article/get-one?id=1`
 
 ## Poznámky
 
 -   URL ve tvaru base/version/controller/action.format?params
--   https://api.stacha.dev/1/article/get-all.json?order=newest
+-   https://api.stacha.dev/1/article/get-all?order=newest
