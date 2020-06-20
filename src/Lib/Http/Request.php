@@ -47,4 +47,49 @@ class Request {
 	public function getBody(): \App\Lib\Http\Body {
 		return $this->body;
 	}
+
+	/**
+	 * Returns request method.
+	 *
+	 * @return string
+	 */
+	public function getMethod(): string {
+		return $this->method;
+	}
+
+	/**
+	 * Check if request method is GET.
+	 *
+	 * @return boolean
+	 */
+	public function isGet(): bool {
+		return $this->getMethod() === "GET";
+	}
+
+	/**
+	 * Check if request method is POST.
+	 *
+	 * @return boolean
+	 */
+	public function isPost(): bool {
+		return $this->getMethod() === "POST";
+	}
+
+	/**
+	 * Check if request method is PUT.
+	 *
+	 * @return boolean
+	 */
+	public function isPut(): bool {
+		return $this->getMethod() === "PUT";
+	}
+
+	/**
+	 * Check if request method is DELETE.
+	 *
+	 * @return boolean
+	 */
+	public function isDelete(): bool {
+		return $this->getMethod() === "DELETE";
+	}
 }
