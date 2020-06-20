@@ -43,6 +43,6 @@ class RequestFactory {
 	 * @return \App\Lib\Http\Request
 	 */
 	public static function fromGlobals(): \App\Lib\Http\Request {
-		return new Request($_SERVER['HTTPS'] === 'on', $_SERVER['REQUEST_METHOD'], self::getUri($_SERVER['REQUEST_URI']), self::getBody(), $_SERVER['REMOTE_ADDR']);
+		return new Request($_SERVER['HTTPS'] === 'on', $_SERVER['REQUEST_METHOD'], self::getUri($_SERVER['REQUEST_URI']), self::getBody(), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_ACCEPT'] ?? "");
 	}
 }
