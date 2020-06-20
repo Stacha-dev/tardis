@@ -17,6 +17,8 @@ class Uri {
 
 	public function __construct(string $url = '') {
 		$url = parse_url($url);
+		if(!(is_array($url) && array_key_exists(URL_PATH, $url) && array_key_exists(URL_QUERY, $url)))
+			throw new \Exception("Parsed URL not corespondig with required standard!");
 		$this->setPath($url[URL_PATH] ?? '');
 		$this->setQuery($url[URL_QUERY] ?? '');
 	}
