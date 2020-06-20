@@ -61,6 +61,15 @@ class User
      */
     protected $avatar;
 
+    public function __construct(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = "") {
+		$this->setUsername($username);
+		$this->setPassword($password);
+		$this->setEmail($email);
+		$this->setName($name);
+		$this->setSurname($surname);
+		$this->setAvatar($avatar);
+    }
+
 	/**
 	 * Return user ID.
 	 *
