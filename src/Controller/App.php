@@ -23,7 +23,6 @@ class App {
 	try {
 		$uri = $request->getUri();
 		@list($version, $controller, $action) = $uri->getPath();
-		@list($action, $format) = explode(".", $action);
 		$params = $uri->getQuery();
 
 		$this->version = $version;
@@ -32,7 +31,7 @@ class App {
 		$this->params = $params;
 
 		$this->controller->setEntityManager($entityManager);
-		$this->controller->setView($format);
+		$this->controller->setView($request->getAccept());
 		$this->controller->setRequest($request);
 
 		$action = $this->action;
