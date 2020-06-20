@@ -22,12 +22,16 @@ class Request {
 	/** @var string */
 	private $remoteAddress;
 
-	public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, \App\Lib\Http\Body $body, string $remoteAddress) {
+	/** @var string */
+	private $accept;
+
+	public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, \App\Lib\Http\Body $body, string $remoteAddress, string $accept) {
 		$this->isSecured = $isSecured;
 		$this->method = $method;
 		$this->uri = $uri;
 		$this->body = $body;
 		$this->remoteAddress = $remoteAddress;
+		$this->setAccept($accept);
 	}
 
 	/**
@@ -55,6 +59,32 @@ class Request {
 	 */
 	public function getMethod(): string {
 		return $this->method;
+	}
+
+	/**
+	 * Sets accept format.
+	 *
+	 * @param string $accept
+	 * @return void
+	 */
+	private function setAccept($accept) {
+		switch($accept) {
+			case "application/json":
+				$this->accept = "json";
+				break;
+			case "application/xml":
+				$this->accept = "xml";
+				break;
+			case "text/html":
+				$this->accept = "html";
+				break;
+			default:
+				$this->accept = "json";
+		}
+	}
+
+	public function getAccept(): string {
+		return $this->accept;
 	}
 
 	/**
