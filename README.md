@@ -62,4 +62,4 @@ Výpis implmentovancýh koncových bodů API.
 ## Poznámky
 
 -   URL ve tvaru base/version/controller/action.format?params
--   https://api.stacha.dev/1/article/all.json?order=newest
+-   https://api.stacha.dev/1/article/get-all.json?order=newest

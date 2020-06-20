@@ -66,7 +66,7 @@ class App {
 	 * @return void
 	 */
 	private function setAction(string $action) {
-        $action = str_replace("_", "", ucwords(strtolower($action), "_"));
+        $action = str_replace("-", "", ucwords(strtolower($action), "-"));
         if (!method_exists($this->controller, $action)) {
             throw new Exception(
                 "The action '$action' has not been defined.");
