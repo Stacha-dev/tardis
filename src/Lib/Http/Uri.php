@@ -15,12 +15,16 @@ class Uri {
 	/** @var \App\Lib\Http\Query */
 	private $query;
 
-	public function __construct(string $url = '') {
+	public function __construct(string $url = "") {
 		$url = parse_url($url);
-		if(!(is_array($url) && array_key_exists(URL_PATH, $url) && array_key_exists(URL_QUERY, $url)))
+		if(is_array($url)){
+			$path = array_key_exists(URL_PATH, $url) ? $url[URL_PATH] : "";
+			$query = array_key_exists(URL_QUERY, $url) ? $url[URL_QUERY] : "";
+		} else {
 			throw new \Exception("Parsed URL not corespondig with required standard!");
-		$this->setPath($url[URL_PATH] ?? '');
-		$this->setQuery($url[URL_QUERY] ?? '');
+		}
+		$this->setPath($path);
+		$this->setQuery($query);
 	}
 
 	/**
