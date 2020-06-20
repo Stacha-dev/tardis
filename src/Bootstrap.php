@@ -28,6 +28,8 @@ class Bootstrap {
 	public static function getEntityManager(): \Doctrine\ORM\EntityManager {
 		$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), true, null, null, false);
 		$dbParams = parse_ini_file(__DIR__ . "/../config/common.ini", true, INI_SCANNER_RAW) ?? [];
+		if (!(is_array($dbParams) && array_key_exists(DB_CONFIG, $dbParams)))
+			throw new \Exception("Bad configuration file! Check DB credentials.");
 		return EntityManager::create($dbParams[DB_CONFIG], $config);
 	}
 }
