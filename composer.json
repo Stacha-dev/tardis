@@ -28,8 +28,8 @@
 	},
 	"scripts": {
 		"orm:create": "doctrine orm:schema-tool:create",
-		"orm:update": "doctrine orm:schema-tool:update",
-		"orm:drop": "doctrine orm:schema-tool:drop",
+		"orm:update": "doctrine orm:schema-tool:update --force",
+		"orm:drop": "doctrine orm:schema-tool:drop --force",
 		"phpstan": "phpstan analyse src -l max",
 		"doc": "phpdoc run -t docs"
 	}
