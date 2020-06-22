@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Lib\Util\Input;
 use Exception;
 
-final class Article extends \App\Controller\Resource
+final class Article extends \App\Controller\Base
 {
 	public function __construct(\App\Lib\Rest\Router $router){
 		$router->register("GET", "1/article", array($this, "getAll"));
