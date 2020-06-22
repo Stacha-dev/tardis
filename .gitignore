@@ -1,3 +1,4 @@
 config/common.ini
 vendor
 examples/
+.remote-sync.json

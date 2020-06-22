@@ -63,3 +63,7 @@ Výpis implmentovancýh koncových bodů API.
 
 -   URL ve tvaru base/version/controller/action.format?params
 -   https://api.stacha.dev/1/article/get-all?order=newest
+
+## Lady GAGA
+
+-   https://www.youtube.com/watch?v=jKAA_INzDGo
