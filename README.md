@@ -66,4 +66,4 @@ Výpis implmentovancýh koncových bodů API.
 
 ## Lady GAGA
 
--   buď taky fanoušek
+-   https://www.youtube.com/watch?v=jKAA_INzDGo
