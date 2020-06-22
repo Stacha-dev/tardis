@@ -65,3 +65,5 @@ Výpis implmentovancýh koncových bodů API.
 -   https://api.stacha.dev/1/article/get-all?order=newest
 
 ## Lady GAGA
+
+-   buď taky fanoušek
