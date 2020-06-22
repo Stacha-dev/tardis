@@ -2,22 +2,20 @@
 declare(strict_types = 1);
 namespace App\Controller;
 
-use App\Controller\BaseController;
-use App\Model\Entity\Article;
 use App\Lib\Util\Input;
 use Exception;
 
-final class ArticleController extends BaseController
+final class Article extends \App\Controller\Resource
 {
+	public function __construct(\App\Lib\Rest\Router $router){
+		$router->register("GET", "1/article", array($this, "getAll"));
+	}
 	/**
 	 * Gets all articles.
 	 *
 	 * @return array<array>
 	 */
 	public function getAll(): array {
-		if(!$this->request->isGet()) {
-			throw new Exception('Bad request method ' . $this->request->getMethod() . ' should be GET!');
-		}
 		$query = $this->entityManager->createQuery('SELECT a FROM App\Model\Entity\Article a');
 		$result = $query->getArrayResult();
 		$this->view->render($result);
@@ -31,9 +29,6 @@ final class ArticleController extends BaseController
 	* @return \App\Model\Entity\Article
 	*/
 	public function getOneById(int $id = -1): \App\Model\Entity\Article {
-		if(!$this->request->isGet()) {
-			throw new Exception('Bad request method ' . $this->request->getMethod() . ' should be GET!');
-		}
 		$params = $this->request->getUri()->getQuery();
 		$id = $params->getQueryParamValue('id') ?? $id;
 
@@ -53,9 +48,6 @@ final class ArticleController extends BaseController
 	* @return \App\Model\Entity\Article
 	*/
 	public function getOneByAlias(string $alias = ''): \App\Model\Entity\Article {
-		if(!$this->request->isGet()) {
-			throw new Exception('Bad request method ' . $this->request->getMethod() . ' should be GET!');
-		}
 		$params = $this->request->getUri()->getQuery();
 		$alias = $params->getQueryParamValue('alias') ?? $alias;
 
@@ -76,14 +68,11 @@ final class ArticleController extends BaseController
 	 * @return \App\Model\Entity\Article
 	 */
 	public function create(string $title = '', string $alias = NULL, string $content = ''): \App\Model\Entity\Article {
-		if(!$this->request->isPost()) {
-			throw new Exception('Bad request method ' . $this->request->getMethod() . ' should be POST!');
-		}
 		$body = $this->request->getBody();
 		$title = $body->getBodyData('title') ?? $title;
 		$alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
 		$content = $body->getBodyData('content') ?? $content;
-		$article = new Article($title, $alias, $content);
+		$article = new \App\Model\Entity\Article($title, $alias, $content);
 		$this->entityManager->persist($article);
 		$this->entityManager->flush();
 		$this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "alias" => $article->getAlias(), "content" => $article->getContent()));
@@ -100,9 +89,6 @@ final class ArticleController extends BaseController
 	 * @return \App\Model\Entity\Article
 	 */
 	public function edit(int $id = -1, string $title = '', string $alias= '', string $content = ''): \App\Model\Entity\Article {
-		if(!$this->request->isPut()) {
-			throw new Exception('Bad request method ' . $this->request->getMethod() . ' should be PUT!');
-		}
 		$params = $this->request->getUri()->getQuery();
 		$body = $this->request->getBody();
 		$id = $params->getQueryParamValue('id') ?? $id;
@@ -133,9 +119,6 @@ final class ArticleController extends BaseController
 	 * @return void
 	 */
 	public function delete(int $id = -1) {
-		if(!$this->request->isDelete()) {
-			throw new Exception('Bad request method ' . $this->request->getMethod() . ' should be DELETE!');
-		}
 		$params = $this->request->getUri()->getQuery();
 		$id = $params->getQueryParamValue('id') ?? $id;
 
