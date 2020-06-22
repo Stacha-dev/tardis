@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Exception;
 
-class BaseController {
+class Base {
 
 	/** @var EntityManager */
 	protected $entityManager;
