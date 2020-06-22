@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Lib\Http\Uri;
+use App\Lib\Rest\Router;
 use App\Controller\ArticleController;
 use App\View\Error;
 use Doctrine\ORM\EntityManager;
@@ -19,9 +20,13 @@ class App {
 	/** @var \App\Lib\Http\Query */
 	private $params;
 
+	private $router;
+
 	function __construct(\App\Lib\Http\Request $request, EntityManager $entityManager) {
 	try {
 		$uri = $request->getUri();
+		$path = $uri->getPath();
+		$this->router = new Router;
 		@list($version, $controller, $action) = $uri->getPath();
 		$params = $uri->getQuery();
 
@@ -49,13 +54,13 @@ class App {
 	 * @return void
 	 */
 	private function setController(string $controller) {
-        $controller = __NAMESPACE__ . "\\" . ucfirst(strtolower($controller)) . "Controller";
+        $controller = __NAMESPACE__ . "\\" . ucfirst(strtolower($controller));
         if (!class_exists($controller)) {
             throw new Exception(
                 "The controller '$controller' has not been defined.");
         }
 
-        $this->controller = new $controller;
+        $this->controller = new $controller($this->router);
     }
 
 	/**

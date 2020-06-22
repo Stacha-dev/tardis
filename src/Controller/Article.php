@@ -7,8 +7,12 @@ use Exception;
 
 final class Article extends \App\Controller\Base
 {
+	private $router;
 	public function __construct(\App\Lib\Rest\Router $router){
-		$router->register("GET", "1/article", array($this, "getAll"));
+		$this->router = $router;
+		$this->router->register("GET", ":version/article", array($this, "getAll"));
+		$this->router->register("GET", ":version/article/:id", array($this, "getOneById"));
+		$this->router->register("POST", ":version/article", array($this, "create"));
 	}
 	/**
 	 * Gets all articles.
