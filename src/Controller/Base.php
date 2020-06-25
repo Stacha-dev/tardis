@@ -18,15 +18,12 @@ class Base {
 	/** @var \App\Lib\Http\Request */
 	protected $request;
 
-	/**
-	 * Sets entity manager.
-	 *
-	 * @param EntityManager $entityManager
-	 * @return void
-	 */
-	public function setEntityManager(EntityManager $entityManager) {
+	protected $router;
+
+	public function __construct(\Doctrine\ORM\EntityManager $entityManager) {
 		$this->entityManager = $entityManager;
 		$this->queryBuilder = $entityManager->createQueryBuilder();
+		$this->router = new \App\Lib\Middleware\Router();
 	}
 
 	/**
@@ -52,5 +49,9 @@ class Base {
 	 */
 	public function setRequest(\App\Lib\Http\Request $request) {
 		$this->request = $request;
+	}
+
+	public function setRouter(\App\Lib\Middleware\Router $router) {
+		$this->router = $router;
 	}
 }

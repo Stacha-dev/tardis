@@ -6,7 +6,6 @@ namespace App;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use App\Controller\App;
-use App\Lib\Http\RequestFactory;
 
 define("DB_CONFIG", "db");
 
@@ -17,7 +16,7 @@ class Bootstrap {
 	 * @return \App\Controller\App
 	 */
 	public static function boot(): \App\Controller\App {
-		return new App(RequestFactory::fromGlobals(), self::getEntityManager());
+		return new App(\App\Lib\Http\RequestFactory::fromGlobals(), self::getEntityManager());
 	}
 
 	/**

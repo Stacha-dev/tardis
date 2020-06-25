@@ -3,10 +3,9 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Lib\Http\Uri;
-use App\Lib\Rest\Router;
+use App\Lib\Middleware\Router;
 use App\Controller\ArticleController;
 use App\View\Error;
-use Doctrine\ORM\EntityManager;
 use Exception;
 
 
@@ -20,27 +19,17 @@ class App {
 	/** @var \App\Lib\Http\Query */
 	private $params;
 
-	private $router;
-
-	function __construct(\App\Lib\Http\Request $request, EntityManager $entityManager) {
+	function __construct(\App\Lib\Http\Request $request, \Doctrine\ORM\EntityManager $entityManager) {
+	$this->entityManager = $entityManager;
+	$this->request = $request;
 	try {
 		$uri = $request->getUri();
-		$path = $uri->getPath();
-		$this->router = new Router;
-		@list($version, $controller, $action) = $uri->getPath();
-		$params = $uri->getQuery();
+		@list($version, $controller) = $uri->getPath();
 
-		$this->version = $version;
 		$this->setController($controller);
-		$this->setAction($action);
-		$this->params = $params;
 
-		$this->controller->setEntityManager($entityManager);
-		$this->controller->setView($request->getAccept());
-		$this->controller->setRequest($request);
+		$this->controller->requestDispatch($this->request);
 
-		$action = $this->action;
-		$this->controller->$action();
 		} catch(Exception $e){
 			error_log($e->getMessage());
 			Error::render($e->getMessage(), 400);
@@ -59,23 +48,9 @@ class App {
             throw new Exception(
                 "The controller '$controller' has not been defined.");
         }
+        $this->controller = new $controller($this->entityManager);
 
-        $this->controller = new $controller($this->router);
-    }
-
-	/**
-	 * Sets action of controller.
-	 *
-	 * @param string $action
-	 * @return void
-	 */
-	private function setAction(string $action) {
-        $action = str_replace("-", "", ucwords(strtolower($action), "-"));
-        if (!method_exists($this->controller, $action)) {
-            throw new Exception(
-                "The action '$action' has not been defined.");
-        }
-
-        $this->action = $action;
+		$this->controller->setView($this->request->getAccept());
+		$this->controller->setRequest($this->request);
     }
 }

@@ -7,13 +7,23 @@ use Exception;
 
 final class Article extends \App\Controller\Base
 {
-	private $router;
-	public function __construct(\App\Lib\Rest\Router $router){
-		$this->router = $router;
-		$this->router->register("GET", ":version/article", array($this, "getAll"));
-		$this->router->register("GET", ":version/article/:id", array($this, "getOneById"));
-		$this->router->register("POST", ":version/article", array($this, "create"));
+
+	public function requestDispatch(\App\Lib\Http\Request $request) {
+		$this->router->get(array(
+			"version" => 1,
+			"method" => "GET",
+			"pattern" => "@^(?<version>[0-9])/article$@",
+				"action" => array("method" => "getAll", "params" => array())));
+		$this->router->get(array(
+			"version" => 1,
+			"method" => "GET",
+			"pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
+			"action" => array("method" => "getOneById", "params" => array("id"))));
+
+		$result = $this->router->dispatch($request);
+		call_user_func_array(array($this, $result["action"]), $result["params"]);
 	}
+
 	/**
 	 * Gets all articles.
 	 *
@@ -33,11 +43,8 @@ final class Article extends \App\Controller\Base
 	* @return \App\Model\Entity\Article
 	*/
 	public function getOneById(int $id = -1): \App\Model\Entity\Article {
-		$params = $this->request->getUri()->getQuery();
-		$id = $params->getQueryParamValue('id') ?? $id;
-
 		$result = $this->entityManager->find('App\Model\Entity\Article', $id);
-		if ($result instanceof Article) {
+		if ($result instanceof \App\Model\Entity\Article) {
 			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
 			return $result;
 		} else {
