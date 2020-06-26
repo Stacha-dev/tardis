@@ -25,6 +25,11 @@ final class Article extends \App\Controller\Base
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
 			"action" => array("method" => "getOneById", "params" => array("id"))));
+		$router->get(array(
+			"version" => 1,
+			"method" => "GET",
+			"pattern" => "@^(?<version>[0-9]+)/article/(?<alias>[a-z]+)$@",
+			"action" => array("method" => "getOneByAlias", "params" => array("alias"))));
 
 		$result = $router->dispatch($request);
 		call_user_func_array(array($this, $result["action"]), $result["params"]);
