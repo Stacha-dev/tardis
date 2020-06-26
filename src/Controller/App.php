@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Lib\Http\Uri;
 use App\Lib\Middleware\Router;
-use App\Controller\ArticleController;
 use App\View\Error;
 use Exception;
 
@@ -12,7 +11,7 @@ use Exception;
 class App {
 	/** @var string */
 	private $version;
-	/** @var ArticleController */
+	/** @var \App\Controller\Base */
 	private $controller;
 	/** @var string */
 	private $action;
@@ -20,15 +19,8 @@ class App {
 	private $params;
 
 	function __construct(\App\Lib\Http\Request $request, \Doctrine\ORM\EntityManager $entityManager) {
-	$this->entityManager = $entityManager;
-	$this->request = $request;
-	try {
-		$uri = $request->getUri();
-		@list($version, $controller) = $uri->getPath();
-
-		$this->setController($controller);
-
-		$this->controller->requestDispatch($this->request);
+		try {
+			$this->controllerFactory($request, $entityManager)->requestDispatch(new \App\Lib\Middleware\Router, $request);
 
 		} catch(Exception $e){
 			error_log($e->getMessage());
@@ -36,21 +28,20 @@ class App {
 		}
 	}
 
-	/**
-	 * Sets controller.
-	 *
-	 * @param string $controller
-	 * @return void
-	 */
-	private function setController(string $controller) {
+
+	private function controllerFactory(\App\Lib\Http\Request $request, \Doctrine\ORM\EntityManager $entityManager): \App\Controller\Base {
+		$path = $request->getUri()->getPath();
+		$controller = count($path) >= 2 ? $path[1] : "base";
+
         $controller = __NAMESPACE__ . "\\" . ucfirst(strtolower($controller));
         if (!class_exists($controller)) {
             throw new Exception(
                 "The controller '$controller' has not been defined.");
         }
-        $this->controller = new $controller($this->entityManager);
+        $controller = new $controller($entityManager);
 
-		$this->controller->setView($this->request->getAccept());
-		$this->controller->setRequest($this->request);
+		$controller->setView($request->getAccept());
+		$controller->setRequest($request);
+		return $controller;
     }
 }

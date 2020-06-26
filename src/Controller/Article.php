@@ -7,20 +7,26 @@ use Exception;
 
 final class Article extends \App\Controller\Base
 {
-
-	public function requestDispatch(\App\Lib\Http\Request $request) {
-		$this->router->get(array(
+	/**
+	 * Dispatch request to predefined routes.
+	 *
+	 * @param \App\Lib\Middleware\Router $router
+	 * @param \App\Lib\Http\Request $request
+	 * @return void
+	 */
+	public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void {
+		$router->get(array(
 			"version" => 1,
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9])/article$@",
 				"action" => array("method" => "getAll", "params" => array())));
-		$this->router->get(array(
+		$router->get(array(
 			"version" => 1,
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
 			"action" => array("method" => "getOneById", "params" => array("id"))));
 
-		$result = $this->router->dispatch($request);
+		$result = $router->dispatch($request);
 		call_user_func_array(array($this, $result["action"]), $result["params"]);
 	}
 
@@ -63,7 +69,7 @@ final class Article extends \App\Controller\Base
 		$alias = $params->getQueryParamValue('alias') ?? $alias;
 
 		$result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('alias' => $alias));
-		if ($result instanceof Article) {
+		if ($result instanceof \App\Model\Entity\Article) {
 			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
 			return $result;
 		} else {

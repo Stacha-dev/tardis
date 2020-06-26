@@ -17,14 +17,15 @@ class Base {
 	protected $view;
 	/** @var \App\Lib\Http\Request */
 	protected $request;
-
+	/** @var \App\Lib\Middleware\Router */
 	protected $router;
 
 	public function __construct(\Doctrine\ORM\EntityManager $entityManager) {
 		$this->entityManager = $entityManager;
 		$this->queryBuilder = $entityManager->createQueryBuilder();
-		$this->router = new \App\Lib\Middleware\Router();
 	}
+
+	public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void {}
 
 	/**
 	 * Sets view.
@@ -49,9 +50,5 @@ class Base {
 	 */
 	public function setRequest(\App\Lib\Http\Request $request) {
 		$this->request = $request;
-	}
-
-	public function setRouter(\App\Lib\Middleware\Router $router) {
-		$this->router = $router;
 	}
 }

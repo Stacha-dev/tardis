@@ -87,39 +87,8 @@ class Request {
 		return $this->accept;
 	}
 
-	/**
-	 * Check if request method is GET.
-	 *
-	 * @return boolean
-	 */
-	public function isGet(): bool {
-		return $this->getMethod() === "GET";
-	}
-
-	/**
-	 * Check if request method is POST.
-	 *
-	 * @return boolean
-	 */
-	public function isPost(): bool {
-		return $this->getMethod() === "POST";
-	}
-
-	/**
-	 * Check if request method is PUT.
-	 *
-	 * @return boolean
-	 */
-	public function isPut(): bool {
-		return $this->getMethod() === "PUT";
-	}
-
-	/**
-	 * Check if request method is DELETE.
-	 *
-	 * @return boolean
-	 */
-	public function isDelete(): bool {
-		return $this->getMethod() === "DELETE";
+	public function getResource(): string {
+		$path = $this->getUri()->getPath();
+		return count($path) >= 2 ? $path[1] : "base";
 	}
 }
