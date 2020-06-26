@@ -5,29 +5,19 @@ namespace App\Lib\Middleware;
 
 
 class Router {
-	/** @var array<array|string> */
+	/** @var array<array<array|string>> */
 	private $routes = array();
 
 	/**
-	 * Register route by HTTP method.
-	 *
-	 * @param string $method
-	 * @param array $route<array|string>
-	 * @return void
-	 */
-	private function register(string $method, array $route): void {
-		$this->routes[$method] = empty($this->routes[$method]) ? array() : $this->routes[$method];
-		array_push($this->routes[$method], $route);
-	}
-
-	/**
-	 * Register GET route.
+	 * Register router HTTP request.
 	 *
 	 * @param array $route<array<string>|string>
 	 * @return void
 	 */
-	public function get(array $route): void {
-		$this->register("GET", $route);
+	public function register(array $route): void {
+		$method = $route['method'];
+		$this->routes[$method] = empty($this->routes[$method]) ? array() : $this->routes[$method];
+		array_push($this->routes[$method], $route);
 	}
 
 	/**
@@ -40,13 +30,13 @@ class Router {
 		foreach((array)$this->routes[$request->getMethod()] as $route) {
 			$uri = implode("/", $request->getUri()->getPath());
 
-			if(preg_match($route['pattern'], $uri, $matches)) {
+			if(is_array($route) && array_key_exists("pattern", $route) && preg_match($route['pattern'], $uri, $matches)) {
 				$params = array();
 				foreach($route["action"]["params"] as $param) {
 					array_push($params, is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param]);
 				}
 
-				return array("action" => $route["action"]["method"], "params" => $params);
+				return array("action" => (string)$route["action"]["method"], "params" => $params);
 			}
 		}
 		throw new \Exception("Route nout found!");
