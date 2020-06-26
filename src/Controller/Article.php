@@ -15,24 +15,43 @@ final class Article extends \App\Controller\Base
 	 * @return void
 	 */
 	public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void {
-		$router->get(array(
+		$router->register(array(
 			"version" => 1,
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9])/article$@",
 				"action" => array("method" => "getAll", "params" => array())));
-		$router->get(array(
+		$router->register(array(
 			"version" => 1,
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
 			"action" => array("method" => "getOneById", "params" => array("id"))));
-		$router->get(array(
+		$router->register(array(
 			"version" => 1,
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9]+)/article/(?<alias>[a-z]+)$@",
 			"action" => array("method" => "getOneByAlias", "params" => array("alias"))));
+		$router->register(array(
+			"version" => 1,
+			"method" => "POST",
+			"pattern" => "@^(?<version>[0-9]+)/article$@",
+			"action" => array("method" => "create", "params" => array())));
+		$router->register(array(
+			"version" => 1,
+			"method" => "PUT",
+			"pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
+			"action" => array("method" => "edit", "params" => array("id"))));
+		$router->register(array(
+			"version" => 1,
+			"method" => "DELETE",
+			"pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
+			"action" => array("method" => "delete", "params" => array("id"))));
 
 		$result = $router->dispatch($request);
-		call_user_func_array(array($this, $result["action"]), $result["params"]);
+		if(is_array($result) && array_key_exists("action", $result) && array_key_exists("params", $result)){
+			call_user_func_array(array($this, (string)$result["action"]), (array)$result["params"]);
+		} else {
+
+		}
 	}
 
 	/**
@@ -53,7 +72,7 @@ final class Article extends \App\Controller\Base
 	* @param int $id
 	* @return \App\Model\Entity\Article
 	*/
-	public function getOneById(int $id = -1): \App\Model\Entity\Article {
+	public function getOneById(int $id): \App\Model\Entity\Article {
 		$result = $this->entityManager->find('App\Model\Entity\Article', $id);
 		if ($result instanceof \App\Model\Entity\Article) {
 			$this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
@@ -69,7 +88,7 @@ final class Article extends \App\Controller\Base
 	* @param string $alias
 	* @return \App\Model\Entity\Article
 	*/
-	public function getOneByAlias(string $alias = ''): \App\Model\Entity\Article {
+	public function getOneByAlias(string $alias): \App\Model\Entity\Article {
 		$params = $this->request->getUri()->getQuery();
 		$alias = $params->getQueryParamValue('alias') ?? $alias;
 
@@ -89,7 +108,7 @@ final class Article extends \App\Controller\Base
 	 * @param string $content
 	 * @return \App\Model\Entity\Article
 	 */
-	public function create(string $title = '', string $alias = NULL, string $content = ''): \App\Model\Entity\Article {
+	public function create(string $title='', string $alias = NULL, string $content = ''): \App\Model\Entity\Article {
 		$body = $this->request->getBody();
 		$title = $body->getBodyData('title') ?? $title;
 		$alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
