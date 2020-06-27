@@ -27,10 +27,12 @@ class Router {
 	 * @return array<array|string>
 	 */
 	public function dispatch(\App\Lib\Http\Request $request): array {
-		foreach((array)$this->routes[$request->getMethod()] as $route) {
-			$uri = implode("/", $request->getUri()->getPath());
+		$path = $request->getUri()->getPath();
+		$uri = implode("/", $path);
+		$version = (int)$path[0];
 
-			if(is_array($route) && array_key_exists("pattern", $route) && preg_match($route['pattern'], $uri, $matches)) {
+		foreach((array)$this->routes[$request->getMethod()] as $route) {
+			if(is_array($route) && array_key_exists("pattern", $route) && preg_match($route['pattern'], $uri, $matches) && $route['version'] === $version) {
 				$params = array();
 				foreach($route["action"]["params"] as $param) {
 					array_push($params, is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param]);
