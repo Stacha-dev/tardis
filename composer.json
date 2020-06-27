@@ -9,6 +9,7 @@
 		}
 	],
 	"require": {
+		"bshaffer/oauth2-server-php": "^1.11",
 		"doctrine/orm": "*"
 	},
 	"require-dev": {
