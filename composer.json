@@ -10,9 +10,10 @@
 	],
 	"require": {
 		"bshaffer/oauth2-server-php": "^1.11",
-		"doctrine/orm": "*"
+		"doctrine/orm": "^2.7.3"
 	},
 	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.16",
 		"phpstan/phpstan": "^0.12.25"
 	},
 	"autoload": {
@@ -32,6 +33,7 @@
 		"orm:update": "doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:schema-tool:drop --force",
 		"phpstan": "phpstan analyse src -l max",
-		"doc": "phpdoc run -t docs"
+		"doc": "phpdoc run -t docs",
+		"cs": "php vendor/bin/php-cs-fixer fix ."
 	}
 }
