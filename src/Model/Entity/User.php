@@ -14,67 +14,68 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @var int
+     * @var                        int
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
-     * @var string
+     * @var                       string
      */
     protected $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @var string
+     * @var                       string
      */
     protected $password;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
-     * @var string
+     * @var                       string
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @var string
+     * @var                       string
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @var string
+     * @var                       string
      */
     protected $surname;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
-	 * @ORM\Version
-     * @var \DateTime
+     * @ORM\Version
+     * @var                         \DateTime
      */
     protected $updated;
 
     /**
      * @ORM\COlumn(type="string", length=1024)
-     * @var string
+     * @var                       string
      */
     protected $avatar;
 
-    public function __construct(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = "") {
-		$this->setUsername($username);
-		$this->setPassword($password);
-		$this->setEmail($email);
-		$this->setName($name);
-		$this->setSurname($surname);
-		$this->setAvatar($avatar);
+    public function __construct(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = "")
+    {
+        $this->setUsername($username);
+        $this->setPassword($password);
+        $this->setEmail($email);
+        $this->setName($name);
+        $this->setSurname($surname);
+        $this->setAvatar($avatar);
     }
 
-	/**
-	 * Return user ID.
-	 *
-	 * @return integer
-	 */
+    /**
+     * Return user ID.
+     *
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
@@ -83,10 +84,11 @@ class User
     /**
      * Sets user username.
      *
-     * @param string $username
+     * @param  string $username
      * @return void
      */
-    public function setUsername(string $username) {
+    public function setUsername(string $username)
+    {
         $this->username = $username;
     }
 
@@ -95,17 +97,19 @@ class User
      *
      * @return string
      */
-    public function getUsername(): string {
+    public function getUsername(): string
+    {
         return $this->username;
     }
 
     /**
      * Sets user password.
      *
-     * @param string $password
+     * @param  string $password
      * @return void
      */
-    public function setPassword(string $password) {
+    public function setPassword(string $password)
+    {
         $this->password = $password;
     }
 
@@ -114,17 +118,19 @@ class User
      *
      * @return string
      */
-    public function getPassword(): string {
+    public function getPassword(): string
+    {
         return $this->password;
     }
 
     /**
      * Sets user e-mail.
      *
-     * @param string $email
+     * @param  string $email
      * @return void
      */
-    public function setEmail(string $email) {
+    public function setEmail(string $email)
+    {
         $this->email = $email;
     }
 
@@ -133,26 +139,27 @@ class User
      *
      * @return string
      */
-    public function getEmail(): string {
+    public function getEmail(): string
+    {
         return $this->email;
     }
 
     /**
-	 * Sets user name.
-	 *
-	 * @param string $name
-	 * @return void
-	 */
+     * Sets user name.
+     *
+     * @param  string $name
+     * @return void
+     */
     public function setName(string $name)
     {
         $this->name = $name;
     }
 
-	/**
-	 * Returns user name.
-	 *
-	 * @return string
-	 */
+    /**
+     * Returns user name.
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
@@ -161,10 +168,11 @@ class User
     /**
      * Sets user surname.
      *
-     * @param string $surname
+     * @param  string $surname
      * @return void
      */
-    public function setSurname(string $surname) {
+    public function setSurname(string $surname)
+    {
         $this->surname = $surname;
     }
 
@@ -173,17 +181,19 @@ class User
      *
      * @return string
      */
-    public function getSurname():string {
+    public function getSurname():string
+    {
         return $this->surname;
     }
 
     /**
      * Sets user updated date.
      *
-     * @param \DateTime $updated
+     * @param  \DateTime $updated
      * @return void
      */
-    public function setUpdated(\DateTime $updated) {
+    public function setUpdated(\DateTime $updated)
+    {
         $this->updated = $updated;
     }
 
@@ -192,17 +202,19 @@ class User
      *
      * @return \DateTime
      */
-    public function getUpdated(): \DateTime {
+    public function getUpdated(): \DateTime
+    {
         return $this->updated;
     }
 
     /**
      * Sets user avatar.
      *
-     * @param string $avatar
+     * @param  string $avatar
      * @return void
      */
-    public function setAvatar(string $avatar) {
+    public function setAvatar(string $avatar)
+    {
         $this->avatar = $avatar;
     }
 
@@ -211,9 +223,8 @@ class User
      *
      * @return string
      */
-    public function getAvatar(): string {
+    public function getAvatar(): string
+    {
         return $this->avatar;
     }
-
-
 }

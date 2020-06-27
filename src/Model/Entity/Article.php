@@ -14,32 +14,32 @@ class Article
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
-	 * @var int
+     * @var                        int
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=512)
-	 * @var string
+     * @var                       string
      */
     protected $title;
 
-	/**
-	 * @ORM\Column(type="string", unique=true, length=191)
-	 * @var string
-	 */
-	protected $alias;
+    /**
+     * @ORM\Column(type="string", unique=true, length=191)
+     * @var                       string
+     */
+    protected $alias;
 
-	/**
+    /**
      * @ORM\Column(type="string", nullable=true)
-	 * @var string
+     * @var                       string
      */
     protected $content;
 
-	 /**
+    /**
      * @ORM\Column(type="datetime", nullable=false)
-	 * @ORM\Version
-     * @var \DateTime
+     * @ORM\Version
+     * @var                         \DateTime
      */
     protected $updated;
 
@@ -50,88 +50,93 @@ class Article
      * @param string $alias
      * @param string $content
      */
-    public function __construct(string $title = "", string $alias = "", string $content = ""){
+    public function __construct(string $title = "", string $alias = "", string $content = "")
+    {
         $this->setTitle($title);
         $this->setAlias($alias);
         $this->setContent($content);
     }
 
-	/**
-	 * Returns article ID.
-	 *
-	 * @return integer
-	 */
-    public function getId(): int {
+    /**
+     * Returns article ID.
+     *
+     * @return integer
+     */
+    public function getId(): int
+    {
         return $this->id;
     }
 
-	/**
-	 * Returns article title.
-	 *
-	 * @return string
-	 */
-    public function getTitle(): string {
+    /**
+     * Returns article title.
+     *
+     * @return string
+     */
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
-	/**
-	 * Sets article title.
-	 *
-	 * @param string $title
-	 * @return void
-	 */
+    /**
+     * Sets article title.
+     *
+     * @param  string $title
+     * @return void
+     */
     public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-	/**
-	 * Returns article alias.
-	 *
-	 * @return string
-	 */
-    public function getAlias(): string {
+    /**
+     * Returns article alias.
+     *
+     * @return string
+     */
+    public function getAlias(): string
+    {
         return $this->alias;
     }
 
-	/**
-	 * Sets article alias.
-	 *
-	 * @param string $alias
-	 * @return void
-	 */
+    /**
+     * Sets article alias.
+     *
+     * @param  string $alias
+     * @return void
+     */
     public function setAlias(string $alias)
     {
         $this->alias = $alias;
     }
 
-	/**
-	 * Returns article content.
-	 *
-	 * @return string
-	 */
-	public function getContent(): string
+    /**
+     * Returns article content.
+     *
+     * @return string
+     */
+    public function getContent(): string
     {
         return $this->content;
     }
 
-	/**
-	 * Sets article content.
-	 *
-	 * @param string $content
-	 * @return void
-	 */
+    /**
+     * Sets article content.
+     *
+     * @param  string $content
+     * @return void
+     */
     public function setContent(string $content)
     {
         $this->content = $content;
     }
 
-	 /**
+    /**
      * Sets user updated date.
      *
      * @return void
      */
-    public function setUpdated() {
+    public function setUpdated()
+    {
         $this->updated = new \DateTime("now");
     }
 
@@ -140,7 +145,8 @@ class Article
      *
      * @return \DateTime
      */
-    public function getUpdated(): \DateTime {
+    public function getUpdated(): \DateTime
+    {
         return $this->updated;
     }
 }
