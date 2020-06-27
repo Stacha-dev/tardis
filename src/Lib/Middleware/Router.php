@@ -11,11 +11,11 @@ class Router {
 	/**
 	 * Register router HTTP request.
 	 *
-	 * @param array $route<array<string>|string>
+	 * @param array<array|string|int> $route
 	 * @return void
 	 */
 	public function register(array $route): void {
-		$method = $route['method'];
+		$method = strval($route['method']);
 		$this->routes[$method] = empty($this->routes[$method]) ? array() : $this->routes[$method];
 		array_push($this->routes[$method], $route);
 	}

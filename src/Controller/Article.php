@@ -19,7 +19,7 @@ final class Article extends \App\Controller\Base
 			"version" => 1,
 			"method" => "GET",
 			"pattern" => "@^(?<version>[0-9])/article$@",
-				"action" => array("method" => "getAll", "params" => array())));
+			"action" => array("method" => "getAll", "params" => array())));
 		$router->register(array(
 			"version" => 1,
 			"method" => "GET",
@@ -48,9 +48,12 @@ final class Article extends \App\Controller\Base
 
 		$result = $router->dispatch($request);
 		if(is_array($result) && array_key_exists("action", $result) && array_key_exists("params", $result)){
-			call_user_func_array(array($this, (string)$result["action"]), (array)$result["params"]);
+			$callback = [$this, $result["action"]];
+			if (is_callable($callback)) {
+				call_user_func_array($callback, (array)$result["params"]);
+			}
 		} else {
-
+			throw new Exception("Router problem!");
 		}
 	}
 
