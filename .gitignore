@@ -3,3 +3,5 @@ vendor
 examples/
 .remote-sync.json
 .php_cs.cache
+.phpunit.result.cache
+public/reports/

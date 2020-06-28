@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+		convertWarningsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertErrorsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        colors="true">
+    <testsuites>
+        <testsuite name="Input Test Suite">
+            <directory>./tests/Lib/Util</directory>
+			<file>./tests/Lib/Util/InputTest.php</file>
+        </testsuite>
+		<testsuite name="Article Test Suite">
+            <directory>./tests/Controller</directory>
+			<file>./tests/Controller/ArticleTest.php</file>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
