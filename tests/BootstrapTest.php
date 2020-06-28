@@ -12,20 +12,20 @@ final class BootstrapTest extends TestCase
      */
     public function testEntityManagerCanBeCreated(): void
     {
-		$this->assertInstanceOf("\Doctrine\ORM\EntityManager", Bootstrap::getEntityManager());
+        $this->assertInstanceOf("\Doctrine\ORM\EntityManager", Bootstrap::getEntityManager());
     }
 
-	 /**
-     * Test is successfull when instance og App\Controller\App is returned.
-     *
-     * @return void
-     */
+    /**
+    * Test is successfull when instance og App\Controller\App is returned.
+    *
+    * @return void
+    */
     public function testAppCanBoot(): void
     {
-		$_SERVER['HTTPS'] = "on";
-		$_SERVER['REQUEST_METHOD'] = "GET";
-		$_SERVER['REQUEST_URI'] = "/1/article/";
-		$_SERVER['REMOTE_ADDR'] = "192.168.0.1";
-		$this->assertInstanceOf("App\Controller\App", Bootstrap::boot());
+        $_SERVER['HTTPS'] = "on";
+        $_SERVER['REQUEST_METHOD'] = "GET";
+        $_SERVER['REQUEST_URI'] = "/1/article/";
+        $_SERVER['REMOTE_ADDR'] = "192.168.0.1";
+        $this->assertInstanceOf("App\Controller\App", Bootstrap::boot());
     }
 }
