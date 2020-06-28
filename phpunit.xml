@@ -7,6 +7,10 @@
         stopOnFailure="false"
         colors="true">
     <testsuites>
+		<testsuite name="Bootstrap Test Suite">
+            <directory>./tests</directory>
+			<file>./tests/BootstrapTest.php</file>
+        </testsuite>
         <testsuite name="Input Test Suite">
             <directory>./tests/Lib/Util</directory>
 			<file>./tests/Lib/Util/InputTest.php</file>
