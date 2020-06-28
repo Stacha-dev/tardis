@@ -5,3 +5,4 @@ examples/
 .php_cs.cache
 .phpunit.result.cache
 public/reports/
+public/docs/
