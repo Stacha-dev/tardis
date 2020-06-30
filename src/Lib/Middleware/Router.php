@@ -14,13 +14,14 @@ class Router
      * Register router HTTP request.
      *
      * @param  array<array|string|int> $route
-     * @return void
+     * @return \App\Lib\Middleware\Router
      */
-    public function register(array $route): void
+    public function register(array $route): \App\Lib\Middleware\Router
     {
         $method = strval($route['method']);
         $this->routes[$method] = empty($this->routes[$method]) ? array() : $this->routes[$method];
         array_push($this->routes[$method], $route);
+        return $this;
     }
 
     /**
