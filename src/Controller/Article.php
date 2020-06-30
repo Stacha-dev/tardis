@@ -22,36 +22,36 @@ final class Article extends \App\Controller\Base
             "method" => "GET",
             "pattern" => "@^(?<version>[0-9])/article$@",
             "action" => array("method" => "getAll", "params" => array()))
-        );
-        $router->register(
+        )
+        ->register(
             array(
             "version" => 1,
             "method" => "GET",
             "pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
             "action" => array("method" => "getOneById", "params" => array("id")))
-        );
-        $router->register(
+        )
+        ->register(
             array(
             "version" => 1,
             "method" => "GET",
             "pattern" => "@^(?<version>[0-9]+)/article/(?<alias>[a-z]+)$@",
             "action" => array("method" => "getOneByAlias", "params" => array("alias")))
-        );
-        $router->register(
+        )
+        ->register(
             array(
             "version" => 1,
             "method" => "POST",
             "pattern" => "@^(?<version>[0-9]+)/article$@",
             "action" => array("method" => "create", "params" => array()))
-        );
-        $router->register(
+        )
+        ->register(
             array(
             "version" => 1,
             "method" => "PUT",
             "pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
             "action" => array("method" => "edit", "params" => array("id")))
-        );
-        $router->register(
+        )
+        ->register(
             array(
             "version" => 1,
             "method" => "DELETE",
