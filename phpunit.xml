@@ -15,6 +15,14 @@
             <directory>./tests/Lib/Util</directory>
 			<file>./tests/Lib/Util/InputTest.php</file>
         </testsuite>
+		<testsuite name="Request Test Suite">
+            <directory>./tests/Lib/Http</directory>
+			<file>./tests/Lib/Http/RequestTest.php</file>
+        </testsuite>
+		<testsuite name="Router Test Suite">
+            <directory>./tests/Lib/Middleware</directory>
+			<file>./tests/Lib/Middleware/RouterTest.php</file>
+        </testsuite>
 		<testsuite name="Article Test Suite">
             <directory>./tests/Controller</directory>
 			<file>./tests/Controller/ArticleTest.php</file>
