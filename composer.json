@@ -21,11 +21,7 @@
 			"App\\": "src/"
 		}
 	},
-	"minimum-stability": "stable",
 	"config": {
-		"platform": {
-			"php": "7.2.24"
-		},
 		"sort-packages": true
 	},
 	"scripts": {
@@ -35,7 +31,6 @@
 		"orm:update": "doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:schema-tool:drop --force",
 		"phpstan": "phpstan analyse src -l max",
-		"doc": "phpdoc run -t docs",
 		"cs": "php vendor/bin/php-cs-fixer fix ."
 	}
 }
