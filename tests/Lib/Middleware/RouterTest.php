@@ -11,11 +11,11 @@ final class RouterTest extends TestCase
         $this->router = new  \App\Lib\Middleware\Router;
     }
 
-	/**
-	 * Test is successfull if route is registered and instance of Router is returned.
-	 *
-	 * @return void
-	 */
+    /**
+     * Test is successfull if route is registered and instance of Router is returned.
+     *
+     * @return void
+     */
     public function testRouteCanBeRegistered(): void
     {
         $route = array(
