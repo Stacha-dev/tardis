@@ -37,15 +37,15 @@ class Base
         $this->queryBuilder = $entityManager->createQueryBuilder();
     }
 
-	 /**
-     * Register routes to router.
-     *
-     * @param  \App\Lib\Middleware\Router $router
-     * @return void
-     */
-	public function registerRoutes(\App\Lib\Middleware\Router $router): void
+    /**
+    * Register routes to router.
+    *
+    * @param  \App\Lib\Middleware\Router $router
+    * @return void
+    */
+    public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-	}
+    }
 
     /**
     * Dispatch request to predefined routes.
