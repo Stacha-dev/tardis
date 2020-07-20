@@ -237,8 +237,9 @@ class User
     /**
     * Sets user key.
     *
+    * @return void
     */
-    public function setKey(string $key): string
+    public function setKey(string $key)
     {
         $this->key = $key;
     }

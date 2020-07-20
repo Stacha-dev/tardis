@@ -87,14 +87,14 @@ class User extends \App\Controller\Base
         return $user;
     }
 
-    public function login(string $username = "", string $password = "")
+    public function login(string $username = "", string $password = ""): \App\Model\Entity\User
     {
         $body = $this->request->getBody();
         $username = $body->getBodyData('username') ?? $username;
         $password = $body->getBodyData('password') ?? $password;
         $result = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
         if ($result instanceof \App\Model\Entity\User) {
-            $this->view->render(array("key" => $result->key));
+            $this->view->render(array("key" => $result->getKey()));
             return $result;
         } else {
             throw new Exception("Bad user credetials!");
