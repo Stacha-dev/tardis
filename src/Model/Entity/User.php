@@ -14,52 +14,58 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @var                        int
+     * @var int
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
-     * @var                       string
+     * @var string
      */
     protected $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @var                       string
+     * @var string
      */
     protected $password;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
-     * @var                       string
+     * @var string
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @var                       string
+     * @var string
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @var                       string
+     * @var string
      */
     protected $surname;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      * @ORM\Version
-     * @var                         \DateTime
+     * @var \DateTime
      */
     protected $updated;
 
     /**
      * @ORM\COlumn(type="string", length=1024)
-     * @var                       string
+     * @var string
      */
     protected $avatar;
+
+    /**
+     * @ORM\COlumn(type="string", length=1024)
+     * @var string
+     */
+    protected $key;
 
     public function __construct(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = "")
     {
@@ -226,5 +232,24 @@ class User
     public function getAvatar(): string
     {
         return $this->avatar;
+    }
+
+    /**
+    * Sets user key.
+    *
+    */
+    public function setKey(string $key): string
+    {
+        $this->key = $key;
+    }
+
+    /**
+    * Returns user key.
+    *
+    * @return string
+     */
+    public function getKey(): string
+    {
+        return $this->key;
     }
 }
