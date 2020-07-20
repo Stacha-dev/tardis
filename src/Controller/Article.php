@@ -8,13 +8,12 @@ use Exception;
 final class Article extends \App\Controller\Base
 {
     /**
-     * Dispatch request to predefined routes.
+     * Register routes to router.
      *
      * @param  \App\Lib\Middleware\Router $router
-     * @param  \App\Lib\Http\Request      $request
      * @return void
      */
-    public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void
+    public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
         $router->register(
             array(
@@ -58,16 +57,6 @@ final class Article extends \App\Controller\Base
             "pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
             "action" => array("method" => "delete", "params" => array("id")))
         );
-
-        $result = $router->dispatch($request);
-        if (is_array($result) && array_key_exists("action", $result) && array_key_exists("params", $result)) {
-            $callback = [$this, $result["action"]];
-            if (is_callable($callback)) {
-                call_user_func_array($callback, (array)$result["params"]);
-            }
-        } else {
-            throw new Exception("Router problem!");
-        }
     }
 
     /**

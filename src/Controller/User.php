@@ -7,6 +7,45 @@ use Exception;
 
 class User extends \App\Controller\Base
 {
+
+     /**
+     * Register routes to router.
+     *
+     * @param  \App\Lib\Middleware\Router $router
+     * @return void
+     */
+    public function registerRoutes(\App\Lib\Middleware\Router $router): void
+    {
+        $router->register(
+            array(
+            "version" => 1,
+            "method" => "GET",
+            "pattern" => "@^(?<version>[0-9])/user$@",
+            "action" => array("method" => "getAll", "params" => array()))
+        )
+        ->register(
+            array(
+            "version" => 1,
+            "method" => "POST",
+            "pattern" => "@^(?<version>[0-9]+)/user$@",
+            "action" => array("method" => "create", "params" => array()))
+        )
+        ->register(
+            array(
+            "version" => 1,
+            "method" => "POST",
+            "pattern" => "@^(?<version>[0-9]+)/user/login$@",
+            "action" => array("method" => "login", "params" => array()))
+        )
+        ->register(
+            array(
+            "version" => 1,
+            "method" => "DELETE",
+            "pattern" => "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@",
+            "action" => array("method" => "delete", "params" => array("id")))
+        );
+    }
+
     /**
      * Returns all users.
      *
@@ -46,5 +85,19 @@ class User extends \App\Controller\Base
         $this->view->render(array("id" => $user->getId(), "username" => $user->getUsername(), "password" => $user->getPassword(), "email" => $user->getEmail(), "name" => $user->getName(), "surname" => $user->getSurname(), "avatar" => $user->getAvatar()));
 
         return $user;
+    }
+
+    public function login(string $username = "", string $password = "")
+    {
+        $body = $this->request->getBody();
+        $username = $body->getBodyData('username') ?? $username;
+        $password = $body->getBodyData('password') ?? $password;
+        $result = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
+        if ($result instanceof \App\Model\Entity\User) {
+            $this->view->render(array("key" => $result->key));
+            return $result;
+        } else {
+            throw new Exception("Bad user credetials!");
+        }
     }
 }
