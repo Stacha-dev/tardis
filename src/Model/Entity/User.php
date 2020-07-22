@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -56,16 +57,15 @@ class User
     protected $updated;
 
     /**
-     * @ORM\COlumn(type="string", length=1024)
+     * @ORM\Column(type="string", length=1024)
      * @var string
      */
     protected $avatar;
 
     /**
-     * @ORM\COlumn(type="string", length=1024)
-     * @var string
+     * @ORM\OneToMany(targetEntity="Access", mappedBy="user")
      */
-    protected $key;
+    protected $access;
 
     public function __construct(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = "")
     {
@@ -75,6 +75,7 @@ class User
         $this->setName($name);
         $this->setSurname($surname);
         $this->setAvatar($avatar);
+        $this->access = new ArrayCollection();
     }
 
     /**
@@ -235,22 +236,12 @@ class User
     }
 
     /**
-    * Sets user key.
+    * Returns user access.
     *
-    * @return void
+    * @return \Doctrine\ORM\PersistentCollection
     */
-    public function setKey(string $key)
+    public function getAccess(): \Doctrine\ORM\PersistentCollection
     {
-        $this->key = $key;
-    }
-
-    /**
-    * Returns user key.
-    *
-    * @return string
-     */
-    public function getKey(): string
-    {
-        return $this->key;
+        return $this->access;
     }
 }

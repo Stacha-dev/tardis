@@ -92,10 +92,17 @@ class User extends \App\Controller\Base
         $body = $this->request->getBody();
         $username = $body->getBodyData('username') ?? $username;
         $password = $body->getBodyData('password') ?? $password;
-        $result = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
-        if ($result instanceof \App\Model\Entity\User) {
-            $this->view->render(array("key" => $result->getKey()));
-            return $result;
+        $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
+        if ($user instanceof \App\Model\Entity\User) {
+            $access = new \App\Model\Entity\Access();
+            $access->setPrivate(bin2hex(random_bytes(10)));
+            $access->setPublic(hash_hmac("md5", $user->getName() . $user->getEmail(), $access->getPrivate()));
+            $user->getAccess()->add($access);
+            $access->setUser($user);
+            $this->entityManager->persist($access);
+            $this->entityManager->flush();
+            $this->view->render(array("public" => $access->getPublic()));
+            return $user;
         } else {
             throw new Exception("Bad user credetials!");
         }
