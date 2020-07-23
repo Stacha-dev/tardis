@@ -25,6 +25,11 @@ class Request
     private $uri;
 
     /**
+     * @var string
+     */
+    private $apiKey;
+
+    /**
      * @var \App\Lib\Http\Body
      */
     private $body;
@@ -39,11 +44,12 @@ class Request
      */
     private $accept;
 
-    public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, \App\Lib\Http\Body $body, string $remoteAddress, string $accept)
+    public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, string $apiKey, \App\Lib\Http\Body $body, string $remoteAddress, string $accept)
     {
         $this->isSecured = $isSecured;
         $this->method = $method;
         $this->uri = $uri;
+        $this->apiKey = $apiKey;
         $this->body = $body;
         $this->remoteAddress = $remoteAddress;
         $this->setAccept($accept);
@@ -57,6 +63,16 @@ class Request
     public function getUri(): \App\Lib\Http\Uri
     {
         return $this->uri;
+    }
+
+    /**
+     * Returns api key from request header.
+     *
+     * @return string
+     */
+    public function getApiKey(): string
+    {
+        return $this->apiKey;
     }
 
     /**
