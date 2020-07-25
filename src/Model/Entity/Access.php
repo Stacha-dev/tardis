@@ -26,13 +26,13 @@ class Access
     protected $user;
 
     /**
-     * @ORM\Column(type="string", length=1024)
+     * @ORM\Column(type="string", unique=true, length=1024)
      * @var string
      */
     protected $public;
 
     /**
-     * @ORM\Column(type="string", length=1024)
+     * @ORM\Column(type="string", unique=true, length=1024)
      * @var string
      */
     protected $private;
