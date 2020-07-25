@@ -27,22 +27,20 @@ class Router
      * Dispatch request to predefined routes.
      *
      * @param  \App\Lib\Http\Request $request
-     * @return array<array|string>
+     * @return \App\Lib\Middleware\Route
      */
-    public function dispatch(\App\Lib\Http\Request $request): array
+    public function dispatch(\App\Lib\Http\Request $request): \App\Lib\Middleware\Route
     {
         $path = $request->getUri()->getPath();
         $uri = implode("/", $path);
         $version = (int)$path[0];
-
         foreach ((array)$this->routes[$request->getMethod()] as $route) {
             if (preg_match($route->getPattern(), $uri, $matches) && $route->getVersion() === $version) {
                 $params = array();
                 foreach ($route->getParams() as $param) {
                     array_push($params, is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param]);
                 }
-
-                return array("action" => (string)$route->getAction(), "params" => $params);
+                return $route;
             }
         }
         throw new \Exception("Route nout found!");
