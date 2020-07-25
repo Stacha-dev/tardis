@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
+use App\Lib\Middleware\RouteFactory;
 
 final class RouterTest extends TestCase
 {
@@ -18,11 +20,6 @@ final class RouterTest extends TestCase
      */
     public function testRouteCanBeRegistered(): void
     {
-        $route = array(
-            "version" => 1,
-            "method" => "GET",
-            "pattern" => "@^(?<version>[0-9])/article$@",
-            "action" => array("method" => "getAll", "params" => array()));
-        $this->assertInstanceOf("App\Lib\Middleware\Router", $this->router->register($route));
+        $this->assertInstanceOf("App\Lib\Middleware\Router", $this->router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll", array(), array())));
     }
 }
