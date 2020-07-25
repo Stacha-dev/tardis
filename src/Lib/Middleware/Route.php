@@ -25,7 +25,7 @@ class Route
     private $action;
 
     /**
-     * @var array<string>
+     * @var array<int|string>
      */
     private $params;
 
@@ -41,7 +41,7 @@ class Route
      * @param string $method
      * @param string $pattern
      * @param string $action
-     * @param array<string> $params
+     * @param array<int|string> $params
      * @param array<string> $access
      */
     public function __construct(int $version, string $method, string $pattern, string $action, array $params = [], array $access = [])
@@ -50,7 +50,7 @@ class Route
         $this->setMethod($method);
         $this->pattern = $pattern;
         $this->action = $action;
-        $this->params = $params;
+        $this->setParams($params);
         $this->access = $access;
     }
 
@@ -110,12 +110,33 @@ class Route
     }
 
     /**
+     * Sets route params.
+     *
+     * @param array<int|string> $params
+     * @return void
+     */
+    public function setParams(array $params)
+    {
+        $this->params = $params;
+    }
+
+    /**
      * Returns action params.
      *
-     * @return array<string>
+     * @return array<int|string>
      */
     public function getParams(): array
     {
         return $this->params;
+    }
+
+    /**
+     * Returns deined access to route.
+     *
+     * @return array<string>
+     */
+    public function getAccess(): array
+    {
+        return $this->access;
     }
 }

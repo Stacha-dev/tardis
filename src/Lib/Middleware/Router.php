@@ -38,8 +38,9 @@ class Router
             if (preg_match($route->getPattern(), $uri, $matches) && $route->getVersion() === $version) {
                 $params = array();
                 foreach ($route->getParams() as $param) {
-                    array_push($params, is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param]);
+                    $params[$param] = is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param];
                 }
+                $route->setParams($params);
                 return $route;
             }
         }

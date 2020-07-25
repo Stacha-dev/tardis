@@ -55,10 +55,11 @@ class Base
     public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void
     {
         $this->registerRoutes($router);
-        $result = $router->dispatch($request);
-        $callback = [$this, $result->getAction()];
+        $route = $router->dispatch($request);
+        $this->checkPerms($route);
+        $callback = [$this, $route->getAction()];
         if (is_callable($callback)) {
-            call_user_func_array($callback, $result->getParams());
+            call_user_func_array($callback, $route->getParams());
         }
     }
 
@@ -87,5 +88,21 @@ class Base
     public function setRequest(\App\Lib\Http\Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Checks user permitions on route action.
+     *
+     * @param \App\Lib\Middleware\Route $route
+     * @return void
+     */
+    private function checkPerms(\App\Lib\Middleware\Route $route)
+    {
+        if (count($route->getAccess()) > 0) {
+            $access = $this->entityManager->getRepository('App\Model\Entity\Access')->findOneBy(array('public' => $this->request->getApiKey()));
+            if (!($access instanceof \App\Model\Entity\Access)) {
+                throw new Exception('ERR');
+            }
+        }
     }
 }
