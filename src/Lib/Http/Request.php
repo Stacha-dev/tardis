@@ -44,6 +44,17 @@ class Request
      */
     private $accept;
 
+    /**
+     * Creates instance of Request class.
+     *
+     * @param boolean $isSecured
+     * @param string $method
+     * @param \App\Lib\Http\Uri $uri
+     * @param string $apiKey
+     * @param \App\Lib\Http\Body $body
+     * @param string $remoteAddress
+     * @param string $accept
+     */
     public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, string $apiKey, \App\Lib\Http\Body $body, string $remoteAddress, string $accept)
     {
         $this->isSecured = $isSecured;

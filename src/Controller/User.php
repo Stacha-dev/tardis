@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Lib\Util\Input;
+use App\Lib\Middleware\RouteFactory;
 use Exception;
 
 class User extends \App\Controller\Base
@@ -16,34 +17,10 @@ class User extends \App\Controller\Base
      */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(
-            array(
-            "version" => 1,
-            "method" => "GET",
-            "pattern" => "@^(?<version>[0-9])/user$@",
-            "action" => array("method" => "getAll", "params" => array()))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "POST",
-            "pattern" => "@^(?<version>[0-9]+)/user$@",
-            "action" => array("method" => "create", "params" => array()))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "POST",
-            "pattern" => "@^(?<version>[0-9]+)/user/login$@",
-            "action" => array("method" => "login", "params" => array()))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "DELETE",
-            "pattern" => "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@",
-            "action" => array("method" => "delete", "params" => array("id")))
-        );
+        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/user$@", "getAll"))
+               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user$@", "create"))
+               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user/login$@", "login", array()))
+               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@", "delete", array("id")));
     }
 
     /**

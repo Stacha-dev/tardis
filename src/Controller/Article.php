@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Lib\Util\Input;
+use App\Lib\Middleware\RouteFactory;
 use Exception;
 
 final class Article extends \App\Controller\Base
@@ -15,48 +16,12 @@ final class Article extends \App\Controller\Base
      */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(
-            array(
-            "version" => 1,
-            "method" => "GET",
-            "pattern" => "@^(?<version>[0-9])/article$@",
-            "action" => array("method" => "getAll", "params" => array()))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "GET",
-            "pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
-            "action" => array("method" => "getOneById", "params" => array("id")))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "GET",
-            "pattern" => "@^(?<version>[0-9]+)/article/(?<alias>[a-z]+)$@",
-            "action" => array("method" => "getOneByAlias", "params" => array("alias")))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "POST",
-            "pattern" => "@^(?<version>[0-9]+)/article$@",
-            "action" => array("method" => "create", "params" => array()))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "PUT",
-            "pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
-            "action" => array("method" => "edit", "params" => array("id")))
-        )
-        ->register(
-            array(
-            "version" => 1,
-            "method" => "DELETE",
-            "pattern" => "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@",
-            "action" => array("method" => "delete", "params" => array("id")))
-        );
+        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll", array(), array("admin")))
+               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "getOneById", array("id")))
+               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<alias>[a-z]+)$@", "getOneByAlias", array("alias")))
+               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/article$@", "create"))
+               ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "edit", array("id")))
+               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "delete", array("id")));
     }
 
     /**

@@ -6,21 +6,20 @@ namespace App\Lib\Middleware;
 class Router
 {
     /**
-     * @var array<array<array|string>>
+     * @var array<array<\App\Lib\Middleware\Route>>
      */
     private $routes = array();
 
     /**
      * Register router HTTP request.
      *
-     * @param  array<array|string|int> $route
+     * @param  \App\Lib\Middleware\Route $route
      * @return \App\Lib\Middleware\Router
      */
-    public function register(array $route): \App\Lib\Middleware\Router
+    public function register(\App\Lib\Middleware\Route $route): \App\Lib\Middleware\Router
     {
-        $method = strval($route['method']);
-        $this->routes[$method] = empty($this->routes[$method]) ? array() : $this->routes[$method];
-        array_push($this->routes[$method], $route);
+        $this->routes[$route->getMethod()] = empty($this->routes[$route->getMethod()]) ? array() : $this->routes[$route->getMethod()];
+        array_push($this->routes[$route->getMethod()], $route);
         return $this;
     }
 
@@ -37,13 +36,13 @@ class Router
         $version = (int)$path[0];
 
         foreach ((array)$this->routes[$request->getMethod()] as $route) {
-            if (is_array($route) && array_key_exists("pattern", $route) && preg_match($route['pattern'], $uri, $matches) && $route['version'] === $version) {
+            if (preg_match($route->getPattern(), $uri, $matches) && $route->getVersion() === $version) {
                 $params = array();
-                foreach ($route["action"]["params"] as $param) {
+                foreach ($route->getParams() as $param) {
                     array_push($params, is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param]);
                 }
 
-                return array("action" => (string)$route["action"]["method"], "params" => $params);
+                return array("action" => (string)$route->getAction(), "params" => $params);
             }
         }
         throw new \Exception("Route nout found!");
