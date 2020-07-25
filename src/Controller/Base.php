@@ -98,7 +98,7 @@ class Base
      */
     private function checkPerms(\App\Lib\Middleware\Route $route)
     {
-        if (count($route->getAccess()) > 0) {
+        if ($route->isSecure()) {
             $access = $this->entityManager->getRepository('App\Model\Entity\Access')->findOneBy(array('public' => $this->request->getApiKey()));
             if (!($access instanceof \App\Model\Entity\Access)) {
                 throw new Exception('No permition to do this action!');

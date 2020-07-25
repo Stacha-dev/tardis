@@ -14,11 +14,11 @@ class RouteFactory
      * @param string $pattern
      * @param string $action
      * @param array<string> $params
-     * @param array<string> $access
+     * @param bool $secure
      * @return \App\Lib\Middleware\Route
      */
-    public static function fromConstants(int $version, string $method, string $pattern, string $action, array $params = [], array $access = []): \App\Lib\Middleware\Route
+    public static function fromConstants(int $version, string $method, string $pattern, string $action, array $params = [], bool $secure = false): \App\Lib\Middleware\Route
     {
-        return new Route($version, $method, $pattern, $action, $params, $access);
+        return new Route($version, $method, $pattern, $action, $params, $secure);
     }
 }

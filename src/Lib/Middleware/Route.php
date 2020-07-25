@@ -30,9 +30,9 @@ class Route
     private $params;
 
     /**
-     * @var array<string>
+     * @var bool
      */
-    private $access;
+    private $secure;
 
     /**
      * Creates instance of Route class.
@@ -44,14 +44,14 @@ class Route
      * @param array<int|string> $params
      * @param array<string> $access
      */
-    public function __construct(int $version, string $method, string $pattern, string $action, array $params = [], array $access = [])
+    public function __construct(int $version, string $method, string $pattern, string $action, array $params = [], bool $secure = false)
     {
         $this->version = $version;
         $this->setMethod($method);
         $this->pattern = $pattern;
         $this->action = $action;
         $this->setParams($params);
-        $this->access = $access;
+        $this->secure = $secure;
     }
 
     /**
@@ -131,12 +131,12 @@ class Route
     }
 
     /**
-     * Returns deined access to route.
+     * Returns secure route status.
      *
-     * @return array<string>
+     * @return bool
      */
-    public function getAccess(): array
+    public function isSecure(): bool
     {
-        return $this->access;
+        return $this->secure;
     }
 }
