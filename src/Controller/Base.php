@@ -101,7 +101,7 @@ class Base
         if (count($route->getAccess()) > 0) {
             $access = $this->entityManager->getRepository('App\Model\Entity\Access')->findOneBy(array('public' => $this->request->getApiKey()));
             if (!($access instanceof \App\Model\Entity\Access)) {
-                throw new Exception('ERR');
+                throw new Exception('No permition to do this action!');
             }
         }
     }

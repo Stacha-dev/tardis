@@ -16,12 +16,12 @@ final class Article extends \App\Controller\Base
      */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll", array(), array("admin")))
+        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll"))
                ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "getOneById", array("id")))
                ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<alias>[a-z]+)$@", "getOneByAlias", array("alias")))
-               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/article$@", "create"))
-               ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "edit", array("id")))
-               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "delete", array("id")));
+               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/article$@", "create", array(), array("admin")))
+               ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "edit", array("id"), array("admin")))
+               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "delete", array("id"), array("admin")));
     }
 
     /**
