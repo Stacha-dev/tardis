@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
+use App\Lib\Util\Cryptography;
 use Exception;
 
 class User extends \App\Controller\Base
@@ -72,8 +73,8 @@ class User extends \App\Controller\Base
         $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
         if ($user instanceof \App\Model\Entity\User) {
             $access = new \App\Model\Entity\Access();
-            $access->setPrivate(bin2hex(random_bytes(10)));
-            $access->setPublic(hash_hmac("md5", $user->getName() . $user->getEmail(), $access->getPrivate()));
+            $access->setPrivate(Cryptography::generateRandom(10));
+            $access->setPublic(Cryptography::hashByKey($user->getName() . $user->getEmail(), $access->getPrivate()));
             $user->getAccess()->add($access);
             $access->setUser($user);
             $this->entityManager->persist($access);
