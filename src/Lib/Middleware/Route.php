@@ -42,7 +42,7 @@ class Route
      * @param string $pattern
      * @param string $action
      * @param array<int|string> $params
-     * @param array<string> $access
+     * @param bool $secure
      */
     public function __construct(int $version, string $method, string $pattern, string $action, array $params = [], bool $secure = false)
     {
