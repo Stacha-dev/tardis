@@ -6,12 +6,6 @@ use App\Lib\Http\Request;
 use App\Lib\Http\Uri;
 use App\Lib\Http\Body;
 
-/**
- * Request factory creates instance of Request class.
- *
- * Example usage:
- * $request = RequestFactory::fromGlobals();
- */
 class RequestFactory
 {
 
