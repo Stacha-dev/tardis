@@ -73,8 +73,8 @@ class User extends \App\Controller\Base
         $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
         if ($user instanceof \App\Model\Entity\User) {
             $access = new \App\Model\Entity\Access();
-            $access->setPrivate(Cryptography::generateRandom(10));
-            $access->setPublic(Cryptography::hashByKey($user->getName() . $user->getEmail(), $access->getPrivate()));
+            $access->setPrivate(Cryptography::random(10));
+            $access->setPublic(Cryptography::hashHmac($user->getName() . $user->getEmail(), $access->getPrivate()));
             $user->getAccess()->add($access);
             $access->setUser($user);
             $this->entityManager->persist($access);

@@ -10,7 +10,7 @@ class Cryptography
      * @param integer $length
      * @return string
      */
-    public static function generateRandom(int $length = 10): string
+    public static function random(int $length = 10): string
     {
         return bin2hex(random_bytes($length));
     }
@@ -22,7 +22,7 @@ class Cryptography
      * @param string $key
      * @return string
      */
-    public static function hashByKey(string $content, string $key): string
+    public static function hashHmac(string $content, string $key): string
     {
         return hash_hmac("md5", $content, $key);
     }
