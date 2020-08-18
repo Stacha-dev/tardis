@@ -3,9 +3,8 @@
 ## Instalace
 
 1. Naklonovat repozitář: `git clone https://github.com/Stacha-dev/back-end.git`
-2. Nainstalovat závislosti: `composer install`
-3. Nadefinovat připojení k DB `/config/common.ini`
-4. Vytvoření schéma DB `vendor/bin/doctrine orm:schema-tool:create`
+2. Nadefinovat připojení k DB `/config/common.ini` podle `/config/example_common.ini`
+4. Spustit instalační script z bin `./install.sh`
 
 ## Vývoj
 
@@ -63,7 +62,3 @@ Výpis implmentovancýh koncových bodů API.
 
 -   URL ve tvaru base/version/controller/action.format?params
 -   https://api.stacha.dev/1/article/get-all?order=newest
-
-## Lady GAGA
-
--   https://www.youtube.com/watch?v=jKAA_INzDGo
