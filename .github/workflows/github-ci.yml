@@ -15,7 +15,7 @@ jobs:
               run: if [ ! -d "back-end" ]; then git clone git@github.com:Stacha-dev/back-end.git; fi && cd back-end
             
             - name: Validate composer.json and composer.lock
-              run: composer validate
+              run: pwd && composer validate
               
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest
