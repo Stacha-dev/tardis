@@ -22,4 +22,4 @@ jobs:
               run: composer install --prefer-dist --no-progress --no-suggest
 
             - name: Reload database
-              run: composer orm:remove && composer orm:create
+              run: composer orm:drop && composer orm:create
