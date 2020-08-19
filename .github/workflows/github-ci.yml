@@ -9,8 +9,8 @@ on:
 jobs:
     test:
         runs-on: self-hosted
-
-    steps:
+        
+        steps:
         - name: Validate composer.json and composer.lock
           run: composer validate
 
