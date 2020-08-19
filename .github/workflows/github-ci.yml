@@ -11,11 +11,14 @@ jobs:
         runs-on: self-hosted
         
         steps:
-        - name: Validate composer.json and composer.lock
-          run: composer validate
+            - name: Checkout
+              run: if [ ! -d "back-end" ]; then git clone git@github.com:Stacha-dev/back-end.git; fi && cd back-end
+            
+            - name: Validate composer.json and composer.lock
+              run: composer validate
+              
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest
 
-        - name: Install dependencies
-          run: composer install --prefer-dist --no-progress --no-suggest
-
-        - name: CS
-          run: composer cs
+            - name: CS
+              run: composer cs
