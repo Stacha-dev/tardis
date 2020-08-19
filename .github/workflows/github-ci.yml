@@ -9,13 +9,16 @@ on:
 jobs:
     test:
         runs-on: self-hosted
+        
+        steps:
+            - name: Checkout
+              run: git pull
+            
+            - name: Validate composer.json and composer.lock
+              run: pwd && composer validate
+              
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest
 
-    steps:
-        - name: Validate composer.json and composer.lock
-          run: composer validate
-
-        - name: Install dependencies
-          run: composer install --prefer-dist --no-progress --no-suggest
-
-        - name: CS
-          run: composer cs
+            - name: CS
+              run: composer cs
