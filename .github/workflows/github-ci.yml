@@ -12,7 +12,7 @@ jobs:
         
         steps:
             - name: Checkout
-              run: if [ ! -d "back-end" ]; then git clone git@github.com:Stacha-dev/back-end.git; fi && cd back-end
+              run: git clone git@github.com:Stacha-dev/back-end.git .
             
             - name: Validate composer.json and composer.lock
               run: pwd && composer validate
