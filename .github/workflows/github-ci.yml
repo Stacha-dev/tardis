@@ -12,7 +12,7 @@ jobs:
         
         steps:
             - name: Checkout
-              run: cd back-end
+              run: git pull
             
             - name: Validate composer.json and composer.lock
               run: pwd && composer validate
