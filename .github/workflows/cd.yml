@@ -8,18 +8,18 @@ on:
 
 jobs:
 
-    build:
+    deploy:
         runs-on: self-hosted
 
         steps:
+            - name: Move to folder
+              run: cd /var/www/project-release.stacha.dev/web
+
             - name: Checkout
               run: git pull origin master
-
-            - name: Validate composer.json and composer.lock
-              run: pwd && composer validate
 
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest
 
-            - name: CS
-              run: composer cs
+            - name: Reload database
+              run: composer orm:remove && composer orm:create
