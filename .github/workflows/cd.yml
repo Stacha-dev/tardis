@@ -1,4 +1,4 @@
-name: CI
+name: CD
 
 on:
     push:
@@ -7,16 +7,17 @@ on:
       branches: [ master ]
 
 jobs:
-    test:
+
+    build:
         runs-on: self-hosted
-        
+
         steps:
             - name: Checkout
-              run: git pull
-            
+              run: git pull origin master
+
             - name: Validate composer.json and composer.lock
               run: pwd && composer validate
-              
+
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest
 
