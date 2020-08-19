@@ -51,14 +51,4 @@ Slouží k statické analýze kódu.
 
 ## API
 
-Výpis implmentovancýh koncových bodů API.
-
-### Články
-
--   Vyýpis všech článků `https://api.stacha.dev/1/article/get-all`
--   Vyýpis jednoho článku podle ID `https://api.stacha.dev/1/article/get-one?id=1`
-
-## Poznámky
-
--   URL ve tvaru base/version/controller/action.format?params
--   https://api.stacha.dev/1/article/get-all?order=newest
+Dokumentace implementovaných koncových bodů [POSTMAN](https://documenter.getpostman.com/view/10875200/T1LTdP9o?version=latest)
