@@ -13,7 +13,7 @@ if [ "$key" = 'y' ]; then
 fi
 
 # NPM
-cd ../public/admin
+cd public/admin
 npm install
 npm run build
 
