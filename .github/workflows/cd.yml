@@ -8,7 +8,7 @@ on:
     
 defaults:
   run: 
-   shell: bash
+   shell: bash -ieo pipefail {0}
    working-directory: /var/www/project-release.stacha.dev/web
 
 jobs:
@@ -22,7 +22,6 @@ jobs:
             run: composer install --prefer-dist --no-progress --no-suggest
           
           - name: Install dependencies
-            shell: bash --login
             run: nvm install && nvm use && npm ci
     
           - name: nvm
