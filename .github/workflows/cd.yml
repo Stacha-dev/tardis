@@ -21,12 +21,6 @@ jobs:
           - name: Install dependencies
             run: composer install --prefer-dist --no-progress --no-suggest
           
-          - name: Install dependencies
-            run: nvm install && nvm use && npm ci
-    
-          - name: nvm
-            run: nvm -v
-          
           - name: Reinstall instance
             working-directory: /var/www/project-release.stacha.dev/web/bin
             run: ./install.sh
