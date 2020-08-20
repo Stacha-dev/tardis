@@ -29,8 +29,5 @@ jobs:
     - name: Coding standards
       run: composer cs
 
-    - name: PHPStan
-      run: composer phpstan
-
     - name: Run test suite
       run: composer test
