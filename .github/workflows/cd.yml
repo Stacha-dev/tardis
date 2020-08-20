@@ -9,7 +9,6 @@ on:
 defaults:
   run: 
    working-directory: /var/www/project-release.stacha.dev/web
-   shell: bash -l {0}
 
 jobs:
   deploy:
@@ -22,7 +21,6 @@ jobs:
             run: composer install --prefer-dist --no-progress --no-suggest
           
           - name: nvm
-            working-directory: /var/www/project-release.stacha.dev/web
             shell: bash -l {0}
             run: nvm -v
           
