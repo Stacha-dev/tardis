@@ -23,6 +23,7 @@ jobs:
           
           - name: nvm
             working-directory: /var/www/project-release.stacha.dev/web
+            shell: bash -l {0}
             run: nvm -v
           
           - name: Reinstall instance
