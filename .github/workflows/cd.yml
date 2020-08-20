@@ -12,9 +12,11 @@ jobs:
       steps:
           - name: Move to folder
             run: cd /var/www/project-release.stacha.dev/web
+          - name: Test
+            run: pwd
 
           - name: Checkout
-            run: git pull origin master
+            run: git pull origin master --recurse-submodules
 
           - name: Install dependencies
             run: composer install --prefer-dist --no-progress --no-suggest
