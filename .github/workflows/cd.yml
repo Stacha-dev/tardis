@@ -9,6 +9,7 @@ on:
 defaults:
   run: 
    working-directory: /var/www/project-release.stacha.dev/web
+   shell: bash
 
 jobs:
   deploy:
@@ -20,10 +21,8 @@ jobs:
           - name: Install dependencies
             run: composer install --prefer-dist --no-progress --no-suggest
           
-          - name: terminal
-            run: ps -p $$
-          
           - name: nvm
+            working-directory: /var/www/project-release.stacha.dev/web
             run: nvm -v
           
           - name: Reinstall instance
