@@ -20,6 +20,12 @@ jobs:
           - name: Install dependencies
             run: composer install --prefer-dist --no-progress --no-suggest
           
+          - name: terminal
+            run: tty
+          
+          - name: nvm
+            run: nvm -v
+          
           - name: Reinstall instance
             working-directory: /var/www/project-release.stacha.dev/web/bin
             run: ./install.sh
