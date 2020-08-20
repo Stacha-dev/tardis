@@ -8,7 +8,7 @@ on:
     
 defaults:
   run: 
-   shell: bash -l {0}
+   shell: bash --login
    working-directory: /var/www/project-release.stacha.dev/web
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
             run: composer install --prefer-dist --no-progress --no-suggest
           
           - name: nvm
-            shell: bash -l {0}
+            shell: bash --login
             run: nvm -v
           
           - name: Reinstall instance
