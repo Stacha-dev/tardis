@@ -21,7 +21,7 @@ jobs:
             run: composer install --prefer-dist --no-progress --no-suggest
           
           - name: terminal
-            run: tty
+            run: ps -p $$
           
           - name: nvm
             run: nvm -v
