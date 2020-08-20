@@ -22,4 +22,5 @@ jobs:
             run: composer install --prefer-dist --no-progress --no-suggest
           
           - name: Reinstall instance
-            run: cd bin & ./install.sh
+            working-directory: /var/www/project-release.stacha.dev/web/bin
+            run: ./install.sh
