@@ -9,7 +9,7 @@ on:
 defaults:
   run: 
    working-directory: /var/www/project-release.stacha.dev/web
-   shell: bash
+   shell: bash -l {0}
 
 jobs:
   deploy:
