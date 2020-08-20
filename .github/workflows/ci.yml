@@ -26,8 +26,5 @@ jobs:
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Coding standards
-      run: composer cs
-
     - name: Run test suite
       run: composer test

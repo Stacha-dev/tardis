@@ -18,6 +18,3 @@ jobs:
 
           - name: Install dependencies
             run: composer install --prefer-dist --no-progress --no-suggest
-
-          - name: Reload database
-            run: composer orm:drop && composer orm:create
