@@ -1,25 +1,23 @@
 name: CD
 
 on:
-    push:
-      branches: [ master ]
-    pull_request:
-      branches: [ master ]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
+  deploy:
+      runs-on: self-hosted
+      steps:
+          - name: Move to folder
+            run: cd /var/www/project-release.stacha.dev/web
 
-    deploy:
-        runs-on: self-hosted
+          - name: Checkout
+            run: git pull origin master
 
-        steps:
-            - name: Move to folder
-              run: cd /var/www/project-release.stacha.dev/web
+          - name: Install dependencies
+            run: composer install --prefer-dist --no-progress --no-suggest
 
-            - name: Checkout
-              run: git pull origin master
-
-            - name: Install dependencies
-              run: composer install --prefer-dist --no-progress --no-suggest
-
-            - name: Reload database
-              run: composer orm:drop && composer orm:create
+          - name: Reload database
+            run: composer orm:drop && composer orm:create
