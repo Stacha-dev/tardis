@@ -5,16 +5,16 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
+defaults:
+  run: 
+   shell: bash
+   working-directory: /var/www/project-release.stacha.dev/web
 
 jobs:
   deploy:
       runs-on: self-hosted
       steps:
-          - name: Move to folder
-            run: cd /var/www/project-release.stacha.dev/web
-          - name: Test
-            run: pwd
-
           - name: Checkout
             run: git pull origin master --recurse-submodules
 
