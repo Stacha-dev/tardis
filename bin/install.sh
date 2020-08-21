@@ -10,8 +10,8 @@ composer orm:drop
 composer orm:create
 
 # NPM
-cd public/admin
+cd resources/admin
 npm install
-npm run build
+npm run build:production
 
 echo Done!

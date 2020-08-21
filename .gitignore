@@ -6,3 +6,4 @@ examples/
 .phpunit.result.cache
 public/reports/
 public/docs/
+public/admin/
