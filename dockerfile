@@ -10,5 +10,5 @@ RUN mv composer /usr/local/bin/
 #Extensions
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 #Mount src
-ADD src /var/www/html/
+ADD . / /var/www/html/
 EXPOSE 80
