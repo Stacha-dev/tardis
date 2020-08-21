@@ -48,11 +48,12 @@ class Uri
     /**
      * Returns path.
      *
+     * @param boolean $original
      * @return array<string>
      */
-    public function getPath(): array
+    public function getPath($original = false): array
     {
-        return $this->path;
+        return $original ? $this->path : array_slice($this->path, 1);
     }
 
     /**

@@ -1,5 +1,12 @@
-RewriteEngine on
-RewriteCond %{REQUEST_URI} !^/public/admin/
-RewriteCond %{REQUEST_URI} !^/public/reports/
-RewriteCond %{REQUEST_URI} !^/public/docs/
-RewriteRule /(.*)$ index.php?url=$1 [L]
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+
+	RewriteRule /\.|^\.(?!well-known/) - [F]
+
+	RewriteCond %{REQUEST_URI} !^/public/api/
+	RewriteCond %{REQUEST_URI} !^/public/admin/
+	RewriteCond %{REQUEST_URI} !^/public/reports/
+	RewriteCond %{REQUEST_URI} !^/public/docs/
+	RewriteCond %{REQUEST_URI} !^/public/www/
+	RewriteRule ^(.*)$ www/$1 [L]
+</IfModule>
