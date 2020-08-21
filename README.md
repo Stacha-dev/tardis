@@ -3,6 +3,7 @@
 ## Instalace
 
 1. Naklonovat repozitář: `git clone https://github.com/Stacha-dev/back-end.git`
+3. Inicializovat submoduly: `git submodule init` a `git pull --recurse-submodule`
 2. Nadefinovat připojení k DB `/config/common.ini` podle `/config/example_common.ini`
 4. Spustit instalační script z bin `./install.sh`
 
@@ -10,7 +11,7 @@
 
 1. Před začátkem prací, aktualizovat vývojovou větev `develop` pomocí:
 2. Přepnout na vývojovou větev: `git checkout develop`
-3. Aktualizovat lokální repozitář `git pull`
+3. Aktualizovat lokální repozitář `git pull --recurse-submodules`
 4. Vytvořit větev pro vývoj funčknosti `git checkout -b develop_nova_funkcnost` podle konvence pojmenování větví:
     - Pro novou či experimentální funčknost `develop_`
     - Pro opravu `bugfix_`
