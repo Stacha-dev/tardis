@@ -44,6 +44,6 @@ class Router
                 return $route;
             }
         }
-        throw new \Exception("Route nout found!");
+        throw new \Exception("Route not found!");
     }
 }
