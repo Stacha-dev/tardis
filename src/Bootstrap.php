@@ -7,10 +7,10 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use App\Controller\App;
 
-define("DB_CONFIG", "db");
-
 class Bootstrap
 {
+    /** @var string */
+    private const DB_CONFIG = "db";
     /**
      * Boot instace of App.
      *
@@ -30,9 +30,9 @@ class Bootstrap
     {
         $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), true, null, null, false);
         $dbParams = parse_ini_file(__DIR__ . "/../config/common.ini", true, INI_SCANNER_RAW) ?? [];
-        if (!(is_array($dbParams) && array_key_exists(DB_CONFIG, $dbParams))) {
+        if (!(is_array($dbParams) && array_key_exists(self::DB_CONFIG, $dbParams))) {
             throw new \Exception("Bad configuration file! Check DB credentials.");
         }
-        return EntityManager::create($dbParams[DB_CONFIG], $config);
+        return EntityManager::create($dbParams[self::DB_CONFIG], $config);
     }
 }
