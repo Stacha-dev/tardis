@@ -11,7 +11,7 @@ composer orm:create
 
 # NPM
 cd resources/admin
-npm install
+npm ci
 npm run build:production
 
 echo Done!
