@@ -58,12 +58,22 @@ class Request
     public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, string $apiKey, \App\Lib\Http\Body $body, string $remoteAddress, string $accept)
     {
         $this->isSecured = $isSecured;
+        $this->setMethod($method);
         $this->method = $method;
         $this->uri = $uri;
         $this->apiKey = $apiKey;
         $this->body = $body;
         $this->remoteAddress = $remoteAddress;
         $this->setAccept($accept);
+    }
+
+    private function setMethod(string $method):void
+    {
+        if (in_array($method, array('GET', 'POST', 'PUT', 'DELETE'))) {
+            $this->method = $method;
+        } else {
+            throw new \Exception('Bad request method!');
+        }
     }
 
     /**
