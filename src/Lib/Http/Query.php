@@ -2,11 +2,12 @@
 declare(strict_types=1);
 namespace App\Lib\Http;
 
-define("QUERY_PARAM_NAME", "name");
-define("QUERY_PARAM_VALUE", "value");
-
 class Query
 {
+    private const QUERY_PARAM_NAME = "name";
+
+    private const QUERY_PARAM_VALUE = "value";
+
     /**
      * @var array<array<string>>
      */
@@ -45,8 +46,8 @@ class Query
      */
     public function getQueryParamValue(string $param): ?string
     {
-        $key = array_search($param, array_column($this->query, QUERY_PARAM_NAME));
-        return $this->query[$key][QUERY_PARAM_VALUE];
+        $key = array_search($param, array_column($this->query, self::QUERY_PARAM_NAME));
+        return $this->query[$key][self::QUERY_PARAM_VALUE];
     }
 
     /**
@@ -61,7 +62,7 @@ class Query
         foreach (explode("&", $query) as $param) {
             @list($name, $value) = explode("=", $param);
             if (!empty($name) && !empty($value)) {
-                array_push($params, array(QUERY_PARAM_NAME => $name, QUERY_PARAM_VALUE => $value));
+                array_push($params, array(self::QUERY_PARAM_NAME => $name, self::QUERY_PARAM_VALUE => $value));
             }
         }
         return $params;

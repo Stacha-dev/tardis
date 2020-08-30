@@ -6,10 +6,33 @@ class BaseView
 {
     public function __construct()
     {
-        header("Access-Control-Allow-Origin: *");
-        header("Content-Type: application/json; charset=UTF-8");
-        header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
-        header("Access-Control-Max-Age: 3600");
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+        $this->setResponseHeaders();
+    }
+
+    /**
+     * Sets response headers by ini file.
+     *
+     * @return void
+     */
+    private function setResponseHeaders(): void
+    {
+        $config = parse_ini_file(__DIR__ . "/../../config/api.ini", true);
+        if ($config) {
+            foreach ($config as $section => $ruleSet) {
+                foreach ($ruleSet as $rule => $value) {
+                    if (is_array($value)) {
+                        $header = $section . "-" . $rule . ": ";
+                        foreach ($value as $i => $subValue) {
+                            $header .= $i !== array_key_last($value) ? $subValue."," : $subValue;
+                        }
+                        header($header);
+                    } else {
+                        header($section . "-" . $rule . ": " . $value);
+                    }
+                }
+            }
+        } else {
+            throw new \Exception('Bad config file!');
+        }
     }
 }

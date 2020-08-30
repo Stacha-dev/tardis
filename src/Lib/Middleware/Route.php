@@ -47,7 +47,7 @@ class Route
     public function __construct(int $version, string $method, string $pattern, string $action, array $params = [], bool $secure = false)
     {
         $this->version = $version;
-        $this->setMethod($method);
+        $this->method = $method;
         $this->pattern = $pattern;
         $this->action = $action;
         $this->setParams($params);
@@ -62,21 +62,6 @@ class Route
     public function getVersion(): int
     {
         return $this->version;
-    }
-
-    /**
-     * Sets route HTTP method.
-     *
-     * @param string $method
-     * @return void
-     */
-    private function setMethod(string $method)
-    {
-        if (in_array($method, ["GET", "POST", "PUT", "DELETE"])) {
-            $this->method = $method;
-        } else {
-            throw new \Exception("Bad request method!");
-        }
     }
 
     /**
