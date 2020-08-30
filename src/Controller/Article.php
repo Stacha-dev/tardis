@@ -67,7 +67,7 @@ final class Article extends \App\Controller\Base
 
         $result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('alias' => $alias));
         if ($result instanceof \App\Model\Entity\Article) {
-            $this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'content' => $result->getContent()));
             return $result;
         } else {
             throw new Exception("Article by alias can not be founded!");
