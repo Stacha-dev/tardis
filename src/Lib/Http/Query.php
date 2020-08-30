@@ -4,9 +4,9 @@ namespace App\Lib\Http;
 
 class Query
 {
-	private const QUERY_PARAM_NAME = "name";
+    private const QUERY_PARAM_NAME = "name";
 
-	private const QUERY_PARAM_VALUE = "value";
+    private const QUERY_PARAM_VALUE = "value";
 
     /**
      * @var array<array<string>>

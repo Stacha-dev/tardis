@@ -10,9 +10,10 @@ class Router
      */
     private $routes = array();
 
-	public function __construct() {
-		$this->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", ""));
-	}
+    public function __construct()
+    {
+        $this->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", ""));
+    }
 
     /**
      * Register router HTTP request.
