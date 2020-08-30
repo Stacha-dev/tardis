@@ -69,7 +69,7 @@ class Request
 
     private function setMethod(string $method):void
     {
-        if (in_array($method, array('GET', 'POST', 'PUT', 'DELETE'))) {
+        if (in_array($method, parse_ini_file(__DIR__ . '/../../../config/api.ini')['Allow-Methods'])) {
             $this->method = $method;
         } else {
             throw new \Exception('Bad request method!');
