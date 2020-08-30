@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   test:
@@ -14,10 +14,10 @@ jobs:
         ports:
         - 32574:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    
+
     steps:
     - uses: actions/checkout@v2
-      
+
     - name: Verify MySQL connection from host
       run: |
         sudo apt-get install -y mysql-client
