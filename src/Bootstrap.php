@@ -11,6 +11,7 @@ class Bootstrap
 {
     /** @var string */
     private const DB_CONFIG = "db";
+
     /**
      * Boot instace of App.
      *

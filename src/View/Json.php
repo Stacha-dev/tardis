@@ -15,6 +15,7 @@ class Json extends BaseView
      */
     public function render(array $data): void
     {
+        header("Content-Type: application/json; charset=UTF-8");
         echo json_encode($data);
         if ($error = json_last_error()) {
             throw new Exception(json_last_error_msg());
