@@ -64,6 +64,7 @@ class User
 
     /**
      * @ORM\OneToMany(targetEntity="Access", mappedBy="user")
+     * @var \Doctrine\ORM\PersistentCollection<Access>
      */
     protected $access;
 
@@ -75,7 +76,6 @@ class User
         $this->setName($name);
         $this->setSurname($surname);
         $this->setAvatar($avatar);
-        $this->access = new ArrayCollection();
     }
 
     /**
@@ -238,7 +238,7 @@ class User
     /**
     * Returns user access.
     *
-    * @return \Doctrine\ORM\PersistentCollection
+    * @return \Doctrine\ORM\PersistentCollection<Access>
     */
     public function getAccess(): \Doctrine\ORM\PersistentCollection
     {
