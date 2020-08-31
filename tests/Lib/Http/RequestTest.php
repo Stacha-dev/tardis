@@ -10,7 +10,7 @@ final class RequestTest extends TestCase
     {
         $_SERVER['HTTPS'] = "on";
         $_SERVER['REQUEST_METHOD'] = "GET";
-        $_SERVER['REQUEST_URI'] = "/1/article/";
+        $_SERVER['REQUEST_URI'] = "/api/1/article/";
         $_SERVER['REMOTE_ADDR'] = "1.1.1.1";
         $this->request = \App\Lib\Http\RequestFactory::fromGlobals();
     }
@@ -23,7 +23,7 @@ final class RequestTest extends TestCase
     {
         $_SERVER['HTTPS'] = "on";
         $_SERVER['REQUEST_METHOD'] = "GET";
-        $_SERVER['REQUEST_URI'] = "/1/article/";
+        $_SERVER['REQUEST_URI'] = "/api/1/article/aa";
         $_SERVER['REMOTE_ADDR'] = "1.1.1.1";
         $this->assertInstanceOf("App\Lib\Http\Request", \App\Lib\Http\RequestFactory::fromGlobals());
     }
