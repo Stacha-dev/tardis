@@ -47,7 +47,7 @@ final class Article extends \App\Controller\Base
     {
         $result = $this->entityManager->find('App\Model\Entity\Article', $id);
         if ($result instanceof \App\Model\Entity\Article) {
-            $this->view->render(array('title' => $result->getTitle(), 'content' => $result->getContent()));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'content' => $result->getContent()));
             return $result;
         } else {
             throw new Exception("Article by ID can not be founded!");
@@ -103,7 +103,7 @@ final class Article extends \App\Controller\Base
      * @param  string $content
      * @return \App\Model\Entity\Article
      */
-    public function edit(int $id = -1, string $title = '', string $alias = '', string $content = ''): \App\Model\Entity\Article
+    public function edit(int $id = 0, string $title = '', string $alias = '', string $content = ''): \App\Model\Entity\Article
     {
         $params = $this->request->getUri()->getQuery();
         $body = $this->request->getBody();
@@ -137,7 +137,7 @@ final class Article extends \App\Controller\Base
      * @param  int $id
      * @return void
      */
-    public function delete(int $id = -1)
+    public function delete(int $id = 0)
     {
         $params = $this->request->getUri()->getQuery();
         $id = $params->getQueryParamValue('id') ?? $id;

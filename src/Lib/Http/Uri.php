@@ -5,11 +5,12 @@ namespace App\Lib\Http;
 use Exception;
 use App\Lib\Http\Query;
 
-define("URL_PATH", "path");
-define("URL_QUERY", "query");
-
 class Uri
 {
+    private const URL_PATH = "path";
+
+    private const URL_QUERY = "query";
+
     /**
      * @var array<string>
      */
@@ -24,8 +25,8 @@ class Uri
     {
         $url = parse_url($url);
         if (is_array($url)) {
-            $path = array_key_exists(URL_PATH, $url) ? $url[URL_PATH] : "";
-            $query = array_key_exists(URL_QUERY, $url) ? $url[URL_QUERY] : "";
+            $path = array_key_exists(self::URL_PATH, $url) ? $url[self::URL_PATH] : "";
+            $query = array_key_exists(self::URL_QUERY, $url) ? $url[self::URL_QUERY] : "";
         } else {
             throw new \Exception("Parsed URL not corespondig with required standard!");
         }
