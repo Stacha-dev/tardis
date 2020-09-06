@@ -21,14 +21,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Verify MariaDB connection
-      env:
-        PORT: ${{ job.services.mariadb.ports[3306] }}
-      run: |
-        while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
-          sleep 1
-        done
-
     - name: Install new instance
       env:
           MYSQL_USER: user
@@ -37,6 +29,9 @@ jobs:
       run: |
         cd bin
         ./install.sh pdo_mysql $MYSQL_USER $MYSQL_PASSWORD $MYSQL_DATABASE
+        cd ..
+        cd config
+        cat common.ini
 
     - name: Coding Standards
       run: composer cs
