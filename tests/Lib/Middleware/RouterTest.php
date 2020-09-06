@@ -21,5 +21,6 @@ final class RouterTest extends TestCase
     public function testRouteCanBeRegistered(): void
     {
         $this->assertInstanceOf("App\Lib\Middleware\Router", $this->router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll", array(), false)));
+        $this->assertCount(1, $this->router->getRoutes());
     }
 }

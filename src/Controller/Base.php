@@ -6,8 +6,9 @@ use App\View\Json;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Exception;
+use App\Lib\Middleware\RouteFactory;
 
-class Base
+class Base implements IBase
 {
 
     /**
@@ -48,12 +49,24 @@ class Base
     }
 
     /**
+     * Register default routes
+     *
+     * @param \App\Lib\Middleware\Router $router
+     * @return void
+     */
+    public function registerDefaultRoutes(\App\Lib\Middleware\Router $router): void
+    {
+        $router->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", "getStatus"));
+    }
+
+    /**
     * Dispatch request to predefined routes.
     * @param  \App\Lib\Middleware\Router $router
     * @param \App\Lib\Http\Request $request
      */
     public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void
     {
+        $this->registerDefaultRoutes($router);
         $this->registerRoutes($router);
         $route = $router->dispatch($request);
         $this->checkPerms($route);
@@ -61,6 +74,19 @@ class Base
         if (is_callable($callback)) {
             call_user_func_array($callback, $route->getParams());
         }
+    }
+
+    /**
+     * Returns API status
+     *
+     * @todo Make it usefull
+     * @return array<string>
+     */
+    public function getStatus():array
+    {
+        $status = array('status' => 'ok');
+        $this->view->render($status);
+        return $status;
     }
 
     /**
