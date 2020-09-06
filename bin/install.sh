@@ -31,4 +31,3 @@ npm ci
 npm run build:prod
 
 exit 0;
-echo Done!
