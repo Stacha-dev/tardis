@@ -54,7 +54,7 @@ class Base implements IBase
      * @param \App\Lib\Middleware\Router $router
      * @return void
      */
-    private function registerDefaultRoutes(\App\Lib\Middleware\Router $router): void
+    public function registerDefaultRoutes(\App\Lib\Middleware\Router $router): void
     {
         $router->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", "getStatus"));
     }

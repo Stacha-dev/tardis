@@ -24,6 +24,16 @@ class Router
     }
 
     /**
+     * Returns all registered routes.
+     *
+     * @return array<array>
+     */
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+
+    /**
      * Dispatch request to predefined routes.
      *
      * @param  \App\Lib\Http\Request $request
@@ -34,7 +44,7 @@ class Router
         $path = $request->getUri()->getPath();
         $uri = implode("/", $path);
         $version = (int)$path[0];
-        foreach ((array)$this->routes[$request->getMethod()] as $route) {
+        foreach ((array)$this->getRoutes()[$request->getMethod()] as $route) {
             if (preg_match($route->getPattern(), $uri, $matches) && $route->getVersion() === $version) {
                 $params = array();
                 foreach ($route->getParams() as $param) {
