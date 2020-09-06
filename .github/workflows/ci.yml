@@ -23,15 +23,12 @@ jobs:
 
     - name: Install new instance
       env:
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-          MYSQL_DATABASE: test
+          MYSQL_USER: ${{ job.services.mariadb.env.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ job.services.mariadb.env.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ job.services.mariadb.env.MYSQL_DATABASE }}
       run: |
         cd bin
         ./install.sh pdo_mysql $MYSQL_USER $MYSQL_PASSWORD $MYSQL_DATABASE
-        cd ..
-        cd config
-        cat common.ini
 
     - name: Coding Standards
       run: composer cs
