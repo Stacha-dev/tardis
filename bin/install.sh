@@ -11,6 +11,7 @@ DBNAME=$4
 
 # Composer
 cd ..
+composer validate
 composer install
 
 # DB
