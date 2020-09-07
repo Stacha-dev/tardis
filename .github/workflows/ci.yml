@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mariadb:
-        image: mysql:latest
+        image: mariadb:latest
         ports:
           - 3306
         env:
