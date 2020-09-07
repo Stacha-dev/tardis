@@ -16,7 +16,6 @@ jobs:
           MYSQL_PASSWORD: password
           MYSQL_DATABASE: test
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_HOST: 127.0.0.1
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
     steps:
@@ -35,7 +34,7 @@ jobs:
           MYSQL_USER: ${{ job.services.mariadb.env.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ job.services.mariadb.env.MYSQL_PASSWORD }}
           MYSQL_DATABASE: ${{ job.services.mariadb.env.MYSQL_DATABASE }}
-          HOST: ${{ job.services.mariadb.env.MYSQL_HOST }}
+          HOST: 127.0.0.1
           PORT: ${{ job.services.mariadb.ports[3306] }}
       run: |
         cd bin
