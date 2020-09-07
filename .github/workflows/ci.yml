@@ -28,7 +28,7 @@ jobs:
           MYSQL_DATABASE: test
       run: |
         cd bin
-        ./install.sh pdo_mysql $MYSQL_USER $MYSQL_PASSWORD $MYSQL_DATABASE
+        ./install.sh pdo_mysql user password test
 
     - name: Coding Standards
       run: composer cs
