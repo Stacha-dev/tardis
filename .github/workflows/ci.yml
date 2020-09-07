@@ -34,10 +34,11 @@ jobs:
           MYSQL_USER: user
           MYSQL_PASSWORD: password
           MYSQL_DATABASE: test
+          HOST: 127.0.0.1
           PORT: ${{ job.services.mariadb.ports[3306] }}
       run: |
         cd bin
-        ./install.sh user password test "$PORT"
+        ./install.sh user password test "$HOST" "$PORT"
 
     - name: Coding Standards
       run: composer cs

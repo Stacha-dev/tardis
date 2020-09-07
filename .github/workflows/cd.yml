@@ -21,4 +21,4 @@ jobs:
 
           - name: Reinstall instance
             working-directory: /var/www/project-release.stacha.dev/web/bin
-            run: ./install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
+            run: ./install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} 127.0.0.1 3306
