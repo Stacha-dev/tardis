@@ -3,9 +3,9 @@ name: CD
 on:
   push:
     branches: [ master ]
-    
+
 defaults:
-  run: 
+  run:
    shell: bash -ieo pipefail {0}
    working-directory: /var/www/project-release.stacha.dev/web
 
@@ -18,7 +18,7 @@ jobs:
 
           - name: Install dependencies
             run: composer install --prefer-dist --no-progress --no-suggest
-          
+
           - name: Reinstall instance
             working-directory: /var/www/project-release.stacha.dev/web/bin
-            run: ./install.sh
+            run: ./install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} 127.0.0.1 3306

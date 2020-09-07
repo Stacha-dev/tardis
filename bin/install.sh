@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-if [ "$#" -ne 4 ]; then
+if [ "$#" -ne 5 ]; then
 	exit 1;
 fi
 
-DRIVER=$1
-USER=$2
-PASSWORD=$3
-DBNAME=$4
+USER=$1
+PASSWORD=$2
+DBNAME=$3
+HOST=$4
+PORT=$5
 
 # Composer
 cd ..
