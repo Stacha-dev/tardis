@@ -7,40 +7,44 @@ jobs:
 
     runs-on: ubuntu-latest
     services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
+      mariadb:
+        image: mariadb:latest
         ports:
-        - 32574:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+          - 3306
+        env:
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Verify MySQL connection from host
+    - name: Verify MariaDB connection
+      env:
+        PORT: ${{ job.services.mariadb.ports[3306] }}
       run: |
-        sudo apt-get install -y mysql-client
-        mysql --host 127.0.0.1 --port 32574 -uroot -ppassword -e "SHOW DATABASES"
+        while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+          sleep 1
+        done
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-
-    - name: Cache Composer Packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-
-    - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Install new instance
+      env:
+          MYSQL_USER: ${{ job.services.mariadb.env.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ job.services.mariadb.env.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ job.services.mariadb.env.MYSQL_DATABASE }}
+          HOST: 127.0.0.1
+          PORT: ${{ job.services.mariadb.ports[3306] }}
+      run: |
+        cd bin
+        ./install.sh user password test "$HOST" "$PORT"
 
     - name: Coding Standards
       run: composer cs
 
     - name: Static Analysis
       run: composer phpstan
+
+    - name: Unit tests
+      run: composer test
