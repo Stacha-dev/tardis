@@ -4,7 +4,7 @@
 
 1. Naklonovat repozitář: `git clone https://github.com/Stacha-dev/back-end.git`
 2. Inicializovat submoduly: `git submodule init` a `git pull --recurse-submodule`
-3. Spustit instalační script z bin `./install.sh <db_driver> <db_user> <db_password> <db_name>`
+3. Spustit instalační script z bin `./install.sh <db_driver> <db_user> <db_password> <db_name> <host> <port>`
 
 ## Vývoj
 
