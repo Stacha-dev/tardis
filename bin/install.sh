@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-if [ "$#" -ne 5 ]; then
-	exit 1;
-fi
-
 # DB
 USER=$1
 PASSWORD=$2
 DBNAME=$3
-HOST=$4
-PORT=$5
+HOST="${4:-127.0.0.1}"
+PORT="${5:-3306}"
 
 echo $USER
 echo $PASSWORD
 echo $DBNAME
 echo $HOST
 echo $PORT
+
+if ! mysql -h "$HOST" -u $USER -p$PASSWORD $DBNAME -e ";" ; then
+	exit 1
+fi
 
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
