@@ -4,8 +4,8 @@
 USER=$1
 PASSWORD=$2
 DBNAME=$3
-HOST="${4:-127.0.0.1}"
-PORT="${5:-3306}"
+HOST="127.0.0.1"
+PORT=$4
 
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
