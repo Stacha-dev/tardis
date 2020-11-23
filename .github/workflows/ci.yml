@@ -9,12 +9,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: getong/mariadb-action@v1.1
       with:
+        mysql database: 'some_test'
         mysql root password: 'password'
 
     - name: Install new instance
       run: |
         cd bin
-        ./install.sh root password test 127.0.0.1 3306
+        ./install.sh root password some_test 127.0.0.1 3306
 
     - name: Coding Standards
       run: composer cs
