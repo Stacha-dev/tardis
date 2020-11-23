@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Exception;
 use App\Lib\Middleware\RouteFactory;
+use App\Lib\Authorization\AuthorizationFactory;
 
 class Base implements IBase
 {
@@ -122,13 +123,11 @@ class Base implements IBase
      * @param \App\Lib\Middleware\Route $route
      * @return void
      */
-    private function checkPerms(\App\Lib\Middleware\Route $route)
+    private function checkPerms(\App\Lib\Middleware\Route $route):void
     {
         if ($route->isSecure()) {
-            $access = $this->entityManager->getRepository('App\Model\Entity\Access')->findOneBy(array('public' => $this->request->getApiKey()));
-            if (!($access instanceof \App\Model\Entity\Access)) {
-                throw new Exception('No permition to do this action!');
-            }
+            $jwt = AuthorizationFactory::fromType('JWT');
+            $jwt->authorize($this->request->getAuthorization());
         }
     }
 }

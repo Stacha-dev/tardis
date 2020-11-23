@@ -62,12 +62,6 @@ class User
      */
     protected $avatar;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Access", mappedBy="user")
-     * @var \Doctrine\ORM\PersistentCollection<Access>
-     */
-    protected $access;
-
     public function __construct(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = "")
     {
         $this->setUsername($username);
@@ -233,15 +227,5 @@ class User
     public function getAvatar(): string
     {
         return $this->avatar;
-    }
-
-    /**
-    * Returns user access.
-    *
-    * @return \Doctrine\ORM\PersistentCollection<Access>
-    */
-    public function getAccess(): \Doctrine\ORM\PersistentCollection
-    {
-        return $this->access;
     }
 }
