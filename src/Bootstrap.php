@@ -5,8 +5,10 @@ namespace App;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Cache\MemcachedCache;
 use App\Controller\App;
 use App\Lib\Configuration\ConfigurationFactory;
+use Memcached;
 
 class Bootstrap
 {
@@ -27,9 +29,19 @@ class Bootstrap
      */
     public static function getEntityManager(): \Doctrine\ORM\EntityManager
     {
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), true, null, null, false);
-        $configuration = ConfigurationFactory::fromFileName('common');
+        $memcached = new Memcached();
+        $memcached->addServer('127.0.0.1', 11211);
 
-        return EntityManager::create($configuration->getSegment('db'), $config);
+        $cacheDriver = new MemcachedCache();
+        $cacheDriver->setMemcached($memcached);
+
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"));
+        $config->setQueryCacheImpl($cacheDriver);
+        $config->setResultCacheImpl($cacheDriver);
+        $config->setMetadataCacheImpl($cacheDriver);
+
+        $common = ConfigurationFactory::fromFileName('common');
+
+        return EntityManager::create($common->getSegment('db'), $config);
     }
 }
