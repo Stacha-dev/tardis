@@ -1,35 +1,30 @@
 #!/usr/bin/env bash
 
-if [ "$#" -ne 5 ]; then
+if [ "$#" -ne 3 ]; then
 	exit 1;
 fi
 
+# DB
 USER=$1
 PASSWORD=$2
 DBNAME=$3
-HOST=$4
-PORT=$5
+
+# Authorization
+JWT_KEY=$(openssl rand -base64 32)
+
+function generate_config() {
+  eval "echo \"$(cat $1)\""
+}
 
 # Composer
 cd ..
 composer validate
 composer install
 
-# DB
+# Config
 cd config
-function generate_config() {
-  eval "echo \"$(cat $1)\""
-}
-
 generate_config common.ini.tmpl > common.ini
 
 cd ..
 composer orm:drop
 composer orm:create
-
-# NPM
-cd resources/admin
-npm ci
-npm run build:prod
-
-exit 0;
