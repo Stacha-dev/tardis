@@ -29,9 +29,6 @@ class Configuration
      */
     private function parseIniFile(string $path):array
     {
-        if (!(file_exists($path))) {
-            throw new Exception('Configuration ' . $path . ' is not exist!');
-        }
         $configuration = parse_ini_file($path, true, INI_SCANNER_RAW) ?: [];
 
         return $configuration;
