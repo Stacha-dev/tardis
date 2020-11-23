@@ -13,10 +13,6 @@ echo $DBNAME
 echo $HOST
 echo $PORT
 
-if ! mysql -h "$HOST" -u $USER -p$PASSWORD $DBNAME -e ";" ; then
-	exit 1
-fi
-
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
 
