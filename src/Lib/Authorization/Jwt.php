@@ -38,9 +38,9 @@ class Jwt extends Base
      * Authorize providet JWT
      *
      * @param string $token
-     * @return \stdClass
+     * @return object
      */
-    public function authorize(string $token):\stdClass
+    public function authorize(string $token):object
     {
         return \Firebase\JWT\JWT::decode($token, $this->key, array('HS256'));
     }
