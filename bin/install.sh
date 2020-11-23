@@ -11,6 +11,12 @@ DBNAME=$3
 HOST=$4
 PORT=$5
 
+echo $USER
+echo $PASSWORD
+echo $DBNAME
+echo $HOST
+echo $PORT
+
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
 
@@ -20,7 +26,6 @@ function generate_config() {
 
 # Composer
 cd ..
-composer validate
 composer install
 
 # Config
