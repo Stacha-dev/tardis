@@ -4,33 +4,18 @@ on: [pull_request]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-    services:
-      mariadb:
-        image: mariadb:latest
-        ports:
-          - 3306
-        env:
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-          MYSQL_DATABASE: test
-          MYSQL_ROOT_PASSWORD: password
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
-
     steps:
     - uses: actions/checkout@v2
+    - uses: getong/mariadb-action@v1.1
+      with:
+        mysql user: 'developer'
+        mysql password: 'password'
 
     - name: Install new instance
-      env:
-          MYSQL_USER: ${{ job.services.mariadb.env.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ job.services.mariadb.env.MYSQL_PASSWORD }}
-          MYSQL_DATABASE: ${{ job.services.mariadb.env.MYSQL_DATABASE }}
-          HOST: 0.0.0.0
-          PORT: ${{ job.services.mariadb.ports[3306] }}
       run: |
         cd bin
-        ./install.sh user password test "$HOST" "$PORT"
+        ./install.sh developer password test 127.0.0.1 3306
 
     - name: Coding Standards
       run: composer cs
