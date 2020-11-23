@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+if [ "$#" -ne 5 ]; then
+	exit 1;
+fi
+
 # DB
 USER=$1
 PASSWORD=$2
 DBNAME=$3
-HOST="127.0.0.1"
-PORT=$4
+HOST=$4
+PORT=$5
 
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
