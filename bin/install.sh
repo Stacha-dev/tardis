@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-if [ "$#" -ne 3 ]; then
-	exit 1;
-fi
-
 # DB
 USER=$1
 PASSWORD=$2
 DBNAME=$3
+HOST="${4:-127.0.0.1}"
+PORT="${5:-3306}"
 
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
