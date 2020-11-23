@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use App\Lib\Util\Cryptography;
+use App\Lib\Authorization\AuthorizationFactory;
 use Exception;
 
 class User extends \App\Controller\Base
@@ -72,14 +73,9 @@ class User extends \App\Controller\Base
         $password = $body->getBodyData('password') ?? $password;
         $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
         if ($user instanceof \App\Model\Entity\User) {
-            $access = new \App\Model\Entity\Access();
-            $access->setPrivate(Cryptography::random(10));
-            $access->setPublic(Cryptography::hashHmac($user->getName() . $user->getEmail(), $access->getPrivate()));
-            $user->getAccess()->add($access);
-            $access->setUser($user);
-            $this->entityManager->persist($access);
-            $this->entityManager->flush();
-            $this->view->render(array("public" => $access->getPublic()));
+            $jwt = AuthorizationFactory::fromType('JWT');
+            $this->view->render(array("token" => $jwt->getToken(['id_user' => $user->getId()])));
+
             return $user;
         } else {
             throw new Exception("Bad user credetials!");

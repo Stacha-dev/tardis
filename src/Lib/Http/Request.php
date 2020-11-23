@@ -27,7 +27,7 @@ class Request
     /**
      * @var string
      */
-    private $apiKey;
+    private $authorization;
 
     /**
      * @var \App\Lib\Http\Body
@@ -50,18 +50,18 @@ class Request
      * @param boolean $isSecured
      * @param string $method
      * @param \App\Lib\Http\Uri $uri
-     * @param string $apiKey
+     * @param string $authorization
      * @param \App\Lib\Http\Body $body
      * @param string $remoteAddress
      * @param string $accept
      */
-    public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, string $apiKey, \App\Lib\Http\Body $body, string $remoteAddress, string $accept)
+    public function __construct(bool $isSecured, string $method, \App\Lib\Http\Uri $uri, string $authorization, \App\Lib\Http\Body $body, string $remoteAddress, string $accept)
     {
         $this->isSecured = $isSecured;
         $this->setMethod($method);
         $this->method = $method;
         $this->uri = $uri;
-        $this->apiKey = $apiKey;
+        $this->setAuthorization($authorization);
         $this->body = $body;
         $this->remoteAddress = $remoteAddress;
         $this->setAccept($accept);
@@ -75,6 +75,17 @@ class Request
         } else {
             throw new \Exception('Bad request method!');
         }
+    }
+
+    /**
+     * Sets authorization
+     *
+     * @param string $authorization
+     * @return void
+     */
+    private function setAuthorization(string $authorization):void
+    {
+        [$this->authorization] = sscanf($authorization, 'Bearer %s');
     }
 
     /**
@@ -92,9 +103,9 @@ class Request
      *
      * @return string
      */
-    public function getApiKey(): string
+    public function getAuthorization(): string
     {
-        return $this->apiKey;
+        return $this->authorization;
     }
 
     /**
