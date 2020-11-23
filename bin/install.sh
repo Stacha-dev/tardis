@@ -7,12 +7,6 @@ DBNAME=$3
 HOST="${4:-127.0.0.1}"
 PORT="${5:-3306}"
 
-echo $USER
-echo $PASSWORD
-echo $DBNAME
-echo $HOST
-echo $PORT
-
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
 
