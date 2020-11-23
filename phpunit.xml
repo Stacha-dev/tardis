@@ -29,7 +29,11 @@
         </testsuite>
         <testsuite name="Configuration Test Suite">
             <directory>./tests/Lib/Configuration</directory>
-			<file>./tests/Lib/ConfigurationTest.php</file>
+			<file>./tests/Lib/Configuration/ConfigurationTest.php</file>
+        </testsuite>
+        <testsuite name="Authorization Test Suite">
+            <directory>./tests/Lib/Authorization</directory>
+			<file>./tests/Lib/Authorization/ConfigurationTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
