@@ -27,6 +27,10 @@
             <directory>./tests/Controller</directory>
 			<file>./tests/Controller/ArticleTest.php</file>
         </testsuite>
+        <testsuite name="Configuration Test Suite">
+            <directory>./tests/Lib/Configuration</directory>
+			<file>./tests/Lib/ConfigurationTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
