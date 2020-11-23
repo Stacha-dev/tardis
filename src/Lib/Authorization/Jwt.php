@@ -23,15 +23,11 @@ class Jwt extends Base
      * @param array<string|int> $data
      * @return string
      */
-    public function getToken(array $data):string
+    public function getToken(array $data = []):string
     {
-        $issuedAt   = time();
-        $notBefore  = $issuedAt + 10;
-
         $payload = array(
             "iss" => self::SERVER_NAME,
-            "iat" => $issuedAt,
-            "nbf" => $notBefore,
+            "iat" => time(),
             'data' => $data
         );
 
@@ -42,10 +38,10 @@ class Jwt extends Base
      * Authorize providet JWT
      *
      * @param string $token
-     * @return void
+     * @return \stdClass
      */
-    public function authorize(string $token):void
+    public function authorize(string $token):\stdClass
     {
-        \Firebase\JWT\JWT::decode($token, $this->key, array('HS256'));
+        return \Firebase\JWT\JWT::decode($token, $this->key, array('HS256'));
     }
 }
