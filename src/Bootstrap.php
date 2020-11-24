@@ -35,7 +35,8 @@ class Bootstrap
         $cacheDriver = new MemcachedCache();
         $cacheDriver->setMemcached($memcached);
 
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"));
+        /** @todo seek for better aproach */
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), false, null, null, false);
         $config->setQueryCacheImpl($cacheDriver);
         $config->setResultCacheImpl($cacheDriver);
         $config->setMetadataCacheImpl($cacheDriver);
