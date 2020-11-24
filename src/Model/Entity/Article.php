@@ -44,17 +44,24 @@ class Article
     protected $updated;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @var                       boolean
+     */
+    protected $status;
+
+    /**
      * Creates new instance of Article class.
      *
      * @param string $title
      * @param string $alias
      * @param string $content
      */
-    public function __construct(string $title = "", string $alias = "", string $content = "")
+    public function __construct(string $title = "", string $alias = "", string $content = "", bool $status = true)
     {
         $this->setTitle($title);
         $this->setAlias($alias);
         $this->setContent($content);
+        $this->setStatus($status);
     }
 
     /**
@@ -131,7 +138,7 @@ class Article
     }
 
     /**
-     * Sets user updated date.
+     * Sets article updated date.
      *
      * @return void
      */
@@ -141,12 +148,33 @@ class Article
     }
 
     /**
-     * Returns user updated date.
+     * Returns article updated date.
      *
      * @return \DateTime
      */
     public function getUpdated(): \DateTime
     {
         return $this->updated;
+    }
+
+    /**
+     * Sets article status
+     *
+     * @param boolean $status
+     * @return void
+     */
+    public function setStatus(bool $status):void
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Returns article status
+     *
+     * @return boolean
+     */
+    public function getStatus():bool
+    {
+        return $this->status;
     }
 }
