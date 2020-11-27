@@ -103,7 +103,7 @@ class Request
      *
      * @return string
      */
-    public function getAuthorization(): string
+    public function getAuthorization(): ?string
     {
         return $this->authorization;
     }
