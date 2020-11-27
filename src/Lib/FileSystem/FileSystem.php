@@ -10,7 +10,10 @@ class FileSystem
 {
 
     /** @var string */
-    public const STORAGE = '/public/storage';
+	public const STORAGE = '/public/storage';
+
+	/** @var string */
+	public const STORAGE_NAME = 'storage';
 
     public static function open(string $path): File
     {
@@ -38,6 +41,6 @@ class FileSystem
      */
     public static function getUrl($file):string
     {
-        return "https://" . $_SERVER["HTTP_HOST"] . "/storage/" . $file->getBasename();
+        return "https://" . $_SERVER["HTTP_HOST"] . DIRECTORY_SEPARATOR .  self::STORAGE_NAME . DIRECTORY_SEPARATOR . $file->getBasename();
     }
 }
