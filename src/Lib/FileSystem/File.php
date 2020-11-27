@@ -178,7 +178,7 @@ class File
         } elseif (isset(Image::MIME_TYPES[$mime])) {
             return Image::MIME_TYPES[$mime];
         } else {
-            throw new Exception('foo');
+            throw new Exception('File is not supported yet!');
         }
     }
 }
