@@ -18,7 +18,7 @@ final class Article extends \App\Controller\Base
     {
         $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll"))
                ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "getOneById", array("id")))
-               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<alias>[a-z-]+)$@", "getOneByAlias", array("alias")))
+               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
                ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/article$@", "create", array(), true))
                ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "edit", array("id"), true))
                ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "delete", array("id"), true));
@@ -121,7 +121,7 @@ final class Article extends \App\Controller\Base
                 $article->setContent($content);
             }
             if (!empty($alias)) {
-                $article->setContent($alias);
+                $article->setAlias($alias);
             }
             $this->entityManager->flush();
             $this->view->render(array("id" => $article->getId(), "title" => $article->getTitle(), "alias" => $article->getAlias(), "content" => $article->getContent()));
