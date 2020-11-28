@@ -45,13 +45,20 @@ class File
      */
     protected function setPath(string $path):void
     {
-        if (!file_exists($path)) {
+        if (!(file_exists($path))) {
             throw new Exception('File not exists!');
         }
-
-        $this->path = $path;
+        if (!($realPath = realpath($path))) {
+            throw new Exception('File path can not be created!');
+        }
+        $this->path = $realPath;
     }
 
+    /**
+     * Sets mime type
+     *
+     * @return void
+     */
     private function setMimeType():void
     {
         $mimeType = mime_content_type($this->getPath());
@@ -71,6 +78,23 @@ class File
     private function setPermitions(int $permitions):void
     {
         chmod($this->getPath(), $permitions);
+    }
+
+    /**
+    * Mime to extension
+    *
+    * @param string $mime
+    * @return string
+    */
+    private function mimeTypeToExtension(string $mime):string
+    {
+        if (isset(self::MIME_TYPES[$mime])) {
+            return self::MIME_TYPES[$mime];
+        } elseif (isset(Image::MIME_TYPES[$mime])) {
+            return Image::MIME_TYPES[$mime];
+        } else {
+            throw new Exception('File is not supported yet!');
+        }
     }
 
     /**
@@ -163,22 +187,5 @@ class File
     public function delete(): void
     {
         unlink($this->getPath());
-    }
-
-    /**
-     * Mime to extension
-     *
-     * @param string $mime
-     * @return string
-     */
-    public function mimeTypeToExtension(string $mime):string
-    {
-        if (isset(self::MIME_TYPES[$mime])) {
-            return self::MIME_TYPES[$mime];
-        } elseif (isset(Image::MIME_TYPES[$mime])) {
-            return Image::MIME_TYPES[$mime];
-        } else {
-            throw new Exception('File is not supported yet!');
-        }
     }
 }
