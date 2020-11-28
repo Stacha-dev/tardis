@@ -35,6 +35,10 @@
             <directory>./tests/Lib/Authorization</directory>
 			<file>./tests/Lib/Authorization/ConfigurationTest.php</file>
         </testsuite>
+        <testsuite name="File System Test Suite">
+            <directory>./tests/Lib/FileSystem</directory>
+			<file>./tests/Lib/FileSystem/FileSystemTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

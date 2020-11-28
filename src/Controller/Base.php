@@ -127,7 +127,11 @@ class Base implements IBase
     {
         if ($route->isSecure()) {
             $jwt = AuthorizationFactory::fromType('JWT');
-            $jwt->authorize($this->request->getAuthorization());
+            $token = $this->request->getAuthorization();
+            if (is_null($token) || empty($token)) {
+                throw new Exception('Authorization token is not provided!');
+            }
+            $jwt->authorize($token);
         }
     }
 }
