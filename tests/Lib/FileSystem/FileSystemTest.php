@@ -41,24 +41,4 @@ final class FileSystemTest extends TestCase
         $file = FileSystem::open(self::FILE_PATH);
         $this->assertFileExists($file->getPath());
     }
-
-    /**
-     * Test is successfull if URL to file is created
-     *
-     * @return void
-     */
-    public function testUrlCanBeGenerated():void
-    {
-        $file = FileSystem::open(self::FILE_PATH);
-        $url = FileSystem::getUrl($file);
-
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $data = curl_exec($curl);
-        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
-        $this->assertSame(200, $httpcode);
-    }
 }
