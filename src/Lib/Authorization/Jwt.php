@@ -42,6 +42,7 @@ class Jwt extends Base
      */
     public function authorize(string $token):object
     {
+        [$token] = sscanf($token, 'Bearer %s');
         return \Firebase\JWT\JWT::decode($token, $this->key, array('HS256'));
     }
 }

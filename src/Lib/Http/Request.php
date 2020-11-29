@@ -61,7 +61,7 @@ class Request
         $this->setMethod($method);
         $this->method = $method;
         $this->uri = $uri;
-        $this->setAuthorization($authorization);
+        $this->authorization = $authorization;
         $this->body = $body;
         $this->remoteAddress = $remoteAddress;
         $this->setAccept($accept);
@@ -75,17 +75,6 @@ class Request
         } else {
             throw new \Exception('Bad request method!');
         }
-    }
-
-    /**
-     * Sets authorization
-     *
-     * @param string $authorization
-     * @return void
-     */
-    private function setAuthorization(string $authorization):void
-    {
-        [$this->authorization] = sscanf($authorization, 'Bearer %s');
     }
 
     /**
