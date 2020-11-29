@@ -44,7 +44,6 @@ class FileSystem
      */
     public static function getUrl($file):string
     {
-        $host = isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "pc.stacha.dev";
-        return "https://" . $host . DIRECTORY_SEPARATOR .  self::STORAGE_NAME . DIRECTORY_SEPARATOR . $file->getBasename();
+        return "https://" . $_SERVER["HTTP_HOST"] . DIRECTORY_SEPARATOR .  self::STORAGE_NAME . DIRECTORY_SEPARATOR . $file->getBasename();
     }
 }
