@@ -17,11 +17,20 @@ class FileSystem
     public const STORAGE_NAME = 'storage';
 
     /** @var string */
+    public const PUBLIC_DIRECTORY = 'public';
+
+    /** @var string */
     public const IMAGES_DIRECTORY = 'images';
 
+    /**
+     * Open file in file system
+     *
+     * @param string $path
+     * @return File
+     */
     public static function open(string $path): File
     {
-        return new File($path);
+        return new File(self::isAbsolute($path) ? $path : $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . self::PUBLIC_DIRECTORY . $path);
     }
 
     /**
@@ -51,5 +60,16 @@ class FileSystem
         }
 
         return $uri;
+    }
+
+    /**
+     * Check if path is absolute
+     *
+     * @param string $path
+     * @return boolean
+     */
+    public static function isAbsolute(string $path):bool
+    {
+        return is_int(strpos($path, $_SERVER["HOME"]));
     }
 }
