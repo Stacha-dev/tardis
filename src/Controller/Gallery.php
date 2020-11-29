@@ -2,11 +2,12 @@
 declare(strict_types = 1);
 namespace App\Controller;
 
+use App\Controller\Base;
 use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use Exception;
 
-final class Gallery extends \App\Controller\Base
+final class Gallery extends Base
 {
     /**
      * Register routes to router
@@ -46,8 +47,13 @@ final class Gallery extends \App\Controller\Base
     public function getOneById(int $id): \App\Model\Entity\Gallery
     {
         $result = $this->entityManager->find('App\Model\Entity\Gallery', $id);
+        $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $id));
         if ($result instanceof \App\Model\Entity\Gallery) {
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'status' => $result->getStatus()));
+            $imageResult = array();
+            foreach ($images as $image) {
+                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "path" => $image->getPath()));
+            }
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'status' => $result->getStatus(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by ID can not be founded!");
@@ -62,11 +68,7 @@ final class Gallery extends \App\Controller\Base
      */
     public function getOneByAlias(string $alias): \App\Model\Entity\Gallery
     {
-        $params = $this->request->getUri()->getQuery();
-        $alias = $params->getQueryParamValue('alias') ?? $alias;
-
         $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('alias' => $alias));
-
         if ($result instanceof \App\Model\Entity\Gallery) {
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle()));
             return $result;
@@ -103,12 +105,9 @@ final class Gallery extends \App\Controller\Base
      */
     public function edit(int $id = 0, string $title = '', string $alias = ''): \App\Model\Entity\Gallery
     {
-        $params = $this->request->getUri()->getQuery();
         $body = $this->request->getBody();
-        $id = $params->getQueryParamValue('id') ?? $id;
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
-
         $gallery = $this->entityManager->find('App\Model\Entity\Gallery', $id);
         if ($gallery instanceof \App\Model\Entity\Gallery) {
             if (!empty($title)) {
@@ -133,9 +132,6 @@ final class Gallery extends \App\Controller\Base
      */
     public function delete(int $id = 0): void
     {
-        $params = $this->request->getUri()->getQuery();
-        $id = $params->getQueryParamValue('id') ?? $id;
-
         $gallery = $this->entityManager->find('App\Model\Entity\Gallery', $id);
         if (isset($gallery)) {
             $this->entityManager->remove($gallery);

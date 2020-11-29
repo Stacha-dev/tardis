@@ -62,9 +62,6 @@ final class Article extends \App\Controller\Base
      */
     public function getOneByAlias(string $alias): \App\Model\Entity\Article
     {
-        $params = $this->request->getUri()->getQuery();
-        $alias = $params->getQueryParamValue('alias') ?? $alias;
-
         $result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('alias' => $alias));
         if ($result instanceof \App\Model\Entity\Article) {
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'content' => $result->getContent()));
@@ -105,9 +102,7 @@ final class Article extends \App\Controller\Base
      */
     public function edit(int $id = 0, string $title = '', string $alias = '', string $content = ''): \App\Model\Entity\Article
     {
-        $params = $this->request->getUri()->getQuery();
         $body = $this->request->getBody();
-        $id = $params->getQueryParamValue('id') ?? $id;
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
         $content = $body->getBodyData('content') ?? $content;
@@ -139,9 +134,6 @@ final class Article extends \App\Controller\Base
      */
     public function delete(int $id = 0)
     {
-        $params = $this->request->getUri()->getQuery();
-        $id = $params->getQueryParamValue('id') ?? $id;
-
         $article = $this->entityManager->find('App\Model\Entity\Article', $id);
         if (isset($article)) {
             $this->entityManager->remove($article);
