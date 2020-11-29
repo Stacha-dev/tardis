@@ -36,14 +36,14 @@ class FileSystem
         $file->rename(Cryptography::random(6));
     }
 
-    /**
-     * Returns web url to file
+     /**
+     * Returns uri to file
      *
      * @param File|Image $file
      * @return string
      */
-    public static function getUrl($file):string
+    public static function getUri($file):string
     {
-        return "https://" . $_SERVER["HTTP_HOST"] . DIRECTORY_SEPARATOR .  self::STORAGE_NAME . DIRECTORY_SEPARATOR . $file->getBasename();
+        return  strstr($file->getPath(), DIRECTORY_SEPARATOR . self::STORAGE_NAME);
     }
 }
