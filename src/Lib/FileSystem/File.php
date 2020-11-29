@@ -128,6 +128,17 @@ class File
     }
 
     /**
+    * Returns directory
+    *
+    * @return string
+    */
+    public function getDirname():string
+    {
+        return $this->dirname;
+    }
+
+
+    /**
      * Checks if file is image
      *
      * @return boolean
@@ -159,9 +170,10 @@ class File
      */
     public function move(string $destination):void
     {
+        $destination = is_dir($destination) ? $destination . DIRECTORY_SEPARATOR . $this->getBasename() : $destination;
         rename($this->getPath(), $destination);
         $this->setPath($destination);
-        $this->setPermitions(0644);
+        $this->setPermitions(0770);
         ["dirname"=>$this->dirname]=pathinfo($this->getPath());
     }
 

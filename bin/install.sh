@@ -25,3 +25,4 @@ generate_config common.ini.tmpl > common.ini
 cd ..
 composer orm:drop
 composer orm:create
+composer orm:genproxies

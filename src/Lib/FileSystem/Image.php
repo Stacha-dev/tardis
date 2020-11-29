@@ -13,7 +13,7 @@ class Image extends File
     public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg'];
 
     /** @var array */
-    private const THUMBNAIL_DIMENSIONS = [[1024, 768], [640, 480], [320, 240]];
+    public const THUMBNAIL_DIMENSIONS = [[1024, 768], [640, 480], [320, 240]];
 
     /** @var Imagick */
     public $image;
@@ -39,7 +39,7 @@ class Image extends File
      */
     public function saveAs(string $filename):void
     {
-        $path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . FileSystem::STORAGE . DIRECTORY_SEPARATOR . $filename . "." . $this->extension;
+        $path = join(DIRECTORY_SEPARATOR, [$_SERVER["DOCUMENT_ROOT"], FileSystem::STORAGE, $filename . "." . $this->extension]);
         $this->image->writeImage($path);
         $this->setPath($path);
         ["dirname"=>$this->dirname, "filename"=>$this->filename]=pathinfo($this->getPath());
@@ -70,6 +70,25 @@ class Image extends File
     }
 
     /**
+     * Deletes image
+     *
+     * @return void
+     */
+    public function delete(): void
+    {
+        unlink($this->getPath());
+        foreach (self::THUMBNAIL_DIMENSIONS as $dimension) {
+            [$width] = $dimension;
+            foreach (self::FORMAT as $format) {
+                $path = join(DIRECTORY_SEPARATOR, [$this->getDirname(), $width, $this->getFilename() . "." . $format]);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+        }
+    }
+
+    /**
      * Generates thumbnails
      *
      * @return void
@@ -78,10 +97,15 @@ class Image extends File
     {
         foreach (self::THUMBNAIL_DIMENSIONS as $dimensions) {
             [$width, $height] = $dimensions;
+            $directory = join(DIRECTORY_SEPARATOR, [$this->getDirname(), $width]);
+            if (!is_dir($directory)) {
+                mkdir($directory, 0770);
+            }
             $thumbnail = clone $this;
             $thumbnail->resize($width, $height);
             $thumbnail->setFormat(self::FORMAT['WebP']);
             $thumbnail->saveAs($width . "_" . $this->getFilename());
+            $thumbnail->move($directory);
             unset($thumbnail);
         }
     }

@@ -19,6 +19,9 @@ class Bootstrap
      */
     public static function boot(): \App\Controller\App
     {
+        if (php_sapi_name() === 'cli') {
+            $_SERVER['HOME'] = realpath(__DIR__ . "/../../");
+        }
         return new App(\App\Lib\Http\RequestFactory::fromGlobals(), self::getEntityManager());
     }
 
@@ -37,6 +40,8 @@ class Bootstrap
 
         /** @todo seek for better aproach */
         $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), false, null, null, false);
+        $config->setProxyDir(__DIR__ . '/../tmp/Proxies');
+        $config->setProxyNamespace('App\Proxies');
         $config->setQueryCacheImpl($cacheDriver);
         $config->setResultCacheImpl($cacheDriver);
         $config->setMetadataCacheImpl($cacheDriver);
