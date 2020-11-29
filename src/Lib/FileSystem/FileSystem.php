@@ -15,6 +15,9 @@ class FileSystem
     /** @var string */
     public const STORAGE_NAME = 'storage';
 
+    /** @var string */
+    public const IMAGES_DIRECTORY = 'images';
+
     public static function open(string $path): File
     {
         return new File($path);
@@ -26,9 +29,9 @@ class FileSystem
      * @param File $file
      * @return void
      */
-    public static function upload(File &$file):void
+    public static function upload(File &$file, string $directory=""):void
     {
-        $destination = join("/", [$_SERVER["DOCUMENT_ROOT"] . self::STORAGE, $file->getBasename()]);
+        $destination = join("/", [$_SERVER["DOCUMENT_ROOT"] . self::STORAGE, $directory, $file->getBasename()]);
         $file->move($destination);
         $file->rename(Cryptography::random(6));
     }
