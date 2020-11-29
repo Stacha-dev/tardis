@@ -4,6 +4,7 @@ examples/
 .remote-sync.json
 .php_cs.cache
 .phpunit.result.cache
+tmp/Proxies
 public/reports/
 public/docs/
 public/admin/
