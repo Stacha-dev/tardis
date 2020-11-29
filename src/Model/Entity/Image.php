@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\Entity\Gallery;
 
 /**
  * @ORM\Entity
@@ -19,10 +20,23 @@ class Image
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Gallery")
+     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
+     * @var Gallery
+     */
+    private $gallery;
+
+    /**
      * @ORM\Column(type="string", length=512)
      * @var                       string
      */
     protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=512)
+     * @var                       string
+     */
+    protected $path;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -32,53 +46,41 @@ class Image
     protected $updated;
 
     /**
+     * @ORM\Column(type="integer")
+     * @var                        int
+     */
+    protected $standing;
+
+    /**
      * @ORM\Column(type="boolean")
      * @var                       boolean
      */
     protected $status;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var                        int
-     */
-    protected $order;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Gallery")
-     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
-     * @var int
-     */
-    private $gallery;
-
-    /**
      * @param string $title
      * @param bool $status
      */
-    public function __construct(string $title = "", bool $status = true)
+    public function __construct(Gallery $gallery, string $title = "", string $path, int $standing = 0, bool $status = true)
     {
+        $this->setGallery($gallery);
         $this->setTitle($title);
+        $this->setPath($path);
+        $this->setStanding($standing);
         $this->setStatus($status);
     }
 
     /**
-     * Returns image ID
+     * Sets image gallery
      *
-     * @return integer
+     * @param Gallery $gallery
+     * @return void
      */
-    public function getId(): int
+    public function setGallery(Gallery $gallery):void
     {
-        return $this->id;
+        $this->gallery = $gallery;
     }
 
-    /**
-     * Returns image title
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     /**
      * Sets image title
@@ -86,9 +88,31 @@ class Image
      * @param  string $title
      * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title):void
     {
         $this->title = $title;
+    }
+
+    /**
+     * Sets path to image
+     *
+     * @param string $path
+     * @return void
+     */
+    public function setPath(string $path):void
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * Sets image standing
+     *
+     * @param integer $standing
+     * @return void
+     */
+    public function setStanding(int $standing):void
+    {
+        $this->standing = $standing;
     }
 
     /**
@@ -99,16 +123,6 @@ class Image
     public function setUpdated()
     {
         $this->updated = new \DateTime("now");
-    }
-
-    /**
-     * Returns image updated date
-     *
-     * @return \DateTime
-     */
-    public function getUpdated(): \DateTime
-    {
-        return $this->updated;
     }
 
     /**
@@ -123,6 +137,70 @@ class Image
     }
 
     /**
+     * Returns image ID
+     *
+     * @return integer
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Returns image gallery
+     *
+     * @return Gallery
+     */
+    public function getGallery():Gallery
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * Returns image title
+     *
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * Returns image path
+     *
+     * @return string
+     */
+    public function getPath():string
+    {
+        return $this->path;
+    }
+
+    /**
+     * Returns image standing
+     *
+     * @return integer
+     */
+    public function getStanding():int
+    {
+        return $this->standing;
+    }
+
+
+    /**
+     * Returns image updated date
+     *
+     * @return \DateTime
+     */
+    public function getUpdated(): \DateTime
+    {
+        return $this->updated;
+    }
+
+
+
+    /**
      * Returns image status
      *
      * @return boolean
@@ -130,26 +208,5 @@ class Image
     public function getStatus():bool
     {
         return $this->status;
-    }
-
-    /**
-     * Sets image gallery ID
-     *
-     * @param integer $gallery_id
-     * @return void
-     */
-    public function setGallery(int $gallery_id):void
-    {
-        $this->gallery = $gallery_id;
-    }
-
-    /**
-     * Returns gallery ID
-     *
-     * @return integer
-     */
-    public function getGallery():int
-    {
-        return $this->gallery;
     }
 }
