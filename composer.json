@@ -29,7 +29,7 @@
 		"test": "vendor/bin/phpunit tests",
 		"test:codecov": "vendor/bin/phpunit --coverage-html public/reports/codecov/",
 		"orm:create": "doctrine orm:schema-tool:create",
-		"orm:update": "doctrine orm:schema-tool:update --force",
+		"orm:update": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
 		"phpstan": "phpstan analyse src -l max",
 		"cs": "php vendor/bin/php-cs-fixer fix . --dry-run --ansi",
