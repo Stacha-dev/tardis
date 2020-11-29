@@ -27,10 +27,9 @@ final class File extends \App\Controller\Base
      */
     public function upload(): void
     {
-        foreach ($_FILES as $file) {
-            $newFile = FileSystem::open($file["tmp_name"]);
-            FileSystem::upload($newFile);
-            $this->view->render(["path"=>FileSystem::getUrl($newFile)]);
+        foreach ($this->request->getBody()->getFiles() as $file) {
+            FileSystem::upload($file);
+            $this->view->render(["path"=>FileSystem::getUrl($file)]);
         }
     }
 }
