@@ -19,6 +19,9 @@ class Bootstrap
      */
     public static function boot(): \App\Controller\App
     {
+        if (php_sapi_name() === 'cli') {
+            $_SERVER['HOME'] = realpath(__DIR__ . "/../../");
+        }
         return new App(\App\Lib\Http\RequestFactory::fromGlobals(), self::getEntityManager());
     }
 
