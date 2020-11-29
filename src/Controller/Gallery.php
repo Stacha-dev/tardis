@@ -136,7 +136,7 @@ final class Gallery extends Base
         $galleryEntity = $this->entityManager->find('App\Model\Entity\Gallery', $id);
         if ($galleryEntity instanceof \App\Model\Entity\Gallery) {
             $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $galleryEntity->getId()));
-            foreach($images as $imageEntity) {
+            foreach ($images as $imageEntity) {
                 $file = FileSystem::open($imageEntity->getPath());
                 $image = $file->toImage();
                 $image->delete();
