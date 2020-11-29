@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\Base;
 use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
+use App\Lib\FileSystem\FileSystem;
 use Exception;
 
 final class Gallery extends Base
@@ -132,9 +133,16 @@ final class Gallery extends Base
      */
     public function delete(int $id = 0): void
     {
-        $gallery = $this->entityManager->find('App\Model\Entity\Gallery', $id);
-        if (isset($gallery)) {
-            $this->entityManager->remove($gallery);
+        $galleryEntity = $this->entityManager->find('App\Model\Entity\Gallery', $id);
+        if ($galleryEntity instanceof \App\Model\Entity\Gallery) {
+            $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $galleryEntity->getId()));
+            foreach($images as $imageEntity) {
+                $file = FileSystem::open($imageEntity->getPath());
+                $image = $file->toImage();
+                $image->delete();
+                $this->entityManager->remove($imageEntity);
+            }
+            $this->entityManager->remove($galleryEntity);
             $this->entityManager->flush();
         } else {
             throw new Exception("Gallery with ID: " . $id . " not exists!");
