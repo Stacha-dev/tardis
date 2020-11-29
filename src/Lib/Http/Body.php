@@ -46,11 +46,12 @@ class Body
     private function setContentType():void
     {
         if (!array_key_exists("CONTENT_TYPE", $_SERVER)) {
-            throw new Exception("Content type header is not provided!");
+            $this->contentType = null;
+        } else {
+            $contentType = $_SERVER["CONTENT_TYPE"];
+            $contentType = explode(";", $contentType);
+            $this->contentType = array_shift($contentType);
         }
-        $contentType = $_SERVER["CONTENT_TYPE"];
-        $contentType = explode(";", $contentType);
-        $this->contentType = array_shift($contentType);
     }
 
     private function setFiles():void
