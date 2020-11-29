@@ -70,6 +70,6 @@ class FileSystem
      */
     public static function isAbsolute(string $path):bool
     {
-        return is_int(strpos($path, $_SERVER["HOME"]));
+        return is_int(strpos($path, $_SERVER['HOME']));
     }
 }
