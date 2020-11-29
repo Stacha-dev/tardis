@@ -3,39 +3,61 @@ declare(strict_types=1);
 
 namespace App\Lib\Http;
 
+use App\Lib\FileSystem\FileSystem;
+use Exception;
+
 class Body
 {
-    /**
-     * @var array<string>
-     */
-    private $body = array();
+    /** @var string */
+    private $contentType;
+
+    /** @var array<string> */
+    private $body;
+
+    /** @var array<\App\Lib\FileSystem\File> */
+    private $files = [];
 
     public function __construct()
     {
-        $body = file_get_contents('php://input');
-        if (is_string($body)) {
-            $this->body = $this->decodeBody($body) ?? array();
-        }
+        $this->setContentType();
+        $this->setBody();
+        $this->setFiles();
     }
 
     /**
-     * Sets body by string.
-     *
-     * Type: 1-JSON
-     *
-     * @param  string $body
-     * @param  int    $type
-     * @return array<string>
+     * Parse request body
      */
-    private function decodeBody(string $body, int $type = 1): ?array
+    private function setBody():void
     {
-        switch ($type) {
-        case 1:
-            $body = json_decode($body, true);
+        switch ($this->contentType) {
+            case 'application/json':
+                $body = file_get_contents('php://input');
+                if (!is_string($body)) {
+                    throw new Exception('Body content is not valid!');
+                }
+                $this->body = json_decode($body, true);
+            break;
+            case 'multipart/form-data':
+                $this->body = $_POST;
             break;
         }
+    }
 
-        return $body;
+    private function setContentType():void
+    {
+        if (!array_key_exists("CONTENT_TYPE", $_SERVER)) {
+            throw new Exception("Content type header is not provided!");
+        }
+        $contentType = $_SERVER["CONTENT_TYPE"];
+        $contentType = explode(";", $contentType);
+        $this->contentType = array_shift($contentType);
+    }
+
+    private function setFiles():void
+    {
+        foreach ($_FILES as $file) {
+            array_push($this->files, FileSystem::open($file['tmp_name']));
+        }
     }
 
     /**
@@ -57,5 +79,27 @@ class Body
     public function getBodyData(string $key): ?string
     {
         return array_key_exists($key, $this->body) ? $this->body[$key] : null;
+    }
+
+
+
+    /**
+     * Returns body content type
+     *
+     * @return string
+     */
+    public function getContentType():string
+    {
+        return $this->contentType;
+    }
+
+    /**
+     * Returns files
+     *
+     * @return array<\App\Lib\FileSystem\File>
+     */
+    public function getFiles():array
+    {
+        return $this->files;
     }
 }
