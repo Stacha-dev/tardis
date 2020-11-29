@@ -46,7 +46,7 @@ class Body
     private function setContentType():void
     {
         if (!array_key_exists("CONTENT_TYPE", $_SERVER)) {
-            $this->contentType = null;
+            $this->contentType = "";
         } else {
             $contentType = $_SERVER["CONTENT_TYPE"];
             $contentType = explode(";", $contentType);
