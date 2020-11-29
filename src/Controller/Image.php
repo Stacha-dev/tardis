@@ -7,7 +7,6 @@ use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use App\Model\Entity\Gallery;
 use App\Lib\FileSystem\FileSystem;
-use App\Lib\FileSystem\File;
 use Exception;
 
 final class Image extends Base
