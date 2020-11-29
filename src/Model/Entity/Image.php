@@ -55,19 +55,19 @@ class Image
      * @ORM\Column(type="boolean")
      * @var                       boolean
      */
-    protected $status;
+    protected $state;
 
     /**
      * @param string $title
-     * @param bool $status
+     * @param bool $state
      */
-    public function __construct(Gallery $gallery, string $title = "", string $path, int $standing = 0, bool $status = true)
+    public function __construct(Gallery $gallery, string $title = "", string $path, int $standing = 0, bool $state = true)
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
         $this->setPath($path);
         $this->setStanding($standing);
-        $this->setStatus($status);
+        $this->setState($state);
     }
 
     /**
@@ -126,14 +126,14 @@ class Image
     }
 
     /**
-     * Sets image status
+     * Sets image state
      *
-     * @param boolean $status
+     * @param boolean $state
      * @return void
      */
-    public function setStatus(bool $status):void
+    public function setState(bool $state):void
     {
-        $this->status = $status;
+        $this->state = $state;
     }
 
     /**
@@ -201,12 +201,12 @@ class Image
 
 
     /**
-     * Returns image status
+     * Returns image state
      *
      * @return boolean
      */
-    public function getStatus():bool
+    public function getState():bool
     {
-        return $this->status;
+        return $this->state;
     }
 }

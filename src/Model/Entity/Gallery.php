@@ -41,17 +41,17 @@ class Gallery
      * @ORM\Column(type="boolean")
      * @var                       boolean
      */
-    protected $status;
+    protected $state;
 
     /**
      * @param string $title
      * @param string $alias
      */
-    public function __construct(string $title = "", string $alias = "", bool $status = true)
+    public function __construct(string $title = "", string $alias = "", bool $state = true)
     {
         $this->setTitle($title);
         $this->setAlias($alias);
-        $this->setStatus($status);
+        $this->setState($state);
     }
 
     /**
@@ -127,23 +127,23 @@ class Gallery
     }
 
     /**
-     * Sets gallery status
+     * Sets gallery state
      *
-     * @param boolean $status
+     * @param boolean $state
      * @return void
      */
-    public function setStatus(bool $status):void
+    public function setState(bool $state):void
     {
-        $this->status = $status;
+        $this->state = $state;
     }
 
     /**
-     * Returns gallery status
+     * Returns gallery state
      *
      * @return boolean
      */
-    public function getStatus():bool
+    public function getState():bool
     {
-        return $this->status;
+        return $this->state;
     }
 }

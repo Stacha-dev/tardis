@@ -47,7 +47,7 @@ final class Article extends \App\Controller\Base
     {
         $result = $this->entityManager->find('App\Model\Entity\Article', $id);
         if ($result instanceof \App\Model\Entity\Article) {
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'content' => $result->getContent(), 'status' => $result->getStatus()));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'content' => $result->getContent(), 'state' => $result->getState()));
             return $result;
         } else {
             throw new Exception("Article by ID can not be founded!");

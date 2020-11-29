@@ -57,7 +57,7 @@ class Base implements IBase
      */
     public function registerDefaultRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", "getStatus"));
+        $router->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", "getState"));
     }
 
     /**
@@ -78,16 +78,16 @@ class Base implements IBase
     }
 
     /**
-     * Returns API status
+     * Returns API state
      *
      * @todo Make it usefull
      * @return array<string>
      */
-    public function getStatus():array
+    public function getState():array
     {
-        $status = array('status' => 'ok');
-        $this->view->render($status);
-        return $status;
+        $state = array('state' => 'ok');
+        $this->view->render($state);
+        return $state;
     }
 
     /**

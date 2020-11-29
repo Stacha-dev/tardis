@@ -47,7 +47,7 @@ class Article
      * @ORM\Column(type="boolean")
      * @var                       boolean
      */
-    protected $status;
+    protected $state;
 
     /**
      * Creates new instance of Article class.
@@ -56,12 +56,12 @@ class Article
      * @param string $alias
      * @param string $content
      */
-    public function __construct(string $title = "", string $alias = "", string $content = "", bool $status = true)
+    public function __construct(string $title = "", string $alias = "", string $content = "", bool $state = true)
     {
         $this->setTitle($title);
         $this->setAlias($alias);
         $this->setContent($content);
-        $this->setStatus($status);
+        $this->setState($state);
     }
 
     /**
@@ -158,23 +158,23 @@ class Article
     }
 
     /**
-     * Sets article status
+     * Sets article state
      *
-     * @param boolean $status
+     * @param boolean $state
      * @return void
      */
-    public function setStatus(bool $status):void
+    public function setState(bool $state):void
     {
-        $this->status = $status;
+        $this->state = $state;
     }
 
     /**
-     * Returns article status
+     * Returns article state
      *
      * @return boolean
      */
-    public function getStatus():bool
+    public function getState():bool
     {
-        return $this->status;
+        return $this->state;
     }
 }

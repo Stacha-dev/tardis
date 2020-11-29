@@ -54,7 +54,7 @@ final class Gallery extends Base
             foreach ($images as $image) {
                 array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "path" => $image->getPath(), "standing" => $image->getStanding()));
             }
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'status' => $result->getStatus(), "images" => $imageResult));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by ID can not be founded!");

@@ -36,7 +36,7 @@ final class Image extends Base
     {
         $result = $this->entityManager->find('App\Model\Entity\Image', $id);
         if ($result instanceof \App\Model\Entity\Image) {
-            $this->view->render(array('id' => $result->getId(), 'gallery' => $result->getGallery()->getId(), 'title' => $result->getTitle(), 'path' => $result->getPath(), 'status' => $result->getStatus()));
+            $this->view->render(array('id' => $result->getId(), 'gallery' => $result->getGallery()->getId(), 'title' => $result->getTitle(), 'path' => $result->getPath(), 'state' => $result->getState()));
             return $result;
         } else {
             throw new Exception("Image by ID can not be founded!");
@@ -50,13 +50,13 @@ final class Image extends Base
      * @param int $galleryId
      * @return array<\App\Model\Entity\Image>
      */
-    public function upload(string $title = '', int $galleryId = 0, int $standing = 0, bool $status = true): array
+    public function upload(string $title = '', int $galleryId = 0, int $standing = 0, bool $state = true): array
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $galleryId = $body->getBodyData('gallery') ?? $galleryId;
         $standing = (int)$body->getBodyData('standing') ?? $standing;
-        $status = (bool)$body->getBodyData('status') ?? $status;
+        $state = (bool)$body->getBodyData('state') ?? $state;
         $output = [];
         $images = [];
         foreach ($body->getFiles() as $file) {
@@ -67,7 +67,7 @@ final class Image extends Base
             if (!($gallery instanceof Gallery)) {
                 throw new Exception('Gallery with ID ' . $galleryId . ' was not found!');
             }
-            $insert = new \App\Model\Entity\Image($gallery, $title, FileSystem::getUri($file), $standing, $status);
+            $insert = new \App\Model\Entity\Image($gallery, $title, FileSystem::getUri($file), $standing, $state);
             $this->entityManager->persist($insert);
             array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "path"=>$insert->getPath()]);
             array_push($images, $insert);

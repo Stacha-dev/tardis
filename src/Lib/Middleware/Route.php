@@ -116,7 +116,7 @@ class Route
     }
 
     /**
-     * Returns secure route status.
+     * Returns secure route state.
      *
      * @return bool
      */
