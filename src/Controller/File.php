@@ -29,7 +29,7 @@ final class File extends \App\Controller\Base
     {
         foreach ($this->request->getBody()->getFiles() as $file) {
             FileSystem::upload($file);
-            $this->view->render(["path"=>FileSystem::getUrl($file)]);
+            $this->view->render(["path"=>FileSystem::getUri($file)]);
         }
     }
 }
