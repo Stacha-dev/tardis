@@ -37,6 +37,8 @@ class Bootstrap
 
         /** @todo seek for better aproach */
         $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), false, null, null, false);
+        $config->setProxyDir(__DIR__ . '/../tmp/Proxies');
+        $config->setProxyNamespace('App\Proxies');
         $config->setQueryCacheImpl($cacheDriver);
         $config->setResultCacheImpl($cacheDriver);
         $config->setMetadataCacheImpl($cacheDriver);
