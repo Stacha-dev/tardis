@@ -50,12 +50,12 @@ final class Image extends Base
      * @param int $galleryId
      * @return array<\App\Model\Entity\Image>
      */
-    public function upload(string $title = '', int $galleryId = 0, int $standing = 0, bool $state = true): array
+    public function upload(string $title = '', int $galleryId = 0, int $ordering = 0, bool $state = true): array
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $galleryId = $body->getBodyData('gallery') ?? $galleryId;
-        $standing = (int)$body->getBodyData('standing') ?? $standing;
+        $ordering = (int)$body->getBodyData('ordering') ?? $ordering;
         $state = (bool)$body->getBodyData('state') ?? $state;
         $output = [];
         $images = [];
@@ -67,7 +67,7 @@ final class Image extends Base
             if (!($gallery instanceof Gallery)) {
                 throw new Exception('Gallery with ID ' . $galleryId . ' was not found!');
             }
-            $insert = new \App\Model\Entity\Image($gallery, $title, FileSystem::getUri($file), $standing, $state);
+            $insert = new \App\Model\Entity\Image($gallery, $title, FileSystem::getUri($file), $ordering, $state);
             $this->entityManager->persist($insert);
             array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "path"=>$insert->getPath()]);
             array_push($images, $insert);
@@ -85,11 +85,11 @@ final class Image extends Base
      * @param  string $title
      * @return \App\Model\Entity\Image
      */
-    public function edit(int $id = 0, string $title = '', int $standing = 0): \App\Model\Entity\Image
+    public function edit(int $id = 0, string $title = '', int $ordering = 0): \App\Model\Entity\Image
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
-        $standing = (int)$body->getBodyData('standing') ?? $standing;
+        $ordering = (int)$body->getBodyData('ordering') ?? $ordering;
         $image = $this->entityManager->find('App\Model\Entity\Image', $id);
         if ($image instanceof \App\Model\Entity\Image) {
             if (!empty($title)) {
@@ -97,11 +97,11 @@ final class Image extends Base
             }
 
             if (!empty($title)) {
-                $image->setStanding($standing);
+                $image->setOrdering($ordering);
             }
 
             $this->entityManager->flush();
-            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "standing" => $image->getStanding()));
+            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "ordering" => $image->getOrdering()));
             return $image;
         } else {
             throw new Exception("Image with ID: " . $id . " not exists!");

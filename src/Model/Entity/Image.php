@@ -49,7 +49,7 @@ class Image
      * @ORM\Column(type="integer")
      * @var                        int
      */
-    protected $standing;
+    protected $ordering;
 
     /**
      * @ORM\Column(type="boolean")
@@ -61,12 +61,12 @@ class Image
      * @param string $title
      * @param bool $state
      */
-    public function __construct(Gallery $gallery, string $title = "", string $path, int $standing = 0, bool $state = true)
+    public function __construct(Gallery $gallery, string $title = "", string $path, int $ordering = 0, bool $state = true)
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
         $this->setPath($path);
-        $this->setStanding($standing);
+        $this->setOrdering($ordering);
         $this->setState($state);
     }
 
@@ -105,14 +105,14 @@ class Image
     }
 
     /**
-     * Sets image standing
+     * Sets image ordering
      *
-     * @param integer $standing
+     * @param integer $ordering
      * @return void
      */
-    public function setStanding(int $standing):void
+    public function setOrdering(int $ordering):void
     {
-        $this->standing = $standing;
+        $this->ordering = $ordering;
     }
 
     /**
@@ -178,13 +178,13 @@ class Image
     }
 
     /**
-     * Returns image standing
+     * Returns image ordering
      *
      * @return integer
      */
-    public function getStanding():int
+    public function getOrdering():int
     {
-        return $this->standing;
+        return $this->ordering;
     }
 
 
