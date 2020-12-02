@@ -23,6 +23,9 @@ class File
     /** @var string */
     protected $extension;
 
+    /** @var string */
+    protected $uploadName;
+
     /** @var array */
     public const MIME_TYPES = ['application/pdf' => 'pdf'];
 
@@ -41,9 +44,9 @@ class File
      * Sets file path
      *
      * @param string $path
-     * @return void
+     * @return self
      */
-    protected function setPath(string $path):void
+    protected function setPath(string $path):self
     {
         if (!(file_exists($path))) {
             throw new Exception('File not exists!');
@@ -52,14 +55,16 @@ class File
             throw new Exception('File path can not be created!');
         }
         $this->path = $realPath;
+
+        return $this;
     }
 
     /**
      * Sets mime type
      *
-     * @return void
+     * @return self
      */
-    private function setMimeType():void
+    private function setMimeType():self
     {
         $mimeType = mime_content_type($this->getPath());
         if (!$mimeType) {
@@ -67,17 +72,34 @@ class File
         }
 
         $this->mimeType = $mimeType;
+
+        return $this;
     }
 
     /**
      * Sets file permitions
      *
      * @param integer $permitions
-     * @return void
+     * @return self
      */
-    private function setPermitions(int $permitions):void
+    private function setPermitions(int $permitions):self
     {
         chmod($this->getPath(), $permitions);
+
+        return $this;
+    }
+
+    /**
+     * Sets upload name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function setUploadName(string $name):self
+    {
+        $this->uploadName = $name;
+
+        return $this;
     }
 
     /**
@@ -135,6 +157,17 @@ class File
     public function getDirname():string
     {
         return $this->dirname;
+    }
+
+
+    /**
+     * Returns upload name
+     *
+     * @return string|null
+     */
+    public function getUploadName():?string
+    {
+        return $this->uploadName;
     }
 
 

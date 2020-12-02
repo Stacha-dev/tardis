@@ -7,9 +7,9 @@ use App\Model\Entity\Gallery;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="image")
+ * @ORM\Table(name="file")
  */
-class Image
+class File
 {
     /**
      * @ORM\Id
@@ -18,13 +18,6 @@ class Image
      * @var                        int
      */
     protected $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Gallery")
-     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
-     * @var Gallery
-     */
-    private $gallery;
 
     /**
      * @ORM\Column(type="string", length=512)
@@ -46,12 +39,6 @@ class Image
     protected $updated;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var                        int
-     */
-    protected $ordering;
-
-    /**
      * @ORM\Column(type="boolean")
      * @var                       boolean
      */
@@ -61,29 +48,16 @@ class Image
      * @param string $title
      * @param bool $state
      */
-    public function __construct(Gallery $gallery, string $title = "", string $path, int $ordering = 0, bool $state = true)
+    public function __construct(string $title = "", string $path, bool $state = true)
     {
-        $this->setGallery($gallery);
         $this->setTitle($title);
         $this->setPath($path);
-        $this->setOrdering($ordering);
         $this->setState($state);
     }
 
-    /**
-     * Sets image gallery
-     *
-     * @param Gallery $gallery
-     * @return void
-     */
-    public function setGallery(Gallery $gallery):void
-    {
-        $this->gallery = $gallery;
-    }
-
 
     /**
-     * Sets image title
+     * Sets file title
      *
      * @param  string $title
      * @return void
@@ -94,7 +68,7 @@ class Image
     }
 
     /**
-     * Sets path to image
+     * Sets path to file
      *
      * @param string $path
      * @return void
@@ -105,18 +79,7 @@ class Image
     }
 
     /**
-     * Sets image ordering
-     *
-     * @param integer $ordering
-     * @return void
-     */
-    public function setOrdering(int $ordering):void
-    {
-        $this->ordering = $ordering;
-    }
-
-    /**
-     * Sets image updated date
+     * Sets file updated date
      *
      * @return void
      */
@@ -126,7 +89,7 @@ class Image
     }
 
     /**
-     * Sets image state
+     * Sets file state
      *
      * @param boolean $state
      * @return void
@@ -137,7 +100,7 @@ class Image
     }
 
     /**
-     * Returns image ID
+     * Returns file ID
      *
      * @return integer
      */
@@ -146,19 +109,8 @@ class Image
         return $this->id;
     }
 
-
     /**
-     * Returns image gallery
-     *
-     * @return Gallery
-     */
-    public function getGallery():Gallery
-    {
-        return $this->gallery;
-    }
-
-    /**
-     * Returns image title
+     * Returns file title
      *
      * @return string
      */
@@ -168,7 +120,7 @@ class Image
     }
 
     /**
-     * Returns image path
+     * Returns file path
      *
      * @return string
      */
@@ -177,19 +129,9 @@ class Image
         return $this->path;
     }
 
-    /**
-     * Returns image ordering
-     *
-     * @return integer
-     */
-    public function getOrdering():int
-    {
-        return $this->ordering;
-    }
-
 
     /**
-     * Returns image updated date
+     * Returns file updated date
      *
      * @return \DateTime
      */
@@ -201,7 +143,7 @@ class Image
 
 
     /**
-     * Returns image state
+     * Returns file state
      *
      * @return boolean
      */
