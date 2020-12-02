@@ -7,6 +7,7 @@ examples/
 tmp/Proxies
 public/reports/
 public/docs/
-public/admin/
+public/admin/*
+!public/admin/.gitkeep
 public/storage/*
 !public/storage/.gitkeep
