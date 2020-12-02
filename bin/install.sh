@@ -15,14 +15,12 @@ function generate_config() {
 }
 
 # Composer
-cd ..
 composer install
 
 # Config
-cd config
-generate_config common.ini.tmpl > common.ini
+generate_config config/common.ini.tmpl > config/common.ini
 
-cd ..
+# ORM
 composer orm:drop
 composer orm:create
 composer orm:genproxies
