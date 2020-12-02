@@ -1,3 +1,0 @@
-[submodule "resources/admin"]
-	path = resources/admin
-	url = git@github.com:Stacha-dev/admin.git
