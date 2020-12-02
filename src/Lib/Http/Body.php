@@ -40,6 +40,9 @@ class Body
             case 'multipart/form-data':
                 $this->body = $_POST;
             break;
+            default:
+            $this->body = [];
+        break;
         }
     }
 
