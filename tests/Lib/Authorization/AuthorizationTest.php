@@ -44,8 +44,9 @@ final class AuthorizationTest extends TestCase
      */
     public function testAuthorizationTokenIsDecoded():void
     {
+
         $authorization = AuthorizationFactory::fromType('JWT');
         $jwt = $authorization->getToken();
-        $this->assertInstanceOf('\stdClass', $authorization->authorize($jwt));
+        $this->assertInstanceOf('\stdClass', $authorization->authorize('Bearer ' . $jwt));
     }
 }

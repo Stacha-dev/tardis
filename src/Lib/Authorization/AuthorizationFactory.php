@@ -11,7 +11,7 @@ final class AuthorizationFactory
      * Creates authorization service by proidet type
      *
      * @param string $type
-     * @return Jwt
+     * @return mixed
      */
     public static function fromType(string $type)
     {
