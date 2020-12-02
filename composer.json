@@ -9,7 +9,8 @@
 		}
 	],
 	"require": {
-		"doctrine/orm": "^2.7.3"
+		"doctrine/orm": "^2.7.3",
+		"firebase/php-jwt": "^5.2"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.16",
@@ -28,10 +29,11 @@
 		"test": "vendor/bin/phpunit tests",
 		"test:codecov": "vendor/bin/phpunit --coverage-html public/reports/codecov/",
 		"orm:create": "doctrine orm:schema-tool:create",
-		"orm:update": "doctrine orm:schema-tool:update --force",
-		"orm:drop": "doctrine orm:schema-tool:drop --force",
+		"orm:update": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
+		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
+		"orm:genproxies": "doctrine orm:generate-proxies",
 		"phpstan": "phpstan analyse src -l max",
-		"cs": "php vendor/bin/php-cs-fixer fix . --dry-run --ansi",
-		"cs:fix": "php vendor/bin/php-cs-fixer fix . --ansi"
+		"cs": "php vendor/bin/php-cs-fixer fix src --dry-run --ansi",
+		"cs:fix": "php vendor/bin/php-cs-fixer fix src --ansi"
 	}
 }

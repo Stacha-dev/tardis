@@ -5,13 +5,13 @@ namespace App;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Cache\MemcachedCache;
 use App\Controller\App;
+use App\Lib\Configuration\ConfigurationFactory;
+use Memcached;
 
 class Bootstrap
 {
-    /** @var string */
-    private const DB_CONFIG = "db";
-
     /**
      * Boot instace of App.
      *
@@ -19,6 +19,9 @@ class Bootstrap
      */
     public static function boot(): \App\Controller\App
     {
+        if (php_sapi_name() === 'cli') {
+            $_SERVER['HOME'] = realpath(__DIR__ . "/../../");
+        }
         return new App(\App\Lib\Http\RequestFactory::fromGlobals(), self::getEntityManager());
     }
 
@@ -29,11 +32,22 @@ class Bootstrap
      */
     public static function getEntityManager(): \Doctrine\ORM\EntityManager
     {
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), true, null, null, false);
-        $dbParams = parse_ini_file(__DIR__ . "/../config/common.ini", true, INI_SCANNER_RAW) ?? [];
-        if (!(is_array($dbParams) && array_key_exists(self::DB_CONFIG, $dbParams))) {
-            throw new \Exception("Bad configuration file! Check DB credentials.");
-        }
-        return EntityManager::create($dbParams[self::DB_CONFIG], $config);
+        $memcached = new Memcached();
+        $memcached->addServer('127.0.0.1', 11211);
+
+        $cacheDriver = new MemcachedCache();
+        $cacheDriver->setMemcached($memcached);
+
+        /** @todo seek for better aproach */
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), false, null, null, false);
+        $config->setProxyDir(__DIR__ . '/../tmp/Proxies');
+        $config->setProxyNamespace('App\Proxies');
+        $config->setQueryCacheImpl($cacheDriver);
+        $config->setResultCacheImpl($cacheDriver);
+        $config->setMetadataCacheImpl($cacheDriver);
+
+        $common = ConfigurationFactory::fromFileName('common');
+
+        return EntityManager::create($common->getSegment('db'), $config);
     }
 }

@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="article")
+ * @ORM\Table(name="gallery")
  */
-class Article
+class Gallery
 {
     /**
      * @ORM\Id
@@ -31,12 +31,6 @@ class Article
     protected $alias;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var                       string
-     */
-    protected $content;
-
-    /**
      * @ORM\Column(type="datetime", nullable=false)
      * @ORM\Version
      * @var                         \DateTime
@@ -50,22 +44,18 @@ class Article
     protected $state;
 
     /**
-     * Creates new instance of Article class.
-     *
      * @param string $title
      * @param string $alias
-     * @param string $content
      */
-    public function __construct(string $title = "", string $alias = "", string $content = "", bool $state = true)
+    public function __construct(string $title = "", string $alias = "", bool $state = true)
     {
         $this->setTitle($title);
         $this->setAlias($alias);
-        $this->setContent($content);
         $this->setState($state);
     }
 
     /**
-     * Returns article ID.
+     * Returns gallery ID
      *
      * @return integer
      */
@@ -75,7 +65,7 @@ class Article
     }
 
     /**
-     * Returns article title.
+     * Returns gallery title
      *
      * @return string
      */
@@ -85,7 +75,7 @@ class Article
     }
 
     /**
-     * Sets article title.
+     * Sets gallery title
      *
      * @param  string $title
      * @return void
@@ -96,7 +86,7 @@ class Article
     }
 
     /**
-     * Returns article alias.
+     * Returns gallery alias
      *
      * @return string
      */
@@ -106,7 +96,7 @@ class Article
     }
 
     /**
-     * Sets article alias.
+     * Sets gallery alias
      *
      * @param  string $alias
      * @return void
@@ -117,28 +107,7 @@ class Article
     }
 
     /**
-     * Returns article content.
-     *
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    /**
-     * Sets article content.
-     *
-     * @param  string $content
-     * @return void
-     */
-    public function setContent(string $content)
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * Sets article updated date.
+     * Sets gallery updated date
      *
      * @return void
      */
@@ -148,7 +117,7 @@ class Article
     }
 
     /**
-     * Returns article updated date.
+     * Returns gallery updated date
      *
      * @return \DateTime
      */
@@ -158,7 +127,7 @@ class Article
     }
 
     /**
-     * Sets article state
+     * Sets gallery state
      *
      * @param boolean $state
      * @return void
@@ -169,7 +138,7 @@ class Article
     }
 
     /**
-     * Returns article state
+     * Returns gallery state
      *
      * @return boolean
      */

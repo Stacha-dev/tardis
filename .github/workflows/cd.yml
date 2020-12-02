@@ -14,11 +14,7 @@ jobs:
       runs-on: self-hosted
       steps:
           - name: Checkout
-            run: git pull origin master --recurse-submodules
+            run: git pull origin master
 
-          - name: Install dependencies
-            run: composer install --prefer-dist --no-progress --no-suggest
-
-          - name: Reinstall instance
-            working-directory: /var/www/project-release.stacha.dev/web/bin
-            run: ./install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} 127.0.0.1 3306
+          - name: Install
+            run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}

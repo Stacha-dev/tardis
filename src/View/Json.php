@@ -10,7 +10,7 @@ class Json extends BaseView
     /**
      * Displays data in JSON format
      *
-     * @param  array<integer|string|array> $data
+     * @param  array<integer|string|bool|array> $data
      * @return void
      */
     public function render(array $data): void

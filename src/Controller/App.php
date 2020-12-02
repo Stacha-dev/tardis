@@ -12,7 +12,7 @@ class App
     public function __construct(\App\Lib\Http\Request $request, \Doctrine\ORM\EntityManager $entityManager)
     {
         try {
-            $this->controllerFactory($request, $entityManager)->requestDispatch(new \App\Lib\Middleware\Router, $request);
+            $this->controllerFactory($request, $entityManager)->requestDispatch(new Router, $request);
         } catch (Exception $e) {
             error_log($e->getMessage());
             Error::render($e->getMessage(), 400);

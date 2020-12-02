@@ -1,54 +1,40 @@
 # API Service Stacha.dev
 
-## Instalace
+## Instalation
 
-1. Naklonovat repozitář: `git clone https://github.com/Stacha-dev/back-end.git`
-2. Inicializovat submoduly: `git submodule init` a `git pull --recurse-submodule`
-3. Spustit instalační script z bin `./install.sh <db_driver> <db_user> <db_password> <db_name>`
+1. Clone repository: `git clone https://github.com/Stacha-dev/back-end.git && cd back-end`
+2. Run install script `./bin/install.sh <db_user> <db_password> <db_name>`
 
-## Vývoj
+## Development
 
-1. Před začátkem prací, aktualizovat vývojovou větev `develop` pomocí:
-2. Přepnout na vývojovou větev: `git checkout develop`
-3. Aktualizovat lokální repozitář `git pull --recurse-submodules`
-4. Vytvořit větev pro vývoj funčknosti `git checkout -b develop_nova_funkcnost` podle konvence pojmenování větví:
-    - Pro novou či experimentální funčknost `develop_`
-    - Pro opravu `bugfix_`
-5. Zaverzovat změny pomocí `git add cesta/k/souboru` a `git commit -m "Popis změny"`
-6. Odeslat změny do vzdáleného repozitáře pomocí `git push origin nazev_vetve`
-7. Vytvoření pull requestu v GitHubu a po schválění změn sloučení s větví develop
-
-## DOCTRINE 0RM
-
-Doctrine ORM je abstraktní databázová vrstva, která umožňuje pracovat s daty jako s objekty. [Seznam anotací](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/annotations-reference.html)
-
-### Dustupné příkazy
-
--   Vygenerování DB schéma na základě entit `vendor/bin/doctrine orm:schema-tool:create`
--   Aktualizace DB `vendor/bin/doctrine orm:schema-tool:update`
--   Dropuje všechny entity databáze `vendor/bin/doctrine orm:schema-tool:drop`
-
-#### Dostupné flagy
-
--   Vynucení `--force`
--   Příkaz se neprovede, vypíše se pouze náhled `--dump-sql`
-
-## Composer
-
-Slouží k udržování závislostí projektu a autoloadingu tříd.
-
-### Dostupné příkazy
-
--   Instalace závislostí `composer require <balíček>`
--   Aktualizace závislostí `composer update`
--   Obnovení autoloadu `composer dump-autoload -o`
-
-## PHPStan
-
-Slouží k statické analýze kódu.
-
--   Spuštění pomocí příkazu `vendor/bin/phpstan analyse src -l max`
+1. Update `git pull develop` to get recent commits
+2. Create new branch by `git checkout -b <branch_name>`
+    - Feature `dev_<feature_name>`
+    - Bugfix `fix_<bugfix_name>`
+3. Commit changes to repository
+4. Create pull request into `develop` branch
 
 ## API
 
-Dokumentace implementovaných koncových bodů [POSTMAN](https://documenter.getpostman.com/view/10875200/T1LTdP9o?version=latest)
+Endpoints: [POSTMAN](https://documenter.getpostman.com/view/10875200/T1LTdP9o?version=latest)
+
+## Usefull commands
+
+### ORM
+
+-   Create `composer orm:create`
+-   Update `composer orm:update`
+-   Drop  `composer orm:drop`
+
+### Composer
+
+-   Install `composer require <package>`
+-   Update `composer update`
+
+### PHPStan
+
+-   Static analysis `composer phpstan`
+
+### CS-Fixer
+
+-   Fix cs `composer cs`

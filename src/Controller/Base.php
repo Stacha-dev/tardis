@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Exception;
 use App\Lib\Middleware\RouteFactory;
+use App\Lib\Authorization\AuthorizationFactory;
 
 class Base implements IBase
 {
@@ -56,7 +57,7 @@ class Base implements IBase
      */
     public function registerDefaultRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", "getStatus"));
+        $router->register(RouteFactory::fromConstants(1, "OPTIONS", "@^(.*)$@", "getState"));
     }
 
     /**
@@ -77,16 +78,16 @@ class Base implements IBase
     }
 
     /**
-     * Returns API status
+     * Returns API state
      *
      * @todo Make it usefull
      * @return array<string>
      */
-    public function getStatus():array
+    public function getState():array
     {
-        $status = array('status' => 'ok');
-        $this->view->render($status);
-        return $status;
+        $state = array('state' => 'ok');
+        $this->view->render($state);
+        return $state;
     }
 
     /**
@@ -122,13 +123,15 @@ class Base implements IBase
      * @param \App\Lib\Middleware\Route $route
      * @return void
      */
-    private function checkPerms(\App\Lib\Middleware\Route $route)
+    private function checkPerms(\App\Lib\Middleware\Route $route):void
     {
         if ($route->isSecure()) {
-            $access = $this->entityManager->getRepository('App\Model\Entity\Access')->findOneBy(array('public' => $this->request->getApiKey()));
-            if (!($access instanceof \App\Model\Entity\Access)) {
-                throw new Exception('No permition to do this action!');
+            $jwt = AuthorizationFactory::fromType('JWT');
+            $token = $this->request->getAuthorization();
+            if (is_null($token) || empty($token)) {
+                throw new Exception('Authorization token is not provided!');
             }
+            $jwt->authorize($token);
         }
     }
 }
