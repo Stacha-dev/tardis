@@ -56,8 +56,8 @@ class Body
 
     private function setFiles():void
     {
-        foreach ($_FILES as $file) {
-            array_push($this->files, FileSystem::open($file['tmp_name']));
+        foreach ($_FILES as $key => $file) {
+            array_push($this->files, FileSystem::open($file['tmp_name'])->setUploadName($key));
         }
     }
 
