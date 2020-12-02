@@ -18,7 +18,8 @@ final class File extends \App\Controller\Base
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
         $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/file$@", "getAll"))
-                ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/file$@", "upload", [], true));
+        ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/file/(?<id>[0-9]+)$@", "getOneById", array("id")))
+        ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/file$@", "upload", [], true));
     }
 
     /**
@@ -59,11 +60,12 @@ final class File extends \App\Controller\Base
     public function upload(string $title = ""): void
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title') ?? $title;
         foreach ($body->getFiles() as $file) {
+            $title = $file->getUploadName() ?? $title;
             FileSystem::upload($file);
-            $this->view->render(["path"=>FileSystem::getUri($file)]);
             $fileEntity = new \App\Model\Entity\File($title, FileSystem::getUri($file));
+            $this->entityManager->persist($fileEntity);
+            $this->view->render(["title"=> $fileEntity->getTitle(), "path"=>FileSystem::getUri($file)]);
         }
         $this->entityManager->flush();
     }
