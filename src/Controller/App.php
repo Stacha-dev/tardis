@@ -15,7 +15,7 @@ class App
             $this->controllerFactory($request, $entityManager)->requestDispatch(new Router, $request);
         } catch (Exception $e) {
             error_log($e->getMessage());
-            Error::render($e->getMessage(), 400);
+            Error::render($e->getMessage(), $e->getCode() === 0 ? 400 : $e->getCode());
         }
     }
 
