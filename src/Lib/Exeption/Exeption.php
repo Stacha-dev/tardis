@@ -1,6 +1,6 @@
 <?php
 declare(strict_types = 1);
-namespace App; // \Lib\Exeption
+namespace App;
 
 class EinExeption extends Exeption {
 
