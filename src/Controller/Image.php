@@ -63,7 +63,8 @@ final class Image extends Base
         foreach ($body->getFiles() as $file) {
             FileSystem::upload($file, FileSystem::IMAGES_DIRECTORY);
             $image = $file->toImage();
-            $paths = $image->generateThumbnails();
+            $paths = $image->generateThumbnails(\App\Lib\FileSystem\Image::FORMAT['JPG']);
+            $file->delete();
             $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$galleryId));
 
             if (!($gallery instanceof Gallery)) {
