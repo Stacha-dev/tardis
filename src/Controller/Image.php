@@ -72,7 +72,7 @@ final class Image extends Base
             }
             $insert = new \App\Model\Entity\Image($gallery, $title, $paths, $ordering, $state);
             $this->entityManager->persist($insert);
-            array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "paths"=>$insert->getPaths()]);
+            array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "paths" => $insert->getPaths()]);
             array_push($images, $insert);
         }
         $this->entityManager->flush();
@@ -88,11 +88,12 @@ final class Image extends Base
      * @param  string $title
      * @return \App\Model\Entity\Image
      */
-    public function edit(int $id = 0, string $title = '', int $ordering = 0): \App\Model\Entity\Image
+    public function edit(int $id = 0, string $title = '', int $ordering = 0, bool $state = false): \App\Model\Entity\Image
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $ordering = (int)$body->getBodyData('ordering') ?? $ordering;
+        $state = (bool)$body->getBodyData('state') ?? $state;
         $image = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id'=>$id));
 
         if ($image instanceof \App\Model\Entity\Image) {
@@ -100,12 +101,16 @@ final class Image extends Base
                 $image->setTitle($title);
             }
 
-            if (!empty($title)) {
+            if (!empty($ordering)) {
                 $image->setOrdering($ordering);
             }
 
+            if (!empty($state)) {
+                $image->setState($state);
+            }
+
             $this->entityManager->flush();
-            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "ordering" => $image->getOrdering()));
+            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             return $image;
         } else {
             throw new Exception("Image with ID: " . $id . " not exists!");
