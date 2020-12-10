@@ -36,7 +36,7 @@ class Image
      * @ORM\Column(type="string", length=512)
      * @var                       string
      */
-    protected $path;
+    protected $paths;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -58,14 +58,17 @@ class Image
     protected $state;
 
     /**
+     * @param Gallery $gallery
      * @param string $title
-     * @param bool $state
+     * @param array<string> $paths
+     * @param integer $ordering
+     * @param boolean $state
      */
-    public function __construct(Gallery $gallery, string $title = "", string $path, int $ordering = 0, bool $state = true)
+    public function __construct(Gallery $gallery, string $title = "", array $paths, int $ordering = 0, bool $state = true)
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
-        $this->setPath($path);
+        $this->setPath($paths);
         $this->setOrdering($ordering);
         $this->setState($state);
     }
@@ -94,14 +97,14 @@ class Image
     }
 
     /**
-     * Sets path to image
+     * Sets paths to image
      *
-     * @param string $path
+     * @param array<string> $paths
      * @return void
      */
-    public function setPath(string $path):void
+    public function setPath(array $paths):void
     {
-        $this->path = $path;
+        $this->paths = json_encode($paths, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -168,13 +171,13 @@ class Image
     }
 
     /**
-     * Returns image path
+     * Returns image paths
      *
-     * @return string
+     * @return array<string>
      */
-    public function getPath():string
+    public function getPaths():array
     {
-        return $this->path;
+        return json_decode($this->paths, true);
     }
 
     /**

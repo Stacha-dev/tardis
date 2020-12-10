@@ -10,16 +10,16 @@ use Imagick;
 class Image extends File
 {
     /** @var array */
-    public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg'];
+    public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg', 'PNG'=>'png'];
 
     /** @var array */
-    public const THUMBNAIL_DIMENSIONS = [[1024, 768], [640, 480], [320, 240]];
+    public const THUMBNAIL_DIMENSIONS = [[2560, 1440], [1920, 1080], [1366, 768], [1024, 768], [640, 480], [320, 240], [150, 150]];
 
     /** @var Imagick */
     public $image;
 
     /** @var array */
-    public const MIME_TYPES = ['image/jpeg' => 'jpg', 'image/webp' => 'webp'];
+    public const MIME_TYPES = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 
     /**
      *
@@ -91,10 +91,11 @@ class Image extends File
     /**
      * Generates thumbnails
      *
-     * @return void
+     * @return array<string>
      */
-    public function generateThumbnails()
+    public function generateThumbnails():array
     {
+        $output = [];
         foreach (self::THUMBNAIL_DIMENSIONS as $dimensions) {
             [$width, $height] = $dimensions;
             $directory = join(DIRECTORY_SEPARATOR, [$this->getDirname(), $width]);
@@ -106,7 +107,10 @@ class Image extends File
             $thumbnail->setFormat(self::FORMAT['WebP']);
             $thumbnail->saveAs($width . "_" . $this->getFilename());
             $thumbnail->move($directory);
+            $output[$width] = FileSystem::getUri($thumbnail);
             unset($thumbnail);
         }
+
+        return $output;
     }
 }
