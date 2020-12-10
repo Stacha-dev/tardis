@@ -78,9 +78,9 @@ class Body
      * Returns body data by key.
      *
      * @param  string $key
-     * @return string|null
+     * @return mixed
      */
-    public function getBodyData(string $key): ?string
+    public function getBodyData(string $key)
     {
         return array_key_exists($key, $this->body) ? $this->body[$key] : null;
     }
