@@ -29,6 +29,7 @@ class Image extends File
     {
         parent::__construct($path);
         $this->image = new Imagick($this->getPath());
+        $this->image->setCompressionQuality(70);
     }
 
     /**
