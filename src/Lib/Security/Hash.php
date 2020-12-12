@@ -17,7 +17,6 @@ class Hash
   */
     public static function getHash(string $str):string
     {
-
         $salt = 'hellomysalt';
 
         $res = hash('whirlpool', $salt.$str);
