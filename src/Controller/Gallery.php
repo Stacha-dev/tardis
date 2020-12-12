@@ -47,12 +47,13 @@ final class Gallery extends Base
      */
     public function getOneById(int $id): \App\Model\Entity\Gallery
     {
-        $result = $this->entityManager->find('App\Model\Entity\Gallery', $id);
+        $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
         $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $id));
+
         if ($result instanceof \App\Model\Entity\Gallery) {
             $imageResult = array();
             foreach ($images as $image) {
-                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "path" => $image->getPath(), "ordering" => $image->getOrdering()));
+                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
@@ -109,7 +110,8 @@ final class Gallery extends Base
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
-        $gallery = $this->entityManager->find('App\Model\Entity\Gallery', $id);
+        $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
+
         if ($gallery instanceof \App\Model\Entity\Gallery) {
             if (!empty($title)) {
                 $gallery->setTitle($title);
@@ -133,14 +135,17 @@ final class Gallery extends Base
      */
     public function delete(int $id = 0): void
     {
-        $galleryEntity = $this->entityManager->find('App\Model\Entity\Gallery', $id);
+        $galleryEntity = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
+
         if ($galleryEntity instanceof \App\Model\Entity\Gallery) {
             $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $galleryEntity->getId()));
             foreach ($images as $imageEntity) {
-                $file = FileSystem::open($imageEntity->getPath());
-                $image = $file->toImage();
-                $image->delete();
-                $this->entityManager->remove($imageEntity);
+                foreach ($imageEntity->getPaths() as $path) {
+                    $file = FileSystem::open($path);
+                    $image = $file->toImage();
+                    $image->delete();
+                    $this->entityManager->remove($imageEntity);
+                }
             }
             $this->entityManager->remove($galleryEntity);
             $this->entityManager->flush();
