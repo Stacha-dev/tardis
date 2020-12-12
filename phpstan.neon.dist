@@ -3,3 +3,4 @@ parameters:
 	tmpDir: tmp
 	paths:
 		- src
+		- tests
