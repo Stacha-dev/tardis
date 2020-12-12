@@ -6,6 +6,7 @@ use App\Bootstrap;
 
 final class ArticleTest extends TestCase
 {
+    /** @var Article */
     private $article;
 
     /**
