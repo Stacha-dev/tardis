@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 final class RequestTest extends TestCase
 {
+    /** @var \App\Lib\Http\Request */
     private $request;
 
     public function setUp(): void
