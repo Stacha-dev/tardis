@@ -1,12 +1,7 @@
 <?php
 declare(strict_types = 1);
 namespace App\Lib\Security;
-
 use App\Lib\Configuration\ConfigurationFactory;
-
-// use App\Lib\Configuration\ConfigurationFactory;
-//$configuration = ConfigurationFactory::fromFileName('common');
-//$salt = $configuration->get('jwt_key'); // change to salt_key?
 
 class Hash
 {
