@@ -45,7 +45,7 @@ class Hash
         }
 
         $str = self::hashString($str);
-        $pepper = self::hashString(self::getPepper());
+        $pepper = self::getPepper();
 
         $res = password_hash($pepper.$str, PASSWORD_ARGON2I);
 
@@ -61,7 +61,7 @@ class Hash
     public static function verifyHash(string $str, string $hash):bool
     {
         $str = self::hashString($str);
-        $pepper = self::hashString(self::getPepper());
+        $pepper = self::getPepper();
 
         return password_verify($pepper.$str, $hash);
     }
