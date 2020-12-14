@@ -59,7 +59,7 @@ class Hash
   *
   * @return string
   */
-  public static function verifyHash(string $str, string $hash):string
+  public static function verifyHash(string $str, string $hash):bool
   {
     
     // hash user input
