@@ -13,12 +13,12 @@ class Hash
   *
   * @return string
   */
-    private function getPepper():string
+    private static function getPepper():string
     {
       $configuration = ConfigurationFactory::fromFileName('common');
       $configuration->setSegment('security');
       return $configuration->get('pepper');
-    } 
+    }
 
 
   /**
@@ -26,10 +26,10 @@ class Hash
   *
   * @return string
   */
-  private function hashString(string $str):string
+  private static function hashString(string $str):string
   {
     return hash('md5', $str);
-  } 
+  }
 
 
   /**
@@ -58,17 +58,17 @@ class Hash
   /**
   * Verify hash from string.
   *
-  * @return string
+  * @return bool
   */
   public static function verifyHash(string $str, string $hash):bool
   {
-    
+
     // hash user input
     $str = self::hashString($str);
     $pepper = self::hashString(self::getPepper());
 
     // hash pepper with input together
     return password_verify($pepper.$str, $hash);
-      
+
   }
 }
