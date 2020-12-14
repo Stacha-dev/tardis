@@ -46,7 +46,7 @@ class Hash
 
       // hash user input
       $str = self::hashString($str);
-      $pepper = self::hashString(getPepper());
+      $pepper = self::hashString(self::getPepper());
 
       // hash pepper with input together
       return password_hash($pepper.$str, PASSWORD_ARGON2I);
@@ -64,7 +64,7 @@ class Hash
     
     // hash user input
     $str = self::hashString($str);
-    $pepper = self::hashString(getPepper());
+    $pepper = self::hashString(self::getPepper());
 
     // hash pepper with input together
     return password_verify($pepper.$str, $hash);
