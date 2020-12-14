@@ -1,6 +1,8 @@
 <?php
 declare(strict_types = 1);
-namespace App\Lib\Security; // pak vyuziti bude use App\Lib\Security\Hash;
+namespace App\Lib\Security;
+
+use App\Lib\Configuration\ConfigurationFactory;
 
 // use App\Lib\Configuration\ConfigurationFactory;
 //$configuration = ConfigurationFactory::fromFileName('common');
@@ -17,9 +19,11 @@ class Hash
   */
     public static function getHash(string $str):string
     {
-        $salt = 'hellomysalt';
+        $configuration = ConfigurationFactory::fromFileName('common');
+        $configuration->setSegment('security');
+        $pepper = $configuration->get('pepper');
 
-        $res = hash('whirlpool', $salt.$str);
+        $res = hash('whirlpool', $salt.$pepper);
 
         return $res;
     }
