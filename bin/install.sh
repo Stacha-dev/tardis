@@ -10,6 +10,9 @@ PORT="${5:-3306}"
 # Authorization
 JWT_KEY=$(openssl rand -base64 32)
 
+# Security
+PEPPER=$(openssl rand -base64 32)
+
 function generate_config() {
   eval "echo \"$(cat $1)\""
 }
