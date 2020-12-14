@@ -41,7 +41,7 @@ class Hash
 
       // check for maximum password length
       if (strlen($str) > 32) {
-          throw new Exeption('Submitted password is too long.', 401);
+          throw new Exception('Submitted password is too long.', 401);
       }
 
       // hash user input
