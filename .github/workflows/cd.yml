@@ -1,13 +1,16 @@
 name: CD
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      instance:
+        description: 'Instance'
+        required: true
 
 defaults:
   run:
    shell: bash -ieo pipefail {0}
-   working-directory: /var/www/project-release.stacha.dev/web
+   working-directory: /var/www/${{ instance }}/web
 
 jobs:
   deploy:
