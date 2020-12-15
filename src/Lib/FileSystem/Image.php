@@ -32,6 +32,16 @@ class Image extends File
     }
 
     /**
+     * Saves image
+     *
+     * @return void
+     */
+    public function save():void
+    {
+        $this->image->writeImage($this->getPath());
+    }
+
+    /**
      * Saves image as
      *
      * @param string $filename
@@ -43,6 +53,17 @@ class Image extends File
         $this->image->writeImage($path);
         $this->setPath($path);
         ["dirname"=>$this->dirname, "filename"=>$this->filename]=pathinfo($this->getPath());
+    }
+
+    /**
+     * Change quality of jpeg
+     *
+     * @return void
+     */
+    public function setQuality(int $quality):void
+    {
+        $this->image->setImageCompressionQuality($quality);
+        $this->save();
     }
 
     /**
