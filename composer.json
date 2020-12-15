@@ -27,7 +27,7 @@
 	},
 	"scripts": {
 		"test": "vendor/bin/phpunit tests",
-		"test:codecov": "vendor/bin/phpunit --coverage-html public/reports/codecov/",
+		"test:codecov": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html public/reports/codecov/",
 		"orm:create": "doctrine orm:schema-tool:create",
 		"orm:update": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
