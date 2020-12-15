@@ -47,9 +47,7 @@ class Hash
         $str = self::hashString($str);
         $pepper = self::getPepper();
 
-        $res = password_hash($pepper.$str, PASSWORD_ARGON2I);
-
-        return $res?$res:'';
+        return password_hash($pepper.$str, PASSWORD_ARGON2I) ?: '';
     }
 
 
