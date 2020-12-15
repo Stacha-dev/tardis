@@ -10,7 +10,7 @@ class Hash
 
 
   /**
-  * Gets pepper from global domain config.
+  * Gets pepper from global domain config
   *
   * @return string
   */
@@ -23,7 +23,7 @@ class Hash
 
 
     /**
-    * Basic hash for pepper and password before submit/verify.
+    * Basic hash for pepper and password before submit/verify
     *
     * @return string
     */
@@ -34,7 +34,7 @@ class Hash
 
 
     /**
-    * Creates hash from string.
+    * Creates hash from string
     *
     * @return string
     */
@@ -52,7 +52,7 @@ class Hash
 
 
     /**
-    * Verify hash from string.
+    * Verify hash from string
     *
     * @return bool
     */
