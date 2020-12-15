@@ -39,6 +39,10 @@
             <directory>./tests/Lib/FileSystem</directory>
 			<file>./tests/Lib/FileSystem/FileSystemTest.php</file>
         </testsuite>
+        <testsuite name="Security Hash Test Suite">
+            <directory>./tests/Lib/Security</directory>
+			<file>./tests/Lib/Security/HashTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

@@ -53,7 +53,7 @@ final class Gallery extends Base
         if ($result instanceof \App\Model\Entity\Gallery) {
             $imageResult = array();
             foreach ($images as $image) {
-                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering()));
+                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
