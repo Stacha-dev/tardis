@@ -13,7 +13,7 @@ class Image extends File
     public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg', 'PNG'=>'png'];
 
     /** @var array */
-    public const THUMBNAIL_DIMENSIONS = [[2560, 1440], [1920, 1080], [1366, 768], [1024, 768], [640, 480], [320, 240], [150, 150]];
+    public const THUMBNAIL_DIMENSIONS = [[2560, 1440], [1920, 1080], [1366, 768], [1024, 768], [640, 480], [320, 240], [160, 160]];
 
     /** @var Imagick */
     public $image;
@@ -29,7 +29,16 @@ class Image extends File
     {
         parent::__construct($path);
         $this->image = new Imagick($this->getPath());
-        //$this->image->setCompressionQuality(70);
+    }
+
+    /**
+     * Saves image
+     *
+     * @return void
+     */
+    public function save():void
+    {
+        $this->image->writeImage($this->getPath());
     }
 
     /**
@@ -44,6 +53,17 @@ class Image extends File
         $this->image->writeImage($path);
         $this->setPath($path);
         ["dirname"=>$this->dirname, "filename"=>$this->filename]=pathinfo($this->getPath());
+    }
+
+    /**
+     * Change quality of jpeg
+     *
+     * @return void
+     */
+    public function setQuality(int $quality):void
+    {
+        $this->image->setImageCompressionQuality($quality);
+        $this->save();
     }
 
     /**
@@ -92,9 +112,10 @@ class Image extends File
     /**
      * Generates thumbnails
      *
+     * @param string $format
      * @return array<string>
      */
-    public function generateThumbnails():array
+    public function generateThumbnails(string $format):array
     {
         $output = [];
         foreach (self::THUMBNAIL_DIMENSIONS as $dimensions) {
@@ -105,7 +126,7 @@ class Image extends File
             }
             $thumbnail = clone $this;
             $thumbnail->resize($width, $height);
-            $thumbnail->setFormat(self::FORMAT['WebP']);
+            $thumbnail->setFormat($format);
             $thumbnail->saveAs($width . "_" . $this->getFilename());
             $thumbnail->move($directory);
             $output[$width] = FileSystem::getUri($thumbnail);
