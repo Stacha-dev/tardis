@@ -1,0 +1,6 @@
+parameters:
+	level: max
+	tmpDir: tmp
+	paths:
+		- src
+		- tests

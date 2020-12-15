@@ -45,7 +45,7 @@ final class Article extends \App\Controller\Base
      */
     public function getOneById(int $id): \App\Model\Entity\Article
     {
-        $result = $this->entityManager->find('App\Model\Entity\Article', $id);
+        $result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id'=>$id));
         if ($result instanceof \App\Model\Entity\Article) {
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'content' => $result->getContent(), 'state' => $result->getState()));
             return $result;
@@ -106,8 +106,8 @@ final class Article extends \App\Controller\Base
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
         $content = $body->getBodyData('content') ?? $content;
+        $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id'=>$id));
 
-        $article = $this->entityManager->find('App\Model\Entity\Article', $id);
         if ($article instanceof \App\Model\Entity\Article) {
             if (!empty($title)) {
                 $article->setTitle($title);
@@ -134,7 +134,8 @@ final class Article extends \App\Controller\Base
      */
     public function delete(int $id = 0)
     {
-        $article = $this->entityManager->find('App\Model\Entity\Article', $id);
+        $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id'=>$id));
+
         if (isset($article)) {
             $this->entityManager->remove($article);
             $this->entityManager->flush();

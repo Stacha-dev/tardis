@@ -1,13 +1,24 @@
+# Config
 config/common.ini
+
+# Dependencies
 vendor
-examples/
-.remote-sync.json
+
+# Cache
 .php_cs.cache
 .phpunit.result.cache
-tmp/Proxies
-public/reports/
-public/docs/
-public/admin/*
+tmp/*
+!tmp/.gitkeep
+
+# Public
+public/*
+!public/api/
 !public/admin/.gitkeep
-public/storage/*
-!public/storage/.gitkeep
+
+# Storage
+!public/storage/
+public/storage/images/*
+!public/storage/images/.gitkeep
+
+# Misc
+.remote-sync.json

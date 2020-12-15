@@ -34,9 +34,10 @@ final class Image extends Base
      */
     public function getOneById(int $id=0): \App\Model\Entity\Image
     {
-        $result = $this->entityManager->find('App\Model\Entity\Image', $id);
+        $result = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id'=>$id));
+
         if ($result instanceof \App\Model\Entity\Image) {
-            $this->view->render(array('id' => $result->getId(), 'gallery' => $result->getGallery()->getId(), 'title' => $result->getTitle(), 'path' => $result->getPath(), 'state' => $result->getState()));
+            $this->view->render(array('id' => $result->getId(), 'gallery' => $result->getGallery()->getId(), 'title' => $result->getTitle(), 'paths' => $result->getPaths(), 'state' => $result->getState()));
             return $result;
         } else {
             throw new Exception("Image by ID can not be founded!");
@@ -62,14 +63,16 @@ final class Image extends Base
         foreach ($body->getFiles() as $file) {
             FileSystem::upload($file, FileSystem::IMAGES_DIRECTORY);
             $image = $file->toImage();
-            $image->generateThumbnails();
-            $gallery = $this->entityManager->find('App\Model\Entity\Gallery', $galleryId);
+            $paths = $image->generateThumbnails(\App\Lib\FileSystem\Image::FORMAT['JPG']);
+            $file->delete();
+            $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$galleryId));
+
             if (!($gallery instanceof Gallery)) {
                 throw new Exception('Gallery with ID ' . $galleryId . ' was not found!');
             }
-            $insert = new \App\Model\Entity\Image($gallery, $title, FileSystem::getUri($file), $ordering, $state);
+            $insert = new \App\Model\Entity\Image($gallery, $title, $paths, $ordering, $state);
             $this->entityManager->persist($insert);
-            array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "path"=>$insert->getPath()]);
+            array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "paths" => $insert->getPaths()]);
             array_push($images, $insert);
         }
         $this->entityManager->flush();
@@ -85,23 +88,29 @@ final class Image extends Base
      * @param  string $title
      * @return \App\Model\Entity\Image
      */
-    public function edit(int $id = 0, string $title = '', int $ordering = 0): \App\Model\Entity\Image
+    public function edit(int $id = 0, string $title = '', int $ordering = 0, bool $state = false): \App\Model\Entity\Image
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $ordering = (int)$body->getBodyData('ordering') ?? $ordering;
-        $image = $this->entityManager->find('App\Model\Entity\Image', $id);
+        $state = (bool)$body->getBodyData('state') ?? $state;
+        $image = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id'=>$id));
+
         if ($image instanceof \App\Model\Entity\Image) {
             if (!empty($title)) {
                 $image->setTitle($title);
             }
 
-            if (!empty($title)) {
+            if (!empty($ordering)) {
                 $image->setOrdering($ordering);
             }
 
+            if (!empty($state)) {
+                $image->setState($state);
+            }
+
             $this->entityManager->flush();
-            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "ordering" => $image->getOrdering()));
+            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             return $image;
         } else {
             throw new Exception("Image with ID: " . $id . " not exists!");
@@ -116,12 +125,15 @@ final class Image extends Base
      */
     public function delete(int $id = 0): void
     {
-        $entity = $this->entityManager->find('App\Model\Entity\Image', $id);
+        $entity = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id'=>$id));
+
         if ($entity instanceof \App\Model\Entity\Image) {
-            $file = FileSystem::open($entity->getPath());
-            $image = $file->toImage();
-            $image->delete();
-            $this->entityManager->remove($entity);
+            foreach ($entity->getPaths() as $path) {
+                $file = FileSystem::open($path);
+                $image = $file->toImage();
+                $image->delete();
+                $this->entityManager->remove($entity);
+            }
             $this->entityManager->flush();
         } else {
             throw new Exception("Image with ID: " . $id . " not exists!");

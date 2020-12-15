@@ -6,6 +6,7 @@ use App\Bootstrap;
 
 final class BaseTest extends TestCase
 {
+    /** @var Base */
     private $base;
 
     protected function setUp(): void

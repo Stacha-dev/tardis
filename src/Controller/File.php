@@ -43,7 +43,8 @@ final class File extends \App\Controller\Base
      */
     public function getOneById(int $id=0): \App\Model\Entity\File
     {
-        $result = $this->entityManager->find('App\Model\Entity\File', $id);
+        $result = $this->entityManager->getRepository('App\Model\Entity\File')->findOneBy(array('id'=>$id));
+
         if ($result instanceof \App\Model\Entity\File) {
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'path' => $result->getPath(), 'state' => $result->getState()));
             return $result;
