@@ -6,13 +6,14 @@ use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use App\Lib\Util\Cryptography;
 use App\Lib\Authorization\AuthorizationFactory;
+use App\Lib\Security\Hash;
 use Exception;
 
 class User extends \App\Controller\Base
 {
 
      /**
-     * Register routes to router.
+     * Register routes to router
      *
      * @param  \App\Lib\Middleware\Router $router
      * @return void
@@ -26,7 +27,7 @@ class User extends \App\Controller\Base
     }
 
     /**
-     * Returns all users.
+     * Returns all users
      *
      * @return array<array>
      */
@@ -39,7 +40,7 @@ class User extends \App\Controller\Base
     }
 
     /**
-     * Creates new user.
+     * Creates new user
      *
      * @param  string $username
      * @param  string $password
@@ -53,7 +54,7 @@ class User extends \App\Controller\Base
     {
         $body = $this->request->getBody();
         $username = $body->getBodyData('username') ?? $username;
-        $password = $body->getBodyData('password') ?? $password;
+        $password = Hash::getHash($body->getBodyData('password') ?? $password);
         $email = $body->getBodyData('email') ?? $email;
         $name = $body->getBodyData('name') ?? $name;
         $surname = $body->getBodyData('surname') ?? $surname;
@@ -61,24 +62,35 @@ class User extends \App\Controller\Base
         $user = new \App\Model\Entity\User($username, $password, $email, $name, $surname, $avatar);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        $this->view->render(array("id" => $user->getId(), "username" => $user->getUsername(), "password" => $user->getPassword(), "email" => $user->getEmail(), "name" => $user->getName(), "surname" => $user->getSurname(), "avatar" => $user->getAvatar()));
+        $this->view->render(array("id" => $user->getId(), "username" => $user->getUsername(), "email" => $user->getEmail(), "name" => $user->getName(), "surname" => $user->getSurname(), "avatar" => $user->getAvatar()));
 
         return $user;
     }
 
+    /**
+     * Verifi user credentials
+     *
+     * @param string $username
+     * @param string $password
+     * @return \App\Model\Entity\User
+     */
     public function login(string $username = "", string $password = ""): \App\Model\Entity\User
     {
         $body = $this->request->getBody();
         $username = $body->getBodyData('username') ?? $username;
         $password = $body->getBodyData('password') ?? $password;
-        $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username, "password" => $password));
+        $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username));
         if ($user instanceof \App\Model\Entity\User) {
-            $jwt = AuthorizationFactory::fromType('JWT');
-            $this->view->render(array("token" => $jwt->getToken(['id_user' => $user->getId()])));
+            if (Hash::verifyHash($password, $user->getPassword())) {
+                $jwt = AuthorizationFactory::fromType('JWT');
+                $this->view->render(array("token" => $jwt->getToken(['id_user' => $user->getId()])));
 
-            return $user;
+                return $user;
+            } else {
+                throw new Exception("Password is incorrect!", 401);
+            }
         } else {
-            throw new Exception("Bad user credetials!");
+            throw new Exception("User not exists!", 401);
         }
     }
 }
