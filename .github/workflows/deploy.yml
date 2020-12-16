@@ -6,19 +6,16 @@ on:
       instance:
         description: 'Instance'
         required: true
-        default: 'pc.stacha.dev'  
 
 defaults:
   run:
    shell: bash -ieo pipefail {0}
+   working-directory: /var/www/pc.stacha.dev/web
 
 jobs:
   deploy:
       runs-on: self-hosted
       steps:
-        - name: Go to
-          run: cd /var/www/${{ github.event.inputs.instance }}/web
-          
         - uses: actions/checkout@v2
           with:
             ref: master
