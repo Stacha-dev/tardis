@@ -16,8 +16,9 @@ jobs:
   deploy:
       runs-on: self-hosted
       steps:
-          - name: Checkout
-            run: git pull origin master
-
-          - name: Install
-            run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
+        - uses: actions/checkout@v2
+          with:
+            ref: master
+          
+        - name: Install
+          run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
