@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      instance:
+        description: 'Instance'
+        required: true
+
+jobs:
+  tardis:
+      runs-on: self-hosted
+      defaults:
+        run:
+          shell: bash -ieo pipefail {0}
+          working-directory: /var/www/${{ github.event.inputs.instance }}/web
+      steps:
+        - name: Checkout
+          run: git pull origin master
+
+        - name: Install
+          run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
