@@ -6,11 +6,12 @@ on:
       instance:
         description: 'Instance'
         required: true
+        default: 'pc.stacha.dev'  
 
 defaults:
   run:
    shell: bash -ieo pipefail {0}
-   working-directory: /var/www/${{ INPUT_INSTANCE }}/web
+   working-directory: /var/www/${{ github.event.inputs.instance }}/web
 
 jobs:
   deploy:
