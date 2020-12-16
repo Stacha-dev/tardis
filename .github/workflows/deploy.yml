@@ -13,12 +13,12 @@ defaults:
    working-directory: /var/www/pc.stacha.dev/web
 
 jobs:
-  deploy:
+  tardis:
       runs-on: self-hosted
       steps:
         - uses: actions/checkout@v2
           with:
             ref: master
-          
+
         - name: Install
           run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
