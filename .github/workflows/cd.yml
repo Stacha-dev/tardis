@@ -10,7 +10,7 @@ on:
 defaults:
   run:
    shell: bash -ieo pipefail {0}
-   working-directory: /var/www/${{ github.event.inputs.instance }}/web
+   working-directory: /var/www/pc.stacha.dev/web
 
 jobs:
   deploy:
