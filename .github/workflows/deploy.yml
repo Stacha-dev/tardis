@@ -15,9 +15,9 @@ jobs:
   tardis:
       runs-on: self-hosted
       steps:
-        - uses: actions/checkout@v2
-          with:
-            ref: master
+        - name: Checkout
+          working-directory: /var/www/${{ github.event.inputs.instance }}/web
+          run: git pull origin master
 
         - name: Install
           working-directory: /var/www/${{ github.event.inputs.instance }}/web
