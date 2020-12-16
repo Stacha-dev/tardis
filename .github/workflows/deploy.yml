@@ -7,18 +7,16 @@ on:
         description: 'Instance'
         required: true
 
-defaults:
-  run:
-   shell: bash -ieo pipefail {0}
-   working-directory: /var/www/pc.stacha.dev/web
-
 jobs:
-  deploy:
+  tardis:
       runs-on: self-hosted
+      defaults:
+        run:
+          shell: bash -ieo pipefail {0}
+          working-directory: /var/www/${{ github.event.inputs.instance }}/web
       steps:
-        - uses: actions/checkout@v2
-          with:
-            ref: master
-          
+        - name: Checkout
+          run: git pull origin master
+
         - name: Install
           run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
