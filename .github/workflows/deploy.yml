@@ -10,15 +10,16 @@ on:
 defaults:
   run:
    shell: bash -ieo pipefail {0}
-   working-directory: /var/www/pc.stacha.dev/web
 
 jobs:
   tardis:
       runs-on: self-hosted
       steps:
         - uses: actions/checkout@v2
+          working-directory: /var/www/${{ github.event.inputs.instance }}/web
           with:
             ref: master
 
         - name: Install
+          working-directory: /var/www/${{ github.event.inputs.instance }}/web
           run: ./bin/install.sh ${{ secrets.DB_USER }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
