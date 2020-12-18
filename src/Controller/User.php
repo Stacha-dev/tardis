@@ -83,7 +83,7 @@ class User extends \App\Controller\Base
         if ($user instanceof \App\Model\Entity\User) {
             if (Hash::verifyHash($password, $user->getPassword())) {
                 $jwt = AuthorizationFactory::fromType('JWT');
-                $this->view->render(array("token" => $jwt->getToken(['id_user' => $user->getId()])));
+                $this->view->render(array("name" => $user->getname(), "surname" => $user->getSurname(), "token" => $jwt->getToken(['id_user' => $user->getId()])));
 
                 return $user;
             } else {
