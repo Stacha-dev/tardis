@@ -34,6 +34,7 @@
 		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
 		"orm:genproxies": "doctrine orm:generate-proxies",
 		"fixtures:load": "php bin/console fixtures:load",
+		"app:password": "php bin/console app:password",
 		"phpstan": "phpstan analyse",
 		"cs": "vendor/bin/php-cs-fixer fix src --dry-run --ansi",
 		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi"
