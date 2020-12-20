@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Loader;
 
-class LoadFixturesCommand extends Command
+class FixturesLoadCommand extends Command
 {
     /** @var string */
     protected static $defaultName = 'fixtures:load';
