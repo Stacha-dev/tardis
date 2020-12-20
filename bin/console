@@ -3,8 +3,10 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use App\Command\LoadFixturesCommand;
+use App\Command\FixturesLoadCommand;
+use App\Command\AppPasswordCommand;
 
 $application = new Application();
-$application->add(new LoadFixturesCommand());
+$application->add(new FixturesLoadCommand());
+$application->add(new AppPasswordCommand());
 $application->run();
