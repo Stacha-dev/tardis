@@ -38,3 +38,7 @@ Endpoints: [POSTMAN](https://documenter.getpostman.com/view/10875200/T1LTdP9o?ve
 ### CS-Fixer
 
 -   Fix cs `composer cs`
+
+### PHP Unit
+-   Run all tests `composer test`
+-   Generate test coverage `composer test:codecov`
