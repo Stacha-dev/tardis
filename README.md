@@ -15,6 +15,7 @@
     - Feature `feat/<feature_name>`
     - Bugfix `fix/<bugfix_name>`
 5. Commit changes to repository
+6. In case of feature add PHP Unit test suite
 6. Create pull request into `develop` branch
 
 ## API
