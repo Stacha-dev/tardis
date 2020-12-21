@@ -19,6 +19,7 @@ class AppPasswordCommand extends Command
      */
     protected function configure()
     {
+        $this->setDescription('Generates passwod hash.')->setHelp('This command generates hash of provided password.');
         $this->addArgument('password', InputArgument::REQUIRED, 'Provide password');
     }
 
