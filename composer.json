@@ -16,7 +16,8 @@
 		"doctrine/data-fixtures": "^1.4",
 		"friendsofphp/php-cs-fixer": "^2.16",
 		"phpstan/phpstan": "^0.12.25",
-		"phpunit/phpunit": "^8.5"
+		"phpunit/phpunit": "^8.5",
+		"symfony/console": "^5.2"
 	},
 	"autoload": {
 		"psr-4": {
