@@ -29,4 +29,4 @@ composer orm:create
 composer orm:genproxies
 
 # Fixtures
-composer fixtures:load
+composer fixtures:load -- -y
