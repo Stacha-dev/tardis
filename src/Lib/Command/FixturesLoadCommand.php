@@ -40,7 +40,7 @@ class FixturesLoadCommand extends Command
 
         if ($input->getOption('yes') || $helper->ask($input, $output, $question)) {
             $loader = new Loader();
-            $loader->loadFromDirectory(__DIR__ . '/../Model/Fixtures');
+            $loader->loadFromDirectory(__DIR__ . '/../../Model/Fixtures');
             $purger = new ORMPurger();
             $executor = new ORMExecutor(\App\Bootstrap::getEntityManager(), $purger);
             $executor->execute($loader->getFixtures());
