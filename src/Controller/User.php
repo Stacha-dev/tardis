@@ -20,10 +20,10 @@ class User extends \App\Controller\Base
      */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/user$@", "getAll"))
-               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user$@", "create"))
+        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/user$@", "getAll", [], true))
+               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user$@", "create", [], true))
                ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user/login$@", "login"))
-               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@", "delete", array("id")));
+               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@", "delete", ["id"], true));
     }
 
     /**
