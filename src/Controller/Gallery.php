@@ -33,8 +33,18 @@ final class Gallery extends Base
      */
     public function getAll(): array
     {
-        $query = $this->entityManager->createQuery('SELECT a FROM App\Model\Entity\Gallery a');
-        $result = $query->getArrayResult();
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('g')
+                ->from('App\Model\Entity\Gallery', 'g');
+        $result = $queryBuilder->getQuery()->getArrayResult();
+
+        foreach ($result as &$item) {
+            $thumbnail = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array("gallery" => $item['id']));
+            if ($thumbnail instanceof \App\Model\Entity\Image) {
+                $item['thumbnail'] = $thumbnail->getPaths();
+            }
+        }
+
         $this->view->render($result);
         return $result;
     }
