@@ -81,8 +81,14 @@ final class Gallery extends Base
     public function getOneByAlias(string $alias): \App\Model\Entity\Gallery
     {
         $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('alias' => $alias));
+
         if ($result instanceof \App\Model\Entity\Gallery) {
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle()));
+            $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $result->getId()));
+            $imageResult = array();
+            foreach ($images as $image) {
+                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
+            }
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by alias can not be founded!");
