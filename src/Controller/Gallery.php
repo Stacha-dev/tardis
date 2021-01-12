@@ -35,7 +35,8 @@ final class Gallery extends Base
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('g')
-                ->from('App\Model\Entity\Gallery', 'g');
+                ->from('App\Model\Entity\Gallery', 'g')
+                ->orderBy('g.updated', 'DESC');
         $result = $queryBuilder->getQuery()->getArrayResult();
 
         foreach ($result as &$item) {
