@@ -24,7 +24,6 @@ class Mail
         $this->fromName = $fromName?$fromName:false;
         $this->subject = $subject?$subject:false;
         $this->content = $content?$content:false;
-
     }
 
 
@@ -94,11 +93,11 @@ class Mail
             if (mail($this->to, $this->subject, $this->content, $headders)) {
                 return true;
             } else {                
-                throw new Exception('Mail has not been sent!');
+                throw new Exception('E-mail has Not been sent!');
             }
 
         } else {
-            throw new Exception('Input has not met Requied Parameters!');
+            throw new Exception('Input has not met Requied Parameters for Sending E-mail!');
         }
         
     }
