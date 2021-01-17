@@ -10,7 +10,6 @@ class Mail
     private $headders;
 
 
-
     /**
      *
      * @param string $to
@@ -59,7 +58,7 @@ class Mail
     public static function send():bool
     {
 
-        $headders .= 'From: '.$fromName.' <'.$from.'>'."\r\n";
+        $headders .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
 
         if (isset($this->bcc)) {
             $headders .= 'Bcc: '.$bcc."\r\n";
