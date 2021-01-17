@@ -19,11 +19,12 @@ class Mail
      */
     public function __construct(string $to, string $from, string $fromName, string $subject, string $content)
     {
-        $this->to = $to;
-        $this->from = $from;
-        $this->fromName = $fromName;
-        $this->subject = $subject;
-        $this->content = $content;
+        $this->to = $to?$to:false;
+        $this->from = testEmail($from, 'From')?$from:false;
+        $this->fromName = $fromName?$fromName:false;
+        $this->subject = $subject?$subject:false;
+        $this->content = $content?$content:false;
+
     }
 
 
@@ -34,19 +35,35 @@ class Mail
     */
     public static function addBcc($bcc):void
     {
-        $this->bcc = $bcc;
+        $this->bcc = testEmail($bcc, 'Bcc')?$bcc:false;
     }
 
 
     /**
-    * Add reply to (different adress)
+    * Add reply to (different address)
     *
     * @return void
     */
     public static function addReplyTo($replyTo, $replyToName):void
     {
-        $this->replyTo = $replyTo;
+        $this->replyTo = testEmail($replyTo, 'Reply-to')?$replyTo:false;
         $this->replyToName = $replyToName;
+    }
+
+
+    /**
+     * Test for email address
+     * 
+     * @return bool
+     */
+    private static function testEmail(string $email, string $case):bool
+    {
+        if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        } else {
+            return false;
+            throw new Exception('Not valid "'.$case.'" email address!');
+        }
     }
 
 
@@ -57,21 +74,33 @@ class Mail
     */
     public static function send():bool
     {
+        if ($this->from && $this->fromName) {
+            $headders .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
+        }
 
-        $headders .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
-
-        if (isset($this->bcc)) {
+        if ($this->bcc) {
             $headders .= 'Bcc: '.$bcc."\r\n";
         }
 
-        if (isset($this->replyTo) && isset($this->replyToName)) {
+        if ($this->replyTo && $this->replyToName) {
             $headders .= 'Reply-To: '.$this->replyToName.' <'.$this->replyTo.'>'."\r\n";
         }
 
         $headders .= 'Content-Type: text/html; charset=utf-8'."\r\n".
                      'X-Mailer: PHP/'.phpversion();
+
+        if ($this->to && $this->subject && $this->content) {
+
+            if (mail($this->to, $this->subject, $this->content, $headders)) {
+                return true;
+            } else {                
+                throw new Exception('Mail has not been sent!');
+            }
+
+        } else {
+            throw new Exception('Input has not met Requied Parameters!');
+        }
         
-        return mail($this->to, $this->subject, $this->content, $headders);
     }
 
 }
