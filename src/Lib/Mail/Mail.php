@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace App\Lib\Mail;
 
 class Mail
@@ -9,15 +10,20 @@ class Mail
     private $headders;
 
 
+
     /**
      *
      * @param string $to
+     * @param string $from
+     * @param string $fromName
+     * @param string $content
      */
-    public function __construct(string $to, string $from, string $fromName, string $content)
+    public function __construct(string $to, string $from, string $fromName, string $subject, string $content)
     {
         $this->to = $to;
         $this->from = $from;
         $this->fromName = $fromName;
+        $this->subject = $subject;
         $this->content = $content;
     }
 
@@ -66,7 +72,7 @@ class Mail
         $headders .= 'Content-Type: text/html; charset=utf-8'."\r\n".
                      'X-Mailer: PHP/'.phpversion();
         
-        return mail($this->to, $this->from, $this->content, $headders);
+        return mail($this->to, $this->subject, $this->content, $headders);
     }
 
 }
