@@ -44,6 +44,16 @@ class Tag
     }
 
     /**
+     * Return tag id
+     *
+     * @return integer
+     */
+    public function getId():int
+    {
+        return $this->id;
+    }
+
+    /**
      * Return tag title
      *
      * @return string
