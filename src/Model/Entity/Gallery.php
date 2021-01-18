@@ -87,7 +87,7 @@ class Gallery
     /**
      * Set gallery tag
      *
-     * @param Tag $ag
+     * @param Tag $tag
      * @return void
      */
     public function setTag(Tag $tag)
