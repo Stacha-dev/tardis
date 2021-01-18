@@ -32,11 +32,11 @@ class Gallery
     protected $alias;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tag")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
-     * @var Tag
-     */
-    private $tag;
+    * @ORM\ManyToOne(targetEntity="Tag")
+    * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+    * @var Tag
+    */
+    protected $tag;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -90,7 +90,7 @@ class Gallery
      * @param Tag $ag
      * @return void
      */
-    public function setTag(Tag $ag)
+    public function setTag(Tag $tag)
     {
         $this->tag = $tag;
     }
@@ -140,7 +140,7 @@ class Gallery
      *
      * @return Tag
      */
-    public function getTag(): Tag
+    public function getTag(): ?Tag
     {
         return $this->tag;
     }
