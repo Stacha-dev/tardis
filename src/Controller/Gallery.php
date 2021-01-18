@@ -66,7 +66,7 @@ final class Gallery extends Base
             foreach ($images as $image) {
                 array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'tag' => $result->getTag()->getId(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by ID can not be founded!");
@@ -89,7 +89,7 @@ final class Gallery extends Base
             foreach ($images as $image) {
                 array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'tag' => $result->getTag()->getId(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by alias can not be founded!");
@@ -102,12 +102,19 @@ final class Gallery extends Base
      * @param  string $title
      * @return \App\Model\Entity\Gallery
      */
-    public function create(string $title = '', string $alias = null): \App\Model\Entity\Gallery
+    public function create(string $title = '', string $alias = null, int $tagId = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
+        $tagId = $body->getBodyData('tag') ?? $tagId;
         $gallery = new \App\Model\Entity\Gallery($title, $alias);
+        $tag = $this->entityManager->getRepository('App\Model\Entity\Tag')->findOneBy(array("id" => $tagId));
+
+        if ($tag instanceof \App\Model\Entity\Tag) {
+            $gallery->setTag($tag);
+        }
+
         $this->entityManager->persist($gallery);
         $this->entityManager->flush();
         $this->view->render(array("id" => $gallery->getId(), "title" => $gallery->getTitle(), "alias" => $gallery->getAlias()));
@@ -122,20 +129,28 @@ final class Gallery extends Base
      * @param  string $title
      * @return \App\Model\Entity\Gallery
      */
-    public function edit(int $id = 0, string $title = '', string $alias = ''): \App\Model\Entity\Gallery
+    public function edit(int $id = 0, string $title = '', string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
+        $tagId = $body->getBodyData('tag') ?? $tagId;
         $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
+        $tag = $this->entityManager->getRepository('App\Model\Entity\Tag')->findOneBy(array("id" => $tagId));
 
         if ($gallery instanceof \App\Model\Entity\Gallery) {
             if (!empty($title)) {
                 $gallery->setTitle($title);
             }
+
             if (!empty($alias)) {
                 $gallery->setAlias($alias);
             }
+
+            if ($tag instanceof \App\Model\Entity\Tag) {
+                $gallery->setTag($tag);
+            }
+
             $this->entityManager->flush();
             $this->view->render(array("id" => $gallery->getId(), "title" => $gallery->getTitle(), "alias" => $gallery->getAlias()));
             return $gallery;
