@@ -1,13 +1,28 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Lib\Mail;
+namespace App\Lib\Mailer;
 
 class Mail
 {
 
     /** @var string */
     private $headders;
+
+    /** @var string */
+    private $to;
+
+    /** @var string */
+    private $from;
+
+    /** @var string */
+    private $fromName;
+
+    /** @var string */
+    private $subject;
+
+    /** @var string */
+    private $content;
 
 
     /**
@@ -19,8 +34,8 @@ class Mail
      */
     public function __construct(string $to, string $from, string $fromName, string $subject, string $content)
     {
-        $this->to = $to?$to:false;
-        $this->from = testEmail($from, 'From')?$from:false;
+        $this->to = $this->assertEmail($to)?$to:false;
+        $this->from = $this->assertEmail($from)?$from:false;
         $this->fromName = $fromName?$fromName:false;
         $this->subject = $subject?$subject:false;
         $this->content = $content?$content:false;
@@ -32,9 +47,12 @@ class Mail
     *
     * @return void
     */
-    public static function addBcc($bcc):void
+    public static function addBcc(array $bcc):void
     {
-        $this->bcc = testEmail($bcc, 'Bcc')?$bcc:false;
+        foreach($bcc as &$val) {
+            $this->assertEmail($val)?array_push($this->bcc, $val):false;
+        }
+        return $this;
     }
 
 
@@ -45,24 +63,20 @@ class Mail
     */
     public static function addReplyTo($replyTo, $replyToName):void
     {
-        $this->replyTo = testEmail($replyTo, 'Reply-to')?$replyTo:false;
+        $this->replyTo = $this->assertEmail($replyTo)?$replyTo:false;
         $this->replyToName = $replyToName;
+        return $this;
     }
 
 
     /**
-     * Test for email address
+     * Test string for email address
      * 
      * @return bool
      */
-    private static function testEmail(string $email, string $case):bool
+    private function assertEmail(string $email):bool
     {
-        if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return true;
-        } else {
-            return false;
-            throw new Exception('Not valid "'.$case.'" email address!');
-        }
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
 
@@ -93,11 +107,11 @@ class Mail
             if (mail($this->to, $this->subject, $this->content, $headders)) {
                 return true;
             } else {                
-                throw new Exception('E-mail has Not been sent!');
+                throw new Exception('E-mail has Not been sent!', 500);
             }
 
         } else {
-            throw new Exception('Input has not met Requied Parameters for Sending E-mail!');
+            throw new Exception('Input has not met Requied Parameters for Sending E-mail!', 500);
         }
         
     }
