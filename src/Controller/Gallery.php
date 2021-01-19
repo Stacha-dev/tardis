@@ -21,6 +21,7 @@ final class Gallery extends Base
         $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/gallery$@", "getAll"))
                ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "getOneById", array("id")))
                ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
+               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/tag/(?<tag>[0-9]+)$@", "getByTag", array("tag")))
                ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/gallery$@", "create", array(), true))
                ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "edit", array("id"), true))
                ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "delete", array("id"), true));
@@ -94,6 +95,26 @@ final class Gallery extends Base
         } else {
             throw new Exception("Gallery by alias can not be founded!");
         }
+    }
+
+    /**
+     * Gets galleries by tag id
+     *
+     * @param  int $tagId
+     * @return array<\App\Model\Entity\Gallery>
+     */
+    public function getByTag(int $tagId): array
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('g')
+                ->from('App\Model\Entity\Gallery', 'g')
+                ->where('g.tag = ' . $tagId)
+                ->orderBy('g.updated', 'DESC');
+        $galleries = $queryBuilder->getQuery()->getArrayResult();
+
+        $this->view->render($galleries);
+
+        return $galleries;
     }
 
     /**
