@@ -66,7 +66,7 @@ final class Gallery extends Base
             foreach ($images as $image) {
                 array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'tag' => $result->getTag()->getId(), 'state' => $result->getState(), "images" => $imageResult));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by ID can not be founded!");
@@ -89,7 +89,7 @@ final class Gallery extends Base
             foreach ($images as $image) {
                 array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'tag' => $result->getTag()->getId(), 'state' => $result->getState(), "images" => $imageResult));
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
         } else {
             throw new Exception("Gallery by alias can not be founded!");
