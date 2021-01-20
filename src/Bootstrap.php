@@ -44,7 +44,7 @@ class Bootstrap
         $config->setProxyNamespace('App\Proxies');
         $config->setQueryCacheImpl($cacheDriver);
         $config->setResultCacheImpl($cacheDriver);
-        $config->setMetadataCacheImpl($cacheDriver);
+        //$config->setMetadataCacheImpl($cacheDriver);
 
         $common = ConfigurationFactory::fromFileName('common');
 
