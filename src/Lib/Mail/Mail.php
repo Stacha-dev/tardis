@@ -26,7 +26,6 @@ class Mail
 
 
     /**
-     *
      * @param string $to
      * @param string $from
      * @param string $fromName
@@ -47,24 +46,11 @@ class Mail
     *
     * @return void
     */
-    public static function addBcc(array $bcc):void
+    public function addBcc(array $bcc):void
     {
         foreach($bcc as &$val) {
             $this->assertEmail($val)?array_push($this->bcc, $val):false;
         }
-        return $this;
-    }
-
-
-    /**
-    * Add reply to (different address)
-    *
-    * @return void
-    */
-    public static function addReplyTo($replyTo, $replyToName):void
-    {
-        $this->replyTo = $this->assertEmail($replyTo)?$replyTo:false;
-        $this->replyToName = $replyToName;
         return $this;
     }
 
@@ -85,7 +71,7 @@ class Mail
     *
     * @return bool
     */
-    public static function send():bool
+    public function send():bool
     {
         if ($this->from && $this->fromName) {
             $headders .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
@@ -93,10 +79,6 @@ class Mail
 
         if ($this->bcc) {
             $headders .= 'Bcc: '.$bcc."\r\n";
-        }
-
-        if ($this->replyTo && $this->replyToName) {
-            $headders .= 'Reply-To: '.$this->replyToName.' <'.$this->replyTo.'>'."\r\n";
         }
 
         $headders .= 'Content-Type: text/html; charset=utf-8'."\r\n".
@@ -107,11 +89,11 @@ class Mail
             if (mail($this->to, $this->subject, $this->content, $headders)) {
                 return true;
             } else {                
-                throw new Exception('E-mail has Not been sent!', 500);
+                throw new Exception('E-mail has Not been sent!', 400);
             }
 
         } else {
-            throw new Exception('Input has not met Requied Parameters for Sending E-mail!', 500);
+            throw new Exception('Input has not met Requied Parameters for Sending E-mail!', 400);
         }
         
     }
