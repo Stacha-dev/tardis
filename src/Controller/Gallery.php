@@ -7,6 +7,7 @@ use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use App\Lib\FileSystem\FileSystem;
 use Exception;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 final class Gallery extends Base
 {
@@ -105,13 +106,17 @@ final class Gallery extends Base
      */
     public function getByTag(int $tagId): array
     {
-        $queryBuilder = $this->entityManager->createQueryBuilder();
-        $queryBuilder->select('g')
-                ->from('App\Model\Entity\Gallery', 'g')
-                ->where('g.tag = ' . $tagId)
-                ->orderBy('g.updated', 'DESC');
-        $galleries = $queryBuilder->getQuery()->getArrayResult();
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult('App\Model\Entity\Gallery', 'g');
+        $rsm->addEntityResult('App\Model\Entity\Image', 'i');
+        $rsm->addScalarREsult('id', 'id');
+        $rsm->addScalarResult('title', 'title');
+        $rsm->addScalarResult('alias', 'alias');
+        $rsm->addScalarResult('paths', 'paths');
 
+        $query = $this->entityManager->createNativeQuery('SELECT * FROM gallery g INNER JOIN (SELECT paths, gallery_id FROM image GROUP BY gallery_id) i ON g.id = i.gallery_id WHERE g.tag_id = ? ORDER BY g.updated', $rsm);
+        $query->setParameter(1, $tagId);
+        $galleries = $query->getResult();
         $this->view->render($galleries);
 
         return $galleries;
