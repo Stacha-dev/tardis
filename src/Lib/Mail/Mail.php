@@ -31,11 +31,9 @@ class Mail
      * @param string $fromName
      * @param string $content
      */
-    public function __construct(string $to, string $from, string $fromName, string $subject, string $content)
+    public function __construct(string $to, string $subject, string $content)
     {
         $this->to = $this->assertEmail($to)?$to:false;
-        $this->from = $this->assertEmail($from)?$from:false;
-        $this->fromName = $fromName?$fromName:false;
         $this->subject = $subject?$subject:false;
         $this->content = $content?$content:false;
     }
