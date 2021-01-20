@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App;
 
@@ -39,12 +40,12 @@ class Bootstrap
         $cacheDriver->setMemcached($memcached);
 
         /** @todo seek for better aproach */
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), false, null, null, false);
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/Model/Entity"), false, null, null, false);
         $config->setProxyDir(__DIR__ . '/../tmp/Proxies');
         $config->setProxyNamespace('App\Proxies');
         $config->setQueryCacheImpl($cacheDriver);
         $config->setResultCacheImpl($cacheDriver);
-        //$config->setMetadataCacheImpl($cacheDriver);
+        $config->setMetadataCacheImpl($cacheDriver);
 
         $common = ConfigurationFactory::fromFileName('common');
 
