@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Lib\Assert\String;
+namespace App\Lib\Assert;
 
 
 /**
