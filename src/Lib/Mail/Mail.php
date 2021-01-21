@@ -1,7 +1,8 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Lib\Mailer;
+
+use App\Lib\Assert\String;
 
 class Mail
 {
@@ -33,7 +34,7 @@ class Mail
      */
     public function __construct(string $to, string $subject, string $content)
     {
-        $this->to = $this->assertEmail($to)?$to:false;
+        $this->to = isEmail($to)?$to:false;
         $this->subject = $subject?$subject:false;
         $this->content = $content?$content:false;
     }
@@ -47,20 +48,9 @@ class Mail
     public function addBcc(array $bcc):void
     {
         foreach($bcc as &$val) {
-            $this->assertEmail($val)?array_push($this->bcc, $val):false;
+            isEmail($val)?array_push($this->bcc, $val):false;
         }
         return $this;
-    }
-
-
-    /**
-     * Test string for email address
-     * 
-     * @return bool
-     */
-    private function assertEmail(string $email):bool
-    {
-        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
 
