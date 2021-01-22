@@ -16,11 +16,11 @@ class Headers
     public function setHeaders($mail):self
     {
 
-        if ($this->from && $this->fromName) {
-            $headers .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
+        if ($mail->from && $mail->fromName) {
+            $headers .= 'From: '.$mail->fromName.' <'.$mail->from.'>'."\r\n";
         }
 
-        if ($this->bcc && $bcc = implode(', ', $this->bcc)) {
+        if ($mail->bcc && $bcc = implode(', ', $mail->bcc)) {
             $headers .= 'Bcc: '.$bcc."\r\n";
         }
 
