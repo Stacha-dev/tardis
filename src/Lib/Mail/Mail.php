@@ -48,7 +48,7 @@ class Mail
     public function addBcc(array $bcc):void
     {
         foreach($bcc as &$val) {
-            isEmail($val)?array_push($this->bcc, $val):false;
+            array_push($this->bcc, isEmail($val)?$val:false);
         }
         return $this;
     }
@@ -65,7 +65,7 @@ class Mail
             $headders .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
         }
 
-        if ($this->bcc) {
+        if ($this->bcc && $bcc = implode(', ', $this->bcc)) {
             $headders .= 'Bcc: '.$bcc."\r\n";
         }
 
