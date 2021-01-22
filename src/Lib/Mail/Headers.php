@@ -11,14 +11,11 @@ class Headers
     * Return string header for email
     *
     * @param string $mail
-    * @return self
+    * @return string
     */
-    public function setHeaders($mail):self
+    public function setHeaders($mail):string
     {
-
-        if ($mail->from && $mail->fromName) {
-            $headers .= 'From: '.$mail->fromName.' <'.$mail->from.'>'."\r\n";
-        }
+        $headers = '';
 
         if ($mail->bcc && $bcc = implode(', ', $mail->bcc)) {
             $headers .= 'Bcc: '.$bcc."\r\n";

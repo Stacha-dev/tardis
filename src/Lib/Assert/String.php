@@ -1,6 +1,5 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Lib\Assert;
 
 
@@ -9,7 +8,7 @@ namespace App\Lib\Assert;
  * 
  * @return bool
  */
-static method isEmail(string $email):bool
+public function isEmail(string $email):bool
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }

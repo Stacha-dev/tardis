@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace App\Lib\Mailer;
 
+use Exception;
 use App\Lib\Assert\String;
 use App\Lib\Mailer\Headers;
 
@@ -9,16 +10,7 @@ class Mail
 {
 
     /** @var string */
-    private $headders;
-
-    /** @var string */
     private $to;
-
-    /** @var string */
-    private $from;
-
-    /** @var string */
-    private $fromName;
 
     /** @var string */
     private $subject;
@@ -26,11 +18,13 @@ class Mail
     /** @var string */
     private $content;
 
+    /** @var array */
+    private $bcc;
+
 
     /**
      * @param string $to
-     * @param string $from
-     * @param string $fromName
+     * @param string $subject
      * @param string $content
      */
     public function __construct(string $to, string $subject, string $content)
