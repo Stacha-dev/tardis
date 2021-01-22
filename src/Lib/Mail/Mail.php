@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Lib\Mailer;
 
 use App\Lib\Assert\String;
+use App\Lib\Mailer\Headers;
 
 class Mail
 {
@@ -61,20 +62,10 @@ class Mail
     */
     public function send():bool
     {
-        if ($this->from && $this->fromName) {
-            $headders .= 'From: '.$this->fromName.' <'.$this->from.'>'."\r\n";
-        }
-
-        if ($this->bcc && $bcc = implode(', ', $this->bcc)) {
-            $headders .= 'Bcc: '.$bcc."\r\n";
-        }
-
-        $headders .= 'Content-Type: text/html; charset=utf-8'."\r\n".
-                     'X-Mailer: PHP/'.phpversion();
 
         if ($this->to && $this->subject && $this->content) {
 
-            if (mail($this->to, $this->subject, $this->content, $headders)) {
+            if (mail($this->to, $this->subject, $this->content, setHeaders($this))) {
                 return true;
             } else {                
                 throw new Exception('E-mail has Not been sent!', 400);
