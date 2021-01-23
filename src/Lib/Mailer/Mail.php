@@ -42,7 +42,7 @@ class Mail
     {
         $this->headers = new Headers();
         $this->setTo($to);
-        $this->setSubject($subject);
+        $this->setSubject($subject); // max 78 chars
         $this->setContent($content);
     }
 
