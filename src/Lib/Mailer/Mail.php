@@ -44,7 +44,6 @@ class Mail
         $this->setTo($to);
         $this->setSubject($subject);
         $this->setContent($content);
-        $this->setFrom('Chip the Cat', 'chip@project-release.stacha.dev');
     }
 
 
