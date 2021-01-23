@@ -35,6 +35,7 @@ class Mail
     public function __construct(string $to, string $subject, string $content)
     {
         $this->setTo($to);
+        $this->setFrom('Chip the Cat', 'chip@project-release.stacha.dev');
         $this->setSubject($subject);
         $this->setContent($content);
         $this->headers = new Headers();
@@ -53,6 +54,24 @@ class Mail
             $this->to = $to;
         } else {
             throw new Exception('Recipient\'s E-mail is Not Valid', 400);
+        }
+        return $this;
+    }
+
+    
+    /**
+     * set Sender's email
+     *
+     * @param string $from
+     * @param string $fromName
+     * @return self
+     */
+    public function setFrom(string $fromName, string $from): self
+    {
+        if (Text::isEmail($from)) {
+            $this->headers->setFrom($fromName, $from);
+        } else {
+            throw new Exception('Sender\'s E-mail is Not Valid', 400);
         }
         return $this;
     }
