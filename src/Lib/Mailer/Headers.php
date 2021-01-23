@@ -44,7 +44,6 @@ class Headers
     public function addBcc(string $bcc): void
     {
         array_push($this->bccArray, $bcc);
-        //$this->headers['Bcc'] =  ', ' . $bcc;
     }
 
 
