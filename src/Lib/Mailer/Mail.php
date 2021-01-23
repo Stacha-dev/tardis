@@ -22,6 +22,12 @@ class Mail
 
     /** @var string */
     private $bcc;
+    
+    /** @var string */
+    private $from;
+    
+    /** @var string */
+    private $fromName;
 
     /** @var Headers */
     private $headers;
@@ -34,11 +40,11 @@ class Mail
      */
     public function __construct(string $to, string $subject, string $content)
     {
+        $this->headers = new Headers();
         $this->setTo($to);
-        $this->setFrom('Chip the Cat', 'chip@project-release.stacha.dev');
         $this->setSubject($subject);
         $this->setContent($content);
-        $this->headers = new Headers();
+        $this->setFrom('Chip the Cat', 'chip@project-release.stacha.dev');
     }
 
 
