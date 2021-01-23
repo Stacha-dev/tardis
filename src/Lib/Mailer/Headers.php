@@ -6,33 +6,34 @@ namespace App\Lib\Mailer;
 
 class Headers
 {
-    /** @var string */
-    private $headers;
-
-    /** @var string */
-    private $bcc;
-
     /** @var array<string> */
-    private array $bccArray;
+    private $headers;
+    
+    /** @var array<string> */
+    private $bccArray;
+
+
+    /**
+     */
+    public function __construct()
+    {
+        if (sizeof($this->bccArray)) {
+            $this->headers['Bcc'] = implode(', ', $this->bccArray);
+        }
+
+        $this->headers['Content-Type'] = 'text/html; charset=utf-8';
+        $this->headers['X-Mailer'] = 'PHP/' . phpversion();
+    }
 
 
     /**
      * Return string header for email
      *
-     * @return string
+     * @return array<string>
      */
-    public function getHeaders(): string
+    public function getHeaders(): array
     {
-        $headers = '';
-
-        if (sizeof($this->bccArray)) {
-            $headers .= 'Bcc: ' . implode(', ', $this->bccArray) . "\r\n";
-        }
-
-        $headers .= 'Content-Type: text/html; charset=utf-8' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-
-        return $headers;
+        return $this->headers;
     }
 
 
@@ -45,5 +46,19 @@ class Headers
     public function addBcc(string $bcc): void
     {
         array_push($this->bccArray, $bcc);
+        //$this->headers['Bcc'] =  ', ' . $bcc;
+    }
+
+
+    /**
+     * adds From to headders
+     *
+     * @param string $from
+     * @param string $fromName
+     * @return void
+     */
+    public function setFrom(string $fromName, string $from): void
+    {
+        $this->headers['From'] = $fromName . '<'. $this->$from . '>';
     }
 }
