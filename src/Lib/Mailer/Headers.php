@@ -13,11 +13,9 @@ class Headers
     private $bccArray;
 
 
-    /**
-     */
     public function __construct()
     {
-        if (sizeof($this->bccArray)) {
+        if ($this->bccArray && sizeof($this->bccArray)) {
             $this->headers['Bcc'] = implode(', ', $this->bccArray);
         }
 
@@ -59,6 +57,6 @@ class Headers
      */
     public function setFrom(string $fromName, string $from): void
     {
-        $this->headers['From'] = $fromName . '<'. $this->$from . '>';
+        $this->headers['From'] = $fromName . ' <'. $from . '>';
     }
 }
