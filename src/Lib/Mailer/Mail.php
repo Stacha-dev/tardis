@@ -107,9 +107,7 @@ class Mail
      */
     public function send(): bool
     {
-
         if ($this->to && $this->subject && $this->content) {
-
             if (mail($this->to, $this->subject, $this->content, $this->headers->getHeaders())) {
                 return true;
             } else {
