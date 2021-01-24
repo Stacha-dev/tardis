@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -36,7 +38,7 @@ class Image
      * @ORM\Column(type="string", length=512)
      * @var                       string
      */
-    protected $paths;
+    protected $source;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -60,15 +62,15 @@ class Image
     /**
      * @param Gallery $gallery
      * @param string $title
-     * @param array<string> $paths
+     * @param array<string> $source
      * @param integer $ordering
      * @param boolean $state
      */
-    public function __construct(Gallery $gallery, string $title = "", array $paths, int $ordering = 0, bool $state = true)
+    public function __construct(Gallery $gallery, string $title = "", array $source, int $ordering = 0, bool $state = true)
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
-        $this->setPath($paths);
+        $this->setPath($source);
         $this->setOrdering($ordering);
         $this->setState($state);
     }
@@ -79,7 +81,7 @@ class Image
      * @param Gallery $gallery
      * @return void
      */
-    public function setGallery(Gallery $gallery):void
+    public function setGallery(Gallery $gallery): void
     {
         $this->gallery = $gallery;
     }
@@ -91,20 +93,20 @@ class Image
      * @param  string $title
      * @return void
      */
-    public function setTitle(string $title):void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * Sets paths to image
+     * Sets source to image
      *
-     * @param array<string> $paths
+     * @param array<string> $source
      * @return void
      */
-    public function setPath(array $paths):void
+    public function setPath(array $source): void
     {
-        $this->paths = json_encode($paths, JSON_THROW_ON_ERROR);
+        $this->source = json_encode($source, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -113,7 +115,7 @@ class Image
      * @param integer $ordering
      * @return void
      */
-    public function setOrdering(int $ordering):void
+    public function setOrdering(int $ordering): void
     {
         $this->ordering = $ordering;
     }
@@ -134,7 +136,7 @@ class Image
      * @param boolean $state
      * @return void
      */
-    public function setState(bool $state):void
+    public function setState(bool $state): void
     {
         $this->state = $state;
     }
@@ -155,7 +157,7 @@ class Image
      *
      * @return Gallery
      */
-    public function getGallery():Gallery
+    public function getGallery(): Gallery
     {
         return $this->gallery;
     }
@@ -171,13 +173,13 @@ class Image
     }
 
     /**
-     * Returns image paths
+     * Returns image source
      *
      * @return array<string>
      */
-    public function getPaths():array
+    public function getSource(): array
     {
-        return json_decode($this->paths, true);
+        return json_decode($this->source, true);
     }
 
     /**
@@ -185,7 +187,7 @@ class Image
      *
      * @return integer
      */
-    public function getOrdering():int
+    public function getOrdering(): int
     {
         return $this->ordering;
     }
@@ -208,7 +210,7 @@ class Image
      *
      * @return boolean
      */
-    public function getState():bool
+    public function getState(): bool
     {
         return $this->state;
     }

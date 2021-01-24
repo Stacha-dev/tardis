@@ -46,7 +46,7 @@ final class Gallery extends Base
         foreach ($result as &$item) {
             $thumbnail = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array("gallery" => $item['id']));
             if ($thumbnail instanceof \App\Model\Entity\Image) {
-                $item['thumbnail'] = $thumbnail->getPaths();
+                $item['thumbnail'] = $thumbnail->getSource();
             }
         }
 
@@ -68,7 +68,7 @@ final class Gallery extends Base
         if ($result instanceof \App\Model\Entity\Gallery) {
             $imageResult = array();
             foreach ($images as $image) {
-                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
+                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "source" => $image->getSource(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             }
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
             return $result;
@@ -88,12 +88,20 @@ final class Gallery extends Base
         $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('alias' => $alias));
 
         if ($result instanceof \App\Model\Entity\Gallery) {
-            $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $result->getId()));
-            $imageResult = array();
-            foreach ($images as $image) {
-                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "paths" => $image->getPaths(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
+            // $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $result->getId()));
+            $queryBuilder = $this->entityManager->createQueryBuilder();
+            $queryBuilder->select('i')
+                ->from('App\Model\Entity\Image', 'i')
+                ->where('i.gallery = :galleryId')
+                ->orderBy('i.ordering', 'ASC')
+                ->setParameter('galleryId', $result->getId());
+            $images = $queryBuilder->getQuery()->getArrayResult();
+
+            foreach ($images as &$image) {
+                $image['source'] = json_decode($image['source']);
             }
-            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $imageResult));
+
+            $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $images));
             return $result;
         } else {
             throw new Exception("Gallery by alias can not be founded!");
@@ -114,14 +122,14 @@ final class Gallery extends Base
         $rsm->addScalarResult('id', 'id');
         $rsm->addScalarResult('title', 'title');
         $rsm->addScalarResult('alias', 'alias');
-        $rsm->addScalarResult('paths', 'paths');
+        $rsm->addScalarResult('source', 'source');
 
-        $query = $this->entityManager->createNativeQuery('SELECT * FROM gallery g INNER JOIN (SELECT paths, gallery_id FROM image GROUP BY gallery_id) i ON g.id = i.gallery_id WHERE g.tag_id = ? ORDER BY g.updated', $rsm);
+        $query = $this->entityManager->createNativeQuery('SELECT * FROM gallery g INNER JOIN (SELECT source, gallery_id FROM image GROUP BY gallery_id ORDER BY image.ordering) i ON g.id = i.gallery_id WHERE g.tag_id = ? ORDER BY g.updated DESC', $rsm);
         $query->setParameter(1, $tagId);
         $galleries = $query->getResult();
 
         foreach ($galleries as &$gallery) {
-            $gallery['paths'] = json_decode($gallery['paths'], true);
+            $gallery['source'] = json_decode($gallery['source'], true);
         }
 
         $this->view->render($galleries);
@@ -205,7 +213,7 @@ final class Gallery extends Base
         if ($galleryEntity instanceof \App\Model\Entity\Gallery) {
             $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $galleryEntity->getId()));
             foreach ($images as $imageEntity) {
-                foreach ($imageEntity->getPaths() as $path) {
+                foreach ($imageEntity->getSource() as $path) {
                     $file = FileSystem::open($path);
                     $image = $file->toImage();
                     $image->delete();

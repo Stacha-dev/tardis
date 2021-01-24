@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Lib\FileSystem;
 
@@ -10,7 +11,7 @@ use Imagick;
 class Image extends File
 {
     /** @var array */
-    public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg', 'PNG'=>'png'];
+    public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg', 'PNG' => 'png'];
 
     /** @var array */
     public const THUMBNAIL_DIMENSIONS = [[2560, 1440], [1920, 1080], [1366, 768], [1024, 768], [640, 480], [320, 240], [160, 160]];
@@ -36,7 +37,7 @@ class Image extends File
      *
      * @return void
      */
-    public function save():void
+    public function save(): void
     {
         $this->image->writeImage($this->getPath());
     }
@@ -47,12 +48,12 @@ class Image extends File
      * @param string $filename
      * @return void
      */
-    public function saveAs(string $filename):void
+    public function saveAs(string $filename): void
     {
         $path = join(DIRECTORY_SEPARATOR, [$_SERVER["DOCUMENT_ROOT"], FileSystem::STORAGE, $filename . "." . $this->extension]);
         $this->image->writeImage($path);
         $this->setPath($path);
-        ["dirname"=>$this->dirname, "filename"=>$this->filename]=pathinfo($this->getPath());
+        ["dirname" => $this->dirname, "filename" => $this->filename] = pathinfo($this->getPath());
     }
 
     /**
@@ -60,7 +61,7 @@ class Image extends File
      *
      * @return void
      */
-    public function setQuality(int $quality):void
+    public function setQuality(int $quality): void
     {
         $this->image->setImageCompressionQuality($quality);
         $this->save();
@@ -87,7 +88,7 @@ class Image extends File
      */
     public function resize(int $width, int $height): void
     {
-        $this->image->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 1, true);
+        $this->image->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 0.5, true);
     }
 
     /**
@@ -115,7 +116,7 @@ class Image extends File
      * @param string $format
      * @return array<string>
      */
-    public function generateThumbnails(string $format):array
+    public function generateThumbnails(string $format): array
     {
         $output = [];
         foreach (self::THUMBNAIL_DIMENSIONS as $dimensions) {
