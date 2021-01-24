@@ -173,6 +173,16 @@ class File
         return $this->uploadName;
     }
 
+    /**
+     * Return file mime type
+     *
+     * @return string
+     */
+    public function getMimeType(): string
+    {
+        return $this->mimeType;
+    }
+
 
     /**
      * Checks if file is image
