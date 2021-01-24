@@ -7,6 +7,7 @@ namespace App\Lib\FileSystem;
 use Exception;
 use App\Lib\FileSystem\FileSystem;
 use App\Lib\FileSystem\Image;
+use App\Lib\Util\Cryptography;
 
 class File
 {
@@ -234,11 +235,22 @@ class File
      */
     public function copy(string $destination): File
     {
-        if (!copy($this->path, $destination)) {
+        if (!copy($this->getPath(), $destination)) {
             throw new Exception('Failed to copy file!', 400);
         }
 
         return FileSystem::open($destination);
+    }
+
+    /**
+     * Clone file
+     *
+     * @return File
+     */
+    public function clone(): File
+    {
+        $destination = join('/', [$this->getDirname(), Cryptography::random(6) . '.' . $this->extension]);
+        return $this->copy($destination);
     }
 
     /**
