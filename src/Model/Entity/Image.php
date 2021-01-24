@@ -36,7 +36,7 @@ class Image
 
     /**
      * @ORM\Column(type="json", length=512)
-     * @var                       array
+     * @var                       array<string>
      */
     protected $source;
 
