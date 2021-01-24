@@ -35,8 +35,8 @@ class Image
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=512)
-     * @var                       string
+     * @ORM\Column(type="json", length=512)
+     * @var                       array
      */
     protected $source;
 
@@ -106,7 +106,7 @@ class Image
      */
     public function setSource(array $source): void
     {
-        $this->source = json_encode($source, JSON_THROW_ON_ERROR);
+        $this->source = $source;
     }
 
     /**
@@ -179,7 +179,7 @@ class Image
      */
     public function getSource(): array
     {
-        return json_decode($this->source, true);
+        return $this->source;
     }
 
     /**
