@@ -249,7 +249,7 @@ class File
      */
     public function clone(): File
     {
-        $destination = join('/', [$this->getDirname(), Cryptography::random(6) . '.' . $this->extension]);
+        $destination = join(DIRECTORY_SEPARATOR, [$this->getDirname(), Cryptography::random(6) . '.' . $this->extension]);
         return $this->copy($destination);
     }
 
