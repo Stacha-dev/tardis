@@ -70,7 +70,7 @@ class Image
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
-        $this->setPath($source);
+        $this->setSource($source);
         $this->setOrdering($ordering);
         $this->setState($state);
     }
@@ -104,7 +104,7 @@ class Image
      * @param array<string> $source
      * @return void
      */
-    public function setPath(array $source): void
+    public function setSource(array $source): void
     {
         $this->source = json_encode($source, JSON_THROW_ON_ERROR);
     }
