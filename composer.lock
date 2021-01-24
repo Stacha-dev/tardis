@@ -325,16 +325,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "9f3e3f3cc5399604c0325d5ffa92609d694d950d"
+                "reference": "2afde5a9844126bc311cd5f548b5475e75f800d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/9f3e3f3cc5399604c0325d5ffa92609d694d950d",
-                "reference": "9f3e3f3cc5399604c0325d5ffa92609d694d950d",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/2afde5a9844126bc311cd5f548b5475e75f800d3",
+                "reference": "2afde5a9844126bc311cd5f548b5475e75f800d3",
                 "shasum": ""
             },
             "require": {
@@ -394,7 +394,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/common/issues",
-                "source": "https://github.com/doctrine/common/tree/3.1.0"
+                "source": "https://github.com/doctrine/common/tree/3.1.1"
             },
             "funding": [
                 {
@@ -410,7 +410,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-03T21:02:31+00:00"
+            "time": "2021-01-20T19:58:05+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -2156,16 +2156,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.4.4",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "16a03fadb5473f49aad70384002dfd5012fe680e"
+                "reference": "51d3d4880d28951fff42a635a2389f8c63baddc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/16a03fadb5473f49aad70384002dfd5012fe680e",
-                "reference": "16a03fadb5473f49aad70384002dfd5012fe680e",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/51d3d4880d28951fff42a635a2389f8c63baddc5",
+                "reference": "51d3d4880d28951fff42a635a2389f8c63baddc5",
                 "shasum": ""
             },
             "require": {
@@ -2177,11 +2177,12 @@
                 "doctrine/phpcr-odm": "<1.3.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^6.0",
+                "doctrine/coding-standard": "^8.2",
                 "doctrine/dbal": "^2.5.4",
                 "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
                 "doctrine/orm": "^2.7.0",
-                "phpunit/phpunit": "^7.0"
+                "ext-sqlite3": "*",
+                "phpunit/phpunit": "^8.0"
             },
             "suggest": {
                 "alcaeus/mongo-php-adapter": "For using MongoDB ODM 1.3 with PHP 7 (deprecated)",
@@ -2190,11 +2191,6 @@
                 "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\DataFixtures\\": "lib/Doctrine/Common/DataFixtures"
@@ -2217,7 +2213,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.4.x"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.0"
             },
             "funding": [
                 {
@@ -2233,20 +2229,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-01T07:13:28+00:00"
+            "time": "2021-01-23T10:20:43+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.18.0",
+            "version": "v2.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "cbc5b50bfa2688a1afca20e5a8c71f058e9ccbef"
+                "reference": "c68ff6231adb276857761e43b7ed082f164dce0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/cbc5b50bfa2688a1afca20e5a8c71f058e9ccbef",
-                "reference": "cbc5b50bfa2688a1afca20e5a8c71f058e9ccbef",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/c68ff6231adb276857761e43b7ed082f164dce0b",
+                "reference": "c68ff6231adb276857761e43b7ed082f164dce0b",
                 "shasum": ""
             },
             "require": {
@@ -2328,7 +2324,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.0"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.1"
             },
             "funding": [
                 {
@@ -2336,7 +2332,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-18T03:31:06+00:00"
+            "time": "2021-01-21T18:50:42+00:00"
         },
         {
             "name": "jawira/plantuml",
@@ -4339,16 +4335,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.68",
+            "version": "0.12.69",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "ddbe01af0706ee094c3f1ce9730b35aebb508d3d"
+                "reference": "8f436ea35241da33487fd0d38b4bc3e6dfe30ea8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ddbe01af0706ee094c3f1ce9730b35aebb508d3d",
-                "reference": "ddbe01af0706ee094c3f1ce9730b35aebb508d3d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8f436ea35241da33487fd0d38b4bc3e6dfe30ea8",
+                "reference": "8f436ea35241da33487fd0d38b4bc3e6dfe30ea8",
                 "shasum": ""
             },
             "require": {
@@ -4379,7 +4375,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.68"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.69"
             },
             "funding": [
                 {
@@ -4395,7 +4391,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-18T12:29:17+00:00"
+            "time": "2021-01-24T14:55:37+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -7789,12 +7785,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
@@ -7832,8 +7828,8 @@
                 "validate"
             ],
             "support": {
-                "issues": "https://github.com/webmozart/assert/issues",
-                "source": "https://github.com/webmozart/assert/tree/master"
+                "issues": "https://github.com/webmozarts/assert/issues",
+                "source": "https://github.com/webmozarts/assert/tree/1.9.1"
             },
             "time": "2020-07-08T17:02:28+00:00"
         }
