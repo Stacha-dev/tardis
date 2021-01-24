@@ -26,7 +26,7 @@ generate_config config/common.ini.tmpl > config/common.ini
 # ORM
 composer orm:drop
 composer orm:create
-composer orm:genproxies
+composer orm:proxies
 
 # Fixtures
 composer fixtures:load -- -y
