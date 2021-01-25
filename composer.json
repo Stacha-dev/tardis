@@ -4,8 +4,14 @@
 	"description": "Back-end for our applications.",
 	"authors": [
 		{
-			"name": "Stacha.dev",
-			"email": "chalupa.petr93@gmail.com"
+			"name": "Petr Chalupa",
+			"email": "chalupa.petr93@gmail.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Oliver Stasa",
+			"email": "oliver.stasa@gmail.com",
+			"role": "Developer"
 		}
 	],
 	"require": {
