@@ -15,4 +15,26 @@ class Text
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) === false ? false : true;
     }
+
+    
+    /**
+     * Test string for max length
+     *
+     * @return bool
+     */
+    public static function hasMax(int $lim, string $str): bool
+    {
+        return strlen($str) <= $lim;
+    }
+
+
+    /**
+     * Test string for min length
+     *
+     * @return bool
+     */
+    public static function hasMin(int $lim, string $str): bool
+    {
+        return strlen($str) >= $lim;
+    }
 }
