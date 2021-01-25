@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Lib\Middleware\RouteFactory;
+use App\Lib\Configuration\ConfigurationFactory;
 use Exception;
 
 final class Mail extends Base
@@ -18,7 +19,7 @@ final class Mail extends Base
 	 */
 	public function registerRoutes(\App\Lib\Middleware\Router $router): void
 	{
-		$router->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9])/mail$@", "sendMail"));
+		$router->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9])/mail$@", "sendMail", /*[], true*/));
 	}
 
 
@@ -32,8 +33,13 @@ final class Mail extends Base
 		$subject = $body->getBodyData('subject') ?? $subject;
 		$content = $body->getBodyData('content') ?? $content;
 
+		$configuration = ConfigurationFactory::fromFileName('common');
+		$configuration->setSegment('mail');
+		$from = $configuration->get('from');
+		$fromName = $configuration->get('from_name');
+		
 		$mail = new \App\Lib\Mailer\Mail($to, $subject, $content);
-		$mail->setFrom('Chip the Cat', 'chip@project-release.stacha.dev'); // to be set in config file
+		$mail->setFrom($fromName, $from);
 		$status = $mail->send();
 
 		$this->view->render(array("status" => $status));
