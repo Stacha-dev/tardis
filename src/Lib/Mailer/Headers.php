@@ -88,5 +88,4 @@ class Headers
     {
         $this->setHeader('From', $fromName . ' <' . $from . '>');
     }
-
 }
