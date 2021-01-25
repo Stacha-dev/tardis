@@ -36,7 +36,7 @@ class Image
 
     /**
      * @ORM\Column(type="json", length=512)
-     * @var                       array<string>
+     * @var                       array<array<string>>
      */
     protected $source;
 
@@ -62,7 +62,7 @@ class Image
     /**
      * @param Gallery $gallery
      * @param string $title
-     * @param array<string> $source
+     * @param array<array<string>> $source
      * @param integer $ordering
      * @param boolean $state
      */
@@ -101,7 +101,7 @@ class Image
     /**
      * Sets source to image
      *
-     * @param array<string> $source
+     * @param array<array<string>> $source
      * @return void
      */
     public function setSource(array $source): void
@@ -175,7 +175,7 @@ class Image
     /**
      * Returns image source
      *
-     * @return array<string>
+     * @return array<array<string>>
      */
     public function getSource(): array
     {
