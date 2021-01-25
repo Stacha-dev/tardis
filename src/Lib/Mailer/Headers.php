@@ -47,7 +47,7 @@ class Headers
     /**
      * Return string header for email
      *
-     * @return array<string|array>
+     * @return array<string>
      */
     public function getHeaders(): array
     {
