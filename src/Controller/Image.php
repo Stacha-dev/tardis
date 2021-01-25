@@ -51,9 +51,9 @@ final class Image extends Base
      *
      * @param  string $title
      * @param int $galleryId
-     * @return array<\App\Model\Entity\Image>
+     * @return void
      */
-    public function upload(string $title = '', int $galleryId = 0, int $ordering = 0, bool $state = true): array
+    public function upload(string $title = '', int $galleryId = 0, int $ordering = 0, bool $state = true): void
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
@@ -61,12 +61,16 @@ final class Image extends Base
         $ordering = (int)$body->getBodyData('ordering') ?? $ordering;
         $state = (bool)$body->getBodyData('state') ?? $state;
         $output = [];
-        $images = [];
         foreach ($body->getFiles() as $file) {
             FileSystem::upload($file, FileSystem::IMAGES_DIRECTORY);
-            $image = $file->toImage();
-            $source = $image->generateThumbnails(\App\Lib\FileSystem\Image::FORMAT['JPG']);
-            $file->delete();
+            $images = [];
+            array_push($images, $file->toImage(), $file->clone()->toImage()->setFormat(\App\Lib\FileSystem\Image::FORMAT['WebP']));
+
+            foreach ($images as $image) {
+                $source[$image->getMimeType()] = $image->generateThumbnails();
+                $image->delete();
+            }
+
             $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $galleryId));
 
             if (!($gallery instanceof Gallery)) {
@@ -75,12 +79,9 @@ final class Image extends Base
             $insert = new \App\Model\Entity\Image($gallery, $title, $source, $ordering, $state);
             $this->entityManager->persist($insert);
             array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "source" => $insert->getSource()]);
-            array_push($images, $insert);
         }
         $this->entityManager->flush();
         $this->view->render($output);
-
-        return $images;
     }
 
     /**
