@@ -20,15 +20,6 @@ class Mail
     /** @var string */
     private $content;
 
-    /** @var string */
-    private $bcc;
-    
-    /** @var string */
-    private $from;
-    
-    /** @var string */
-    private $fromName;
-
     /** @var Headers */
     private $headers;
 
@@ -90,7 +81,11 @@ class Mail
      */
     public function setSubject(string $subject): self
     {
-        $this->subject = $subject;
+        if (Text::hasMax(78, $subject)) {
+            $this->subject = $subject;
+        } else {
+            throw new Exception('Subject text is longer than 78 characters', 400);
+        }
         return $this;
     }
 
