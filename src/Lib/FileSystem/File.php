@@ -38,9 +38,8 @@ class File
     public function __construct(string $path)
     {
         @["dirname" => $this->dirname, "filename" => $this->filename, "extension" => $extension] = pathinfo($path);
-        $this->setPath($path);
-        $this->setMimeType();
-        $this->extension = $extension ?? $this->mimeTypeToExtension($this->mimeType);
+        $this->setPath($path)->setMimeType();
+        $this->setExtension($extension ?? $this->mimeTypeToExtension($this->mimeType));
     }
 
     /**
@@ -67,7 +66,7 @@ class File
      *
      * @return self
      */
-    private function setMimeType(): self
+    protected function setMimeType(): self
     {
         $mimeType = mime_content_type($this->getPath());
         if (!$mimeType) {
@@ -101,6 +100,20 @@ class File
     public function setUploadName(string $name): self
     {
         $this->uploadName = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set file extension
+     *
+     * @param string $extension
+     * @return self
+     */
+    public function setExtension(string $extension): self
+    {
+        $this->extension = $extension;
+        $this->rename($this->getFilename())->setMimeType();
 
         return $this;
     }
@@ -212,29 +225,33 @@ class File
      * Moves file to new location
      *
      * @param string $destination
-     * @return void
+     * @return self
      */
-    public function move(string $destination): void
+    public function move(string $destination): self
     {
         $destination = is_dir($destination) ? $destination . DIRECTORY_SEPARATOR . $this->getBasename() : $destination;
         rename($this->getPath(), $destination);
         $this->setPath($destination);
         $this->setPermitions(0770);
         ["dirname" => $this->dirname] = pathinfo($this->getPath());
+
+        return $this;
     }
 
     /**
-     * Renames file
+     * Rename file
      *
      * @param string $filename
-     * @return void
+     * @return self
      */
-    public function rename(string $filename): void
+    public function rename(string $filename): self
     {
         $newPath = $this->dirname . DIRECTORY_SEPARATOR . $filename . "." . $this->extension;
         rename($this->getPath(), $newPath);
         $this->setPath($newPath);
         $this->filename = $filename;
+
+        return $this;
     }
 
     /**
@@ -264,7 +281,7 @@ class File
     }
 
     /**
-     * Deletes file
+     * Delete file
      *
      * @return void
      */
