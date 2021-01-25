@@ -32,28 +32,37 @@ class Image extends File
         $this->image = new Imagick($this->getPath());
     }
 
+    public function __destruct()
+    {
+        $this->image->clear();
+    }
+
     /**
      * Saves image
      *
-     * @return void
+     * @return self
      */
-    public function save(): void
+    public function save(): self
     {
         $this->image->writeImage($this->getPath());
+
+        return $this;
     }
 
     /**
      * Saves image as
      *
      * @param string $filename
-     * @return void
+     * @return self
      */
-    public function saveAs(string $filename): void
+    public function saveAs(string $filename): self
     {
         $path = join(DIRECTORY_SEPARATOR, [$_SERVER["DOCUMENT_ROOT"], FileSystem::STORAGE, $filename . "." . $this->extension]);
         $this->image->writeImage($path);
         $this->setPath($path);
         ["dirname" => $this->dirname, "filename" => $this->filename] = pathinfo($this->getPath());
+
+        return $this;
     }
 
     /**
@@ -71,12 +80,15 @@ class Image extends File
      * Sets image format
      *
      * @param string $format
-     * @return void
+     * @return self
      */
-    public function setFormat(string $format)
+    public function setFormat(string $format): self
     {
-        $this->image->setImageFormat($format);
-        $this->extension = $format;
+        $this->image->setFormat($format);
+        $this->save();
+        $this->setExtension($format);
+
+        return $this;
     }
 
     /**
@@ -89,6 +101,7 @@ class Image extends File
     public function resize(int $width, int $height): void
     {
         $this->image->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 0.5, true);
+        $this->save();
     }
 
     /**
@@ -116,7 +129,7 @@ class Image extends File
      * @param string $format
      * @return array<string>
      */
-    public function generateThumbnails(string $format): array
+    public function generateThumbnails(string $format = ''): array
     {
         $output = [];
         foreach (self::THUMBNAIL_DIMENSIONS as $dimensions) {
@@ -125,10 +138,13 @@ class Image extends File
             if (!is_dir($directory)) {
                 mkdir($directory, 0770);
             }
-            $thumbnail = clone $this;
+            $thumbnail = $this->clone()->toImage();
+
             $thumbnail->resize($width, $height);
-            $thumbnail->setFormat($format);
-            $thumbnail->saveAs($width . "_" . $this->getFilename());
+            if ($format) {
+                $thumbnail->setFormat($format);
+            }
+
             $thumbnail->move($directory);
             $output[$width] = FileSystem::getUri($thumbnail);
             unset($thumbnail);
