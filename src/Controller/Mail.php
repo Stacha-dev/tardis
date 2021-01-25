@@ -19,7 +19,7 @@ final class Mail extends Base
      */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9])/mail$@", "sendMail", /*[], true*/));
+        $router->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9])/mail$@", "sendMail", [], true));
     }
 
 
