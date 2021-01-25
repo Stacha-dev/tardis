@@ -39,7 +39,7 @@ class Mail
 
 
     /**
-     * set Recipient's email
+     * Set Recipient's email
      *
      * @param string $to
      * @return self
@@ -56,7 +56,7 @@ class Mail
 
     
     /**
-     * set Sender's email
+     * Set Sender's email
      *
      * @param string $from
      * @param string $fromName
@@ -74,7 +74,7 @@ class Mail
 
 
     /**
-     * set Subject
+     * Set Subject
      *
      * @param string $subject
      * @return self
@@ -91,7 +91,7 @@ class Mail
 
 
     /**
-     * set Content
+     * Set Content
      *
      * @param string $content
      * @return self
