@@ -15,11 +15,6 @@ class Headers
         $this->setHeader('Bcc', [])
              ->setHeader('Content-Type', 'text/html; charset=utf-8')
              ->setHeader('X-Mailer', 'PHP/' . phpversion());
-
-            $this->addBcc('ok1@help.com')
-            ->addBcc('ok2@help.com')
-            ->addBcc('ok3@help.com');
-            var_dump($this->headers);
     }
 
 
@@ -27,7 +22,7 @@ class Headers
      * Set single header
      *
      * @param string $key
-     * @param $content
+     * @param mixed $content
      * @return self
      */
     private function setHeader(string $key, $content): self
@@ -41,7 +36,7 @@ class Headers
      * Get single header
      *
      * @param string $key
-     * @return
+     * @return mixed
      */
     public function getHeader(string $key)
     {
