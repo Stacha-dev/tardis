@@ -33,7 +33,7 @@ class Mail
     {
         $this->headers = new Headers();
         $this->setTo($to);
-        $this->setSubject($subject); // max 78 chars
+        $this->setSubject($subject);
         $this->setContent($content);
     }
 
@@ -126,14 +126,10 @@ class Mail
      */
     public function send(): bool
     {
-        if ($this->to && $this->subject && $this->content) {
-            if (mail($this->to, $this->subject, $this->content, $this->headers->getHeaders())) {
-                return true;
-            } else {
-                throw new Exception('E-mail has Not been sent!', 400);
-            }
+        if (mail($this->to, $this->subject, $this->content, $this->headers->getHeaders())) {
+            return true;
         } else {
-            throw new Exception('Input has not met Requied Parameters for Sending E-mail!', 400);
+            throw new Exception('E-mail has Not been sent!', 400);
         }
     }
 }
