@@ -97,10 +97,6 @@ final class Gallery extends Base
                 ->setParameter('galleryId', $result->getId());
             $images = $queryBuilder->getQuery()->getArrayResult();
 
-            foreach ($images as &$image) {
-                $image['source'] = json_decode($image['source']);
-            }
-
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'state' => $result->getState(), "images" => $images));
             return $result;
         } else {
@@ -213,12 +209,14 @@ final class Gallery extends Base
         if ($galleryEntity instanceof \App\Model\Entity\Gallery) {
             $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $galleryEntity->getId()));
             foreach ($images as $imageEntity) {
-                foreach ($imageEntity->getSource() as $path) {
-                    $file = FileSystem::open($path);
-                    $image = $file->toImage();
-                    $image->delete();
-                    $this->entityManager->remove($imageEntity);
+                foreach ($imageEntity->getSource() as $type) {
+                    foreach ($type as $path) {
+                        $file = FileSystem::open($path);
+                        $image = $file->toImage();
+                        $image->delete();
+                    }
                 }
+                $this->entityManager->remove($imageEntity);
             }
             $this->entityManager->remove($galleryEntity);
             $this->entityManager->flush();
