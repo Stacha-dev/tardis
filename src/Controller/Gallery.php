@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Controller\Base;
@@ -7,6 +9,7 @@ use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use App\Lib\FileSystem\FileSystem;
 use Exception;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 final class Gallery extends Base
 {
@@ -19,11 +22,12 @@ final class Gallery extends Base
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
         $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/gallery$@", "getAll"))
-               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "getOneById", array("id")))
-               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
-               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/gallery$@", "create", array(), true))
-               ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "edit", array("id"), true))
-               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "delete", array("id"), true));
+            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "getOneById", array("id")))
+            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
+            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/tag/(?<tag>[0-9]+)$@", "getByTag", array("tag")))
+            ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/gallery$@", "create", array(), true))
+            ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "edit", array("id"), true))
+            ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "delete", array("id"), true));
     }
 
     /**
@@ -35,8 +39,8 @@ final class Gallery extends Base
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('g')
-                ->from('App\Model\Entity\Gallery', 'g')
-                ->orderBy('g.updated', 'DESC');
+            ->from('App\Model\Entity\Gallery', 'g')
+            ->orderBy('g.updated', 'DESC');
         $result = $queryBuilder->getQuery()->getArrayResult();
 
         foreach ($result as &$item) {
@@ -58,7 +62,7 @@ final class Gallery extends Base
      */
     public function getOneById(int $id): \App\Model\Entity\Gallery
     {
-        $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
+        $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $id));
         $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $id));
 
         if ($result instanceof \App\Model\Entity\Gallery) {
@@ -97,17 +101,53 @@ final class Gallery extends Base
     }
 
     /**
+     * Gets galleries by tag id
+     *
+     * @param  int $tagId
+     * @return array<\App\Model\Entity\Gallery>
+     */
+    public function getByTag(int $tagId): array
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult('App\Model\Entity\Gallery', 'g');
+        $rsm->addEntityResult('App\Model\Entity\Image', 'i');
+        $rsm->addScalarResult('id', 'id');
+        $rsm->addScalarResult('title', 'title');
+        $rsm->addScalarResult('alias', 'alias');
+        $rsm->addScalarResult('paths', 'paths');
+
+        $query = $this->entityManager->createNativeQuery('SELECT * FROM gallery g INNER JOIN (SELECT paths, gallery_id FROM image GROUP BY gallery_id) i ON g.id = i.gallery_id WHERE g.tag_id = ? ORDER BY g.updated', $rsm);
+        $query->setParameter(1, $tagId);
+        $galleries = $query->getResult();
+
+        foreach ($galleries as &$gallery) {
+            $gallery['paths'] = json_decode($gallery['paths'], true);
+        }
+
+        $this->view->render($galleries);
+
+        return $galleries;
+    }
+
+    /**
      * Creates new gallery
      *
      * @param  string $title
      * @return \App\Model\Entity\Gallery
      */
-    public function create(string $title = '', string $alias = null): \App\Model\Entity\Gallery
+    public function create(string $title = '', string $alias = null, int $tagId = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
+        $tagId = $body->getBodyData('tag') ?? $tagId;
         $gallery = new \App\Model\Entity\Gallery($title, $alias);
+        $tag = $this->entityManager->getRepository('App\Model\Entity\Tag')->findOneBy(array("id" => $tagId));
+
+        if ($tag instanceof \App\Model\Entity\Tag) {
+            $gallery->setTag($tag);
+        }
+
         $this->entityManager->persist($gallery);
         $this->entityManager->flush();
         $this->view->render(array("id" => $gallery->getId(), "title" => $gallery->getTitle(), "alias" => $gallery->getAlias()));
@@ -122,20 +162,28 @@ final class Gallery extends Base
      * @param  string $title
      * @return \App\Model\Entity\Gallery
      */
-    public function edit(int $id = 0, string $title = '', string $alias = ''): \App\Model\Entity\Gallery
+    public function edit(int $id = 0, string $title = '', string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
-        $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
+        $tagId = $body->getBodyData('tag') ?? $tagId;
+        $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $id));
+        $tag = $this->entityManager->getRepository('App\Model\Entity\Tag')->findOneBy(array("id" => $tagId));
 
         if ($gallery instanceof \App\Model\Entity\Gallery) {
             if (!empty($title)) {
                 $gallery->setTitle($title);
             }
+
             if (!empty($alias)) {
                 $gallery->setAlias($alias);
             }
+
+            if ($tag instanceof \App\Model\Entity\Tag) {
+                $gallery->setTag($tag);
+            }
+
             $this->entityManager->flush();
             $this->view->render(array("id" => $gallery->getId(), "title" => $gallery->getTitle(), "alias" => $gallery->getAlias()));
             return $gallery;
@@ -152,7 +200,7 @@ final class Gallery extends Base
      */
     public function delete(int $id = 0): void
     {
-        $galleryEntity = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id'=>$id));
+        $galleryEntity = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $id));
 
         if ($galleryEntity instanceof \App\Model\Entity\Gallery) {
             $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $galleryEntity->getId()));

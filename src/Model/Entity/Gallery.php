@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\Entity\Tag;
 
 /**
  * @ORM\Entity
@@ -31,6 +32,13 @@ class Gallery
     protected $alias;
 
     /**
+    * @ORM\ManyToOne(targetEntity="Tag")
+    * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+    * @var Tag
+    */
+    protected $tag;
+
+    /**
      * @ORM\Column(type="datetime", nullable=false)
      * @ORM\Version
      * @var                         \DateTime
@@ -55,27 +63,7 @@ class Gallery
     }
 
     /**
-     * Returns gallery ID
-     *
-     * @return integer
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns gallery title
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * Sets gallery title
+     * Set gallery title
      *
      * @param  string $title
      * @return void
@@ -86,17 +74,7 @@ class Gallery
     }
 
     /**
-     * Returns gallery alias
-     *
-     * @return string
-     */
-    public function getAlias(): string
-    {
-        return $this->alias;
-    }
-
-    /**
-     * Sets gallery alias
+     * Set gallery alias
      *
      * @param  string $alias
      * @return void
@@ -107,7 +85,18 @@ class Gallery
     }
 
     /**
-     * Sets gallery updated date
+     * Set gallery tag
+     *
+     * @param Tag $tag
+     * @return void
+     */
+    public function setTag(Tag $tag)
+    {
+        $this->tag = $tag;
+    }
+
+    /**
+     * Set gallery updated date
      *
      * @return void
      */
@@ -117,7 +106,47 @@ class Gallery
     }
 
     /**
-     * Returns gallery updated date
+     * Return gallery ID
+     *
+     * @return integer
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Return gallery title
+     *
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * Return gallery alias
+     *
+     * @return string
+     */
+    public function getAlias(): string
+    {
+        return $this->alias;
+    }
+
+    /**
+     * Return gallery tag
+     *
+     * @return Tag
+     */
+    public function getTag(): ?Tag
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Return gallery updated date
      *
      * @return \DateTime
      */
@@ -127,7 +156,7 @@ class Gallery
     }
 
     /**
-     * Sets gallery state
+     * Set gallery state
      *
      * @param boolean $state
      * @return void
@@ -138,7 +167,7 @@ class Gallery
     }
 
     /**
-     * Returns gallery state
+     * Return gallery state
      *
      * @return boolean
      */
