@@ -6,49 +6,84 @@ namespace App\Lib\Mailer;
 
 class Headers
 {
-    /** @var array<string> */
+    /** @var array<string|array> */
     private $headers;
-    
-    /** @var array<string> */
-    private $bccArray;
 
 
     public function __construct()
     {
-        if ($this->bccArray && sizeof($this->bccArray)) {
-            $this->headers['Bcc'] = implode(', ', $this->bccArray);
-        }
+        $this->setHeader('Bcc', [])
+             ->setHeader('Content-Type', 'text/html; charset=utf-8')
+             ->setHeader('X-Mailer', 'PHP/' . phpversion());
 
-        $this->headers['Content-Type'] = 'text/html; charset=utf-8';
-        $this->headers['X-Mailer'] = 'PHP/' . phpversion();
+            $this->addBcc('ok1@help.com')
+            ->addBcc('ok2@help.com')
+            ->addBcc('ok3@help.com');
+            var_dump($this->headers);
+    }
+
+
+    /**
+     * Set single header
+     *
+     * @param string $key
+     * @param $content
+     * @return self
+     */
+    private function setHeader(string $key, $content): self
+    {
+        $this->headers[$key] = $content;
+        return $this;
+    }
+
+    
+    /**
+     * Get single header
+     *
+     * @param string $key
+     * @return
+     */
+    public function getHeader(string $key)
+    {
+        return $this->headers[$key];
     }
 
 
     /**
      * Return string header for email
      *
-     * @return array<string>
+     * @return array<string|array>
      */
     public function getHeaders(): array
     {
+        foreach ($this->headers as &$header) {
+            if (is_array($header)) {
+                $header = implode(' ,', $header);
+            }
+        }
         return $this->headers;
     }
 
 
     /**
-     * adds Bcc to headders
+     * Adds Bcc to headders
      *
      * @param string $bcc
-     * @return void
+     * @return self
      */
-    public function addBcc(string $bcc): void
+    public function addBcc(string $bcc): self
     {
-        array_push($this->bccArray, $bcc);
+        $bccHeader = $this->getHeader('Bcc');
+        if (is_array($bccHeader)) {
+            array_push($bccHeader, $bcc);
+            $this->setHeader('Bcc', $bccHeader);
+        }
+        return $this;
     }
 
 
     /**
-     * adds From to headders
+     * Adds From to headders
      *
      * @param string $from
      * @param string $fromName
@@ -56,6 +91,7 @@ class Headers
      */
     public function setFrom(string $fromName, string $from): void
     {
-        $this->headers['From'] = $fromName . ' <'. $from . '>';
+        $this->setHeader('From', $fromName . ' <' . $from . '>');
     }
+
 }
