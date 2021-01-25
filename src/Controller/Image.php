@@ -131,12 +131,15 @@ final class Image extends Base
         $entity = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
 
         if ($entity instanceof \App\Model\Entity\Image) {
-            foreach ($entity->getSource() as $path) {
-                $file = FileSystem::open($path);
-                $image = $file->toImage();
-                $image->delete();
-                $this->entityManager->remove($entity);
+            var_dump($entity->getSource());
+            foreach ($entity->getSource() as $type) {
+                foreach ($type as $path) {
+                    $file = FileSystem::open($path);
+                    $image = $file->toImage();
+                    $image->delete();
+                }
             }
+            $this->entityManager->remove($entity);
             $this->entityManager->flush();
         } else {
             throw new Exception("Image with ID: " . $id . " not exists!");
