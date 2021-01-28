@@ -16,7 +16,15 @@ class Timestamp
      */
     public static function timestampToArray(string $str): array
     {
-        $ts = explode(' ', $str);
+        if (strpos($str, ' ')) {
+            $ts = explode(' ', $str);
+        } else if (strpos($str, 'T')) {
+            $ts = explode('T', $str);
+            $ts[1] .= ':00';
+        } else {
+            throw new Exception('Timestamp is Not in right format YYYY-MM-DD HH:II:SS', 400);
+        }
+
         $date = explode('-', $ts[0]);
         $time = explode(':', $ts[1]);
 
