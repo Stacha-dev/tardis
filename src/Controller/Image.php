@@ -13,6 +13,9 @@ use Exception;
 
 final class Image extends Base
 {
+    /** @var array */
+    public const THUMBNAIL_DIMENSIONS = [[2560, 1440], [1920, 1080], [1366, 768], [1024, 768], [640, 480], [320, 240], [160, 160]];
+
     /**
      * Register routes to router
      *
@@ -63,13 +66,9 @@ final class Image extends Base
         $output = [];
         foreach ($body->getFiles() as $file) {
             FileSystem::upload($file, FileSystem::IMAGES_DIRECTORY);
-            $images = [];
-            array_push($images, $file->toImage(), $file->clone()->toImage()->setFormat(\App\Lib\FileSystem\Image::FORMAT['WebP']));
-
-            foreach ($images as $image) {
-                $source[$image->getMimeType()] = $image->generateThumbnails();
-                $image->delete();
-            }
+            $image = $file->toImage();
+            $source[$image->getMimeType()] = $image->generateThumbnails(self::THUMBNAIL_DIMENSIONS);
+            $image->delete();
 
             $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $galleryId));
 
@@ -131,12 +130,10 @@ final class Image extends Base
         $entity = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
 
         if ($entity instanceof \App\Model\Entity\Image) {
-            var_dump($entity->getSource());
             foreach ($entity->getSource() as $type) {
                 foreach ($type as $path) {
-                    $file = FileSystem::open($path);
-                    $image = $file->toImage();
-                    $image->delete();
+                    var_dump($path);
+                    FileSystem::open($path)->delete();
                 }
             }
             $this->entityManager->remove($entity);

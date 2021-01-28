@@ -13,9 +13,6 @@ class Image extends File
     /** @var array */
     public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg', 'PNG' => 'png'];
 
-    /** @var array */
-    public const THUMBNAIL_DIMENSIONS = [[2560, 1440], [1920, 1080], [1366, 768], [1024, 768], [640, 480], [320, 240], [160, 160]];
-
     /** @var Imagick */
     public $image;
 
@@ -68,12 +65,14 @@ class Image extends File
     /**
      * Change quality of jpeg
      *
-     * @return void
+     * @return self
      */
-    public function setQuality(int $quality): void
+    public function setQuality(int $quality): self
     {
         $this->image->setImageCompressionQuality($quality);
         $this->save();
+
+        return $this;
     }
 
     /**
@@ -105,34 +104,15 @@ class Image extends File
     }
 
     /**
-     * Deletes image
-     *
-     * @return void
-     */
-    public function delete(): void
-    {
-        unlink($this->getPath());
-        foreach (self::THUMBNAIL_DIMENSIONS as $dimension) {
-            [$width] = $dimension;
-            foreach (self::FORMAT as $format) {
-                $path = join(DIRECTORY_SEPARATOR, [$this->getDirname(), $width, $this->getFilename() . "." . $format]);
-                if (file_exists($path)) {
-                    unlink($path);
-                }
-            }
-        }
-    }
-
-    /**
      * Generates thumbnails
      *
      * @param string $format
      * @return array<string>
      */
-    public function generateThumbnails(string $format = ''): array
+    public function generateThumbnails(array $thumbnailDimensions, string $format = ''): array
     {
         $output = [];
-        foreach (self::THUMBNAIL_DIMENSIONS as $dimensions) {
+        foreach ($thumbnailDimensions as $dimensions) {
             [$width, $height] = $dimensions;
             $directory = join(DIRECTORY_SEPARATOR, [$this->getDirname(), $width]);
             if (!is_dir($directory)) {
