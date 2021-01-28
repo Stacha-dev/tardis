@@ -88,7 +88,6 @@ final class Gallery extends Base
         $result = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('alias' => $alias));
 
         if ($result instanceof \App\Model\Entity\Gallery) {
-            // $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $result->getId()));
             $queryBuilder = $this->entityManager->createQueryBuilder();
             $queryBuilder->select('i')
                 ->from('App\Model\Entity\Image', 'i')
