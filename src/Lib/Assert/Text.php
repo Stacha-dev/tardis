@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Lib\Assert;
 
-
 class Text
 {
     /**
@@ -42,7 +41,7 @@ class Text
 
     /**
      * Test if string is date
-     * 
+     *
      * @return bool
      */
     public static function isTimestamp(string $str): bool
@@ -52,7 +51,7 @@ class Text
             $ts['h'] >= 0 && $ts['h'] <= 23 &&
             $ts['i'] >= 0 && $ts['i'] <= 59 &&
             $ts['s'] >= 0 && $ts['s'] <= 59) {
-                return true;
+            return true;
         } else {
             return false;
         }
