@@ -103,9 +103,11 @@ class Image extends File
         $this->save();
     }
 
+
     /**
-     * Generates thumbnails
+     * Return thumbnail sources
      *
+     * @param array<array<int>> $thumbnailDimensions
      * @param string $format
      * @return array<string>
      */
