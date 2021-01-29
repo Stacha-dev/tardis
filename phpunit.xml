@@ -5,7 +5,8 @@
         convertErrorsToExceptions="true"
         processIsolation="false"
         stopOnFailure="false"
-        colors="true">
+        colors="true"
+        cacheResultFile="tmp/.phpunit.result.cache">
     <testsuites>
 		<testsuite name="Bootstrap Test Suite">
             <directory>./tests</directory>
