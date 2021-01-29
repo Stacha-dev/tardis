@@ -20,3 +20,4 @@ public/storage/images/*
 
 # Misc
 .remote-sync.json
+.vscode
