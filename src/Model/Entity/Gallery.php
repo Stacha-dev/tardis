@@ -61,11 +61,13 @@ class Gallery
 
     /**
      * @param string $title
+     * @param string $description
      * @param string $alias
      */
-    public function __construct(string $title = "", string $alias = "", bool $state = true)
+    public function __construct(string $title = "", string $description = "", string $alias = "", bool $state = true)
     {
         $this->setTitle($title);
+        $this->setDescription($description);
         $this->setAlias($alias);
         $this->setState($state);
     }
