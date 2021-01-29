@@ -5,7 +5,6 @@ config/common.ini
 vendor
 
 # Cache
-.php_cs.cache
 tmp/*
 !tmp/.gitkeep
 
