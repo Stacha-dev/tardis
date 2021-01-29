@@ -173,7 +173,7 @@ final class Gallery extends Base
      * @param int $tagId
      * @return \App\Model\Entity\Gallery
      */
-    public function edit(int $id = 0, string $title = '',  string $description = "", string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
+    public function edit(int $id = 0, string $title = '', string $description = "", string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
