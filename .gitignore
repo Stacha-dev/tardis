@@ -6,7 +6,6 @@ vendor
 
 # Cache
 .php_cs.cache
-.phpunit.result.cache
 tmp/*
 !tmp/.gitkeep
 
