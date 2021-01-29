@@ -4,8 +4,14 @@
 	"description": "Back-end for our applications.",
 	"authors": [
 		{
-			"name": "Stacha.dev",
-			"email": "chalupa.petr93@gmail.com"
+			"name": "Petr Chalupa",
+			"email": "chalupa.petr93@gmail.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Oliver Stasa",
+			"email": "oliver.stasa@gmail.com",
+			"role": "Developer"
 		}
 	],
 	"require": {
@@ -35,15 +41,17 @@
 	"scripts": {
 		"docs": "phpdoc",
 		"test": "vendor/bin/phpunit tests",
-		"test:codecov": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html public/reports/codecov/",
+		"test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html public/reports/codecov/",
 		"orm:create": "doctrine orm:schema-tool:create",
 		"orm:update": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
-		"orm:genproxies": "doctrine orm:generate-proxies",
+		"orm:proxies": "doctrine orm:generate-proxies",
+		"orm:validate": "doctrine orm:validate-schema",
 		"fixtures:load": "php bin/console fixtures:load",
 		"app:password": "php bin/console app:password",
 		"phpstan": "phpstan analyse",
 		"cs": "vendor/bin/php-cs-fixer fix src --dry-run --ansi",
-		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi"
+		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi",
+		"foo": "doctrine"
 	}
 }

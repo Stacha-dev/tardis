@@ -20,6 +20,9 @@ jobs:
     - name: Install new instance
       run: ./bin/install.sh root password test 127.0.0.1 3306
 
+    - name: Validate DB schema
+      run: composer orm:validate
+
     - name: Coding Standards
       run: composer cs
 

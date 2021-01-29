@@ -1,10 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Lib\FileSystem;
 
 use Exception;
 use App\Lib\FileSystem\FileSystem;
 use App\Lib\FileSystem\Image;
+use App\Lib\Util\Cryptography;
 
 class File
 {
@@ -34,10 +37,9 @@ class File
      */
     public function __construct(string $path)
     {
-        @["dirname"=>$this->dirname, "filename"=>$this->filename, "extension"=>$extension]=pathinfo($path);
-        $this->setPath($path);
-        $this->setMimeType();
-        $this->extension = $extension ?? $this->mimeTypeToExtension($this->mimeType);
+        @["dirname" => $this->dirname, "filename" => $this->filename, "extension" => $extension] = pathinfo($path);
+        $this->setPath($path)->setMimeType();
+        $this->setExtension($extension ?? $this->mimeTypeToExtension($this->mimeType));
     }
 
     /**
@@ -46,7 +48,7 @@ class File
      * @param string $path
      * @return self
      */
-    protected function setPath(string $path):self
+    protected function setPath(string $path): self
     {
         if (!(file_exists($path))) {
             throw new Exception('File not exists!');
@@ -64,7 +66,7 @@ class File
      *
      * @return self
      */
-    private function setMimeType():self
+    protected function setMimeType(): self
     {
         $mimeType = mime_content_type($this->getPath());
         if (!$mimeType) {
@@ -82,7 +84,7 @@ class File
      * @param integer $permitions
      * @return self
      */
-    private function setPermitions(int $permitions):self
+    private function setPermitions(int $permitions): self
     {
         chmod($this->getPath(), $permitions);
 
@@ -95,7 +97,7 @@ class File
      * @param string $name
      * @return self
      */
-    public function setUploadName(string $name):self
+    public function setUploadName(string $name): self
     {
         $this->uploadName = $name;
 
@@ -103,12 +105,26 @@ class File
     }
 
     /**
-    * Mime to extension
-    *
-    * @param string $mime
-    * @return string
-    */
-    private function mimeTypeToExtension(string $mime):string
+     * Set file extension
+     *
+     * @param string $extension
+     * @return self
+     */
+    public function setExtension(string $extension): self
+    {
+        $this->extension = $extension;
+        $this->rename($this->getFilename())->setMimeType();
+
+        return $this;
+    }
+
+    /**
+     * Mime to extension
+     *
+     * @param string $mime
+     * @return string
+     */
+    private function mimeTypeToExtension(string $mime): string
     {
         if (isset(self::MIME_TYPES[$mime])) {
             return self::MIME_TYPES[$mime];
@@ -124,7 +140,7 @@ class File
      *
      * @return string
      */
-    public function getFilename():string
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -134,7 +150,7 @@ class File
      *
      * @return string
      */
-    public function getBasename():string
+    public function getBasename(): string
     {
         return $this->filename . "." . $this->extension;
     }
@@ -144,17 +160,17 @@ class File
      *
      * @return string
      */
-    public function getPath():string
+    public function getPath(): string
     {
         return $this->path;
     }
 
     /**
-    * Returns directory
-    *
-    * @return string
-    */
-    public function getDirname():string
+     * Returns directory
+     *
+     * @return string
+     */
+    public function getDirname(): string
     {
         return $this->dirname;
     }
@@ -165,9 +181,19 @@ class File
      *
      * @return string|null
      */
-    public function getUploadName():?string
+    public function getUploadName(): ?string
     {
         return $this->uploadName;
+    }
+
+    /**
+     * Return file mime type
+     *
+     * @return string
+     */
+    public function getMimeType(): string
+    {
+        return $this->mimeType;
     }
 
 
@@ -176,7 +202,7 @@ class File
      *
      * @return boolean
      */
-    public function isImage():bool
+    public function isImage(): bool
     {
         return in_array($this->mimeType, array_keys(Image::MIME_TYPES));
     }
@@ -186,7 +212,7 @@ class File
      *
      * @return Image
      */
-    public function toImage():Image
+    public function toImage(): Image
     {
         if (!$this->isImage()) {
             throw new Exception('File is not image!');
@@ -199,33 +225,63 @@ class File
      * Moves file to new location
      *
      * @param string $destination
-     * @return void
+     * @return self
      */
-    public function move(string $destination):void
+    public function move(string $destination): self
     {
         $destination = is_dir($destination) ? $destination . DIRECTORY_SEPARATOR . $this->getBasename() : $destination;
         rename($this->getPath(), $destination);
         $this->setPath($destination);
         $this->setPermitions(0770);
-        ["dirname"=>$this->dirname]=pathinfo($this->getPath());
+        ["dirname" => $this->dirname] = pathinfo($this->getPath());
+
+        return $this;
     }
 
     /**
-     * Renames file
+     * Rename file
      *
      * @param string $filename
-     * @return void
+     * @return self
      */
-    public function rename(string $filename):void
+    public function rename(string $filename): self
     {
         $newPath = $this->dirname . DIRECTORY_SEPARATOR . $filename . "." . $this->extension;
         rename($this->getPath(), $newPath);
         $this->setPath($newPath);
-        $this->filename=$filename;
+        $this->filename = $filename;
+
+        return $this;
     }
 
     /**
-     * Deletes file
+     * Copy file to destination
+     *
+     * @param string $destination
+     * @return File
+     */
+    public function copy(string $destination): File
+    {
+        if (!copy($this->getPath(), $destination)) {
+            throw new Exception('Failed to copy file!', 400);
+        }
+
+        return FileSystem::open($destination);
+    }
+
+    /**
+     * Clone file
+     *
+     * @return File
+     */
+    public function clone(): File
+    {
+        $destination = join(DIRECTORY_SEPARATOR, [$this->getDirname(), Cryptography::random(6) . '.' . $this->extension]);
+        return $this->copy($destination);
+    }
+
+    /**
+     * Delete file
      *
      * @return void
      */
