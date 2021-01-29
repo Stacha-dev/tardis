@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -26,16 +28,22 @@ class Gallery
     protected $title;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @var                       string
+     */
+    protected $description;
+
+    /**
      * @ORM\Column(type="string", unique=true, length=191)
      * @var                       string
      */
     protected $alias;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Tag")
-    * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
-    * @var Tag
-    */
+     * @ORM\ManyToOne(targetEntity="Tag")
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     * @var Tag
+     */
     protected $tag;
 
     /**
@@ -71,6 +79,17 @@ class Gallery
     public function setTitle(string $title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * Set gallery description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
     }
 
     /**
@@ -126,6 +145,16 @@ class Gallery
     }
 
     /**
+     * Return gallery description
+     *
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
      * Return gallery alias
      *
      * @return string
@@ -161,7 +190,7 @@ class Gallery
      * @param boolean $state
      * @return void
      */
-    public function setState(bool $state):void
+    public function setState(bool $state): void
     {
         $this->state = $state;
     }
@@ -171,7 +200,7 @@ class Gallery
      *
      * @return boolean
      */
-    public function getState():bool
+    public function getState(): bool
     {
         return $this->state;
     }
