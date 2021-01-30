@@ -21,7 +21,7 @@ final class ConfigurationFactory
      */
     public static function fromFileName(string $fileName): Configuration
     {
-        $configs = glob(self::CONFIG_DIRECTORY . $fileName . '*' . 'ini');
+        $configs = glob(self::CONFIG_DIRECTORY . $fileName . '*' . '.ini');
         if ($configs && is_array($configs)) {
             $config = array_pop($configs);
             return new Configuration($config);
