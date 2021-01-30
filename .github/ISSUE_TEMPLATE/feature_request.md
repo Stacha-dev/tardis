@@ -7,8 +7,5 @@ assignees: ''
 
 ---
 
-**Describe your feature request**
+## Describe your feature request
 A clear and concise description of your feature request.
-
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
