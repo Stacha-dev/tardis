@@ -21,7 +21,7 @@ function generate_config() {
 composer install
 
 # Config
-generate_config config/common.ini.tmpl > config/common.ini
+generate_config config/common.ini > config/common.local.ini
 
 # ORM
 composer orm:drop

@@ -1,5 +1,5 @@
 # Config
-config/common.ini
+config/*.local.ini
 
 # Dependencies
 vendor
