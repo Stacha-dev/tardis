@@ -1,4 +1,4 @@
-# Proposed Changes
+# Proposed changes
   -
   -
 
