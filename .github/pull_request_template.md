@@ -2,7 +2,7 @@
   -
   -
 
-## Sumary
+## Summary
 Describe your changes in detail.
 
 ### Checklist
