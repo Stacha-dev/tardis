@@ -22,7 +22,7 @@ class Image
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Gallery")
+     * @ORM\ManyToOne(targetEntity="Gallery", inversedBy="images")
      * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
      * @var Gallery
      */
@@ -79,11 +79,12 @@ class Image
      * Sets image gallery
      *
      * @param Gallery $gallery
-     * @return void
+     * @return self
      */
-    public function setGallery(Gallery $gallery): void
+    public function setGallery(Gallery $gallery): self
     {
         $this->gallery = $gallery;
+        return $this;
     }
 
 
@@ -91,54 +92,59 @@ class Image
      * Sets image title
      *
      * @param  string $title
-     * @return void
+     * @return self
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
      * Sets source to image
      *
      * @param array<array<string>> $source
-     * @return void
+     * @return self
      */
-    public function setSource(array $source): void
+    public function setSource(array $source): self
     {
         $this->source = $source;
+        return $this;
     }
 
     /**
      * Sets image ordering
      *
      * @param integer $ordering
-     * @return void
+     * @return self
      */
-    public function setOrdering(int $ordering): void
+    public function setOrdering(int $ordering): self
     {
         $this->ordering = $ordering;
+        return $this;
     }
 
     /**
      * Sets image updated date
      *
-     * @return void
+     * @return self
      */
-    public function setUpdated()
+    public function setUpdated(): self
     {
         $this->updated = new \DateTime("now");
+        return $this;
     }
 
     /**
      * Sets image state
      *
      * @param boolean $state
-     * @return void
+     * @return self
      */
-    public function setState(bool $state): void
+    public function setState(bool $state): self
     {
         $this->state = $state;
+        return $this;
     }
 
     /**

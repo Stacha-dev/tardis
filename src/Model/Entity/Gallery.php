@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use App\Model\Entity\Tag;
+use App\Model\Entity\Image;
 
 /**
  * @ORM\Entity
@@ -38,6 +40,13 @@ class Gallery
      * @var                       string
      */
     protected $alias;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="gallery")
+     * @ORM\OrderBy({"ordering" = "ASC"})
+     * @var PersistentCollection<Image>
+     */
+    protected $images;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tag")
@@ -73,57 +82,74 @@ class Gallery
     }
 
     /**
-     * Set gallery title
+     * Sets gallery title
      *
      * @param  string $title
-     * @return void
+     * @return self
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
-     * Set gallery description
+     * Sets gallery description
      *
      * @param string $description
-     * @return void
+     * @return self
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
     }
 
     /**
-     * Set gallery alias
+     * Sets gallery alias
      *
      * @param  string $alias
-     * @return void
+     * @return self
      */
-    public function setAlias(string $alias)
+    public function setAlias(string $alias): self
     {
         $this->alias = $alias;
+        return $this;
     }
 
     /**
-     * Set gallery tag
+     * Sets gallery tag
      *
      * @param Tag $tag
-     * @return void
+     * @return self
      */
-    public function setTag(Tag $tag)
+    public function setTag(Tag $tag): self
     {
         $this->tag = $tag;
+        return $this;
     }
 
     /**
-     * Set gallery updated date
+     * Sets gallery updated date
      *
-     * @return void
+     * @return self
      */
-    public function setUpdated()
+    public function setUpdated(): self
     {
         $this->updated = new \DateTime("now");
+        return $this;
+    }
+
+    /**
+     * Sets gallery state
+     *
+     * @param boolean $state
+     * @return self
+     */
+    public function setState(bool $state): self
+    {
+        $this->state = $state;
+        return $this;
     }
 
     /**
@@ -137,7 +163,22 @@ class Gallery
     }
 
     /**
-     * Return gallery title
+     * Returns images associated to this gallery
+     *
+     * @return PersistentCollection<Image>
+     */
+    public function getImages(): PersistentCollection
+    {
+        return $this->images;
+    }
+
+    public function getThumbnail(): ?Image
+    {
+        return $this->images[0];
+    }
+
+    /**
+     * Returns gallery title
      *
      * @return string
      */
@@ -147,7 +188,7 @@ class Gallery
     }
 
     /**
-     * Return gallery description
+     * Returns gallery description
      *
      * @return string
      */
@@ -157,7 +198,7 @@ class Gallery
     }
 
     /**
-     * Return gallery alias
+     * Returns gallery alias
      *
      * @return string
      */
@@ -167,7 +208,7 @@ class Gallery
     }
 
     /**
-     * Return gallery tag
+     * Returns gallery tag
      *
      * @return Tag
      */
@@ -177,7 +218,7 @@ class Gallery
     }
 
     /**
-     * Return gallery updated date
+     * Returns gallery updated date
      *
      * @return \DateTime
      */
@@ -187,18 +228,7 @@ class Gallery
     }
 
     /**
-     * Set gallery state
-     *
-     * @param boolean $state
-     * @return void
-     */
-    public function setState(bool $state): void
-    {
-        $this->state = $state;
-    }
-
-    /**
-     * Return gallery state
+     * Returns gallery state
      *
      * @return boolean
      */
