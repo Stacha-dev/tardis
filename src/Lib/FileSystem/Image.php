@@ -10,13 +10,13 @@ use Imagick;
 
 class Image extends File
 {
-    /** @var array */
+    /** @var array<string> */
     public const FORMAT = ['WebP' => 'webp', 'JPG' => 'jpg', 'PNG' => 'png'];
 
     /** @var Imagick */
     public $image;
 
-    /** @var array */
+    /** @var array<string> */
     public const MIME_TYPES = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 
     /**
@@ -99,7 +99,7 @@ class Image extends File
      */
     public function resize(int $width, int $height): void
     {
-        $this->image->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 0.5, true);
+        $this->image->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 1, true);
         $this->save();
     }
 
