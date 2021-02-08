@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\View\Json;
@@ -40,11 +42,11 @@ class Base implements IBase
     }
 
     /**
-    * Register routes to router.
-    *
-    * @param  \App\Lib\Middleware\Router $router
-    * @return void
-    */
+     * Register routes to router.
+     *
+     * @param  \App\Lib\Middleware\Router $router
+     * @return void
+     */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
     }
@@ -61,9 +63,9 @@ class Base implements IBase
     }
 
     /**
-    * Dispatch request to predefined routes.
-    * @param  \App\Lib\Middleware\Router $router
-    * @param \App\Lib\Http\Request $request
+     * Dispatch request to predefined routes.
+     * @param  \App\Lib\Middleware\Router $router
+     * @param \App\Lib\Http\Request $request
      */
     public function requestDispatch(\App\Lib\Middleware\Router $router, \App\Lib\Http\Request $request): void
     {
@@ -83,7 +85,7 @@ class Base implements IBase
      * @todo Make it usefull
      * @return array<string>
      */
-    public function getState():array
+    public function getState(): array
     {
         $state = array('state' => 'ok');
         $this->view->render($state);
@@ -123,7 +125,7 @@ class Base implements IBase
      * @param \App\Lib\Middleware\Route $route
      * @return void
      */
-    private function checkPerms(\App\Lib\Middleware\Route $route):void
+    private function checkPerms(\App\Lib\Middleware\Route $route): void
     {
         if ($route->isSecure()) {
             $jwt = AuthorizationFactory::fromType('JWT');

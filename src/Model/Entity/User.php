@@ -1,9 +1,10 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -72,8 +73,95 @@ class User
         $this->setAvatar($avatar);
     }
 
+
     /**
-     * Return user ID.
+     * Sets user username
+     *
+     * @param  string $username
+     * @return self
+     */
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+
+    /**
+     * Sets user password
+     *
+     * @param  string $password
+     * @return self
+     */
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * Sets user e-mail
+     *
+     * @param  string $email
+     * @return self
+     */
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Sets user name
+     *
+     * @param  string $name
+     * @return self
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Sets user surname
+     *
+     * @param  string $surname
+     * @return self
+     */
+    public function setSurname(string $surname): self
+    {
+        $this->surname = $surname;
+        return $this;
+    }
+
+    /**
+     * Sets user updated date
+     *
+     * @param  \DateTime $updated
+     * @return self
+     */
+    public function setUpdated(\DateTime $updated): self
+    {
+        $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * Sets user avatar
+     *
+     * @param  string $avatar
+     * @return self
+     */
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+
+
+    /**
+     * Return user ID
      *
      * @return integer
      */
@@ -83,18 +171,7 @@ class User
     }
 
     /**
-     * Sets user username.
-     *
-     * @param  string $username
-     * @return void
-     */
-    public function setUsername(string $username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * Returns user username.
+     * Returns user username
      *
      * @return string
      */
@@ -104,18 +181,7 @@ class User
     }
 
     /**
-     * Sets user password.
-     *
-     * @param  string $password
-     * @return void
-     */
-    public function setPassword(string $password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * Returns user password.
+     * Returns user password
      *
      * @return string
      */
@@ -125,18 +191,7 @@ class User
     }
 
     /**
-     * Sets user e-mail.
-     *
-     * @param  string $email
-     * @return void
-     */
-    public function setEmail(string $email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * Returns user e-mail.
+     * Returns user e-mail
      *
      * @return string
      */
@@ -146,18 +201,7 @@ class User
     }
 
     /**
-     * Sets user name.
-     *
-     * @param  string $name
-     * @return void
-     */
-    public function setName(string $name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Returns user name.
+     * Returns user name
      *
      * @return string
      */
@@ -166,40 +210,20 @@ class User
         return $this->name;
     }
 
-    /**
-     * Sets user surname.
-     *
-     * @param  string $surname
-     * @return void
-     */
-    public function setSurname(string $surname)
-    {
-        $this->surname = $surname;
-    }
+
 
     /**
-     * Returns user surname.
+     * Returns user surname
      *
      * @return string
      */
-    public function getSurname():string
+    public function getSurname(): string
     {
         return $this->surname;
     }
 
     /**
-     * Sets user updated date.
-     *
-     * @param  \DateTime $updated
-     * @return void
-     */
-    public function setUpdated(\DateTime $updated)
-    {
-        $this->updated = $updated;
-    }
-
-    /**
-     * Returns user updated date.
+     * Returns user updated date
      *
      * @return \DateTime
      */
@@ -209,18 +233,7 @@ class User
     }
 
     /**
-     * Sets user avatar.
-     *
-     * @param  string $avatar
-     * @return void
-     */
-    public function setAvatar(string $avatar)
-    {
-        $this->avatar = $avatar;
-    }
-
-    /**
-     * Returns user avatar.
+     * Returns user avatar
      *
      * @return string
      */

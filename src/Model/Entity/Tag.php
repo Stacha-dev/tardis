@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -33,32 +35,33 @@ class Tag
     }
 
     /**
-     * Set tag title
+     * Sets tag title
      *
      * @param string $title
-     * @return void
+     * @return self
      */
-    public function setTitle(string $title):void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
-     * Return tag id
+     * Returns tag id
      *
      * @return integer
      */
-    public function getId():int
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * Return tag title
+     * Returns tag title
      *
      * @return string
      */
-    public function getTitle():string
+    public function getTitle(): string
     {
         return $this->title;
     }

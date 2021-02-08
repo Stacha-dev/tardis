@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -64,6 +66,69 @@ class Article
         $this->setState($state);
     }
 
+
+
+    /**
+     * Sets article title.
+     *
+     * @param  string $title
+     * @return self
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * Sets article alias.
+     *
+     * @param  string $alias
+     * @return self
+     */
+    public function setAlias(string $alias): self
+    {
+        $this->alias = $alias;
+        return $this;
+    }
+
+    /**
+     * Sets article content.
+     *
+     * @param  string $content
+     * @return self
+     */
+    public function setContent(string $content): Self
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * Sets article updated date.
+     *
+     * @return self
+     */
+    public function setUpdated(): self
+    {
+        $this->updated = new \DateTime("now");
+        return $this;
+    }
+
+
+    /**
+     * Sets article state
+     *
+     * @param boolean $state
+     * @return self
+     */
+    public function setState(bool $state): self
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+
     /**
      * Returns article ID.
      *
@@ -85,17 +150,6 @@ class Article
     }
 
     /**
-     * Sets article title.
-     *
-     * @param  string $title
-     * @return void
-     */
-    public function setTitle(string $title)
-    {
-        $this->title = $title;
-    }
-
-    /**
      * Returns article alias.
      *
      * @return string
@@ -105,16 +159,7 @@ class Article
         return $this->alias;
     }
 
-    /**
-     * Sets article alias.
-     *
-     * @param  string $alias
-     * @return void
-     */
-    public function setAlias(string $alias)
-    {
-        $this->alias = $alias;
-    }
+
 
     /**
      * Returns article content.
@@ -126,26 +171,6 @@ class Article
         return $this->content;
     }
 
-    /**
-     * Sets article content.
-     *
-     * @param  string $content
-     * @return void
-     */
-    public function setContent(string $content)
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * Sets article updated date.
-     *
-     * @return void
-     */
-    public function setUpdated()
-    {
-        $this->updated = new \DateTime("now");
-    }
 
     /**
      * Returns article updated date.
@@ -157,23 +182,13 @@ class Article
         return $this->updated;
     }
 
-    /**
-     * Sets article state
-     *
-     * @param boolean $state
-     * @return void
-     */
-    public function setState(bool $state):void
-    {
-        $this->state = $state;
-    }
 
     /**
      * Returns article state
      *
      * @return boolean
      */
-    public function getState():bool
+    public function getState(): bool
     {
         return $this->state;
     }
