@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Lib\Middleware;
 
@@ -41,17 +42,22 @@ class Router
      */
     public function dispatch(\App\Lib\Http\Request $request): \App\Lib\Middleware\Route
     {
+        $method = $request->getMethod();
         $path = $request->getUri()->getPath();
         $uri = implode("/", $path);
-        $version = (int)$path[0];
-        foreach ((array)$this->getRoutes()[$request->getMethod()] as $route) {
-            if (preg_match($route->getPattern(), $uri, $matches) && $route->getVersion() === $version) {
-                $params = array();
-                foreach ($route->getParams() as $param) {
-                    $params[$param] = is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param];
+        $version = (int)array_shift($path);
+        $routes = $this->getRoutes();
+
+        if (array_key_exists($method, $routes)) {
+            foreach ($routes[$method] as $route) {
+                if (preg_match($route->getPattern(), $uri, $matches) && $route->getVersion() === $version) {
+                    $params = array();
+                    foreach ($route->getParams() as $param) {
+                        $params[$param] = is_numeric($matches[$param]) ? (int)$matches[$param] : $matches[$param];
+                    }
+                    $route->setParams($params);
+                    return $route;
                 }
-                $route->setParams($params);
-                return $route;
             }
         }
         throw new \Exception("Route not found!");
