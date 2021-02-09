@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Lib\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -10,6 +11,9 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Loader;
 
+/**
+ * @codeCoverageIgnore
+ */
 class FixturesLoadCommand extends Command
 {
     /** @var string */
@@ -20,7 +24,7 @@ class FixturesLoadCommand extends Command
      *
      * @return void
      */
-    protected function configure():void
+    protected function configure(): void
     {
         $this->setDescription('Loads all fixtures.')->setHelp('This command allows you to load all fixtures.');
         $this->addOption('yes', 'y', InputOption::VALUE_NONE, 'Continue with yes?');
