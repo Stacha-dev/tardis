@@ -44,6 +44,10 @@
             <directory>./tests/Lib/Security</directory>
 			<file>./tests/Lib/Security/HashTest.php</file>
         </testsuite>
+        <testsuite name="Assert Test Suite">
+            <directory>./tests/Lib/Assert</directory>
+			<file>./tests/Lib/Assert/Text.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
