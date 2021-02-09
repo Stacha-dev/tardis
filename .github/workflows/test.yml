@@ -19,8 +19,8 @@ jobs:
 
     - uses: getong/mariadb-action@v1.1
       with:
-        mysql database: env.DB_NAME
-        mysql root password: env.DB_PASSWORD
+        mysql database: 'test'
+        mysql root password: 'root'
 
     - name: Install new instance
       run: ./bin/install.sh root "$DB_PASSWORD" "$DB_NAME" 127.0.0.1 3306
