@@ -5,20 +5,25 @@ on: [pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DB_NAME: test
+      DB_PASSWORD: root
     steps:
     - uses: actions/checkout@v2
+
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
         extensions: imagick, xdebug
         tools: composer:v2
+
     - uses: getong/mariadb-action@v1.1
       with:
-        mysql database: 'test'
-        mysql root password: 'password'
+        mysql database: env.DB_NAME
+        mysql root password: env.DB_PASSWORD
 
     - name: Install new instance
-      run: ./bin/install.sh root password test 127.0.0.1 3306
+      run: ./bin/install.sh root "$DB_PASSWORD" "$DB_NAME" 127.0.0.1 3306
 
     - name: Validate DB schema
       run: composer orm:validate
@@ -30,4 +35,11 @@ jobs:
       run: composer phpstan
 
     - name: Unit tests
-      run: composer test
+      run: composer test:coverage
+
+    - name: Archive test coverage
+      uses: actions/upload-artifact@v2
+      with:
+          name: test_coverage
+          path: public/reports/test-coverage/
+          retention-days: 7
