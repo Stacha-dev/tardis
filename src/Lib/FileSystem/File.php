@@ -29,7 +29,7 @@ class File
     /** @var string */
     protected $uploadName;
 
-    /** @var array */
+    /** @var array<string> */
     public const MIME_TYPES = ['application/pdf' => 'pdf'];
 
     /**

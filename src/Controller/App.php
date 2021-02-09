@@ -1,8 +1,9 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Lib\Http\Uri;
 use App\Lib\Middleware\Router;
 use App\View\Error;
 use Exception;

@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Lib\Util\Input;
@@ -17,11 +19,11 @@ final class Article extends \App\Controller\Base
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
         $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/article$@", "getAll"))
-               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "getOneById", array("id")))
-               ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
-               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/article$@", "create", array(), true))
-               ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "edit", array("id"), true))
-               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "delete", array("id"), true));
+            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "getOneById", array("id")))
+            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/article/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
+            ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/article$@", "create", array(), true))
+            ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "edit", array("id"), true))
+            ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/article/(?<id>[0-9]+)$@", "delete", array("id"), true));
     }
 
     /**
@@ -45,7 +47,7 @@ final class Article extends \App\Controller\Base
      */
     public function getOneById(int $id): \App\Model\Entity\Article
     {
-        $result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id'=>$id));
+        $result = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id' => $id));
         if ($result instanceof \App\Model\Entity\Article) {
             $this->view->render(array('id' => $result->getId(), 'title' => $result->getTitle(), 'alias' => $result->getAlias(), 'content' => $result->getContent(), 'state' => $result->getState()));
             return $result;
@@ -106,7 +108,7 @@ final class Article extends \App\Controller\Base
         $title = $body->getBodyData('title') ?? $title;
         $alias = $body->getBodyData('alias') ?? $alias;
         $content = $body->getBodyData('content') ?? $content;
-        $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id'=>$id));
+        $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id' => $id));
 
         if ($article instanceof \App\Model\Entity\Article) {
             if (!empty($title)) {
@@ -134,7 +136,7 @@ final class Article extends \App\Controller\Base
      */
     public function delete(int $id = 0)
     {
-        $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id'=>$id));
+        $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id' => $id));
 
         if (isset($article)) {
             $this->entityManager->remove($article);

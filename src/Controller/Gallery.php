@@ -9,7 +9,7 @@ use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
 use App\Lib\FileSystem\FileSystem;
 use Exception;
-use Doctrine\ORM\Query\ResultSetMapping;
+use \stdClass;
 
 final class Gallery extends Base
 {
@@ -24,7 +24,7 @@ final class Gallery extends Base
         $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/gallery$@", "getAll"))
             ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "getOneById", array("id")))
             ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/(?<alias>[a-z1-9-]+)$@", "getOneByAlias", array("alias")))
-            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/tag/(?<tag>[0-9]+)$@", "getByTag", array("tag")))
+            ->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9]+)/gallery/find/(?<key>[a-z1-9-]+)/(?<value>[a-z1-9-]+)$@", "find", array("key", "value")))
             ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/gallery$@", "create", array(), true))
             ->register(RouteFactory::fromConstants(1, "PUT", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "edit", array("id"), true))
             ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/gallery/(?<id>[0-9]+)$@", "delete", array("id"), true));
@@ -63,14 +63,14 @@ final class Gallery extends Base
     public function getOneById(int $id): \App\Model\Entity\Gallery
     {
         $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $id));
-        $images = $this->entityManager->getRepository('App\Model\Entity\Image')->findBy(array("gallery" => $id));
 
         if ($gallery instanceof \App\Model\Entity\Gallery) {
-            $imageResult = array();
-            foreach ($images as $image) {
-                array_push($imageResult, array("id" => $image->getId(), "title" => $image->getTitle(), "source" => $image->getSource(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
+            $images = [];
+            foreach ($gallery->getImages() as $image) {
+                array_push($images, array('id' => $image->getId(), 'title' => $image->getTitle(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
             }
-            $this->view->render(array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'state' => $gallery->getState(), "images" => $imageResult));
+
+            $this->view->render(array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'state' => $gallery->getState(), "images" => $images));
             return $gallery;
         } else {
             throw new Exception("Gallery by ID can not be founded!");
@@ -88,50 +88,53 @@ final class Gallery extends Base
         $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('alias' => $alias));
 
         if ($gallery instanceof \App\Model\Entity\Gallery) {
-            $queryBuilder = $this->entityManager->createQueryBuilder();
-            $queryBuilder->select('i')
-                ->from('App\Model\Entity\Image', 'i')
-                ->where('i.gallery = :galleryId')
-                ->orderBy('i.ordering', 'ASC')
-                ->setParameter('galleryId', $gallery->getId());
-            $images = $queryBuilder->getQuery()->getArrayResult();
+            $images = [];
+            foreach ($gallery->getImages() as $image) {
+                array_push($images, array('id' => $image->getId(), 'title' => $image->getTitle(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
+            }
 
             $this->view->render(array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'state' => $gallery->getState(), "images" => $images));
             return $gallery;
         } else {
-            throw new Exception("Gallery by alias can not be founded!");
+            throw new Exception("Gallery by ID can not be founded!");
         }
     }
 
+
     /**
-     * Gets galleries by tag id
+     * Find galleries by key and value
      *
-     * @param  int $tagId
+     * @param  string $key
+     * @param string $value
      * @return array<\App\Model\Entity\Gallery>
      */
-    public function getByTag(int $tagId): array
+    public function find(string $key, string $value): array
     {
-        $rsm = new ResultSetMapping();
-        $rsm->addEntityResult('App\Model\Entity\Gallery', 'g');
-        $rsm->addEntityResult('App\Model\Entity\Image', 'i');
-        $rsm->addScalarResult('id', 'id');
-        $rsm->addScalarResult('title', 'title');
-        $rsm->addScalarResult('description', 'description');
-        $rsm->addScalarResult('alias', 'alias');
-        $rsm->addScalarResult('source', 'source');
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('g')
+            ->from('App\Model\Entity\Gallery', 'g')
+            ->where('g.' . $key . ' = ' . $value)
+            ->orderBy('g.updated', 'DESC');
+        $galleries = $queryBuilder->getQuery()->getResult();
 
-        $query = $this->entityManager->createNativeQuery('SELECT * FROM gallery g INNER JOIN (SELECT source, gallery_id FROM image GROUP BY gallery_id ORDER BY image.ordering) i ON g.id = i.gallery_id WHERE g.tag_id = ? ORDER BY g.updated DESC', $rsm);
-        $query->setParameter(1, $tagId);
-        $galleries = $query->getResult();
+        $response = array();
+        foreach ($galleries as $gallery) {
+            $image = $gallery->getThumbnail();
+            $thumbnail = new stdClass;
+            if ($image) {
+                $thumbnail->id = $image->getId();
+                $thumbnail->title = $image->getTitle();
+                $thumbnail->source = $image->getSource();
+            }
 
-        foreach ($galleries as &$gallery) {
-            $gallery['source'] = json_decode($gallery['source'], true);
+            array_push($response, array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'thumbnail' => $thumbnail, 'updated' => $gallery->getUpdated(), 'state' => $gallery->getState()));
         }
 
-        $this->view->render($galleries);
+        $this->view->render($response);
 
         return $galleries;
     }
+
 
     /**
      * Creates new gallery
@@ -173,7 +176,7 @@ final class Gallery extends Base
      * @param int $tagId
      * @return \App\Model\Entity\Gallery
      */
-    public function edit(int $id = 0, string $title = '', string $description = "", string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
+    public function edit(int $id = 0, string $title = '', string $description = '', string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title') ?? $title;
@@ -188,9 +191,7 @@ final class Gallery extends Base
                 $gallery->setTitle($title);
             }
 
-            if (!empty($description)) {
-                $gallery->setDescription($description);
-            }
+            $gallery->setDescription($description);
 
             if (!empty($alias)) {
                 $gallery->setAlias($alias);

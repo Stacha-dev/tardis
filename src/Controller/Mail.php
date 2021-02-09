@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Lib\Middleware\RouteFactory;
 use App\Lib\Configuration\ConfigurationFactory;
-use Exception;
 
 final class Mail extends Base
 {
@@ -37,7 +36,7 @@ final class Mail extends Base
         $configuration->setSegment('mail');
         $from = $configuration->get('from');
         $fromName = $configuration->get('from_name');
-        
+
         $mail = new \App\Lib\Mailer\Mail($to, $subject, $content);
         $mail->setFrom($fromName, $from);
         $status = $mail->send();
