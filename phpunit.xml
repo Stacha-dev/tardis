@@ -22,7 +22,8 @@
         </testsuite>
 		<testsuite name="Router Test Suite">
             <directory>./tests/Lib/Middleware</directory>
-			<file>./tests/Lib/Middleware/RouterTest.php</file>
+			<file>./tests/Lib/Middleware/RouteTest.php</file>
+            <file>./tests/Lib/Middleware/RouterTest.php</file>
         </testsuite>
 		<testsuite name="Article Test Suite">
             <directory>./tests/Controller</directory>
