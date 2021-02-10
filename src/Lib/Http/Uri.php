@@ -1,13 +1,11 @@
 <?php
-declare(strict_types = 1);
-namespace App\Lib\Http;
 
-use Exception;
+declare(strict_types=1);
+
+namespace App\Lib\Http;
 
 class Uri
 {
-    private const URL_PATH = "path";
-
     /**
      * @var array<string>
      */
@@ -15,17 +13,12 @@ class Uri
 
     public function __construct(string $url = "")
     {
-        $url = parse_url($url);
-        if (is_array($url)) {
-            $path = array_key_exists(self::URL_PATH, $url) ? $url[self::URL_PATH] : "";
-        } else {
-            throw new \Exception("Parsed URL not corespondig with required standard!");
-        }
-        $this->setPath($path);
+        $path = parse_url($url, PHP_URL_PATH);
+        $this->setPath(is_string($path) ? $path : '');
     }
 
     /**
-     * Sets path.
+     * Sets path
      *
      * @param  string $path
      * @return void
@@ -37,7 +30,7 @@ class Uri
     }
 
     /**
-     * Returns path.
+     * Returns path
      *
      * @param boolean $original
      * @return array<string>
