@@ -262,9 +262,7 @@ class File
      */
     public function copy(string $destination): File
     {
-        if (!copy($this->getPath(), $destination)) {
-            throw new Exception('Failed to copy file!', 400);
-        }
+        copy($this->getPath(), $destination);
 
         return FileSystem::open($destination);
     }
