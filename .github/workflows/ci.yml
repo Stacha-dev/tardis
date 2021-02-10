@@ -1,9 +1,6 @@
 name: CI
 on:
-   pull_request:
-    branches:
-      - master
-      - develop
+   push:
 jobs:
   ci:
     runs-on: ubuntu-20.04
