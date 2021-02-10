@@ -51,7 +51,6 @@
 		"app:password": "php bin/console app:password",
 		"phpstan": "phpstan analyse",
 		"cs": "vendor/bin/php-cs-fixer fix src --dry-run --ansi",
-		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi",
-		"foo": "doctrine"
+		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi"
 	}
 }
