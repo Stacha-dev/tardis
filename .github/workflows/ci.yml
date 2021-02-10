@@ -5,7 +5,7 @@ on:
       - master
       - develop
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-20.04
     env:
       DB_NAME: test
@@ -48,9 +48,19 @@ jobs:
     - name: Unit tests
       run: composer test:coverage
 
+    - name: Generate docs
+      run: composer docs
+
     - name: Archive test coverage
       uses: actions/upload-artifact@v2
       with:
           name: test_coverage
           path: public/reports/test-coverage/
+          retention-days: 7
+
+    - name: Archive docs
+      uses: actions/upload-artifact@v2
+      with:
+          name: docs
+          path: public/docs
           retention-days: 7
