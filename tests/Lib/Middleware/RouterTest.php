@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use App\Lib\Middleware\RouteFactory;
+use App\Lib\Middleware\Router;
+use App\Lib\Http\RequestFactory;
 
 final class RouterTest extends TestCase
 {
@@ -46,7 +48,7 @@ final class RouterTest extends TestCase
 		$_SERVER['REQUEST_METHOD'] = self::SAMPLE_REQUEST_METHOD_GET;
 		$_SERVER['REQUEST_URI'] = self::SAMPLE_REQUEST_URI;
 		$_SERVER['REMOTE_ADDR'] = self::SAMPLE_REQUEST_ADDR;
-		$this->sampleGetRequest = \App\Lib\Http\RequestFactory::fromGlobals();
+		$this->sampleGetRequest = RequestFactory::fromGlobals();
 	}
 
 	/**
@@ -56,7 +58,7 @@ final class RouterTest extends TestCase
 	 */
 	public function testRegisteredRouteCanBeDispatched()
 	{
-		$router = new  \App\Lib\Middleware\Router;
+		$router = new Router;
 		$route = RouteFactory::fromConstants(self::SAMPLE_ROUTE_VERSION, self::SAMPLE_ROUTE_METHOD_GET, self::SAMPLE_ROUTE_PATTERN, self::SAMPLE_ROUTE_ACTION, self::SAMPLE_ROUTE_PARAMS, self::SAMPLE_ROUTE_PROTECTED);
 		$router->register($route);
 		$this->assertCount(1, $router->getRoutes());
@@ -70,7 +72,7 @@ final class RouterTest extends TestCase
 	 */
 	public function testRegisteredRouteCanNotBeDispatched()
 	{
-		$router = new  \App\Lib\Middleware\Router;
+		$router = new Router;
 		$route = RouteFactory::fromConstants(self::SAMPLE_ROUTE_VERSION, self::SAMPLE_ROUTE_METHOD_POST, self::SAMPLE_ROUTE_PATTERN, self::SAMPLE_ROUTE_ACTION, self::SAMPLE_ROUTE_PARAMS, self::SAMPLE_ROUTE_PROTECTED);
 		$router->register($route);
 		$this->expectException("Exception");
