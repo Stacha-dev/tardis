@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Lib\Http;
@@ -26,8 +27,10 @@ class Body
 
     /**
      * Parse request body
+     *
+     * @return void
      */
-    private function setBody():void
+    private function setBody()
     {
         switch ($this->contentType) {
             case 'application/json':
@@ -36,17 +39,22 @@ class Body
                     throw new Exception('Body content is not valid!');
                 }
                 $this->body = json_decode($body, true);
-            break;
+                break;
             case 'multipart/form-data':
                 $this->body = $_POST;
-            break;
+                break;
             default:
-            $this->body = [];
-        break;
+                $this->body = [];
+                break;
         }
     }
 
-    private function setContentType():void
+    /**
+     * Sets request content type
+     *
+     * @return void
+     */
+    private function setContentType()
     {
         if (!array_key_exists("CONTENT_TYPE", $_SERVER)) {
             $this->contentType = "";
@@ -57,7 +65,12 @@ class Body
         }
     }
 
-    private function setFiles():void
+    /**
+     * Sets request files to instance
+     *
+     * @return void
+     */
+    private function setFiles()
     {
         foreach ($_FILES as $key => $file) {
             array_push($this->files, FileSystem::open($file['tmp_name'])->setUploadName($key));
@@ -65,7 +78,7 @@ class Body
     }
 
     /**
-     * Returns requests body.
+     * Returns requests body
      *
      * @return array<string>
      */
@@ -75,7 +88,7 @@ class Body
     }
 
     /**
-     * Returns body data by key.
+     * Returns body data by key
      *
      * @param  string $key
      * @return mixed
@@ -92,7 +105,7 @@ class Body
      *
      * @return string
      */
-    public function getContentType():string
+    public function getContentType(): string
     {
         return $this->contentType;
     }
@@ -102,7 +115,7 @@ class Body
      *
      * @return array<\App\Lib\FileSystem\File>
      */
-    public function getFiles():array
+    public function getFiles(): array
     {
         return $this->files;
     }

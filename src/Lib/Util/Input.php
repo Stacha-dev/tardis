@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Lib\Util;
 
 /**
- * String tools library.
+ * String tools library
  */
 class Input
 {
     /**
-     * Converts input string to ASCII.
+     * Converts input string to ASCII
      *
      * @param  string $input
      * @return string
@@ -33,7 +33,7 @@ class Input
     }
 
     /**
-     * Converts input string to url like string.
+     * Converts input string to url like string
      *
      * @param  string $input
      * @return string

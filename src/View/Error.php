@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\View;
 
 use App\View\BaseView;
@@ -7,7 +9,7 @@ use App\View\BaseView;
 class Error extends BaseView
 {
     /**
-     * Rednder error.
+     * Rednders error
      *
      * @param  string  $message
      * @param  integer $code

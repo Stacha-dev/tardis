@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\FileSystem;
 
 use App\Lib\FileSystem\File;
@@ -39,7 +41,7 @@ class FileSystem
      * @param File $file
      * @return void
      */
-    public static function upload(File &$file, string $directory=""):void
+    public static function upload(File &$file, string $directory = ""): void
     {
         $destination = join("/", [$_SERVER["DOCUMENT_ROOT"] . self::STORAGE, $directory, $file->getBasename()]);
         $file->move($destination);
@@ -47,12 +49,12 @@ class FileSystem
     }
 
     /**
-    * Returns uri to file
-    *
-    * @param File|Image $file
-    * @return string
-    */
-    public static function getUri($file):string
+     * Returns uri to file
+     *
+     * @param File|Image $file
+     * @return string
+     */
+    public static function getUri($file): string
     {
         $uri = strstr($file->getPath(), DIRECTORY_SEPARATOR . self::STORAGE_NAME);
         if (!is_string($uri)) {
@@ -68,7 +70,7 @@ class FileSystem
      * @param string $path
      * @return boolean
      */
-    public static function isAbsolute(string $path):bool
+    public static function isAbsolute(string $path): bool
     {
         return is_int(strpos($path, $_SERVER['HOME']));
     }

@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Http;
 
 use App\Lib\Http\Request;
@@ -10,10 +12,9 @@ class RequestFactory
 {
 
     /**
-     * Returns new instance of Uri class by URI.
+     * Returns new instance of Uri class by URI
      *
      * @param  string $uri
-     * @static
      * @return \App\Lib\Http\Uri
      */
     private static function getUri(string $uri): \App\Lib\Http\Uri
@@ -22,9 +23,8 @@ class RequestFactory
     }
 
     /**
-     * Returns new instance of Body class.
+     * Returns new instance of Body class
      *
-     * @static
      * @return \App\Lib\Http\Body
      */
     private static function getBody(): \App\Lib\Http\Body
@@ -33,9 +33,8 @@ class RequestFactory
     }
 
     /**
-     * Returns new instance of Request class from server globals.
+     * Returns new instance of Request class from server globals
      *
-     * @static
      * @return \App\Lib\Http\Request
      */
     public static function fromGlobals(): \App\Lib\Http\Request

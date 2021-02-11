@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Security;
 
 use App\Lib\Configuration\ConfigurationFactory;
@@ -9,12 +11,12 @@ class Hash
 {
 
 
-  /**
-  * Gets pepper from global domain config
-  *
-  * @return string
-  */
-    private static function getPepper():string
+    /**
+     * Gets pepper from global domain config
+     *
+     * @return string
+     */
+    private static function getPepper(): string
     {
         $configuration = ConfigurationFactory::fromFileName('common');
         $configuration->setSegment('security');
@@ -23,22 +25,22 @@ class Hash
 
 
     /**
-    * Basic hash for pepper and password before submit/verify
-    *
-    * @return string
-    */
-    private static function hashString(string $str):string
+     * Basic hash for pepper and password before submit/verify
+     *
+     * @return string
+     */
+    private static function hashString(string $str): string
     {
         return hash('md5', $str);
     }
 
 
     /**
-    * Creates hash from string
-    *
-    * @return string
-    */
-    public static function getHash(string $str):string
+     * Creates hash from string
+     *
+     * @return string
+     */
+    public static function getHash(string $str): string
     {
         if (strlen($str) > 32) {
             throw new Exception('Submitted password is too long.', 401);
@@ -47,20 +49,20 @@ class Hash
         $str = self::hashString($str);
         $pepper = self::getPepper();
 
-        return password_hash($pepper.$str, PASSWORD_ARGON2I) ?: '';
+        return password_hash($pepper . $str, PASSWORD_ARGON2I) ?: '';
     }
 
 
     /**
-    * Verify hash from string
-    *
-    * @return bool
-    */
-    public static function verifyHash(string $str, string $hash):bool
+     * Verify hash from string
+     *
+     * @return bool
+     */
+    public static function verifyHash(string $str, string $hash): bool
     {
         $str = self::hashString($str);
         $pepper = self::getPepper();
 
-        return password_verify($pepper.$str, $hash);
+        return password_verify($pepper . $str, $hash);
     }
 }

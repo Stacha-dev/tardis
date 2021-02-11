@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Configuration;
 
 use Exception;
@@ -27,7 +29,7 @@ class Configuration
      * @param string $path
      * @return array<array>
      */
-    private function parseIniFile(string $path):array
+    private function parseIniFile(string $path): array
     {
         $configuration = parse_ini_file($path, true, INI_SCANNER_RAW) ?: [];
 
@@ -40,7 +42,7 @@ class Configuration
      * @param string $segment
      * @return array<string>
      */
-    public function getSegment(string $segment):array
+    public function getSegment(string $segment): array
     {
         if (!(array_key_exists($segment, $this->configuration))) {
             throw new Exception('Segment ' . $segment . 'not exists!');
@@ -55,7 +57,7 @@ class Configuration
      * @param string $key
      * @return string
      */
-    public function get(string $key):string
+    public function get(string $key): string
     {
         $configuration = $this->getSegment($this->segment);
         if (!(array_key_exists($key, $configuration))) {
@@ -71,7 +73,7 @@ class Configuration
      * @param string $segment
      * @return void
      */
-    public function setSegment(string $segment):void
+    public function setSegment(string $segment): void
     {
         if (!array_key_exists($segment, $this->configuration)) {
             throw new Exception('Segment ' . $segment . ' not exists!');

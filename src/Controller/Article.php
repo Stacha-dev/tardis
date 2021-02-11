@@ -11,7 +11,7 @@ use Exception;
 final class Article extends \App\Controller\Base
 {
     /**
-     * Register routes to router.
+     * Register routes to router
      *
      * @param  \App\Lib\Middleware\Router $router
      * @return void
@@ -27,7 +27,7 @@ final class Article extends \App\Controller\Base
     }
 
     /**
-     * Gets all articles.
+     * Gets all articles
      *
      * @return array<array>
      */
@@ -40,7 +40,7 @@ final class Article extends \App\Controller\Base
     }
 
     /**
-     * Gets one article by his ID.
+     * Gets one article by his ID
      *
      * @param  int $id
      * @return \App\Model\Entity\Article
@@ -57,7 +57,7 @@ final class Article extends \App\Controller\Base
     }
 
     /**
-     * Gets one article by his alias.
+     * Gets one article by his alias
      *
      * @param  string $alias
      * @return \App\Model\Entity\Article
@@ -74,7 +74,7 @@ final class Article extends \App\Controller\Base
     }
 
     /**
-     * Creates new article.
+     * Creates new article
      *
      * @param  string $title
      * @param  string $content
@@ -95,7 +95,7 @@ final class Article extends \App\Controller\Base
     }
 
     /**
-     * Edit article by ID.
+     * Edit article by ID
      *
      * @param  int    $id
      * @param  string $title
@@ -129,7 +129,7 @@ final class Article extends \App\Controller\Base
     }
 
     /**
-     * Delete article by ID.
+     * Delete article by ID
      *
      * @param  int $id
      * @return void

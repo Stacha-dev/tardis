@@ -1,8 +1,9 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Authorization;
 
-use App\Lib\Authorization\Jwt;
 use Exception;
 
 final class AuthorizationFactory

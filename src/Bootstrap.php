@@ -14,7 +14,7 @@ use Memcached;
 class Bootstrap
 {
     /**
-     * Boot instace of App.
+     * Boot instace of App
      *
      * @return \App\Controller\App
      */
@@ -27,7 +27,7 @@ class Bootstrap
     }
 
     /**
-     * Returns instance of EntityManager.
+     * Returns instance of EntityManager
      *
      * @return \Doctrine\ORM\EntityManager
      */

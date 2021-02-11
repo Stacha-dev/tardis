@@ -42,7 +42,7 @@ class Base implements IBase
     }
 
     /**
-     * Register routes to router.
+     * Register routes to router
      *
      * @param  \App\Lib\Middleware\Router $router
      * @return void
@@ -63,7 +63,8 @@ class Base implements IBase
     }
 
     /**
-     * Dispatch request to predefined routes.
+     * Dispatch request to predefined routes
+     *
      * @param  \App\Lib\Middleware\Router $router
      * @param \App\Lib\Http\Request $request
      */
@@ -93,7 +94,7 @@ class Base implements IBase
     }
 
     /**
-     * Sets view.
+     * Sets view
      *
      * @param  string $view
      * @return void
@@ -109,7 +110,7 @@ class Base implements IBase
     }
 
     /**
-     * Sets request.
+     * Sets request
      *
      * @param  \App\Lib\Http\Request $request
      * @return void
@@ -120,7 +121,7 @@ class Base implements IBase
     }
 
     /**
-     * Checks user permitions on route action.
+     * Checks user permitions on route action
      *
      * @param \App\Lib\Middleware\Route $route
      * @return void
