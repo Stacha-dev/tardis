@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Lib\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -7,6 +8,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Lib\Security\Hash;
 
+/**
+ * @codeCoverageIgnore
+ */
 class AppPasswordCommand extends Command
 {
     /** @var string */
@@ -24,12 +28,12 @@ class AppPasswordCommand extends Command
     }
 
     /**
-    * Execute command
-    *
-    * @param InputInterface $input
-    * @param OutputInterface $output
-    * @return integer
-    */
+     * Execute command
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return integer
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $password = $input->getArgument('password');

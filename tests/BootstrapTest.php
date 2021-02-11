@@ -1,26 +1,28 @@
 <?php
+
 declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use App\Bootstrap;
 
 final class BootstrapTest extends TestCase
 {
     /**
-     * Test is successfull when instance og \Doctrine\ORM\EntityManager is returned.
+     * Test is successful when instance og \Doctrine\ORM\EntityManager is returned
      *
      * @return void
      */
-    public function testEntityManagerCanBeCreated(): void
+    public function testEntityManagerCanBeCreated()
     {
         $this->assertInstanceOf("\Doctrine\ORM\EntityManager", Bootstrap::getEntityManager());
     }
 
     /**
-    * Test is successfull when instance og App\Controller\App is returned.
-    *
-    * @return void
-    */
-    public function testAppCanBoot(): void
+     * Test is successful when instance og App\Controller\App is returned
+     *
+     * @return void
+     */
+    public function testAppCanBoot()
     {
         $_SERVER['HTTPS'] = "on";
         $_SERVER['REQUEST_METHOD'] = "GET";

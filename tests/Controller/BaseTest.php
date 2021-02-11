@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use App\Controller\Base;
 use App\Bootstrap;
@@ -15,7 +17,7 @@ final class BaseTest extends TestCase
     }
 
     /**
-     * Test is successfull if instance of App\Controller\Base is created.
+     * Test is successful if instance of App\Controller\Base is created
      *
      * @return void
      */
@@ -25,11 +27,11 @@ final class BaseTest extends TestCase
     }
 
     /**
-     * Test is successfull if default routes can be registered.
+     * Test is successful if default routes can be registered
      *
      * @return void
      */
-    public function testDefaultRoutesCanBeRegistered(): void
+    public function testDefaultRoutesCanBeRegistered()
     {
         $router = new \App\Lib\Middleware\Router;
         $this->base->registerDefaultRoutes($router);

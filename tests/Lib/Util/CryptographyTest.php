@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use App\Lib\Util\Cryptography;
@@ -7,7 +8,7 @@ use App\Lib\Util\Cryptography;
 class CryptographyTest extends TestCase
 {
     /**
-     * Test is successfull if random string is generated.
+     * Test is successful if random string is generated
      *
      * @return void
      */
@@ -23,7 +24,7 @@ class CryptographyTest extends TestCase
     }
 
     /**
-     * Test is successfull if string is hashed.
+     * Test is successful if string is hashed
      *
      * @return void
      */

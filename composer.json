@@ -41,7 +41,7 @@
 	"scripts": {
 		"docs": "phpdoc",
 		"test": "vendor/bin/phpunit tests",
-		"test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html public/reports/codecov/",
+		"test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html public/reports/test-coverage/",
 		"orm:create": "doctrine orm:schema-tool:create",
 		"orm:update": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
@@ -51,7 +51,6 @@
 		"app:password": "php bin/console app:password",
 		"phpstan": "phpstan analyse",
 		"cs": "vendor/bin/php-cs-fixer fix src --dry-run --ansi",
-		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi",
-		"foo": "doctrine"
+		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi"
 	}
 }

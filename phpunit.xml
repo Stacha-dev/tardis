@@ -16,13 +16,16 @@
             <directory>./tests/Lib/Util</directory>
 			<file>./tests/Lib/Util/InputTest.php</file>
         </testsuite>
-		<testsuite name="Request Test Suite">
+		<testsuite name="Http Test Suite">
             <directory>./tests/Lib/Http</directory>
+            <file>./tests/Lib/Http/BodyTest.php</file>
 			<file>./tests/Lib/Http/RequestTest.php</file>
+            <file>./tests/Lib/Http/UriTest.php</file>
         </testsuite>
 		<testsuite name="Router Test Suite">
             <directory>./tests/Lib/Middleware</directory>
-			<file>./tests/Lib/Middleware/RouterTest.php</file>
+			<file>./tests/Lib/Middleware/RouteTest.php</file>
+            <file>./tests/Lib/Middleware/RouterTest.php</file>
         </testsuite>
 		<testsuite name="Article Test Suite">
             <directory>./tests/Controller</directory>
@@ -43,6 +46,10 @@
         <testsuite name="Security Hash Test Suite">
             <directory>./tests/Lib/Security</directory>
 			<file>./tests/Lib/Security/HashTest.php</file>
+        </testsuite>
+        <testsuite name="Assert Test Suite">
+            <directory>./tests/Lib/Assert</directory>
+			<file>./tests/Lib/Assert/Text.php</file>
         </testsuite>
     </testsuites>
     <filter>

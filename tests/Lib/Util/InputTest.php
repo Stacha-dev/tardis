@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
@@ -7,7 +8,7 @@ use App\Lib\Util\Input;
 final class InputTest extends TestCase
 {
     /**
-     * Test is successfull if text is converted to ASCII.
+     * Test is successful if text is converted to ASCII
      *
      * @return void
      */
@@ -18,7 +19,7 @@ final class InputTest extends TestCase
 
 
     /**
-     * Test is successfull if alias from string is returned.
+     * Test is successful if alias from string is returned
      *
      * @return void
      */
