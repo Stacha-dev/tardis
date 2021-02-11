@@ -1,12 +1,9 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Lib\Http;
 
-/**
- * Request
- *
- * @package http
- */
 class Request
 {
     /**
@@ -67,7 +64,13 @@ class Request
         $this->setAccept($accept);
     }
 
-    private function setMethod(string $method):void
+    /**
+     * Sets request method
+     *
+     * @param string $method
+     * @return void
+     */
+    private function setMethod(string $method): void
     {
         $apiConfig = parse_ini_file(__DIR__ . '/../../../config/api.ini');
         if ($apiConfig && in_array($method, $apiConfig['Allow-Methods'])) {
@@ -78,7 +81,7 @@ class Request
     }
 
     /**
-     * Returns requests URI.
+     * Returns requests URI
      *
      * @return \App\Lib\Http\Uri
      */
@@ -88,7 +91,7 @@ class Request
     }
 
     /**
-     * Returns api key from request header.
+     * Returns api key from request header
      *
      * @return string
      */
@@ -108,7 +111,7 @@ class Request
     }
 
     /**
-     * Returns request method.
+     * Returns request method
      *
      * @return string
      */
@@ -118,7 +121,7 @@ class Request
     }
 
     /**
-     * Sets accept format.
+     * Sets accept format
      *
      * @param  string $accept
      * @return void
@@ -126,25 +129,35 @@ class Request
     private function setAccept($accept)
     {
         switch ($accept) {
-        case "application/json":
-            $this->accept = "json";
-            break;
-        case "application/xml":
-            $this->accept = "xml";
-            break;
-        case "text/html":
-            $this->accept = "html";
-            break;
-        default:
-            $this->accept = "json";
+            case "application/json":
+                $this->accept = "json";
+                break;
+            case "application/xml":
+                $this->accept = "xml";
+                break;
+            case "text/html":
+                $this->accept = "html";
+                break;
+            default:
+                $this->accept = "json";
         }
     }
 
+    /**
+     * Returns request accept
+     *
+     * @return string
+     */
     public function getAccept(): string
     {
         return $this->accept;
     }
 
+    /**
+     * Retruns request resource
+     *
+     * @return string
+     */
     public function getResource(): string
     {
         $path = $this->getUri()->getPath();

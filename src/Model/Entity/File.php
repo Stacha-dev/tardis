@@ -1,9 +1,10 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Model\Entity\Gallery;
 
 /**
  * @ORM\Entity
@@ -62,7 +63,7 @@ class File
      * @param  string $title
      * @return void
      */
-    public function setTitle(string $title):void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -73,7 +74,7 @@ class File
      * @param string $path
      * @return void
      */
-    public function setPath(string $path):void
+    public function setPath(string $path): void
     {
         $this->path = $path;
     }
@@ -94,7 +95,7 @@ class File
      * @param boolean $state
      * @return void
      */
-    public function setState(bool $state):void
+    public function setState(bool $state): void
     {
         $this->state = $state;
     }
@@ -124,7 +125,7 @@ class File
      *
      * @return string
      */
-    public function getPath():string
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -147,7 +148,7 @@ class File
      *
      * @return boolean
      */
-    public function getState():bool
+    public function getState(): bool
     {
         return $this->state;
     }

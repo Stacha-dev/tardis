@@ -54,7 +54,7 @@ class Mail
         return $this;
     }
 
-    
+
     /**
      * Set Sender's email
      *

@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\View;
 
 class BaseView
@@ -10,7 +12,7 @@ class BaseView
     }
 
     /**
-     * Sets response headers by ini file.
+     * Sets response headers by ini file
      *
      * @return void
      */
@@ -23,7 +25,7 @@ class BaseView
                     if (is_array($value)) {
                         $header = $section . "-" . $rule . ": ";
                         foreach ($value as $i => $subValue) {
-                            $header .= $i !== array_key_last($value) ? $subValue."," : $subValue;
+                            $header .= $i !== array_key_last($value) ? $subValue . "," : $subValue;
                         }
                         header($header);
                     } else {

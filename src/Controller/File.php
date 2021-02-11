@@ -11,7 +11,7 @@ use Exception;
 final class File extends \App\Controller\Base
 {
     /**
-     * Register routes to router.
+     * Register routes to router
      *
      * @param  \App\Lib\Middleware\Router $router
      * @return void

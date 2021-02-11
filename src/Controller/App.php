@@ -20,6 +20,13 @@ class App
         }
     }
 
+    /**
+     * Cretes instace of controller depends on request
+     *
+     * @param \App\Lib\Http\Request $request
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @return \App\Controller\Base
+     */
     private function controllerFactory(\App\Lib\Http\Request $request, \Doctrine\ORM\EntityManager $entityManager): \App\Controller\Base
     {
         $path = $request->getUri()->getPath();

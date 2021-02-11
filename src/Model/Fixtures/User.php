@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Model\Fixtures;
 
 use App\Model\Entity\User;
@@ -12,7 +14,7 @@ class UserLoader implements FixtureInterface
      * @param ObjectManager $manager
      * @return void
      */
-    public function load(ObjectManager $manager):void
+    public function load(ObjectManager $manager): void
     {
         $user = new User();
         $user->setUsername('root');

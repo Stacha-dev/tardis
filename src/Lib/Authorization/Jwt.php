@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Authorization;
 
 use App\Lib\Authorization\Base;
@@ -23,7 +25,7 @@ class Jwt extends Base
      * @param array<string|int> $data
      * @return string
      */
-    public function getToken(array $data = []):string
+    public function getToken(array $data = []): string
     {
         $payload = array(
             "iss" => self::SERVER_NAME,
@@ -40,7 +42,7 @@ class Jwt extends Base
      * @param string $token
      * @return object
      */
-    public function authorize(string $token):object
+    public function authorize(string $token): object
     {
         [$token] = sscanf($token, 'Bearer %s');
         return \Firebase\JWT\JWT::decode($token, $this->key, array('HS256'));

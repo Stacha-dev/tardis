@@ -13,8 +13,8 @@ class Headers
     public function __construct()
     {
         $this->setHeader('Bcc', [])
-             ->setHeader('Content-Type', 'text/html; charset=utf-8')
-             ->setHeader('X-Mailer', 'PHP/' . phpversion());
+            ->setHeader('Content-Type', 'text/html; charset=utf-8')
+            ->setHeader('X-Mailer', 'PHP/' . phpversion());
     }
 
 
@@ -31,7 +31,7 @@ class Headers
         return $this;
     }
 
-    
+
     /**
      * Get single header
      *

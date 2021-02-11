@@ -16,7 +16,7 @@ class Text
         return filter_var($email, FILTER_VALIDATE_EMAIL) === false ? false : true;
     }
 
-    
+
     /**
      * Test string for max length
      *

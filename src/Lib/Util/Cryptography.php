@@ -1,11 +1,13 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Util;
 
 class Cryptography
 {
     /**
-     * Generates random string.
+     * Generates random string
      *
      * @param integer $length
      * @return string
@@ -16,7 +18,7 @@ class Cryptography
     }
 
     /**
-     * Hash content by provided key.
+     * Hash content by provided key
      *
      * @param string $content
      * @param string $key
