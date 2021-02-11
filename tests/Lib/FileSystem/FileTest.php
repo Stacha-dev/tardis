@@ -49,7 +49,7 @@ final class FileTest extends TestCase
     }
 
     /**
-     * Test is successfull if filename is returned
+     * Test is successful if filename is returned
      *
      * @return void
      */
@@ -60,7 +60,7 @@ final class FileTest extends TestCase
     }
 
     /**
-     * Test is successfull if file is not image
+     * Test is successful if file is not image
      *
      * @return void
      */
@@ -71,7 +71,7 @@ final class FileTest extends TestCase
     }
 
     /**
-     * Test is successfull if file is not turned to image
+     * Test is successful if file is not turned to image
      *
      * @return void
      */
@@ -83,7 +83,7 @@ final class FileTest extends TestCase
     }
 
     /**
-     * Test is successfull if file is deleted
+     * Test is successful if file is deleted
      *
      * @return void
      */
@@ -95,7 +95,7 @@ final class FileTest extends TestCase
     }
 
     /**
-     * Test is successfull if file is renamed
+     * Test is successful if file is renamed
      *
      * @return void
      */
@@ -108,7 +108,7 @@ final class FileTest extends TestCase
     }
 
     /**
-     * Test is successfull if file is moved
+     * Test is successful if file is moved
      *
      * @return void
      */
