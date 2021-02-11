@@ -8,12 +8,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Bootstrap\u003A\u003Aboot\u0028\u0029",
             "name": "boot",
-            "summary": "Boot\u0020instace\u0020of\u0020App.",
+            "summary": "Boot\u0020instace\u0020of\u0020App",
             "url": "classes/App-Bootstrap.html#method_boot"
         },                {
             "fqsen": "\\App\\Bootstrap\u003A\u003AgetEntityManager\u0028\u0029",
             "name": "getEntityManager",
-            "summary": "Returns\u0020instance\u0020of\u0020EntityManager.",
+            "summary": "Returns\u0020instance\u0020of\u0020EntityManager",
             "url": "classes/App-Bootstrap.html#method_getEntityManager"
         },                {
             "fqsen": "\\App\\Controller\\App",
@@ -28,7 +28,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\App\u003A\u003AcontrollerFactory\u0028\u0029",
             "name": "controllerFactory",
-            "summary": "",
+            "summary": "Cretes\u0020instace\u0020of\u0020controller\u0020depends\u0020on\u0020request",
             "url": "classes/App-Controller-App.html#method_controllerFactory"
         },                {
             "fqsen": "\\App\\Controller\\Article",
@@ -38,37 +38,37 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003AregisterRoutes\u0028\u0029",
             "name": "registerRoutes",
-            "summary": "Register\u0020routes\u0020to\u0020router.",
+            "summary": "Register\u0020routes\u0020to\u0020router",
             "url": "classes/App-Controller-Article.html#method_registerRoutes"
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003AgetAll\u0028\u0029",
             "name": "getAll",
-            "summary": "Gets\u0020all\u0020articles.",
+            "summary": "Gets\u0020all\u0020articles",
             "url": "classes/App-Controller-Article.html#method_getAll"
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003AgetOneById\u0028\u0029",
             "name": "getOneById",
-            "summary": "Gets\u0020one\u0020article\u0020by\u0020his\u0020ID.",
+            "summary": "Gets\u0020one\u0020article\u0020by\u0020his\u0020ID",
             "url": "classes/App-Controller-Article.html#method_getOneById"
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003AgetOneByAlias\u0028\u0029",
             "name": "getOneByAlias",
-            "summary": "Gets\u0020one\u0020article\u0020by\u0020his\u0020alias.",
+            "summary": "Gets\u0020one\u0020article\u0020by\u0020his\u0020alias",
             "url": "classes/App-Controller-Article.html#method_getOneByAlias"
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "Creates\u0020new\u0020article.",
+            "summary": "Creates\u0020new\u0020article",
             "url": "classes/App-Controller-Article.html#method_create"
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003Aedit\u0028\u0029",
             "name": "edit",
-            "summary": "Edit\u0020article\u0020by\u0020ID.",
+            "summary": "Edit\u0020article\u0020by\u0020ID",
             "url": "classes/App-Controller-Article.html#method_edit"
         },                {
             "fqsen": "\\App\\Controller\\Article\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "Delete\u0020article\u0020by\u0020ID.",
+            "summary": "Delete\u0020article\u0020by\u0020ID",
             "url": "classes/App-Controller-Article.html#method_delete"
         },                {
             "fqsen": "\\App\\Controller\\Base",
@@ -83,7 +83,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003AregisterRoutes\u0028\u0029",
             "name": "registerRoutes",
-            "summary": "Register\u0020routes\u0020to\u0020router.",
+            "summary": "Register\u0020routes\u0020to\u0020router",
             "url": "classes/App-Controller-Base.html#method_registerRoutes"
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003AregisterDefaultRoutes\u0028\u0029",
@@ -93,7 +93,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003ArequestDispatch\u0028\u0029",
             "name": "requestDispatch",
-            "summary": "Dispatch\u0020request\u0020to\u0020predefined\u0020routes.",
+            "summary": "Dispatch\u0020request\u0020to\u0020predefined\u0020routes",
             "url": "classes/App-Controller-Base.html#method_requestDispatch"
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003AgetState\u0028\u0029",
@@ -103,17 +103,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003AsetView\u0028\u0029",
             "name": "setView",
-            "summary": "Sets\u0020view.",
+            "summary": "Sets\u0020view",
             "url": "classes/App-Controller-Base.html#method_setView"
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003AsetRequest\u0028\u0029",
             "name": "setRequest",
-            "summary": "Sets\u0020request.",
+            "summary": "Sets\u0020request",
             "url": "classes/App-Controller-Base.html#method_setRequest"
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003AcheckPerms\u0028\u0029",
             "name": "checkPerms",
-            "summary": "Checks\u0020user\u0020permitions\u0020on\u0020route\u0020action.",
+            "summary": "Checks\u0020user\u0020permitions\u0020on\u0020route\u0020action",
             "url": "classes/App-Controller-Base.html#method_checkPerms"
         },                {
             "fqsen": "\\App\\Controller\\Base\u003A\u003A\u0024entityManager",
@@ -148,7 +148,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\File\u003A\u003AregisterRoutes\u0028\u0029",
             "name": "registerRoutes",
-            "summary": "Register\u0020routes\u0020to\u0020router.",
+            "summary": "Register\u0020routes\u0020to\u0020router",
             "url": "classes/App-Controller-File.html#method_registerRoutes"
         },                {
             "fqsen": "\\App\\Controller\\File\u003A\u003AgetAll\u0028\u0029",
@@ -728,22 +728,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Http\\Body\u003A\u003AsetContentType\u0028\u0029",
             "name": "setContentType",
-            "summary": "",
+            "summary": "Sets\u0020request\u0020content\u0020type",
             "url": "classes/App-Lib-Http-Body.html#method_setContentType"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Body\u003A\u003AsetFiles\u0028\u0029",
             "name": "setFiles",
-            "summary": "",
+            "summary": "Sets\u0020request\u0020files\u0020to\u0020instance",
             "url": "classes/App-Lib-Http-Body.html#method_setFiles"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Body\u003A\u003AgetBody\u0028\u0029",
             "name": "getBody",
-            "summary": "Returns\u0020requests\u0020body.",
+            "summary": "Returns\u0020requests\u0020body",
             "url": "classes/App-Lib-Http-Body.html#method_getBody"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Body\u003A\u003AgetBodyData\u0028\u0029",
             "name": "getBodyData",
-            "summary": "Returns\u0020body\u0020data\u0020by\u0020key.",
+            "summary": "Returns\u0020body\u0020data\u0020by\u0020key",
             "url": "classes/App-Lib-Http-Body.html#method_getBodyData"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Body\u003A\u003AgetContentType\u0028\u0029",
@@ -773,7 +773,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request",
             "name": "Request",
-            "summary": "Request",
+            "summary": "",
             "url": "classes/App-Lib-Http-Request.html"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003A__construct\u0028\u0029",
@@ -783,17 +783,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AsetMethod\u0028\u0029",
             "name": "setMethod",
-            "summary": "",
+            "summary": "Sets\u0020request\u0020method",
             "url": "classes/App-Lib-Http-Request.html#method_setMethod"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AgetUri\u0028\u0029",
             "name": "getUri",
-            "summary": "Returns\u0020requests\u0020URI.",
+            "summary": "Returns\u0020requests\u0020URI",
             "url": "classes/App-Lib-Http-Request.html#method_getUri"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AgetAuthorization\u0028\u0029",
             "name": "getAuthorization",
-            "summary": "Returns\u0020api\u0020key\u0020from\u0020request\u0020header.",
+            "summary": "Returns\u0020api\u0020key\u0020from\u0020request\u0020header",
             "url": "classes/App-Lib-Http-Request.html#method_getAuthorization"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AgetBody\u0028\u0029",
@@ -803,22 +803,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AgetMethod\u0028\u0029",
             "name": "getMethod",
-            "summary": "Returns\u0020request\u0020method.",
+            "summary": "Returns\u0020request\u0020method",
             "url": "classes/App-Lib-Http-Request.html#method_getMethod"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AsetAccept\u0028\u0029",
             "name": "setAccept",
-            "summary": "Sets\u0020accept\u0020format.",
+            "summary": "Sets\u0020accept\u0020format",
             "url": "classes/App-Lib-Http-Request.html#method_setAccept"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AgetAccept\u0028\u0029",
             "name": "getAccept",
-            "summary": "",
+            "summary": "Returns\u0020request\u0020accept",
             "url": "classes/App-Lib-Http-Request.html#method_getAccept"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003AgetResource\u0028\u0029",
             "name": "getResource",
-            "summary": "",
+            "summary": "Retruns\u0020request\u0020resource",
             "url": "classes/App-Lib-Http-Request.html#method_getResource"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Request\u003A\u003A\u0024isSecured",
@@ -863,17 +863,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Http\\RequestFactory\u003A\u003AgetUri\u0028\u0029",
             "name": "getUri",
-            "summary": "Returns\u0020new\u0020instance\u0020of\u0020Uri\u0020class\u0020by\u0020URI.",
+            "summary": "Returns\u0020new\u0020instance\u0020of\u0020Uri\u0020class\u0020by\u0020URI",
             "url": "classes/App-Lib-Http-RequestFactory.html#method_getUri"
         },                {
             "fqsen": "\\App\\Lib\\Http\\RequestFactory\u003A\u003AgetBody\u0028\u0029",
             "name": "getBody",
-            "summary": "Returns\u0020new\u0020instance\u0020of\u0020Body\u0020class.",
+            "summary": "Returns\u0020new\u0020instance\u0020of\u0020Body\u0020class",
             "url": "classes/App-Lib-Http-RequestFactory.html#method_getBody"
         },                {
             "fqsen": "\\App\\Lib\\Http\\RequestFactory\u003A\u003AfromGlobals\u0028\u0029",
             "name": "fromGlobals",
-            "summary": "Returns\u0020new\u0020instance\u0020of\u0020Request\u0020class\u0020from\u0020server\u0020globals.",
+            "summary": "Returns\u0020new\u0020instance\u0020of\u0020Request\u0020class\u0020from\u0020server\u0020globals",
             "url": "classes/App-Lib-Http-RequestFactory.html#method_fromGlobals"
         },                {
             "fqsen": "\\App\\Lib\\Http\\Uri",
@@ -1008,42 +1008,42 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Creates\u0020instance\u0020of\u0020Route\u0020class.",
+            "summary": "Creates\u0020instance\u0020of\u0020Route\u0020class",
             "url": "classes/App-Lib-Middleware-Route.html#method___construct"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AgetVersion\u0028\u0029",
             "name": "getVersion",
-            "summary": "Returns\u0020route\u0020version.",
+            "summary": "Returns\u0020route\u0020version",
             "url": "classes/App-Lib-Middleware-Route.html#method_getVersion"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AgetMethod\u0028\u0029",
             "name": "getMethod",
-            "summary": "Returns\u0020route\u0020HTTP\u0020method.",
+            "summary": "Returns\u0020route\u0020HTTP\u0020method",
             "url": "classes/App-Lib-Middleware-Route.html#method_getMethod"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AgetPattern\u0028\u0029",
             "name": "getPattern",
-            "summary": "Returns\u0020regulat\u0020expression\u0020pattern.",
+            "summary": "Returns\u0020regulat\u0020expression\u0020pattern",
             "url": "classes/App-Lib-Middleware-Route.html#method_getPattern"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AgetAction\u0028\u0029",
             "name": "getAction",
-            "summary": "Returns\u0020route\u0020action.",
+            "summary": "Returns\u0020route\u0020action",
             "url": "classes/App-Lib-Middleware-Route.html#method_getAction"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AsetParams\u0028\u0029",
             "name": "setParams",
-            "summary": "Sets\u0020route\u0020params.",
+            "summary": "Sets\u0020route\u0020params",
             "url": "classes/App-Lib-Middleware-Route.html#method_setParams"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AgetParams\u0028\u0029",
             "name": "getParams",
-            "summary": "Returns\u0020action\u0020params.",
+            "summary": "Returns\u0020action\u0020params",
             "url": "classes/App-Lib-Middleware-Route.html#method_getParams"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003AisSecure\u0028\u0029",
             "name": "isSecure",
-            "summary": "Returns\u0020secure\u0020route\u0020state.",
+            "summary": "Returns\u0020secure\u0020route\u0020state",
             "url": "classes/App-Lib-Middleware-Route.html#method_isSecure"
         },                {
             "fqsen": "\\App\\Lib\\Middleware\\Route\u003A\u003A\u0024version",
@@ -1143,27 +1143,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Lib\\Util\\Cryptography\u003A\u003Arandom\u0028\u0029",
             "name": "random",
-            "summary": "Generates\u0020random\u0020string.",
+            "summary": "Generates\u0020random\u0020string",
             "url": "classes/App-Lib-Util-Cryptography.html#method_random"
         },                {
             "fqsen": "\\App\\Lib\\Util\\Cryptography\u003A\u003AhashHmac\u0028\u0029",
             "name": "hashHmac",
-            "summary": "Hash\u0020content\u0020by\u0020provided\u0020key.",
+            "summary": "Hash\u0020content\u0020by\u0020provided\u0020key",
             "url": "classes/App-Lib-Util-Cryptography.html#method_hashHmac"
         },                {
             "fqsen": "\\App\\Lib\\Util\\Input",
             "name": "Input",
-            "summary": "String\u0020tools\u0020library.",
+            "summary": "String\u0020tools\u0020library",
             "url": "classes/App-Lib-Util-Input.html"
         },                {
             "fqsen": "\\App\\Lib\\Util\\Input\u003A\u003AtoAscii\u0028\u0029",
             "name": "toAscii",
-            "summary": "Converts\u0020input\u0020string\u0020to\u0020ASCII.",
+            "summary": "Converts\u0020input\u0020string\u0020to\u0020ASCII",
             "url": "classes/App-Lib-Util-Input.html#method_toAscii"
         },                {
             "fqsen": "\\App\\Lib\\Util\\Input\u003A\u003AtoAlias\u0028\u0029",
             "name": "toAlias",
-            "summary": "Converts\u0020input\u0020string\u0020to\u0020url\u0020like\u0020string.",
+            "summary": "Converts\u0020input\u0020string\u0020to\u0020url\u0020like\u0020string",
             "url": "classes/App-Lib-Util-Input.html#method_toAlias"
         },                {
             "fqsen": "\\App\\Model\\Entity\\Article",
@@ -1758,7 +1758,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\View\\BaseView\u003A\u003AsetResponseHeaders\u0028\u0029",
             "name": "setResponseHeaders",
-            "summary": "Sets\u0020response\u0020headers\u0020by\u0020ini\u0020file.",
+            "summary": "Sets\u0020response\u0020headers\u0020by\u0020ini\u0020file",
             "url": "classes/App-View-BaseView.html#method_setResponseHeaders"
         },                {
             "fqsen": "\\App\\View\\Error",
@@ -1768,7 +1768,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\View\\Error\u003A\u003Arender\u0028\u0029",
             "name": "render",
-            "summary": "Rednder\u0020error.",
+            "summary": "Rednders\u0020error",
             "url": "classes/App-View-Error.html#method_render"
         },                {
             "fqsen": "\\App\\View\\Json",
