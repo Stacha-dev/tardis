@@ -2,6 +2,8 @@
 	"name": "stacha/back-end",
 	"type": "project",
 	"description": "Back-end for our applications.",
+	"version": "0.1.0",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Petr Chalupa",
