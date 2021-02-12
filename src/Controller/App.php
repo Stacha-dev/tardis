@@ -1,8 +1,9 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Lib\Http\Uri;
 use App\Lib\Middleware\Router;
 use App\View\Error;
 use Exception;
@@ -19,6 +20,13 @@ class App
         }
     }
 
+    /**
+     * Cretes instace of controller depends on request
+     *
+     * @param \App\Lib\Http\Request $request
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @return \App\Controller\Base
+     */
     private function controllerFactory(\App\Lib\Http\Request $request, \Doctrine\ORM\EntityManager $entityManager): \App\Controller\Base
     {
         $path = $request->getUri()->getPath();

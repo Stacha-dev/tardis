@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +22,7 @@ class Image
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Gallery")
+     * @ORM\ManyToOne(targetEntity="Gallery", inversedBy="images")
      * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
      * @var Gallery
      */
@@ -33,10 +35,10 @@ class Image
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=512)
-     * @var                       string
+     * @ORM\Column(type="json", length=512)
+     * @var                       array<array<string>>
      */
-    protected $paths;
+    protected $source;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -60,15 +62,15 @@ class Image
     /**
      * @param Gallery $gallery
      * @param string $title
-     * @param array<string> $paths
+     * @param array<array<string>> $source
      * @param integer $ordering
      * @param boolean $state
      */
-    public function __construct(Gallery $gallery, string $title = "", array $paths, int $ordering = 0, bool $state = true)
+    public function __construct(Gallery $gallery, string $title = "", array $source, int $ordering = 0, bool $state = true)
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
-        $this->setPath($paths);
+        $this->setSource($source);
         $this->setOrdering($ordering);
         $this->setState($state);
     }
@@ -77,11 +79,12 @@ class Image
      * Sets image gallery
      *
      * @param Gallery $gallery
-     * @return void
+     * @return self
      */
-    public function setGallery(Gallery $gallery):void
+    public function setGallery(Gallery $gallery): self
     {
         $this->gallery = $gallery;
+        return $this;
     }
 
 
@@ -89,54 +92,59 @@ class Image
      * Sets image title
      *
      * @param  string $title
-     * @return void
+     * @return self
      */
-    public function setTitle(string $title):void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
-     * Sets paths to image
+     * Sets source to image
      *
-     * @param array<string> $paths
-     * @return void
+     * @param array<array<string>> $source
+     * @return self
      */
-    public function setPath(array $paths):void
+    public function setSource(array $source): self
     {
-        $this->paths = json_encode($paths, JSON_THROW_ON_ERROR);
+        $this->source = $source;
+        return $this;
     }
 
     /**
      * Sets image ordering
      *
      * @param integer $ordering
-     * @return void
+     * @return self
      */
-    public function setOrdering(int $ordering):void
+    public function setOrdering(int $ordering): self
     {
         $this->ordering = $ordering;
+        return $this;
     }
 
     /**
      * Sets image updated date
      *
-     * @return void
+     * @return self
      */
-    public function setUpdated()
+    public function setUpdated(): self
     {
         $this->updated = new \DateTime("now");
+        return $this;
     }
 
     /**
      * Sets image state
      *
      * @param boolean $state
-     * @return void
+     * @return self
      */
-    public function setState(bool $state):void
+    public function setState(bool $state): self
     {
         $this->state = $state;
+        return $this;
     }
 
     /**
@@ -155,7 +163,7 @@ class Image
      *
      * @return Gallery
      */
-    public function getGallery():Gallery
+    public function getGallery(): Gallery
     {
         return $this->gallery;
     }
@@ -171,13 +179,13 @@ class Image
     }
 
     /**
-     * Returns image paths
+     * Returns image source
      *
-     * @return array<string>
+     * @return array<array<string>>
      */
-    public function getPaths():array
+    public function getSource(): array
     {
-        return json_decode($this->paths, true);
+        return $this->source;
     }
 
     /**
@@ -185,7 +193,7 @@ class Image
      *
      * @return integer
      */
-    public function getOrdering():int
+    public function getOrdering(): int
     {
         return $this->ordering;
     }
@@ -208,7 +216,7 @@ class Image
      *
      * @return boolean
      */
-    public function getState():bool
+    public function getState(): bool
     {
         return $this->state;
     }

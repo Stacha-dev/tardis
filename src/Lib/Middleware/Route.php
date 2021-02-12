@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Middleware;
 
 class Route
@@ -35,7 +37,7 @@ class Route
     private $secure;
 
     /**
-     * Creates instance of Route class.
+     * Creates instance of Route class
      *
      * @param integer $version
      * @param string $method
@@ -55,7 +57,7 @@ class Route
     }
 
     /**
-     * Returns route version.
+     * Returns route version
      *
      * @return integer
      */
@@ -65,7 +67,7 @@ class Route
     }
 
     /**
-     * Returns route HTTP method.
+     * Returns route HTTP method
      *
      * @return string
      */
@@ -75,7 +77,7 @@ class Route
     }
 
     /**
-     * Returns regulat expression pattern.
+     * Returns regulat expression pattern
      *
      * @return string
      */
@@ -85,7 +87,7 @@ class Route
     }
 
     /**
-     * Returns route action.
+     * Returns route action
      *
      * @return string
      */
@@ -95,7 +97,7 @@ class Route
     }
 
     /**
-     * Sets route params.
+     * Sets route params
      *
      * @param array<int|string> $params
      * @return void
@@ -106,7 +108,7 @@ class Route
     }
 
     /**
-     * Returns action params.
+     * Returns action params
      *
      * @return array<int|string>
      */
@@ -116,7 +118,7 @@ class Route
     }
 
     /**
-     * Returns secure route state.
+     * Returns secure route state
      *
      * @return bool
      */

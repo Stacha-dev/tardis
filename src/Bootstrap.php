@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App;
 
@@ -13,7 +14,7 @@ use Memcached;
 class Bootstrap
 {
     /**
-     * Boot instace of App.
+     * Boot instace of App
      *
      * @return \App\Controller\App
      */
@@ -26,7 +27,7 @@ class Bootstrap
     }
 
     /**
-     * Returns instance of EntityManager.
+     * Returns instance of EntityManager
      *
      * @return \Doctrine\ORM\EntityManager
      */
@@ -35,16 +36,20 @@ class Bootstrap
         $memcached = new Memcached();
         $memcached->addServer('127.0.0.1', 11211);
 
-        $cacheDriver = new MemcachedCache();
-        $cacheDriver->setMemcached($memcached);
+        $memchachedDriver = new MemcachedCache();
+        $memchachedDriver->setMemcached($memcached);
+
+        $phpFileCacheDriver = new \Doctrine\Common\Cache\PhpFileCache(
+            __DIR__ . '/../tmp'
+        );
 
         /** @todo seek for better aproach */
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/Model/Entity"), false, null, null, false);
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/Model/Entity"), false, null, null, false);
         $config->setProxyDir(__DIR__ . '/../tmp/Proxies');
         $config->setProxyNamespace('App\Proxies');
-        $config->setQueryCacheImpl($cacheDriver);
-        $config->setResultCacheImpl($cacheDriver);
-        $config->setMetadataCacheImpl($cacheDriver);
+        $config->setQueryCacheImpl($memchachedDriver);
+        $config->setResultCacheImpl($memchachedDriver);
+        $config->setMetadataCacheImpl($phpFileCacheDriver);
 
         $common = ConfigurationFactory::fromFileName('common');
 

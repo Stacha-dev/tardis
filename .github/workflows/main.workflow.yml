@@ -1,0 +1,70 @@
+name: Main workflow
+on:
+   push:
+jobs:
+  ci:
+    runs-on: ubuntu-20.04
+    env:
+      DB_NAME: test
+      DB_PASSWORD: root
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: imagick, xdebug, memcached
+        tools: composer:v2
+
+    - uses: getong/mariadb-action@v1.1
+      with:
+        mysql database: ${{ env.DB_NAME }}
+        mysql root password: ${{ env.DB_PASSWORD }}
+
+    - name: Install new instance
+      run: ./bin/install.sh root "$DB_PASSWORD" "$DB_NAME" 127.0.0.1 3306
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Validate DB schema
+      run: composer orm:validate
+
+    - name: Coding Standards
+      run: composer cs
+
+    - name: Static Analysis
+      run: composer phpstan
+
+    - name: Unit tests
+      run: composer test:coverage
+
+    - name: Generate docs
+      run: composer docs
+
+    - name: Archive test coverage
+      uses: actions/upload-artifact@v2
+      with:
+          name: test_coverage
+          path: public/reports/test-coverage/
+          retention-days: 7
+
+    - name: Archive docs
+      uses: actions/upload-artifact@v2
+      with:
+          name: docs
+          path: public/docs
+          retention-days: 7
+
+    - name: Publish docs
+      if: github.ref == 'refs/heads/develop'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public/docs

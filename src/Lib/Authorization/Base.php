@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Lib\Authorization;
 
 use App\Lib\Configuration\ConfigurationFactory;

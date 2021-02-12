@@ -1,12 +1,10 @@
 # Config
-config/common.ini
+config/*.local.ini
 
 # Dependencies
 vendor
 
 # Cache
-.php_cs.cache
-.phpunit.result.cache
 tmp/*
 !tmp/.gitkeep
 
@@ -22,3 +20,4 @@ public/storage/images/*
 
 # Misc
 .remote-sync.json
+.vscode

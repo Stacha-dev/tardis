@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Lib\Configuration;
 
 use App\Lib\Configuration\Configuration;
@@ -9,7 +11,7 @@ final class ConfigurationFactory
 {
 
     /** @var string */
-    private const DIRECTORY = __DIR__ . "/../../../config/";
+    private const CONFIG_DIRECTORY = __DIR__ . "/../../../config/";
 
     /**
      * Creates configuration from filename
@@ -17,12 +19,14 @@ final class ConfigurationFactory
      * @param string $fileName
      * @return Configuration
      */
-    public static function fromFileName(string $fileName):Configuration
+    public static function fromFileName(string $fileName): Configuration
     {
-        if (empty($fileName) || !($path = realpath(self::DIRECTORY . $fileName . '.ini'))) {
-            throw new Exception('Config file ' . $fileName . ' not exists!');
+        $configs = glob(self::CONFIG_DIRECTORY . $fileName . '*' . '.ini');
+        if ($configs && is_array($configs)) {
+            $config = array_pop($configs);
+            return new Configuration($config);
+        } else {
+            throw new Exception('Config file "' . $fileName . '" not exists!', 400);
         }
-
-        return new Configuration($path);
     }
 }

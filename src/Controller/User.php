@@ -1,10 +1,10 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Lib\Util\Input;
 use App\Lib\Middleware\RouteFactory;
-use App\Lib\Util\Cryptography;
 use App\Lib\Authorization\AuthorizationFactory;
 use App\Lib\Security\Hash;
 use Exception;
@@ -12,7 +12,7 @@ use Exception;
 class User extends \App\Controller\Base
 {
 
-     /**
+    /**
      * Register routes to router
      *
      * @param  \App\Lib\Middleware\Router $router
@@ -20,10 +20,10 @@ class User extends \App\Controller\Base
      */
     public function registerRoutes(\App\Lib\Middleware\Router $router): void
     {
-        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/user$@", "getAll"))
-               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user$@", "create"))
-               ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user/login$@", "login"))
-               ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@", "delete", array("id")));
+        $router->register(RouteFactory::fromConstants(1, "GET", "@^(?<version>[0-9])/user$@", "getAll", [], true))
+            ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user$@", "create", [], true))
+            ->register(RouteFactory::fromConstants(1, "POST", "@^(?<version>[0-9]+)/user/login$@", "login"))
+            ->register(RouteFactory::fromConstants(1, "DELETE", "@^(?<version>[0-9]+)/user/(?<id>[0-9]+)$@", "delete", ["id"], true));
     }
 
     /**
@@ -83,7 +83,7 @@ class User extends \App\Controller\Base
         if ($user instanceof \App\Model\Entity\User) {
             if (Hash::verifyHash($password, $user->getPassword())) {
                 $jwt = AuthorizationFactory::fromType('JWT');
-                $this->view->render(array("token" => $jwt->getToken(['id_user' => $user->getId()])));
+                $this->view->render(array("name" => $user->getname(), "surname" => $user->getSurname(), "token" => $jwt->getToken(['id_user' => $user->getId()])));
 
                 return $user;
             } else {
