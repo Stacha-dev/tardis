@@ -1746,6 +1746,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Model-Fixtures-UserLoader.html#method_load"
         },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210307162611",
+            "name": "Version20210307162611",
+            "summary": "Auto\u002Dgenerated\u0020Migration\u003A\u0020Please\u0020modify\u0020to\u0020your\u0020needs\u0021",
+            "url": "classes/App-Modal-Migrations-Version20210307162611.html"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210307162611\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210307162611.html#method_getDescription"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210307162611\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210307162611.html#method_up"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210307162611\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210307162611.html#method_down"
+        },                {
             "fqsen": "\\App\\View\\BaseView",
             "name": "BaseView",
             "summary": "",
@@ -1865,6 +1885,16 @@ Search.appendIndex(
             "name": "Fixtures",
             "summary": "",
             "url": "namespaces/app-model-fixtures.html"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations",
+            "name": "Migrations",
+            "summary": "",
+            "url": "namespaces/app-modal-migrations.html"
+        },                {
+            "fqsen": "\\App\\Modal",
+            "name": "Modal",
+            "summary": "",
+            "url": "namespaces/app-modal.html"
         },                {
             "fqsen": "\\App\\View",
             "name": "View",
