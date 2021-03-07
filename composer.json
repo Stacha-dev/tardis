@@ -2,7 +2,7 @@
 	"name": "stacha/back-end",
 	"type": "project",
 	"description": "Back-end for our applications.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"license": "MIT",
 	"authors": [
 		{
@@ -17,17 +17,18 @@
 		}
 	],
 	"require": {
+		"doctrine/data-fixtures": "^1.5",
+		"doctrine/migrations": "^3.1",
 		"doctrine/orm": "^2.7.3",
-		"firebase/php-jwt": "^5.2"
+		"firebase/php-jwt": "^5.2",
+		"symfony/console": "^5.2"
 	},
 	"require-dev": {
-		"doctrine/data-fixtures": "^1.4",
 		"friendsofphp/php-cs-fixer": "^2.16",
 		"phpdocumentor/graphviz": "^2.0@dev",
 		"phpdocumentor/phpdocumentor": "^3.0",
 		"phpstan/phpstan": "^0.12.25",
 		"phpunit/phpunit": "^8.5",
-		"symfony/console": "^5.2",
 		"symfony/finder": "5.1.*",
 		"symfony/process": "5.1.*",
 		"symfony/string": "5.1.*"
@@ -41,16 +42,20 @@
 		"sort-packages": true
 	},
 	"scripts": {
+		"app:password": "php bin/console app:password",
 		"docs": "phpdoc",
 		"test": "vendor/bin/phpunit tests",
 		"test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html public/reports/test-coverage/",
 		"orm:create": "doctrine orm:schema-tool:create",
-		"orm:update": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
+		"orm:update": "composer orm:clear-cache:metadata && doctrine orm:schema-tool:update --force",
 		"orm:drop": "doctrine orm:clear-cache:metadata && doctrine orm:schema-tool:drop --full-database  --force",
 		"orm:proxies": "doctrine orm:generate-proxies",
 		"orm:validate": "doctrine orm:validate-schema",
+		"orm:clear-cache:metadata": "doctrine orm:clear-cache:metadata",
 		"fixtures:load": "php bin/console fixtures:load",
-		"app:password": "php bin/console app:password",
+		"migrations:diff": "composer orm:clear-cache:metadata && doctrine-migrations migrations:diff",
+		"migrations:status": "doctrine-migrations migrations:status",
+		"migrations:migrate": "doctrine-migrations migrations:migrate",
 		"phpstan": "phpstan analyse",
 		"cs": "vendor/bin/php-cs-fixer fix src --dry-run --ansi",
 		"cs:fix": "vendor/bin/php-cs-fixer fix src --ansi"

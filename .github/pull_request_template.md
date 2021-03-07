@@ -9,3 +9,4 @@ Describe your changes in detail.
 - [ ] Unit tests for the changes have been added
 - [ ] Static analysis exits without any error
 - [ ] CS Fix exits without any error
+- [ ] DB schema migration has been generated

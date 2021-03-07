@@ -42,23 +42,17 @@ class User extends \App\Controller\Base
     /**
      * Creates new user
      *
-     * @param  string $username
-     * @param  string $password
-     * @param  string $email
-     * @param  string $name
-     * @param  string $surname
-     * @param  string $avatar
      * @return \App\Model\Entity\User
      */
-    public function create(string $username = "", string $password = "", string $email = "", string $name = "", string $surname = "", string $avatar = ""): \App\Model\Entity\User
+    public function create(): \App\Model\Entity\User
     {
         $body = $this->request->getBody();
-        $username = $body->getBodyData('username') ?? $username;
-        $password = Hash::getHash($body->getBodyData('password') ?? $password);
-        $email = $body->getBodyData('email') ?? $email;
-        $name = $body->getBodyData('name') ?? $name;
-        $surname = $body->getBodyData('surname') ?? $surname;
-        $avatar = $body->getBodyData('avatar') ?? $avatar;
+        $username = $body->getBodyData('username', '');
+        $password = Hash::getHash($body->getBodyData('password', ''));
+        $email = $body->getBodyData('email', '');
+        $name = $body->getBodyData('name', '');
+        $surname = $body->getBodyData('surname', '');
+        $avatar = $body->getBodyData('avatar', '');
         $user = new \App\Model\Entity\User($username, $password, $email, $name, $surname, $avatar);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -70,15 +64,13 @@ class User extends \App\Controller\Base
     /**
      * Verifi user credentials
      *
-     * @param string $username
-     * @param string $password
      * @return \App\Model\Entity\User
      */
-    public function login(string $username = "", string $password = ""): \App\Model\Entity\User
+    public function login(): \App\Model\Entity\User
     {
         $body = $this->request->getBody();
-        $username = $body->getBodyData('username') ?? $username;
-        $password = $body->getBodyData('password') ?? $password;
+        $username = $body->getBodyData('username', '');
+        $password = $body->getBodyData('password', '');
         $user = $this->entityManager->getRepository('App\Model\Entity\User')->findOneBy(array("username" => $username));
         if ($user instanceof \App\Model\Entity\User) {
             if (Hash::verifyHash($password, $user->getPassword())) {
