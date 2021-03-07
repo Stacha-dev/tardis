@@ -28,9 +28,9 @@ final class Mail extends Base
     public function sendMail(string $to = '', string $subject = '', string $content = ''): bool
     {
         $body = $this->request->getBody();
-        $to = $body->getBodyData('to') ?? $to;
-        $subject = $body->getBodyData('subject') ?? $subject;
-        $content = $body->getBodyData('content') ?? $content;
+        $to = $body->getBodyData('to', $to);
+        $subject = $body->getBodyData('subject', $subject);
+        $content = $body->getBodyData('content', $content);
 
         $configuration = ConfigurationFactory::fromFileName('common');
         $configuration->setSegment('mail');

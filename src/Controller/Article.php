@@ -76,16 +76,14 @@ final class Article extends \App\Controller\Base
     /**
      * Creates new article
      *
-     * @param  string $title
-     * @param  string $content
      * @return \App\Model\Entity\Article
      */
-    public function create(string $title = '', string $alias = null, string $content = ''): \App\Model\Entity\Article
+    public function create(): \App\Model\Entity\Article
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title') ?? $title;
-        $alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
-        $content = $body->getBodyData('content') ?? $content;
+        $title = $body->getBodyData('title', '');
+        $alias = $body->getBodyData('alias', Input::toAlias($title));
+        $content = $body->getBodyData('content', '');
         $article = new \App\Model\Entity\Article($title, $alias, $content);
         $this->entityManager->persist($article);
         $this->entityManager->flush();
@@ -98,16 +96,14 @@ final class Article extends \App\Controller\Base
      * Edit article by ID
      *
      * @param  int    $id
-     * @param  string $title
-     * @param  string $content
      * @return \App\Model\Entity\Article
      */
-    public function edit(int $id = 0, string $title = '', string $alias = '', string $content = ''): \App\Model\Entity\Article
+    public function edit(int $id = 0): \App\Model\Entity\Article
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title') ?? $title;
-        $alias = $body->getBodyData('alias') ?? $alias;
-        $content = $body->getBodyData('content') ?? $content;
+        $title = $body->getBodyData('title', '');
+        $alias = $body->getBodyData('alias', Input::toAlias($title));
+        $content = $body->getBodyData('content', '');
         $article = $this->entityManager->getRepository('App\Model\Entity\Article')->findOneBy(array('id' => $id));
 
         if ($article instanceof \App\Model\Entity\Article) {

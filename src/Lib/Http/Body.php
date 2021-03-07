@@ -91,11 +91,12 @@ class Body
      * Returns body data by key
      *
      * @param  string $key
+     * @param mixed $default
      * @return mixed
      */
-    public function getBodyData(string $key)
+    public function getBodyData(string $key, $default)
     {
-        return array_key_exists($key, $this->body) ? $this->body[$key] : null;
+        return array_key_exists($key, $this->body) ? $this->body[$key] : $default;
     }
 
 

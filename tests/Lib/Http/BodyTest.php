@@ -49,6 +49,6 @@ final class BodyTest extends TestCase
 		$body = new Body();
 		$this->assertEquals(count($body->getBody()), 0);
 		$this->assertEquals(count($body->getFiles()), 0);
-		$this->assertNull($body->getBodyData(""));
+		$this->assertNull($body->getBodyData("", null));
 	}
 }

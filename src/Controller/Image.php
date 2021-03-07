@@ -51,16 +51,14 @@ final class Image extends Base
     /**
      * Creates new image
      *
-     * @param  string $title
-     * @param int $galleryId
      * @return void
      */
-    public function upload(string $title = '', int $galleryId = 0, bool $state = true): void
+    public function upload(): void
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title') ?? $title;
-        $galleryId = $body->getBodyData('gallery') ?? $galleryId;
-        $state = (bool)$body->getBodyData('state') ?? $state;
+        $title = $body->getBodyData('title', '');
+        $galleryId = $body->getBodyData('gallery', 0);
+        $state = (bool)$body->getBodyData('state', true);
         $output = [];
 
         $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $galleryId));
@@ -95,9 +93,9 @@ final class Image extends Base
     public function edit(int $id = 0): \App\Model\Entity\Image
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title');
-        $ordering = (int)$body->getBodyData('ordering');
-        $state = (bool)$body->getBodyData('state');
+        $title = $body->getBodyData('title', null);
+        $ordering = (int)$body->getBodyData('ordering', null);
+        $state = (bool)$body->getBodyData('state', null);
         $image = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
 
         if ($image instanceof \App\Model\Entity\Image) {
