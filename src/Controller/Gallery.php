@@ -139,19 +139,15 @@ final class Gallery extends Base
     /**
      * Creates new gallery
      *
-     * @param  string $title
-     * @param string $description
-     * @param string $alias
-     * @param int $tagId
      * @return \App\Model\Entity\Gallery
      */
-    public function create(string $title = '', string $description = '', string $alias = null, int $tagId = 0): \App\Model\Entity\Gallery
+    public function create(): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title') ?? $title;
-        $description = $body->getBodyData('description') ?? $description;
-        $alias = $body->getBodyData('alias') ?? $alias ?? Input::toAlias($title);
-        $tagId = $body->getBodyData('tag') ?? $tagId;
+        $title = $body->getBodyData('title', '');
+        $description = $body->getBodyData('description', '');
+        $alias = $body->getBodyData('alias', Input::toAlias($title));
+        $tagId = $body->getBodyData('tag', 0);
         $gallery = new \App\Model\Entity\Gallery($title, $description, $alias);
         $tag = $this->entityManager->getRepository('App\Model\Entity\Tag')->findOneBy(array("id" => $tagId));
 
@@ -170,19 +166,16 @@ final class Gallery extends Base
      * Edit gallery by ID
      *
      * @param  int    $id
-     * @param  string $title
-     * @param string $description
-     * @param string $alias
-     * @param int $tagId
      * @return \App\Model\Entity\Gallery
      */
-    public function edit(int $id = 0, string $title = '', string $description = '', string $alias = '', int $tagId = 0): \App\Model\Entity\Gallery
+    public function edit(int $id = 0): \App\Model\Entity\Gallery
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title') ?? $title;
-        $description = $body->getBodyData('description') ?? $description;
-        $alias = $body->getBodyData('alias') ?? $alias;
-        $tagId = $body->getBodyData('tag') ?? $tagId;
+        $title = $body->getBodyData('title', '');
+        $description = $body->getBodyData('description', '');
+        $alias = $body->getBodyData('alias', Input::toAlias($title));
+        $tagId = $body->getBodyData('tag', 0);
+        $state = $body->getBodydata('state', true);
         $gallery = $this->entityManager->getRepository('App\Model\Entity\Gallery')->findOneBy(array('id' => $id));
         $tag = $this->entityManager->getRepository('App\Model\Entity\Tag')->findOneBy(array("id" => $tagId));
 
@@ -196,6 +189,8 @@ final class Gallery extends Base
             if (!empty($alias)) {
                 $gallery->setAlias($alias);
             }
+
+            $gallery->setState($state);
 
             if ($tag instanceof \App\Model\Entity\Tag) {
                 $gallery->setTag($tag);
