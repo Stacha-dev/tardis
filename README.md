@@ -2,7 +2,7 @@
 
 ## Instalation
 
-1. Clone repository: `git clone https://github.com/Stacha-dev/back-end.git && cd back-end`
+1. Clone repository: `git clone https://github.com/Stacha-dev/tardis.git && cd tardis`
 2. Run install script `./bin/install.sh <db_user> <db_password> <db_name>`
 3. Generate password for root user `composer app:password <password>`
 
@@ -10,7 +10,7 @@
 
 1. Update `git pull develop` to get recent commits
 2. Install composer dependencies `composer install`
-3. Reload DB schema `composer orm:drop` and then `composer orm:create`
+3. Load DB schema `composer migrations:migrate` and generate proxies `composer orm:proxies`
 4. Create new branch by `git checkout -b <branch-name>` follow this convention:
     - Feature `feat/<feature-name>`
     - Bugfix `fix/<bugfix-name>`
@@ -44,8 +44,8 @@ compsoer orm:drop                   // Drops DB schema
 
 ```
 composer migrations:diff            // Generates differences in DB schema
-composer migrations:status          // Shows migrations status
-composer migrations:migrate         // Migrates to latest migration
+composer migrations:status          // Show migration status
+composer migrations:migrate         // Migrate to latest migration
 ```
 
 ### PHPStan
