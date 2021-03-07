@@ -2,14 +2,12 @@ name: Main workflow
 on:
    push:
 jobs:
-  ci:
+  main:
     runs-on: ubuntu-20.04
     env:
       DB_NAME: test
       DB_PASSWORD: root
     steps:
-    - uses: actions/checkout@v2
-
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
@@ -21,17 +19,15 @@ jobs:
         mysql database: ${{ env.DB_NAME }}
         mysql root password: ${{ env.DB_PASSWORD }}
 
-    - name: Install new instance
-      run: ./bin/install.sh root "$DB_PASSWORD" "$DB_NAME" 127.0.0.1 3306
+    - uses: actions/checkout@v2
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
+    - uses: actions/cache@v2
       with:
         path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+
+    - name: Install new instance
+      run: ./bin/install.sh root "$DB_PASSWORD" "$DB_NAME" 127.0.0.1 3306
 
     - name: Validate DB schema
       run: composer orm:validate

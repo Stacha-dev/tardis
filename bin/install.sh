@@ -25,7 +25,7 @@ generate_config config/common.ini > config/common.local.ini
 
 # ORM
 composer orm:drop
-composer orm:create
+composer migrations:migrate -- --no-interaction
 composer orm:proxies
 
 # Fixtures
