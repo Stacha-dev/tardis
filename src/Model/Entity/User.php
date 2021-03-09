@@ -9,7 +9,7 @@ use DateTime;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="users")
+ * @ORM\Table(name="user")
  */
 class User
 {
