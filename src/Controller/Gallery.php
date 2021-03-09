@@ -40,7 +40,7 @@ final class Gallery extends Base
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('g')
             ->from('App\Model\Entity\Gallery', 'g')
-            ->orderBy('g.updated', 'DESC');
+            ->orderBy('g.created', 'DESC');
         $gallery = $queryBuilder->getQuery()->getArrayResult();
 
         foreach ($gallery as &$item) {
@@ -114,7 +114,7 @@ final class Gallery extends Base
         $queryBuilder->select('g')
             ->from('App\Model\Entity\Gallery', 'g')
             ->where('g.' . $key . ' = ' . $value)
-            ->orderBy('g.updated', 'DESC');
+            ->orderBy('g.created', 'DESC');
         $galleries = $queryBuilder->getQuery()->getResult();
 
         $response = array();
@@ -127,7 +127,7 @@ final class Gallery extends Base
                 $thumbnail->source = $image->getSource();
             }
 
-            array_push($response, array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'thumbnail' => $thumbnail, 'updated' => $gallery->getUpdated(), 'state' => $gallery->getState()));
+            array_push($response, array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'thumbnail' => $thumbnail, 'updated' => $gallery->getUpdated(), 'created' => $gallery->getCreated(), 'state' => $gallery->getState()));
         }
 
         $this->view->render($response);

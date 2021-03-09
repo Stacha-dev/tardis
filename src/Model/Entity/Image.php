@@ -6,6 +6,7 @@ namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Model\Entity\Gallery;
+use DateTime;
 
 /**
  * @ORM\Entity
@@ -17,7 +18,7 @@ class Image
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
-     * @var                        int
+     * @var int
      */
     protected $id;
 
@@ -30,32 +31,38 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=512)
-     * @var                       string
+     * @var string
      */
     protected $title;
 
     /**
      * @ORM\Column(type="json", length=512)
-     * @var                       array<array<string>>
+     * @var array<array<string>>
      */
     protected $source;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      * @ORM\Version
-     * @var                         \DateTime
+     * @var DateTime
      */
     protected $updated;
 
     /**
+     * @ORM\Column(type="datetime", nullable=false)
+     * @var DateTime
+     */
+    protected $created;
+
+    /**
      * @ORM\Column(type="integer")
-     * @var                        int
+     * @var int
      */
     protected $ordering;
 
     /**
      * @ORM\Column(type="boolean")
-     * @var                       boolean
+     * @var boolean
      */
     protected $state;
 
@@ -72,6 +79,7 @@ class Image
         $this->setTitle($title);
         $this->setSource($source);
         $this->setOrdering($ordering);
+        $this->setCreated(new DateTime("now"));
         $this->setState($state);
     }
 
@@ -86,7 +94,6 @@ class Image
         $this->gallery = $gallery;
         return $this;
     }
-
 
     /**
      * Sets image title
@@ -131,7 +138,19 @@ class Image
      */
     public function setUpdated(): self
     {
-        $this->updated = new \DateTime("now");
+        $this->updated = new DateTime("now");
+        return $this;
+    }
+
+    /**
+     * Sets image created date
+     *
+     * @param DateTime $created
+     * @return self
+     */
+    public function setCreated(DateTime $created): self
+    {
+        $this->created = $created;
         return $this;
     }
 
@@ -156,7 +175,6 @@ class Image
     {
         return $this->id;
     }
-
 
     /**
      * Returns image gallery
@@ -198,18 +216,25 @@ class Image
         return $this->ordering;
     }
 
-
     /**
      * Returns image updated date
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdated(): \DateTime
+    public function getUpdated(): DateTime
     {
         return $this->updated;
     }
 
-
+    /**
+     * Returns image created date
+     *
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
 
     /**
      * Returns image state
