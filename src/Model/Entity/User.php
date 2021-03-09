@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="users")
+ * @ORM\Table(name="user")
  */
 class User
 {
@@ -53,9 +54,15 @@ class User
     /**
      * @ORM\Column(type="datetime", nullable=false)
      * @ORM\Version
-     * @var \DateTime
+     * @var DateTime
      */
     protected $updated;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     * @var DateTime
+     */
+    protected $created;
 
     /**
      * @ORM\Column(type="string", length=1024)
@@ -71,8 +78,8 @@ class User
         $this->setName($name);
         $this->setSurname($surname);
         $this->setAvatar($avatar);
+        $this->setCreated(new DateTime("now"));
     }
-
 
     /**
      * Sets user username
@@ -85,7 +92,6 @@ class User
         $this->username = $username;
         return $this;
     }
-
 
     /**
      * Sets user password
@@ -138,12 +144,24 @@ class User
     /**
      * Sets user updated date
      *
-     * @param  \DateTime $updated
+     * @param  DateTime $updated
      * @return self
      */
-    public function setUpdated(\DateTime $updated): self
+    public function setUpdated(DateTime $updated): self
     {
         $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * Sets user created date
+     *
+     * @param DateTime $created
+     * @return self
+     */
+    public function setCreated(DateTime $created): self
+    {
+        $this->created = $created;
         return $this;
     }
 
@@ -158,7 +176,6 @@ class User
         $this->avatar = $avatar;
         return $this;
     }
-
 
     /**
      * Return user ID
@@ -210,8 +227,6 @@ class User
         return $this->name;
     }
 
-
-
     /**
      * Returns user surname
      *
@@ -230,6 +245,16 @@ class User
     public function getUpdated(): \DateTime
     {
         return $this->updated;
+    }
+
+    /**
+     * Returns user created date
+     *
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
     }
 
     /**

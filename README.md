@@ -59,7 +59,6 @@ composer phpstan                    // Runs static analysis
 ```
 composer cs                         // Checks coding standarts
 composer cs:fix                     // Fixes coding standarts
-
 ```
 
 ### PHP Unit
