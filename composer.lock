@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b621565b606f37fd3b0e39e181ea48b5",
+    "content-hash": "e8a1e50a6d546b022dc02a167b005b16",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -2859,36 +2859,6 @@
                     "tests/TestCase.php"
                 ]
             },
-            "funding": [
-                {
-                    "url": "https://github.com/keradus",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-01-26T00:22:21+00:00"
-        },
-        {
-            "name": "jawira/plantuml",
-            "version": "v1.51.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jawira/plantuml.git",
-                "reference": "1d7378023b4a693928d0c9cea417c4859ba8c5af"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jawira/plantuml/zipball/1d7378023b4a693928d0c9cea417c4859ba8c5af",
-                "reference": "1d7378023b4a693928d0c9cea417c4859ba8c5af",
-                "shasum": ""
-            },
-            "suggest": {
-                "pds/skeleton": "Standard PHP package skeleton",
-                "phing/phing": "PHP Build Tool"
-            },
-            "bin": [
-                "bin/plantuml"
-            ],
-            "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
