@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use App\Model\Entity\Tag;
 use App\Model\Entity\Image;
+use DateTime;
 
 /**
  * @ORM\Entity
@@ -19,25 +20,25 @@ class Gallery
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
-     * @var                        int
+     * @var int
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=512)
-     * @var                       string
+     * @var string
      */
     protected $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @var                       string
+     * @var string
      */
     protected $description;
 
     /**
      * @ORM\Column(type="string", unique=true, length=191)
-     * @var                       string
+     * @var string
      */
     protected $alias;
 
@@ -58,13 +59,19 @@ class Gallery
     /**
      * @ORM\Column(type="datetime", nullable=false)
      * @ORM\Version
-     * @var                         \DateTime
+     * @var DateTime
      */
     protected $updated;
 
     /**
+     * @ORM\Column(type="datetime", nullable=false)
+     * @var DateTime
+     */
+    protected $created;
+
+    /**
      * @ORM\Column(type="boolean")
-     * @var                       boolean
+     * @var boolean
      */
     protected $state;
 
@@ -78,6 +85,7 @@ class Gallery
         $this->setTitle($title);
         $this->setDescription($description);
         $this->setAlias($alias);
+        $this->setCreated(new DateTime("now"));
         $this->setState($state);
     }
 
@@ -136,7 +144,19 @@ class Gallery
      */
     public function setUpdated(): self
     {
-        $this->updated = new \DateTime("now");
+        $this->updated = new DateTime("now");
+        return $this;
+    }
+
+    /**
+     * Sets gallery created date
+     *
+     * @param DateTime $created
+     * @return self
+     */
+    public function setCreated(DateTime $created): self
+    {
+        $this->created = $created;
         return $this;
     }
 
@@ -220,11 +240,21 @@ class Gallery
     /**
      * Returns gallery updated date
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdated(): \DateTime
+    public function getUpdated(): DateTime
     {
         return $this->updated;
+    }
+
+    /**
+     * Returns gallery created date
+     *
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
     }
 
     /**
