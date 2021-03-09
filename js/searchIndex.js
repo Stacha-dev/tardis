@@ -1196,6 +1196,11 @@ Search.appendIndex(
             "summary": "Sets\u0020article\u0020updated\u0020date.",
             "url": "classes/App-Model-Entity-Article.html#method_setUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Article\u003A\u003AsetCreated\u0028\u0029",
+            "name": "setCreated",
+            "summary": "Sets\u0020article\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-Article.html#method_setCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Article\u003A\u003AsetState\u0028\u0029",
             "name": "setState",
             "summary": "Sets\u0020article\u0020state",
@@ -1225,6 +1230,11 @@ Search.appendIndex(
             "name": "getUpdated",
             "summary": "Returns\u0020article\u0020updated\u0020date.",
             "url": "classes/App-Model-Entity-Article.html#method_getUpdated"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Article\u003A\u003AgetCreated\u0028\u0029",
+            "name": "getCreated",
+            "summary": "Returns\u0020article\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-Article.html#method_getCreated"
         },                {
             "fqsen": "\\App\\Model\\Entity\\Article\u003A\u003AgetState\u0028\u0029",
             "name": "getState",
@@ -1256,6 +1266,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Model-Entity-Article.html#property_updated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Article\u003A\u003A\u0024created",
+            "name": "created",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Article.html#property_created"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Article\u003A\u003A\u0024state",
             "name": "state",
             "summary": "",
@@ -1286,6 +1301,11 @@ Search.appendIndex(
             "summary": "Sets\u0020file\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-File.html#method_setUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\File\u003A\u003AsetCreated\u0028\u0029",
+            "name": "setCreated",
+            "summary": "Sets\u0020article\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-File.html#method_setCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\File\u003A\u003AsetState\u0028\u0029",
             "name": "setState",
             "summary": "Sets\u0020file\u0020state",
@@ -1311,6 +1331,11 @@ Search.appendIndex(
             "summary": "Returns\u0020file\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-File.html#method_getUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\File\u003A\u003AgetCreated\u0028\u0029",
+            "name": "getCreated",
+            "summary": "Returns\u0020article\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-File.html#method_getCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\File\u003A\u003AgetState\u0028\u0029",
             "name": "getState",
             "summary": "Returns\u0020file\u0020state",
@@ -1335,6 +1360,11 @@ Search.appendIndex(
             "name": "updated",
             "summary": "",
             "url": "classes/App-Model-Entity-File.html#property_updated"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\File\u003A\u003A\u0024created",
+            "name": "created",
+            "summary": "",
+            "url": "classes/App-Model-Entity-File.html#property_created"
         },                {
             "fqsen": "\\App\\Model\\Entity\\File\u003A\u003A\u0024state",
             "name": "state",
@@ -1375,6 +1405,11 @@ Search.appendIndex(
             "name": "setUpdated",
             "summary": "Sets\u0020gallery\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-Gallery.html#method_setUpdated"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Gallery\u003A\u003AsetCreated\u0028\u0029",
+            "name": "setCreated",
+            "summary": "Sets\u0020gallery\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-Gallery.html#method_setCreated"
         },                {
             "fqsen": "\\App\\Model\\Entity\\Gallery\u003A\u003AsetState\u0028\u0029",
             "name": "setState",
@@ -1421,6 +1456,11 @@ Search.appendIndex(
             "summary": "Returns\u0020gallery\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-Gallery.html#method_getUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Gallery\u003A\u003AgetCreated\u0028\u0029",
+            "name": "getCreated",
+            "summary": "Returns\u0020gallery\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-Gallery.html#method_getCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Gallery\u003A\u003AgetState\u0028\u0029",
             "name": "getState",
             "summary": "Returns\u0020gallery\u0020state",
@@ -1460,6 +1500,11 @@ Search.appendIndex(
             "name": "updated",
             "summary": "",
             "url": "classes/App-Model-Entity-Gallery.html#property_updated"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Gallery\u003A\u003A\u0024created",
+            "name": "created",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Gallery.html#property_created"
         },                {
             "fqsen": "\\App\\Model\\Entity\\Gallery\u003A\u003A\u0024state",
             "name": "state",
@@ -1501,6 +1546,11 @@ Search.appendIndex(
             "summary": "Sets\u0020image\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-Image.html#method_setUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AsetCreated\u0028\u0029",
+            "name": "setCreated",
+            "summary": "Sets\u0020image\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-Image.html#method_setCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AsetState\u0028\u0029",
             "name": "setState",
             "summary": "Sets\u0020image\u0020state",
@@ -1536,6 +1586,11 @@ Search.appendIndex(
             "summary": "Returns\u0020image\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-Image.html#method_getUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AgetCreated\u0028\u0029",
+            "name": "getCreated",
+            "summary": "Returns\u0020image\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-Image.html#method_getCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AgetState\u0028\u0029",
             "name": "getState",
             "summary": "Returns\u0020image\u0020state",
@@ -1565,6 +1620,11 @@ Search.appendIndex(
             "name": "updated",
             "summary": "",
             "url": "classes/App-Model-Entity-Image.html#property_updated"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003A\u0024created",
+            "name": "created",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Image.html#property_created"
         },                {
             "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003A\u0024ordering",
             "name": "ordering",
@@ -1651,6 +1711,11 @@ Search.appendIndex(
             "summary": "Sets\u0020user\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-User.html#method_setUpdated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\User\u003A\u003AsetCreated\u0028\u0029",
+            "name": "setCreated",
+            "summary": "Sets\u0020user\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-User.html#method_setCreated"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\User\u003A\u003AsetAvatar\u0028\u0029",
             "name": "setAvatar",
             "summary": "Sets\u0020user\u0020avatar",
@@ -1690,6 +1755,11 @@ Search.appendIndex(
             "name": "getUpdated",
             "summary": "Returns\u0020user\u0020updated\u0020date",
             "url": "classes/App-Model-Entity-User.html#method_getUpdated"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\User\u003A\u003AgetCreated\u0028\u0029",
+            "name": "getCreated",
+            "summary": "Returns\u0020user\u0020created\u0020date",
+            "url": "classes/App-Model-Entity-User.html#method_getCreated"
         },                {
             "fqsen": "\\App\\Model\\Entity\\User\u003A\u003AgetAvatar\u0028\u0029",
             "name": "getAvatar",
@@ -1731,6 +1801,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Model-Entity-User.html#property_updated"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\User\u003A\u003A\u0024created",
+            "name": "created",
+            "summary": "",
+            "url": "classes/App-Model-Entity-User.html#property_created"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\User\u003A\u003A\u0024avatar",
             "name": "avatar",
             "summary": "",
@@ -1765,6 +1840,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/App-Modal-Migrations-Version20210307162611.html#method_down"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309191425",
+            "name": "Version20210309191425",
+            "summary": "Auto\u002Dgenerated\u0020Migration\u003A\u0020Please\u0020modify\u0020to\u0020your\u0020needs\u0021",
+            "url": "classes/App-Modal-Migrations-Version20210309191425.html"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309191425\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210309191425.html#method_getDescription"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309191425\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210309191425.html#method_up"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309191425\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210309191425.html#method_down"
         },                {
             "fqsen": "\\App\\View\\BaseView",
             "name": "BaseView",
