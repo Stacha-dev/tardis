@@ -1861,6 +1861,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Modal-Migrations-Version20210309191425.html#method_down"
         },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309204012",
+            "name": "Version20210309204012",
+            "summary": "Auto\u002Dgenerated\u0020Migration\u003A\u0020Please\u0020modify\u0020to\u0020your\u0020needs\u0021",
+            "url": "classes/App-Modal-Migrations-Version20210309204012.html"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309204012\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210309204012.html#method_getDescription"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309204012\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210309204012.html#method_up"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210309204012\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210309204012.html#method_down"
+        },                {
             "fqsen": "\\App\\View\\BaseView",
             "name": "BaseView",
             "summary": "",
