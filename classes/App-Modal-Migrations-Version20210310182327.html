@@ -78,15 +78,16 @@
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/app.html">App</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/app-view.html">View</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/app-modal.html">Modal</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/app-modal-migrations.html">Migrations</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Json
+    Version20210310182327
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/App-View-BaseView.html"><abbr title="\App\View\BaseView">BaseView</abbr></a>
+        extends <abbr title="\Doctrine\Migrations\AbstractMigration">AbstractMigration</abbr>
     </span>
     
     
@@ -94,12 +95,14 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/View/Json.php"><a href="files/src-view-json.html"><abbr title="src/View/Json.php">Json.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Migrations/Version20210310182327.php"><a href="files/src-model-migrations-version20210310182327.html"><abbr title="src/Model/Migrations/Version20210310182327.php">Version20210310182327.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 </aside>
 
-        
+            <p class="phpdocumentor-summary">Auto-generated Migration: Please modify to your needs!</p>
+
+    <section class="phpdocumentor-description"></section>
 
 
 
@@ -115,25 +118,25 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-View-BaseView.html#method___construct">__construct()</a>
+    <a href="classes/App-Modal-Migrations-Version20210310182327.html#method_down">down()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: void    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-View-Json.html#method_render">render()</a>
+    <a href="classes/App-Modal-Migrations-Version20210310182327.html#method_getDescription">getDescription()</a>
     <span>
-                        &nbsp;: void    </span>
+                        &nbsp;: string    </span>
 </dt>
-<dd>Displays data in JSON format</dd>
+<dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/App-View-BaseView.html#method_setResponseHeaders">setResponseHeaders()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Modal-Migrations-Version20210310182327.html#method_up">up()</a>
     <span>
                         &nbsp;: void    </span>
 </dt>
-<dd>Sets response headers by ini file</dd>
+<dd></dd>
 
         </dl>
 
@@ -146,7 +149,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/App-View-Json.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/App-Modal-Migrations-Version20210310182327.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -154,65 +157,30 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/App-View-BaseView.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_down">
+        down()
+        <a href="classes/App-Modal-Migrations-Version20210310182327.html#method_down" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/View/BaseView.php"><a href="files/src-view-baseview.html"><abbr title="src/View/BaseView.php">BaseView.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Migrations/Version20210310182327.php"><a href="files/src-model-migrations-version20210310182327.html"><abbr title="src/Model/Migrations/Version20210310182327.php">Version20210310182327.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">down</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_render">
-        render()
-        <a href="classes/App-View-Json.html#method_render" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/View/Json.php"><a href="files/src-view-json.html"><abbr title="src/View/Json.php">Json.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">18</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Displays data in JSON format</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">render</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, int|string|bool|array|\DateTime|null&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, int|string|bool|array|\DateTime|null&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$schema</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -228,28 +196,68 @@
                     <article
         class="phpdocumentor-element
             -method
-            -private
+            -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setResponseHeaders">
-        setResponseHeaders()
-        <a href="classes/App-View-BaseView.html#method_setResponseHeaders" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getDescription">
+        getDescription()
+        <a href="classes/App-Modal-Migrations-Version20210310182327.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/View/BaseView.php"><a href="files/src-view-baseview.html"><abbr title="src/View/BaseView.php">BaseView.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Migrations/Version20210310182327.php"><a href="files/src-model-migrations-version20210310182327.html"><abbr title="src/Model/Migrations/Version20210310182327.php">Version20210310182327.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Sets response headers by ini file</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">setResponseHeaders</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_up">
+        up()
+        <a href="classes/App-Modal-Migrations-Version20210310182327.html#method_up" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Migrations/Version20210310182327.php"><a href="files/src-model-migrations-version20210310182327.html"><abbr title="src/Model/Migrations/Version20210310182327.php">Version20210310182327.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">up</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$schema</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -275,7 +283,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/App-View-Json.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/App-Modal-Migrations-Version20210310182327.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

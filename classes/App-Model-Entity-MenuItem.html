@@ -84,7 +84,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Gallery
+    MenuItem
 
     
     
@@ -92,9 +92,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 </aside>
 
         
@@ -119,7 +119,7 @@
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>(name=&quot;gallery&quot;)</p>
+                                                 <section class="phpdocumentor-description"><p>(name=&quot;menu_item&quot;)</p>
 </section>
 
                                     </dd>
@@ -137,193 +137,137 @@
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_alias">$alias</a>
-    <span>
-                &nbsp;: string            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_created">$created</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#property_created">$created</a>
     <span>
                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_description">$description</a>
-    <span>
-                &nbsp;: string            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_id">$id</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#property_id">$id</a>
     <span>
                 &nbsp;: int            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_images">$images</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#property_menu">$menu</a>
     <span>
-                &nbsp;: <abbr title="\Doctrine\ORM\PersistentCollection">PersistentCollection</abbr>&lt;string|int, <a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>&gt;            </span>
+                &nbsp;: <a href="classes/App-Model-Entity-Menu.html"><abbr title="\App\Model\Entity\Menu">Menu</abbr></a>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_state">$state</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#property_state">$state</a>
     <span>
                 &nbsp;: bool            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_tag">$tag</a>
-    <span>
-                &nbsp;: <a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a>            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_title">$title</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#property_target">$target</a>
     <span>
                 &nbsp;: string            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/App-Model-Entity-Gallery.html#property_updated">$updated</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#property_title">$title</a>
+    <span>
+                &nbsp;: string            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/App-Model-Entity-MenuItem.html#property_updated">$updated</a>
     <span>
                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method___construct">__construct()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method___construct">__construct()</a>
     <span>
                         &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getAlias">getAlias()</a>
-    <span>
-                        &nbsp;: string    </span>
-</dt>
-<dd>Returns gallery alias</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getCreated">getCreated()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_getCreated">getCreated()</a>
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
-<dd>Returns gallery created date</dd>
+<dd>Returns created date</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getDescription">getDescription()</a>
-    <span>
-                        &nbsp;: string    </span>
-</dt>
-<dd>Returns gallery description</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getId">getId()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_getId">getId()</a>
     <span>
                         &nbsp;: int    </span>
 </dt>
-<dd>Return gallery ID</dd>
+<dd>Return ID</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getImages">getImages()</a>
-    <span>
-                        &nbsp;: <abbr title="\Doctrine\ORM\PersistentCollection">PersistentCollection</abbr>&lt;string|int, <a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>&gt;    </span>
-</dt>
-<dd>Returns images associated to this gallery</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getState">getState()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_getState">getState()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
-<dd>Returns gallery state</dd>
+<dd>Returns state</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getTag">getTag()</a>
-    <span>
-                        &nbsp;: <a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a>    </span>
-</dt>
-<dd>Returns gallery tag</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getThumbnail">getThumbnail()</a>
-    <span>
-                        &nbsp;: <a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>|null    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getTitle">getTitle()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_getTarget">getTarget()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd>Returns gallery title</dd>
+<dd>Returns target</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_getUpdated">getUpdated()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_getTitle">getTitle()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Returns title</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Model-Entity-MenuItem.html#method_getUpdated">getUpdated()</a>
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
-<dd>Returns gallery updated date</dd>
+<dd>Returns updated date</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setAlias">setAlias()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_setCreated">setCreated()</a>
     <span>
                         &nbsp;: self    </span>
 </dt>
-<dd>Sets gallery alias</dd>
+<dd>Sets created date</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setCreated">setCreated()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_setState">setState()</a>
     <span>
                         &nbsp;: self    </span>
 </dt>
-<dd>Sets gallery created date</dd>
+<dd>Sets state</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setDescription">setDescription()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_setTarget">setTarget()</a>
     <span>
                         &nbsp;: self    </span>
 </dt>
-<dd>Sets gallery description</dd>
+<dd>Sets target</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setState">setState()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_setTitle">setTitle()</a>
     <span>
                         &nbsp;: self    </span>
 </dt>
-<dd>Sets gallery state</dd>
+<dd>Sets title</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setTag">setTag()</a>
+    <a href="classes/App-Model-Entity-MenuItem.html#method_setUpdated">setUpdated()</a>
     <span>
                         &nbsp;: self    </span>
 </dt>
-<dd>Sets gallery tag</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setTitle">setTitle()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Sets gallery title</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Model-Entity-Gallery.html#method_setUpdated">setUpdated()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Sets gallery updated date</dd>
+<dd>Sets updated date</dd>
 
         </dl>
 
@@ -335,54 +279,8 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/App-Model-Entity-Gallery.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/App-Model-Entity-MenuItem.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_alias">
-        $alias
-        <a href="classes/App-Model-Entity-Gallery.html#property_alias" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">43</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$alias</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\Column</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>(type=&quot;string&quot;, unique=true, length=191)</p>
-</section>
-
-                                    </dd>
-                        </dl>
-
-</article>
                     <article
         class="
             phpdocumentor-element
@@ -392,14 +290,14 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_created">
         $created
-        <a href="classes/App-Model-Entity-Gallery.html#property_created" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#property_created" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 </aside>
 
     
@@ -436,62 +334,16 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_description">
-        $description
-        <a href="classes/App-Model-Entity-Gallery.html#property_description" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">37</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$description</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\Column</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>(type=&quot;text&quot;, nullable=true)</p>
-</section>
-
-                                    </dd>
-                        </dl>
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_id">
         $id
-        <a href="classes/App-Model-Entity-Gallery.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 </aside>
 
     
@@ -544,23 +396,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_images">
-        $images
-        <a href="classes/App-Model-Entity-Gallery.html#property_images" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_menu">
+        $menu
+        <a href="classes/App-Model-Entity-MenuItem.html#property_menu" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\ORM\PersistentCollection">PersistentCollection</abbr>&lt;string|int, <a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>&gt;</span>
-    <span class="phpdocumentor-signature__name">$images</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/App-Model-Entity-Menu.html"><abbr title="\App\Model\Entity\Menu">Menu</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$menu</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -572,20 +424,20 @@
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\OneToMany</span>
+                    <span class="phpdocumentor-tag__name">ORM\ManyToOne</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>(targetEntity=&quot;Image&quot;, mappedBy=&quot;gallery&quot;)</p>
+                                                 <section class="phpdocumentor-description"><p>(targetEntity=&quot;Menu&quot;, inversedBy=&quot;items&quot;)</p>
 </section>
 
                                     </dd>
                                                 <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\OrderBy</span>
+                    <span class="phpdocumentor-tag__name">ORM\JoinColumn</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>({&quot;ordering&quot; = &quot;ASC&quot;})</p>
+                                                 <section class="phpdocumentor-description"><p>(name=&quot;menu_id&quot;, referencedColumnName=&quot;id&quot;)</p>
 </section>
 
                                     </dd>
@@ -601,14 +453,14 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_state">
         $state
-        <a href="classes/App-Model-Entity-Gallery.html#property_state" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#property_state" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 </aside>
 
     
@@ -645,23 +497,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_tag">
-        $tag
-        <a href="classes/App-Model-Entity-Gallery.html#property_tag" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_target">
+        $target
+        <a href="classes/App-Model-Entity-MenuItem.html#property_target" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$tag</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$target</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -673,20 +525,11 @@
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\ManyToOne</span>
+                    <span class="phpdocumentor-tag__name">ORM\Column</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>(targetEntity=&quot;Tag&quot;)</p>
-</section>
-
-                                    </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\JoinColumn</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>(name=&quot;tag_id&quot;, referencedColumnName=&quot;id&quot;)</p>
+                                                 <section class="phpdocumentor-description"><p>(type=&quot;string&quot;, length=512)</p>
 </section>
 
                                     </dd>
@@ -702,14 +545,14 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_title">
         $title
-        <a href="classes/App-Model-Entity-Gallery.html#property_title" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#property_title" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 </aside>
 
     
@@ -748,14 +591,14 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_updated">
         $updated
-        <a href="classes/App-Model-Entity-Gallery.html#property_updated" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#property_updated" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 </aside>
 
     
@@ -798,7 +641,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/App-Model-Entity-Gallery.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/App-Model-Entity-MenuItem.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -808,18 +651,18 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/App-Model-Entity-Gallery.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$title</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$alias</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$state</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$title</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$state</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -834,20 +677,11 @@
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$description</span>
+                <span class="phpdocumentor-signature__argument__name">$target</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$alias</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$state</span>
@@ -874,51 +708,17 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getAlias">
-        getAlias()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getAlias" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">226</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Returns gallery alias</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getAlias</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getCreated">
         getCreated()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getCreated" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_getCreated" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">256</span>
+    <span class="phpdocumentor-element-found-in__line">179</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Returns gallery created date</p>
+        <p class="phpdocumentor-summary">Returns created date</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -942,51 +742,17 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getDescription">
-        getDescription()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">216</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Returns gallery description</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getId">
         getId()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Return gallery ID</p>
+        <p class="phpdocumentor-summary">Return ID</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1010,51 +776,17 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getImages">
-        getImages()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getImages" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">191</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Returns images associated to this gallery</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getImages</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\PersistentCollection">PersistentCollection</abbr>&lt;string|int, <a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\PersistentCollection">PersistentCollection</abbr>&lt;string|int, <a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getState">
         getState()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getState" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_getState" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">266</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Returns gallery state</p>
+        <p class="phpdocumentor-summary">Returns state</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1078,21 +810,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getTag">
-        getTag()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getTag" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getTarget">
+        getTarget()
+        <a href="classes/App-Model-Entity-MenuItem.html#method_getTarget" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">236</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Returns gallery tag</p>
+        <p class="phpdocumentor-summary">Returns target</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getTag</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a></span></code>
+                <span class="phpdocumentor-signature__name">getTarget</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1100,39 +832,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a></span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getThumbnail">
-        getThumbnail()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getThumbnail" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">196</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getThumbnail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>|null</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/App-Model-Entity-Image.html"><abbr title="\App\Model\Entity\Image">Image</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -1146,15 +846,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_getTitle">
         getTitle()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getTitle" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_getTitle" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">206</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Returns gallery title</p>
+        <p class="phpdocumentor-summary">Returns title</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1180,15 +880,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_getUpdated">
         getUpdated()
-        <a href="classes/App-Model-Entity-Gallery.html#method_getUpdated" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_getUpdated" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">246</span>
+    <span class="phpdocumentor-element-found-in__line">169</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Returns gallery updated date</p>
+        <p class="phpdocumentor-summary">Returns updated date</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1212,62 +912,17 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setAlias">
-        setAlias()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setAlias" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">123</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Sets gallery alias</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setAlias</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$alias</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$alias</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setCreated">
         setCreated()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setCreated" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_setCreated" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Sets gallery created date</p>
+        <p class="phpdocumentor-summary">Sets created date</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1302,62 +957,17 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setDescription">
-        setDescription()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setDescription" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">111</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Sets gallery description</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setDescription</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$description</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setState">
         setState()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setState" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_setState" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Sets gallery state</p>
+        <p class="phpdocumentor-summary">Sets state</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1392,29 +1002,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setTag">
-        setTag()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setTag" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setTarget">
+        setTarget()
+        <a href="classes/App-Model-Entity-MenuItem.html#method_setTarget" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Sets gallery tag</p>
+        <p class="phpdocumentor-summary">Sets target</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setTag</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tag</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+                <span class="phpdocumentor-signature__name">setTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$tag</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Model-Entity-Tag.html"><abbr title="\App\Model\Entity\Tag">Tag</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$target</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -1439,15 +1049,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setTitle">
         setTitle()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setTitle" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_setTitle" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Sets gallery title</p>
+        <p class="phpdocumentor-summary">Sets title</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1484,15 +1094,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setUpdated">
         setUpdated()
-        <a href="classes/App-Model-Entity-Gallery.html#method_setUpdated" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#method_setUpdated" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/Gallery.php"><a href="files/src-model-entity-gallery.html"><abbr title="src/Model/Entity/Gallery.php">Gallery.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Model/Entity/MenuItem.php"><a href="files/src-model-entity-menuitem.html"><abbr title="src/Model/Entity/MenuItem.php">MenuItem.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Sets gallery updated date</p>
+        <p class="phpdocumentor-summary">Sets updated date</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1526,7 +1136,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/App-Model-Entity-Gallery.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/App-Model-Entity-MenuItem.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
