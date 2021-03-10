@@ -34,10 +34,10 @@ final class Menu extends Base
         if ($menu instanceof \App\Model\Entity\Menu) {
             $items = [];
             foreach ($menu->getItems() as $item) {
-                array_push($items, array('title' => $item->getTitle(), 'target' => $item->getTarget()));
+                array_push($items, array('title' => $item->getTitle(), 'target' => $item->getTarget(), "updated" => $menu->getUpdated(), 'created' => $menu->getCreated(), "state" => $menu->getState()));
             }
 
-            $this->view->render(["title" => $menu->getTitle(), "updated" => $menu->getUpdated(), 'created' => $menu->getCreated(), "items" => $items, "state" => $menu->getState()]);
+            $this->view->render(["title" => $menu->getTitle(), "items" => $items, "updated" => $menu->getUpdated(), 'created' => $menu->getCreated(), "state" => $menu->getState()]);
 
             return $menu;
         } else {
