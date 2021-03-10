@@ -79,6 +79,7 @@ class Gallery
      * @param string $title
      * @param string $description
      * @param string $alias
+     * @param bool $state
      */
     public function __construct(string $title = "", string $description = "", string $alias = "", bool $state = true)
     {
