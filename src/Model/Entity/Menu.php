@@ -30,7 +30,7 @@ class Menu
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="menu")
-     * @var PersistentCollection<Image>
+     * @var PersistentCollection<MenuItem>
      */
     protected $items;
 
