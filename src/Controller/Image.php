@@ -93,21 +93,21 @@ final class Image extends Base
     public function edit(int $id = 0): \App\Model\Entity\Image
     {
         $body = $this->request->getBody();
-        $title = $body->getBodyData('title', null);
-        $ordering = (int)$body->getBodyData('ordering', null);
-        $state = (bool)$body->getBodyData('state', null);
+        $title = $body->getBodyData('title');
+        $ordering = (int)$body->getBodyData('ordering');
+        $state = (bool)$body->getBodyData('state');
         $image = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
 
         if ($image instanceof \App\Model\Entity\Image) {
-            if (is_string($title)) {
+            if (!empty($title)) {
                 $image->setTitle($title);
             }
 
-            if (is_integer($ordering)) {
+            if (!empty($ordering)) {
                 $image->setOrdering($ordering);
             }
 
-            if (is_bool($state)) {
+            if (!empty($state)) {
                 $image->setState($state);
             }
 
