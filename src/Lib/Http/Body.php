@@ -94,7 +94,7 @@ class Body
      * @param mixed $default
      * @return mixed
      */
-    public function getBodyData(string $key, $default)
+    public function getBodyData(string $key, $default = null)
     {
         return array_key_exists($key, $this->body) ? $this->body[$key] : $default;
     }
