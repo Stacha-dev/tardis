@@ -38,11 +38,11 @@ final class Image extends Base
      */
     public function getOneById(int $id = 0): \App\Model\Entity\Image
     {
-        $result = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
+        $image = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
 
-        if ($result instanceof \App\Model\Entity\Image) {
-            $this->view->render(array('id' => $result->getId(), 'gallery' => $result->getGallery()->getId(), 'title' => $result->getTitle(), 'source' => $result->getSource(), 'ordering' => $result->getOrdering(), 'state' => $result->getState()));
-            return $result;
+        if ($image instanceof \App\Model\Entity\Image) {
+            $this->view->render(array('id' => $image->getId(), 'gallery' => $image->getGallery()->getId(), 'title' => $image->getTitle(), 'description' => $image->getDescription(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
+            return $image;
         } else {
             throw new Exception("Image by ID: " . $id . " can not be founded!");
         }
@@ -57,6 +57,7 @@ final class Image extends Base
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title', '');
+        $description = $body->getBodyData('description', '');
         $galleryId = $body->getBodyData('gallery', 0);
         $state = (bool)$body->getBodyData('state', true);
         $output = [];
@@ -76,9 +77,9 @@ final class Image extends Base
             $image->delete();
             $ordering++;
 
-            $insert = new \App\Model\Entity\Image($gallery, $title, $source, (int)$ordering, $state);
+            $insert = new \App\Model\Entity\Image($gallery, $title, $description, $source, (int)$ordering, $state);
             $this->entityManager->persist($insert);
-            array_push($output, ["title" => $insert->getTitle(), "gallery" => $insert->getGallery()->getId(), "ordering" => $insert->getOrdering(), "source" => $insert->getSource()]);
+            array_push($output, ["title" => $insert->getTitle(), "description" => $insert->getDescription(), "gallery" => $insert->getGallery()->getId(), "ordering" => $insert->getOrdering(), "source" => $insert->getSource()]);
         }
         $this->entityManager->flush();
         $this->view->render($output);
@@ -94,6 +95,7 @@ final class Image extends Base
     {
         $body = $this->request->getBody();
         $title = $body->getBodyData('title');
+        $description = $body->getBodyData('description', '');
         $ordering = (int)$body->getBodyData('ordering');
         $state = (bool)$body->getBodyData('state');
         $image = $this->entityManager->getRepository('App\Model\Entity\Image')->findOneBy(array('id' => $id));
@@ -101,6 +103,10 @@ final class Image extends Base
         if ($image instanceof \App\Model\Entity\Image) {
             if (!empty($title)) {
                 $image->setTitle($title);
+            }
+
+            if (!empty($description)) {
+                $image->setDescription($description);
             }
 
             if (!empty($ordering)) {
@@ -112,7 +118,7 @@ final class Image extends Base
             }
 
             $this->entityManager->flush();
-            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
+            $this->view->render(array("id" => $image->getId(), "title" => $image->getTitle(), "description" => $image->getDescription(), "ordering" => $image->getOrdering(), "state" => $image->getState()));
             return $image;
         } else {
             throw new Exception("Image with ID: " . $id . " does not exists!");
