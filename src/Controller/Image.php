@@ -105,9 +105,7 @@ final class Image extends Base
                 $image->setTitle($title);
             }
 
-            if (!empty($description)) {
-                $image->setDescription($description);
-            }
+            $image->setDescription($description);
 
             if (!empty($ordering)) {
                 $image->setOrdering($ordering);
