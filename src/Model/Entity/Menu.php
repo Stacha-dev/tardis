@@ -30,7 +30,7 @@ class Menu
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="menu")
-     * @var PersistentCollection<MenuItem>
+     * @var PersistentCollection<int, MenuItem>
      */
     protected $items;
 
@@ -134,7 +134,7 @@ class Menu
     /**
      * Returns menu items associated to menu entity
      *
-     * @return PersistentCollection<MenuItem>
+     * @return PersistentCollection<int, MenuItem>
      */
     public function getItems(): PersistentCollection
     {
