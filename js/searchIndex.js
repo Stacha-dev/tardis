@@ -1546,6 +1546,11 @@ Search.appendIndex(
             "summary": "Sets\u0020image\u0020title",
             "url": "classes/App-Model-Entity-Image.html#method_setTitle"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AsetDescription\u0028\u0029",
+            "name": "setDescription",
+            "summary": "Sets\u0020image\u0020description",
+            "url": "classes/App-Model-Entity-Image.html#method_setDescription"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AsetSource\u0028\u0029",
             "name": "setSource",
             "summary": "Sets\u0020source\u0020to\u0020image",
@@ -1586,6 +1591,11 @@ Search.appendIndex(
             "summary": "Returns\u0020image\u0020title",
             "url": "classes/App-Model-Entity-Image.html#method_getTitle"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "Returns\u0020image\u0020description",
+            "url": "classes/App-Model-Entity-Image.html#method_getDescription"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003AgetSource\u0028\u0029",
             "name": "getSource",
             "summary": "Returns\u0020image\u0020source",
@@ -1625,6 +1635,11 @@ Search.appendIndex(
             "name": "title",
             "summary": "",
             "url": "classes/App-Model-Entity-Image.html#property_title"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Image.html#property_description"
         },                {
             "fqsen": "\\App\\Model\\Entity\\Image\u003A\u003A\u0024source",
             "name": "source",
@@ -2105,6 +2120,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/App-Modal-Migrations-Version20210310182327.html#method_down"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210416164127",
+            "name": "Version20210416164127",
+            "summary": "Auto\u002Dgenerated\u0020Migration\u003A\u0020Please\u0020modify\u0020to\u0020your\u0020needs\u0021",
+            "url": "classes/App-Modal-Migrations-Version20210416164127.html"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210416164127\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210416164127.html#method_getDescription"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210416164127\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210416164127.html#method_up"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210416164127\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210416164127.html#method_down"
         },                {
             "fqsen": "\\App\\View\\BaseView",
             "name": "BaseView",
