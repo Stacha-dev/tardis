@@ -45,7 +45,7 @@ class Gallery
     /**
      * @ORM\OneToMany(targetEntity="Image", mappedBy="gallery")
      * @ORM\OrderBy({"ordering" = "ASC"})
-     * @var PersistentCollection<Image>
+     * @var PersistentCollection<int, Image>
      */
     protected $images;
 
@@ -186,7 +186,7 @@ class Gallery
     /**
      * Returns images associated to this gallery
      *
-     * @return PersistentCollection<Image>
+     * @return PersistentCollection<int, Image>
      */
     public function getImages(): PersistentCollection
     {

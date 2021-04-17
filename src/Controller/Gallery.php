@@ -67,7 +67,7 @@ final class Gallery extends Base
         if ($gallery instanceof \App\Model\Entity\Gallery) {
             $images = [];
             foreach ($gallery->getImages() as $image) {
-                array_push($images, array('id' => $image->getId(), 'title' => $image->getTitle(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
+                array_push($images, array('id' => $image->getId(), 'title' => $image->getTitle(), 'description' => $image->getDescription(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
             }
 
             $this->view->render(array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'state' => $gallery->getState(), "images" => $images));
@@ -90,7 +90,7 @@ final class Gallery extends Base
         if ($gallery instanceof \App\Model\Entity\Gallery) {
             $images = [];
             foreach ($gallery->getImages() as $image) {
-                array_push($images, array('id' => $image->getId(), 'title' => $image->getTitle(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
+                array_push($images, array('id' => $image->getId(), 'title' => $image->getTitle(), 'description' => $image->getDescription(), 'source' => $image->getSource(), 'ordering' => $image->getOrdering(), 'state' => $image->getState()));
             }
 
             $this->view->render(array('id' => $gallery->getId(), 'title' => $gallery->getTitle(), 'description' => $gallery->getDescription(), 'alias' => $gallery->getAlias(), 'state' => $gallery->getState(), "images" => $images));

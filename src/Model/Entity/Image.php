@@ -36,6 +36,12 @@ class Image
     protected $title;
 
     /**
+     * @ORM\Column(type="string", length=512)
+     * @var string
+     */
+    protected $description;
+
+    /**
      * @ORM\Column(type="json", length=512)
      * @var array<array<string>>
      */
@@ -73,10 +79,11 @@ class Image
      * @param integer $ordering
      * @param boolean $state
      */
-    public function __construct(Gallery $gallery, string $title = "", array $source, int $ordering = 0, bool $state = true)
+    public function __construct(Gallery $gallery, string $title = "", string $description = "", array $source, int $ordering = 0, bool $state = true)
     {
         $this->setGallery($gallery);
         $this->setTitle($title);
+        $this->setDescription($description);
         $this->setSource($source);
         $this->setOrdering($ordering);
         $this->setCreated(new DateTime("now"));
@@ -104,6 +111,18 @@ class Image
     public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * Sets image description
+     *
+     * @param  string $description
+     * @return self
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
         return $this;
     }
 
@@ -194,6 +213,16 @@ class Image
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * Returns image description
+     *
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     /**
