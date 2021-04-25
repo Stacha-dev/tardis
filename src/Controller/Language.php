@@ -29,7 +29,6 @@ final class Language extends \App\Controller\Base
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('l')
             ->from('App\Model\Entity\Language', 'l');
-
         $languages = $queryBuilder->getQuery()->getArrayResult();
         $this->view->render($languages);
 
