@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Lib\Middleware\RouteFactory;
-use Exception;
 
 final class Language extends \App\Controller\Base
 {
@@ -27,8 +26,13 @@ final class Language extends \App\Controller\Base
      */
     public function getAll(): array
     {
-        $lang = $this->entityManager->createQuery('SELECT * FROM App\Model\Entity\Language');
-        $this->view->render(["name" => $lang->getName(), "title" => $lang->getTitle(), "state" => $lang->getState()]);
-        return $lang;
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('l')
+            ->from('App\Model\Entity\Language', 'l');
+
+        $languages = $queryBuilder->getQuery()->getArrayResult();
+        $this->view->render($languages);
+
+        return $languages;
     }
 }
