@@ -24,7 +24,7 @@ class Language
      * @ORM\Column(type="string", length=512)
      * @var string
      */
-    protected $name;
+    protected $code;
 
     /**
      * @ORM\Column(type="string", length=512)
@@ -39,26 +39,26 @@ class Language
     protected $state;
 
     /**
-     * @param string $name
+     * @param string $code
      * @param string $title
      * @param bool $state
      */
-    public function __construct(string $name = "", string $title = "", bool $state = true)
+    public function __construct(string $code = "", string $title = "", bool $state = true)
     {
-        $this->setName($name);
+        $this->setCode($code);
         $this->setTitle($title);
         $this->setState($state);
     }
     
     /**
-     * Sets name
+     * Sets code
      *
-     * @param  string $name
+     * @param  string $code
      * @return self
      */
-    public function setName(string $name): self
+    public function setCode(string $code): self
     {
-        $this->name = $name;
+        $this->code = $code;
         return $this;
     }
 
@@ -97,13 +97,13 @@ class Language
     }
 
     /**
-     * Returns name
+     * Returns code
      *
      * @return string
      */
-    public function getName(): string
+    public function getCode(): string
     {
-        return $this->name;
+        return $this->code;
     }
 
     /**
