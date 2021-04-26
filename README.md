@@ -46,6 +46,7 @@ compsoer orm:drop                   // Drops DB schema
 composer migrations:diff            // Generates differences in DB schema
 composer migrations:status          // Show migration status
 composer migrations:migrate         // Migrate to latest migration
+composert migrations:migrate:prev   // Migrate to previous migration
 ```
 
 ### PHPStan
