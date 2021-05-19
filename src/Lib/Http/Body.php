@@ -97,7 +97,13 @@ class Body
     public function getBodyData(string $key, $default = null)
     {
         if (array_key_exists($key, $this->body)) {
-            return is_array($this->body[$key]) ? json_encode($this->body[$key]) : $this->body[$key];
+            if (is_array($this->body[$key])) {
+                return json_encode($this->body[$key]);
+            } else if (is_string()) {
+                return $this->body[$key];
+            } else {
+                return $default;
+            }
         } else {
             return $default;
         }
