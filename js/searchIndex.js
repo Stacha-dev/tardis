@@ -256,6 +256,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-Image.html#constant_THUMBNAIL_DIMENSIONS"
         },                {
+            "fqsen": "\\App\\Controller\\Language",
+            "name": "Language",
+            "summary": "",
+            "url": "classes/App-Controller-Language.html"
+        },                {
+            "fqsen": "\\App\\Controller\\Language\u003A\u003AregisterRoutes\u0028\u0029",
+            "name": "registerRoutes",
+            "summary": "Register\u0020routes\u0020to\u0020router",
+            "url": "classes/App-Controller-Language.html#method_registerRoutes"
+        },                {
+            "fqsen": "\\App\\Controller\\Language\u003A\u003AgetAll\u0028\u0029",
+            "name": "getAll",
+            "summary": "Gets\u0020all\u0020languages",
+            "url": "classes/App-Controller-Language.html#method_getAll"
+        },                {
             "fqsen": "\\App\\Controller\\Mail",
             "name": "Mail",
             "summary": "",
@@ -1666,6 +1681,71 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Model-Entity-Image.html#property_state"
         },                {
+            "fqsen": "\\App\\Model\\Entity\\Language",
+            "name": "Language",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Language.html"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Language.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AsetCode\u0028\u0029",
+            "name": "setCode",
+            "summary": "Sets\u0020code",
+            "url": "classes/App-Model-Entity-Language.html#method_setCode"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AsetTitle\u0028\u0029",
+            "name": "setTitle",
+            "summary": "Sets\u0020title",
+            "url": "classes/App-Model-Entity-Language.html#method_setTitle"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AsetState\u0028\u0029",
+            "name": "setState",
+            "summary": "Sets\u0020state",
+            "url": "classes/App-Model-Entity-Language.html#method_setState"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "Return\u0020ID",
+            "url": "classes/App-Model-Entity-Language.html#method_getId"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AgetCode\u0028\u0029",
+            "name": "getCode",
+            "summary": "Returns\u0020code",
+            "url": "classes/App-Model-Entity-Language.html#method_getCode"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AgetTitle\u0028\u0029",
+            "name": "getTitle",
+            "summary": "Returns\u0020title",
+            "url": "classes/App-Model-Entity-Language.html#method_getTitle"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003AgetState\u0028\u0029",
+            "name": "getState",
+            "summary": "Returns\u0020state",
+            "url": "classes/App-Model-Entity-Language.html#method_getState"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Language.html#property_id"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003A\u0024code",
+            "name": "code",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Language.html#property_code"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Language.html#property_title"
+        },                {
+            "fqsen": "\\App\\Model\\Entity\\Language\u003A\u003A\u0024state",
+            "name": "state",
+            "summary": "",
+            "url": "classes/App-Model-Entity-Language.html#property_state"
+        },                {
             "fqsen": "\\App\\Model\\Entity\\Menu",
             "name": "Menu",
             "summary": "",
@@ -2160,6 +2240,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/App-Modal-Migrations-Version20210418104016.html#method_down"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210425122611",
+            "name": "Version20210425122611",
+            "summary": "Auto\u002Dgenerated\u0020Migration\u003A\u0020Please\u0020modify\u0020to\u0020your\u0020needs\u0021",
+            "url": "classes/App-Modal-Migrations-Version20210425122611.html"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210425122611\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210425122611.html#method_getDescription"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210425122611\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210425122611.html#method_up"
+        },                {
+            "fqsen": "\\App\\Modal\\Migrations\\Version20210425122611\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/App-Modal-Migrations-Version20210425122611.html#method_down"
         },                {
             "fqsen": "\\App\\View\\BaseView",
             "name": "BaseView",
